@@ -1,0 +1,478 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "Inventories APi v1",
+        "description": "Описание запросов смарт-терминала [клиент] к API товароучетной системы marketplace.evotor [сервер]\"\n"
+    },
+    "paths": {
+        "/api/v1/inventories/status": {
+            "get": {
+                "summary": "Get inventory status",
+                "description": "Получение объекта с состоянием ТУ на сервере\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/xDeviceId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "state": {
+                                    "type": "string",
+                                    "enum": [
+                                        "DEFAULT",
+                                        "EXTERNAL"
+                                    ]
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "SETTINGS_NOT_CONFIGURED",
+                                                    "SUBSCRIPTION_INSUFFICIENT_FUNDS"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/products": {
+            "get": {
+                "summary": "Get inventories products",
+                "tags": [
+                    "products"
+                ],
+                "description": "Получение списка товаров c сервера\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/xDeviceId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/product"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Put inventories products",
+                "tags": [
+                    "products"
+                ],
+                "description": "Загрузка массива новых товаров созданных на клиенте на сервер.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/xDeviceId"
+                    },
+                    {
+                        "name": "products",
+                        "in": "body",
+                        "description": "массив продуктов",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/product"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "массив привязок",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "uuid": {
+                                        "type": "string"
+                                    },
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/documents": {
+            "put": {
+                "summary": "Put inventories documents",
+                "tags": [
+                    "documents"
+                ],
+                "description": "Загрузка на сервер документов с транзакциями\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/xDeviceId"
+                    },
+                    {
+                        "name": "documents",
+                        "in": "body",
+                        "description": "массив документов",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/document"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/employees": {
+            "get": {
+                "summary": "Get inventories employees",
+                "tags": [
+                    "employees"
+                ],
+                "description": "Получение списка сотрудников\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/xDeviceId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/employee"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/products/schemes": {
+            "get": {
+                "summary": "Get products schemes",
+                "tags": [
+                    "products-schemes"
+                ],
+                "description": "Получение описания дополнительных полей в продуктах\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/xDeviceId"
+                    },
+                    {
+                        "$ref": "#/parameters/ifNoneMatch"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "headers": {
+                            "ETag": {
+                                "description": "метка для кэширования на клиенте",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/scheme"
+                            }
+                        }
+                    },
+                    "304": {
+                        "description": "Not Modified"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "xDeviceId": {
+            "name": "X-Device-ID",
+            "in": "header",
+            "description": "идентификатор смарт-терминала",
+            "required": true,
+            "type": "string"
+        },
+        "ifNoneMatch": {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "ETag value",
+            "required": false,
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "product": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "code"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "costPrice": {
+                    "type": "number"
+                },
+                "quantity": {
+                    "type": "number"
+                },
+                "measureName": {
+                    "type": "string"
+                },
+                "parentCode": {
+                    "type": "string"
+                },
+                "isGroup": {
+                    "type": "boolean"
+                },
+                "isFavorite": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "alcoholByVolume": {
+                    "type": "string"
+                },
+                "alcoholProductKindCode": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "articleNumber": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "object"
+                }
+            }
+        },
+        "scheme": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "object"
+                },
+                "view": {
+                    "type": "object",
+                    "properties": {
+                        "input": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "TEXT",
+                                        "NUMBER",
+                                        "SELECT",
+                                        "RADIO"
+                                    ]
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "employee": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "profileId": {
+                    "type": "number"
+                }
+            }
+        },
+        "document": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "type"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "SELL",
+                        "PAYBACK",
+                        "ACCEPT",
+                        "RETURN",
+                        "WRITE_OFF",
+                        "FPRINT",
+                        "INVENTORY",
+                        "OPEN_SESSION",
+                        "CLOSE_SESSION",
+                        "REVALUATION",
+                        "OPEN_TARE"
+                    ]
+                },
+                "transactions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/transaction"
+                    }
+                }
+            }
+        },
+        "transaction": {
+            "type": "object",
+            "required": [
+                "id",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "DISCOUNT_DOCUMENT",
+                        "DISCOUNT_POSITION",
+                        "DISCOUNT_DOCUMENT_POSITION",
+                        "DOCUMENT_CANCEL",
+                        "DOCUMENT_OPEN",
+                        "DOCUMENT_CLOSE",
+                        "DOCUMENT_CLOSE_FPRINT",
+                        "REGISTER_POSITION",
+                        "REGISTER_BILLS",
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "INVENTORY",
+                        "PAYMENT",
+                        "OPEN_SESSION",
+                        "CLOSE_SESSION",
+                        "FPRINT_OPEN_SESSION",
+                        "FPRINT_X_REPORT",
+                        "FPRINT_Z_REPORT",
+                        "POSITION_TAX",
+                        "REVALUATION"
+                    ]
+                }
+            }
+        },
+        "paymentTransaction": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/transaction"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "PAYMENT"
+                            ]
+                        },
+                        "summ": {
+                            "type": "number"
+                        },
+                        "paymentType": {
+                            "type": "number"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
