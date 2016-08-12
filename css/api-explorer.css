@@ -619,7 +619,7 @@
 
 @media (min-width: 992px) {
     .swagger-section .token-generator.hide {
-        display: block !important
+        display: none !important
     }
 }
 

@@ -2837,7 +2837,7 @@
         "rrn": null,
         "sum": 0.00
       },
-      {
+      {2
         "creationDate": 1437713723000,
         "id": 149,
         "type": "DOCUMENT_CLOSE",
