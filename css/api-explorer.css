@@ -592,6 +592,19 @@
     color: #8c9299
 }
 
+.swagger-section .market-links-block {
+    letter-spacing: .08em;
+    color: #5c666f;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+}
+
 .swagger-section .token-generator {
     min-width: 320px;
     background: #5c666f;

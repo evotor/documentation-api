@@ -178,7 +178,7 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression,
       buffer = "<div id=\"swagger_sidebar\">\n    <div class=\"sticky-nav-placeholder\">\n        <div class=\"sticky-nav\">\n            <div class=\"mobile-nav\">\n                <span class=\"select-label\">API Reference: </span><span data-selected-value></span>\n            </div>\n\n            " +
-          "<div class='swagger-section'>" +
+          "<div class='swagger-section market-links-block'>" +
           "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor to partner API</a>" +
           "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>Partner to Evotor API</a>" +
           "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Evotor-market to Partner API</a>" +
