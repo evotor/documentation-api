@@ -8,7 +8,8 @@
   "paths": {
     "/api/v1/inventories/employees/search": {
       "get": {
-        "description": "получение списка сотрудников Эвотор \n",
+        "summary": "Список сотрудников",
+        "description": "Получение списка сотрудников Эвотор \n",
         "produces": [
           "application/json"
         ],
@@ -51,7 +52,8 @@
     },
     "/api/v1/inventories/stores/search": {
       "get": {
-        "description": "получение списка торговых точек Эвотор \n",
+        "summary": "Список торговых точек",
+        "description": "Получение списка торговых точек Эвотор \n",
         "produces": [
           "application/json"
         ],
