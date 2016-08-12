@@ -179,8 +179,11 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression,
       buffer = "<div id=\"swagger_sidebar\">\n    <div class=\"sticky-nav-placeholder\">\n        <div class=\"sticky-nav\">\n            <div class=\"mobile-nav\">\n                <span class=\"select-label\">API Reference: </span><span data-selected-value></span>\n            </div>\n\n            " +
           "<div class='swagger-section market-links-block'>" +
+          "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor to partner API</a>" +
+          "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>Partner to Evotor API</a>" +
+          "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Evotor-market to Partner API</a>" +
           "  <br>" +
           "  <a href='/docs/v1/inventory/example/put.documents.payload.json'>Transactions payload example </a>" +
@@ -201,7 +204,7 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
 this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   return "deprecated";
   },"3":function(depth0,helpers,partials,data) {
-  return "                <h4>Warning: Deprecated</h4>\n";
+  return "                <h4>Warning: Deprecated</h4>\n";2
   },"5":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, buffer = "                <div class=\"markdown action-summary\">";
   stack1 = ((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper));
