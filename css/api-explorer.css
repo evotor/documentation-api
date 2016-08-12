@@ -2380,11 +2380,13 @@ body {
 }
 
 .swagger-section #header form#api_selector .input input#input_apiKey {
-    width: 200px
+    width: 200px;
+    display: none;
 }
 
 .swagger-section #header form#api_selector .input input#input_baseUrl {
-    width: 400px
+    width: 400px;
+    display: none;
 }
 
 .swagger-section #header form#api_selector .input a#explore {

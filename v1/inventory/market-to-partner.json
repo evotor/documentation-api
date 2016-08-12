@@ -1,0 +1,596 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1-SNAPSHOT",
+    "title": "API запросов Эвотор к товароучетной системе (ТУ)",
+    "description": "Описание запросов Эвотор [сервер] к API товароучетной системы [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
+  },
+  "paths": {
+    "/api/v1/inventories/employees": {
+      "put": {
+        "description": "Создание сотрудника / сотрудников в системе партнера.\nПодразумевается, что мы мастер-система и все изменения сотрудников будут исходить от нас.\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "employee",
+            "in": "body",
+            "description": "Массив сотрудников Эвотор",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/employee"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "title": "Массив привязок",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "partnerId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/inventories/stores": {
+      "put": {
+        "description": "Создание точки / точек продаж в системе партнера\nПодразумевается, что мы мастер-система и все изменения точек продаж будут исходить от нас.\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "store",
+            "in": "body",
+            "description": "Массив магазинов (точек продаж) Эвотор",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/store"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "title": "Массив привязок",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "partnerId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/inventories/receipt": {
+      "post": {
+        "description": "В данном запросе передается состав чека / чеков.\nВАЖНО - данный запрос носит информационный характер, он не влияет на движение товаров (возможно, пока).\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "receipt",
+            "in": "body",
+            "description": "массив чеков",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/receipt"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/api/v1/inventories/products": {
+      "get": {
+        "description": "Получение списка товаров из Эвотор\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      },
+      "put": {
+        "description": "Загрузка массива новых товаров созданных на клиенте на сервер.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "products",
+            "in": "body",
+            "description": "массив продуктов",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "title": "Массив привязок",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inventories/documents": {
+      "put": {
+        "description": "Загрузка во внешнюю ТУ документов с транзакциями\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "documents",
+            "in": "body",
+            "description": "массив документов",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/document"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/inventories/products/schemes": {
+      "get": {
+        "description": "Получение описания дополнительных полей в продуктах\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "headers": {
+              "ETag": {
+                "description": "метка для кэширования на клиенте",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/scheme"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "auth": {
+      "name": "basic auth or token",
+      "in": "header",
+      "description": "пользовательская авторизация в системе партнера",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "product": {
+      "type": "object",
+      "required": [
+        "uuid",
+        "type"
+      ],
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "barcodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "costPrice": {
+          "type": "number"
+        },
+        "measureName": {
+          "type": "string"
+        },
+        "tax": {
+          "type": "number"
+        },
+        "allowToSell": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "articleNumber": {
+          "type": "string"
+        },
+        "parentCode": {
+          "type": "string"
+        },
+        "isGroup": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "NORMAL",
+            "ALCOHOL_MARKED",
+            "ALCOHOL_NOT_MARKED"
+          ]
+        },
+        "alcoholByVolume": {
+          "type": "boolean"
+        },
+        "alcoholProductKindCode": {
+          "type": "number"
+        },
+        "tarVolume": {
+          "type": "number"
+        },
+        "imagePath": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "object"
+        }
+      }
+    },
+    "scheme": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        },
+        "view": {
+          "type": "object",
+          "properties": {
+            "input": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "TEXT",
+                    "NUMBER",
+                    "SELECT",
+                    "RADIO"
+                  ]
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "required": [
+        "uuid",
+        "deviceId",
+        "storeId",
+        "dateTime"
+      ],
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "storeId": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "inn": {
+          "type": "number"
+        },
+        "dateTime": {
+          "type": "string"
+        },
+        "shiftId": {
+          "description": "ID смены",
+          "type": "string"
+        },
+        "employeeId": {
+          "type": "string"
+        },
+        "paymentSource": {
+          "description": "Способ оплаты",
+          "type": "string",
+          "enum": [
+            "CASH",
+            "CARD",
+            "OTHER"
+          ]
+        },
+        "tax": {
+          "type": "number"
+        },
+        "totalDiscount": {
+          "type": "number"
+        },
+        "totalAmount": {
+          "type": "number"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "mesuareName": {
+                "type": "string"
+              },
+              "discount": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "employee": {
+      "type": "object",
+      "required": [
+        "uuid",
+        "role",
+        "name"
+      ],
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "ADMIN",
+            "CASHIER"
+          ]
+        }
+      }
+    },
+    "store": {
+      "type": "object",
+      "required": [
+        "uuid",
+        "name"
+      ],
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "required": [
+        "uuid",
+        "type"
+      ],
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transaction"
+          }
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "required": [
+        "id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "DISCOUNT_DOCUMENT",
+            "DISCOUNT_POSITION",
+            "DISCOUNT_DOCUMENT_POSITION",
+            "DOCUMENT_CANCEL",
+            "DOCUMENT_OPEN",
+            "DOCUMENT_CLOSE",
+            "DOCUMENT_CLOSE_FPRINT",
+            "REGISTER_POSITION",
+            "REGISTER_BILLS",
+            "CASH_INCOME",
+            "CASH_OUTCOME",
+            "INVENTORY",
+            "PAYMENT",
+            "OPEN_SESSION",
+            "CLOSE_SESSION",
+            "FPRINT_OPEN_SESSION",
+            "FPRINT_X_REPORT",
+            "FPRINT_Z_REPORT",
+            "POSITION_TAX",
+            "REVALUATION"
+          ]
+        }
+      }
+    },
+    "paymentTransaction": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/transaction"
+        },
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "PAYMENT"
+              ]
+            },
+            "summ": {
+              "type": "number"
+            },
+            "paymentType": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
