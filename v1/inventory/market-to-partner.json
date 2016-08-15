@@ -135,7 +135,7 @@
         }
       }
     },
-    "/api/v1/inventories/products": {
+    "/api/v1/inventories/stores/{storeId}/products": {
       "get": {
         "summary": "Получение товаров из ТУ системы",
         "description": "Получение списка товаров из Эвотор\n",
@@ -145,6 +145,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "storeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -171,6 +177,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "storeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "products",
@@ -207,13 +219,19 @@
         }
       }
     },
-    "/api/v1/inventories/documents": {
+    "/api/v1/inventories/stores/{storeId}/documents": {
       "put": {
         "summary": "Выгрузка документов",
         "description": "Загрузка во внешнюю ТУ документов с транзакциями\n",
         "parameters": [
           {
             "$ref": "#/parameters/auth"
+          },
+          {
+            "name": "storeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "documents",
