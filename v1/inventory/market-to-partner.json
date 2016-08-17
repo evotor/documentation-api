@@ -230,6 +230,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                      "$ref": "#/responses/status401"
+                    },
+                    "402": {
+                      "$ref": "#/responses/status402"
+                    },
+                    "404": {
+                      "$ref": "#/responses/status404"
+                    },
+                    "500": {
+                      "$ref": "#/responses/status500"
+                    },
+                    "503": {
+                      "$ref": "#/responses/status503"
                     }
                 }
             }
@@ -264,6 +279,21 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                      "$ref": "#/responses/status401"
+                    },
+                    "402": {
+                      "$ref": "#/responses/status402"
+                    },
+                    "404": {
+                      "$ref": "#/responses/status404"
+                    },
+                    "500": {
+                      "$ref": "#/responses/status500"
+                    },
+                    "503": {
+                      "$ref": "#/responses/status503"
                     }
                 }
             }
