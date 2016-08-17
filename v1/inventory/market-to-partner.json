@@ -329,10 +329,6 @@
                     "type": "string",
                     "description": "уникальный UUID продукта в Эвотор"
                 },
-                "code": {
-                    "type": "string",
-                    "description": "устарел, скоро будет удален."
-                },
                 "barcodes": {
                     "type": "array",
                     "description": "массив штрихкодов",
