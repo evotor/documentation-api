@@ -288,6 +288,26 @@
             }
         }
     },
+
+
+    "responses": {
+        "status401": {
+            "description": "Ключ авторизации неверный "
+        },
+        "status402": {
+            "description": "Точка продаж, аккаунт или поддержка интеграции заблокирована"
+        },
+        "status404": {
+            "description": "Не найдена указанная точка продаж"
+        },
+        "status500": {
+            "description": "Внутренняя ошибка сервиса"
+        },
+        "status503": {
+            "description": "Сервис недоступен"
+        }
+    },
+
     "parameters": {
         "auth": {
             "name": "basic auth or token",
