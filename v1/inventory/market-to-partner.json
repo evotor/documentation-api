@@ -10,9 +10,8 @@
       "put": {
         "summary": "Создание/редактирвоание сотрудников",
         "description": "Создание сотрудника / сотрудников в системе партнера.\nПодразумевается, что мы мастер-система и все изменения сотрудников будут исходить от нас.\n",
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/auth"
@@ -68,9 +67,8 @@
       "put": {
         "summary": "Создание/редактирвоание точек продаж",
         "description": "Создание точки / точек продаж в системе партнера\nПодразумевается, что мы мастер-система и все изменения точек продаж будут исходить от нас.\n",
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/auth"
@@ -126,9 +124,7 @@
       "post": {
         "summary": "Состав чека",
         "description": "В данном запросе передается состав чека / чеков.\nВАЖНО - данный запрос носит информационный характер, он не влияет на движение товаров (возможно, пока).\n",
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/auth"
@@ -213,9 +209,8 @@
       "put": {
         "summary": "Создание товаров в ТУ системе",
         "description": "Загрузка массива новых товаров созданных на клиенте на сервер.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере\n",
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/auth"
@@ -281,6 +276,8 @@
       "put": {
         "summary": "Выгрузка документов",
         "description": "Загрузка во внешнюю ТУ документов с транзакциями\n",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/auth"
