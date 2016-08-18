@@ -104,37 +104,6 @@
                 }
             }
         },
-        "/api/v1/inventories/receipt": {
-            "post": {
-                "summary": "Состав чека",
-                "description": "В данном запросе передается состав чека / чеков.\nВАЖНО - данный запрос носит информационный характер, он не влияет на движение товаров (возможно, пока).\n",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "receipt",
-                        "in": "body",
-                        "description": "массив чеков",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/receipt"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    }
-                }
-            }
-        },
         "/api/v1/inventories/stores/{storeId}/products": {
             "get": {
                 "summary": "Получение товаров из ТУ системы",
