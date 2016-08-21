@@ -180,15 +180,17 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
       buffer = "<div id=\"swagger_sidebar\">\n    <div class=\"sticky-nav-placeholder\">\n        <div class=\"sticky-nav\">\n            <div class=\"mobile-nav\">\n                <span class=\"select-label\">API Reference: </span><span data-selected-value></span>\n            </div>\n\n            " +
           "<div class='swagger-section market-links-block'>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor - partner API</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Инциализация партнерской ТУ (Маркет -> Партнер)</a>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>partner - Evotor API</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>Партнер -> Evotor API</a>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Configuration of Partner Inventory</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor -> partner API</a>" +
           "  <br>" +
-          "  <a href='/docs/v1/inventory/example/put.documents.payload.json'>Document example with transactions</a>" +
+          "  <a href='/docs/v1/inventory/example/put.documents.payload.json'>Пример документа с транзакциями</a>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/receipt.json'>Receipts - online</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/receipt.json'>Чеки (онлайн)</a>" +
+          "  <br>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/1c.json'>1С</a>" +
           "</div>" +
           "<div class=\"token-generator hide\" style='display:none'>\n                <span data-close class=\"icon-budicon-471\"></span>\n                <label for=\"input-api-token\">Url</label>\n                <input type=\"text\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_baseUrl\"\n                       placeholder=\"http://example.com/api\">\n\n                <div class=\"scope-selector\">\n                    <label for=\"scopes\">Token</label>\n\n                    <div class=\"area controls\">\n                        <input type=\"text\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_apiKey\"\n                               placeholder=\"Enter api key or token\">\n                    </div>\n\n                    <div class=\"area cta\">\n                        <div data-add-scope id=\"explore\" class=\"btn\"><span class=\"icon-budicon-519\"></span>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n            <div data-navigator>\n                <div data-resource=\"\" label=\"Tools\">\n                    <div class=\"item\" data-tg-switch=\"\">Swagger resource <span class=\"status\"></span></div>\n                </div>\n                <div id=\"resources_nav\">\n                </div>\n            </div>\n\n            <p class=\"changes-disclaimer\">\n                <span class='info' id='api_info'>\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.info : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
