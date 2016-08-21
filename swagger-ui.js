@@ -180,15 +180,15 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
       buffer = "<div id=\"swagger_sidebar\">\n    <div class=\"sticky-nav-placeholder\">\n        <div class=\"sticky-nav\">\n            <div class=\"mobile-nav\">\n                <span class=\"select-label\">API Reference: </span><span data-selected-value></span>\n            </div>\n\n            " +
           "<div class='swagger-section market-links-block'>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Инциализация партнерской ТУ (Маркет -> Партнер)</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor - partner API</a>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>Партнер -> Evotor API</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>partner - Evotor API</a>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor -> partner API</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Configuration of Partner Inventory</a>" +
           "  <br>" +
-          "  <a href='/docs/v1/inventory/example/put.documents.payload.json'>Пример документа с транзакциями</a>" +
+          "  <a href='/docs/v1/inventory/example/put.documents.payload.json'>Document example with transactions</a>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/receipt.json'>Чеки (онлайн)</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/receipt.json'>Receipts - online</a>" +
           "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/1c.json'>1С</a>" +
           "</div>" +
