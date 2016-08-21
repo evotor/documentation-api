@@ -1,0 +1,244 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "API запросов Эвотор по Чекам",
+        "description": "Описание запросов отправки чеков партнеру (POST - после оплаты) и получение состава чека по UUID (GET)"
+    },
+    "paths": {
+        "/api/v1/receipt": {
+            "post": {
+                "summary": "Отправка чека партнеру после оплаты клиентом",
+                "description": "В данном запросе передается состав чека / чеков.\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "receipt",
+                        "in": "body",
+                        "description": "массив чеков",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/receipt"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Запрос партнером информации по UUID чека",
+                "description": "Партнер может получить по UUID чека его состав. \n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuid",
+                        "description": "uuid чека",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/receipt"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "status401": {
+            "description": "Ключ авторизации неверный "
+        },
+        "status402": {
+            "description": "Точка продаж, аккаунт или поддержка интеграции заблокирована"
+        },
+        "status404": {
+            "description": "Не найдена указанная точка продаж"
+        },
+        "status500": {
+            "description": "Внутренняя ошибка сервиса"
+        },
+        "status503": {
+            "description": "Сервис недоступен"
+        }
+    },
+    "parameters": {
+        "auth": {
+            "name": "token",
+            "in": "header",
+            "description": "токен авторизации",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "receipt": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "deviceUuid",
+                "storeUuid",
+                "dateTime"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "уникальный ID чека."
+                },
+                "deviceUuid": {
+                    "type": "string",
+                    "description": "уникальный ID смарт-терминала."
+                },
+                "storeUuid": {
+                    "type": "string",
+                    "description": "уникальный ID магазина."
+                },
+                "dateTime": {
+                    "description": "дата и время",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "тип чека (продажа, возврат)",
+                    "type": "string"
+                },
+                "shiftId": {
+                    "description": "номер смены",
+                    "type": "number"
+                },
+                "employeeUuid": {
+                    "type": "string",
+                    "description": "уникальный ID автора продажи (пользователь)"
+                },
+                "paymentSource": {
+                    "description": "Способ оплаты. PAY_CASH - оплата наличными без сдачи; PAY_CASHBACK – оплата наличными со сдачей; PAY_CARD - оплата по карте",
+                    "type": "string",
+                    "enum": [
+                        "PAY_CASH",
+                        "PAY_CASHBACK",
+                        "PAY_CARD",
+                        "OTHER"
+                    ]
+                },
+                "infoCheck": {
+                    "type": "boolean",
+                    "description": "инфо–чек (да, нет)"
+                },
+                "egais": {
+                    "type": "boolean",
+                    "description": "ЕГАИС (да, нет)"
+                },
+                "items": {
+                    "type": "array",
+                    "description": "массив с позициями в чеке",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "uuid": {
+                                "type": "string",
+                                "description": "уникальный ID товара / услуги"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "наименование товара / услуги"
+                            },
+                            "itemType": {
+                                "type": "string",
+                                "description": "тип товара - обычный, маркированный алкоголь, немаркированный алкоголь, услуга",
+                                "enum": [
+                                    "NORMAL",
+                                    "ALCOHOL_MARKED",
+                                    "ALCOHOL_NOT_MARKED",
+                                    "SERVICE"
+                                ]
+                            },
+                            "barcode": {
+                                "type": "number"
+                            },
+                            "alcoCode": {
+                                "type": "number"
+                            },
+                            "mesuareName": {
+                                "type": "string",
+                                "description": "единица измерения"
+                            },
+                            "quantity": {
+                                "type": "number",
+                                "description": "кол-во данного товара"
+                            },
+                            "price": {
+                                "type": "number"
+                            },
+                            "purchasePrice": {
+                                "type": "number",
+                                "description": "цена закупки данного товара"
+                            },
+                            "sumPrice": {
+                                "type": "number",
+                                "description": "общая цена данного товара"
+                            },
+                            "tax": {
+                                "type": "number",
+                                "description": "сумма налога на данный товар"
+                            },
+                            "taxPercent": {
+                                "type": "number",
+                                "description": "общий налог в % на данный товар"
+                            },
+                            "discount": {
+                                "type": "number",
+                                "description": "общая сумма скидки на данный товар"
+                            },
+                            "discountPercent": {
+                                "type": "number",
+                                "description": "общая скидка в % на данный товар"
+                            }
+                        }
+                    }
+                },
+                "totalTax": {
+                    "type": "number",
+                    "description": "общая сумма налога"
+                },
+                "totalTaxPercent": {
+                    "type": "number",
+                    "description": "общий налог в %"
+                },
+                "totalDiscount": {
+                    "type": "number",
+                    "description": "общая сумма скидки"
+                },
+                "totalDiscountPercent": {
+                    "type": "number",
+                    "description": "общая скидка в %"
+                },
+                "totalAmount": {
+                    "type": "number",
+                    "description": "общая сумма чека"
+                }
+            }
+        }
+    }
+}
