@@ -25,7 +25,7 @@
                     {
                         "name": "storeUuid",
                         "in": "query",
-                        "type": "string"d
+                        "type": "string"
                     }
                 ],
                 "responses": {
