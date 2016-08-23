@@ -25,7 +25,7 @@
                     {
                         "name": "storeUuid",
                         "in": "query",
-                        "type": "string"
+                        "type": "string"d
                     }
                 ],
                 "responses": {
@@ -216,7 +216,7 @@
                         }
                     }
                 }
-            },
+            }
         },
         "/api/v1/inventories/products/schemes": {
             "get": {
