@@ -133,19 +133,19 @@
                         }
                     },
                     "401": {
-                      "$ref": "#/responses/status401"
+                        "$ref": "#/responses/status401"
                     },
                     "402": {
-                      "$ref": "#/responses/status402"
+                        "$ref": "#/responses/status402"
                     },
                     "404": {
-                      "$ref": "#/responses/status404"
+                        "$ref": "#/responses/status404"
                     },
                     "500": {
-                      "$ref": "#/responses/status500"
+                        "$ref": "#/responses/status500"
                     },
                     "503": {
-                      "$ref": "#/responses/status503"
+                        "$ref": "#/responses/status503"
                     },
                     "default": {
                         "description": "unexpected error"
@@ -201,19 +201,19 @@
                         }
                     },
                     "401": {
-                      "$ref": "#/responses/status401"
+                        "$ref": "#/responses/status401"
                     },
                     "402": {
-                      "$ref": "#/responses/status402"
+                        "$ref": "#/responses/status402"
                     },
                     "404": {
-                      "$ref": "#/responses/status404"
+                        "$ref": "#/responses/status404"
                     },
                     "500": {
-                      "$ref": "#/responses/status500"
+                        "$ref": "#/responses/status500"
                     },
                     "503": {
-                      "$ref": "#/responses/status503"
+                        "$ref": "#/responses/status503"
                     }
                 }
             }
@@ -250,19 +250,19 @@
                         "description": "OK"
                     },
                     "401": {
-                      "$ref": "#/responses/status401"
+                        "$ref": "#/responses/status401"
                     },
                     "402": {
-                      "$ref": "#/responses/status402"
+                        "$ref": "#/responses/status402"
                     },
                     "404": {
-                      "$ref": "#/responses/status404"
+                        "$ref": "#/responses/status404"
                     },
                     "500": {
-                      "$ref": "#/responses/status500"
+                        "$ref": "#/responses/status500"
                     },
                     "503": {
-                      "$ref": "#/responses/status503"
+                        "$ref": "#/responses/status503"
                     }
                 }
             }
@@ -302,8 +302,6 @@
             }
         }
     },
-
-
     "responses": {
         "status401": {
             "description": "Ключ авторизации неверный "
@@ -321,7 +319,6 @@
             "description": "Сервис недоступен"
         }
     },
-
     "parameters": {
         "auth": {
             "name": "basic auth or token",
@@ -461,83 +458,6 @@
                                 "data": {
                                     "type": "object"
                                 }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "receipt": {
-            "type": "object",
-            "required": [
-                "uuid",
-                "deviceId",
-                "storeId",
-                "dateTime"
-            ],
-            "properties": {
-                "uuid": {
-                    "type": "string"
-                },
-                "deviceId": {
-                    "type": "string"
-                },
-                "storeId": {
-                    "type": "string"
-                },
-                "companyName": {
-                    "type": "string"
-                },
-                "inn": {
-                    "type": "number"
-                },
-                "dateTime": {
-                    "description": "ID смены",
-                    "type": "string"
-                },
-                "employeeId": {
-                    "type": "string"
-                },
-                "paymentSource": {
-                    "description": "Способ оплаты",
-                    "type": "string",
-                    "enum": [
-                        "CASH",
-                        "CARD",
-                        "OTHER"
-                    ]
-                },
-                "tax": {
-                    "type": "number"
-                },
-                "totalDiscount": {
-                    "type": "number"
-                },
-                "totalAmount": {
-                    "type": "number"
-                },
-                "products": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "id": {
-                                "type": "string"
-                            },
-                            "price": {
-                                "type": "number"
-                            },
-                            "quantity": {
-                                "type": "number"
-                            },
-                            "mesuareName": {
-                                "type": "string"
-                            },
-                            "discount": {
-                                "type": "number"
                             }
                         }
                     }
