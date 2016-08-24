@@ -151,6 +151,9 @@
                     "items": [
                         {
                             "type": "object",
+                            "example": {
+                                "test": "huy"
+                            },
                             "properties": {
                                 "test": {
                                     "type": "string"
@@ -159,6 +162,9 @@
                         },
                         {
                             "type": "object",
+                            "example": {
+                                "test_2": "huy_2"
+                            },
                             "properties": {
                                 "test_2": {
                                     "type": "string"
