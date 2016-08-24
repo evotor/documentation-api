@@ -61,34 +61,6 @@
                     }
                 }
             }
-        },
-        "/api/v1/inventories/stores/{storeUuid}/huy": {
-            "get": {
-                "summary": "Общий запрос - загрузка документов с сервера Эвотор в 1С",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "storeUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "массив документов",
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/huy"
-                            }
-                        }
-                    }
-                }
-            }
         }
     },
     "parameters": {
@@ -134,38 +106,6 @@
                     "items": {
                         "$ref": "#/definitions/transaction"
                     }
-                }
-            }
-        },
-        "huy": {
-            "type": "object",
-            "properties": {
-                "uuid": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "transactions": {
-                    "type": "array",
-                    "items": [
-                        {
-                            "type": "object",
-                            "properties": {
-                                "test": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        {
-                            "type": "object",
-                            "properties": {
-                                "test_2": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    ]
                 }
             }
         },
@@ -222,151 +162,148 @@
                 },
                 "transactions": {
                     "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "transactionDocOpen": {
-                                "type": "object",
-                                "example": {
-                                    "id": 12,
-                                    "type": "DOCUMENT_OPEN",
-                                    "creationDate": 1471365897000,
-                                    "userCode": "1",
-                                    "baseDocumentNumber": null,
-                                    "baseDocumentUUID": null,
-                                    "clientName": null,
-                                    "clientPhone": null,
-                                    "couponNumber": 145695
-                                },
-                                "properties": {
-                                    "id": {
-                                        "type": "number"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "creationDate": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                    },
-                                    "userCode": {
-                                        "type": "string"
-                                    },
-                                    "baseDocumentNumber": {
-                                        "type": "string"
-                                    },
-                                    "baseDocumentUUID": {
-                                        "type": "string"
-                                    },
-                                    "clientName": {
-                                        "type": "string"
-                                    },
-                                    "clientPhone": {
-                                        "type": "string"
-                                    },
-                                    "couponNumber": {
-                                        "type": "number"
-                                    }
-                                }
+                    "items": [
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 12,
+                                "type": "DOCUMENT_OPEN",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "baseDocumentNumber": null,
+                                "baseDocumentUUID": null,
+                                "clientName": null,
+                                "clientPhone": null,
+                                "couponNumber": 145695
                             },
-                            "transactionRegisterPosition": {
-                                "type": "object",
-                                "example": {
-                                    "id": 20,
-                                    "type": "REGISTER_POSITION",
-                                    "creationDate": 1471365897000,
-                                    "userCode": "1",
-                                    "alcoholByVolume": "0.000",
-                                    "alcoholProductKindCode": 0,
-                                    "balanceQuantity": "300.000",
-                                    "barcode": null,
-                                    "commodityCode": "2",
-                                    "commodityName": "Какое-то название продукта",
-                                    "commodityType": "NORMAL",
-                                    "costPrice": "0.000",
-                                    "fprintSection": "0",
-                                    "mark": null,
-                                    "measureName": "кг",
-                                    "tareVolume": "0.000",
-                                    "price": "25.000",
-                                    "quantity": "30.000",
-                                    "resultPrice": "23.040",
-                                    "resultSumm": "691.130",
-                                    "sum": "750.130",
-                                    "positionId": -1
+                            "properties": {
+                                "id": {
+                                    "type": "number"
                                 },
-                                "properties": {
-                                    "id": {
-                                        "type": "number"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "creationDate": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                    },
-                                    "userCode": {
-                                        "type": "string"
-                                    },
-                                    "alcoholByVolume": {
-                                        "type": "string"
-                                    },
-                                    "alcoholProductKindCode": {
-                                        "type": "number"
-                                    },
-                                    "balanceQuantity": {
-                                        "type": "string"
-                                    },
-                                    "barcode": {
-                                        "type": "string"
-                                    },
-                                    "commodityCode": {
-                                        "type": "string"
-                                    },
-                                    "commodityName": {
-                                        "type": "string"
-                                    },
-                                    "commodityType": {
-                                        "type": "string"
-                                    },
-                                    "costPrice": {
-                                        "type": "string"
-                                    },
-                                    "fprintSection": {
-                                        "type": "string"
-                                    },
-                                    "mark": {
-                                        "type": "string"
-                                    },
-                                    "measureName": {
-                                        "type": "string"
-                                    },
-                                    "tareVolume": {
-                                        "type": "string"
-                                    },
-                                    "price": {
-                                        "type": "string"
-                                    },
-                                    "quantity": {
-                                        "type": "string"
-                                    },
-                                    "resultPrice": {
-                                        "type": "string"
-                                    },
-                                    "resultSumm": {
-                                        "type": "string"
-                                    },
-                                    "sum": {
-                                        "type": "string"
-                                    },
-                                    "positionId": {
-                                        "type": "number"
-                                    }
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "baseDocumentNumber": {
+                                    "type": "string"
+                                },
+                                "baseDocumentUUID": {
+                                    "type": "string"
+                                },
+                                "clientName": {
+                                    "type": "string"
+                                },
+                                "clientPhone": {
+                                    "type": "string"
+                                },
+                                "couponNumber": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 20,
+                                "type": "REGISTER_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "alcoholByVolume": "0.000",
+                                "alcoholProductKindCode": 0,
+                                "balanceQuantity": "300.000",
+                                "barcode": null,
+                                "commodityCode": "2",
+                                "commodityName": "Какое-то название продукта",
+                                "commodityType": "NORMAL",
+                                "costPrice": "0.000",
+                                "fprintSection": "0",
+                                "mark": null,
+                                "measureName": "кг",
+                                "tareVolume": "0.000",
+                                "price": "25.000",
+                                "quantity": "30.000",
+                                "resultPrice": "23.040",
+                                "resultSumm": "691.130",
+                                "sum": "750.130",
+                                "positionId": -1
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "alcoholByVolume": {
+                                    "type": "string"
+                                },
+                                "alcoholProductKindCode": {
+                                    "type": "number"
+                                },
+                                "balanceQuantity": {
+                                    "type": "string"
+                                },
+                                "barcode": {
+                                    "type": "string"
+                                },
+                                "commodityCode": {
+                                    "type": "string"
+                                },
+                                "commodityName": {
+                                    "type": "string"
+                                },
+                                "commodityType": {
+                                    "type": "string"
+                                },
+                                "costPrice": {
+                                    "type": "string"
+                                },
+                                "fprintSection": {
+                                    "type": "string"
+                                },
+                                "mark": {
+                                    "type": "string"
+                                },
+                                "measureName": {
+                                    "type": "string"
+                                },
+                                "tareVolume": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "string"
+                                },
+                                "quantity": {
+                                    "type": "string"
+                                },
+                                "resultPrice": {
+                                    "type": "string"
+                                },
+                                "resultSumm": {
+                                    "type": "string"
+                                },
+                                "sum": {
+                                    "type": "string"
+                                },
+                                "positionId": {
+                                    "type": "number"
                                 }
                             }
                         }
-                    }
+                    ]
                 }
             }
         },
