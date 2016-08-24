@@ -231,17 +231,6 @@
                     "items": [
                         {
                             "type": "object",
-                            "example": {
-                                "id": 12,
-                                "type": "DOCUMENT_OPEN",
-                                "creationDate": 1471365897000,
-                                "userCode": "1",
-                                "baseDocumentNumber": null,
-                                "baseDocumentUUID": null,
-                                "clientName": null,
-                                "clientPhone": null,
-                                "couponNumber": 145695
-                            },
                             "properties": {
                                 "id": {
                                     "type": "number"
@@ -275,30 +264,6 @@
                         },
                         {
                             "type": "object",
-                            "example": {
-                                "id": 20,
-                                "type": "REGISTER_POSITION",
-                                "creationDate": 1471365897000,
-                                "userCode": "1",
-                                "alcoholByVolume": "0.000",
-                                "alcoholProductKindCode": 0,
-                                "balanceQuantity": "300.000",
-                                "barcode": null,
-                                "commodityCode": "2",
-                                "commodityName": "Какое-то название продукта",
-                                "commodityType": "NORMAL",
-                                "costPrice": "0.000",
-                                "fprintSection": "0",
-                                "mark": null,
-                                "measureName": "кг",
-                                "tareVolume": "0.000",
-                                "price": "25.000",
-                                "quantity": "30.000",
-                                "resultPrice": "23.040",
-                                "resultSumm": "691.130",
-                                "sum": "750.130",
-                                "positionId": -1
-                            },
                             "properties": {
                                 "id": {
                                     "type": "number"
