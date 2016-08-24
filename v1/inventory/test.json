@@ -1,0 +1,162 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "API Эвотор для продуктов 1С",
+        "description": "Описание запросов Эвотор [сервер] для продуктов 1С [клиент]. Логика работы следующая - каждый раз, когда юзер заходит в 1с необходимо выполнить синхронизацию базы 1С (точнее выгрузить актуальные данные из Эвотор). Нужно выгружать сотрудников, точки продаж, продукты и документы."
+    },
+    "paths": {
+        "/api/v1/inventories/stores/{storeUuid}/documents": {
+            "get": {
+                "summary": "Общий запрос - загрузка документов с сервера Эвотор в 1С",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "storeUuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "массив документов",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/document"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/stores/{storeUuid}/documentsSell": {
+            "get": {
+                "summary": "ВЫГРУЗКА ДОКУМЕНТА ПРОДАЖИ",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "storeUuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "массив документов",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/documentSell"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "auth": {
+            "name": "token",
+            "in": "header",
+            "description": "ключ доступа пользователя (токен)",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "document": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "type"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "SELL",
+                        "PAYBACK",
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "OPEN_SESSION",
+                        "FPRINT_OPERATION",
+                        "CLOSE_SESSION",
+                        "INVENTORY",
+                        "ACCEPT",
+                        "RETURN",
+                        "WRITE_OFF",
+                        "REVALUATION",
+                        "OPEN_TARE"
+                    ]
+                },
+                "transactions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/transaction"
+                    }
+                }
+            }
+        },
+        "documentSell": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "example": {
+                "name": "Puma",
+                "id": 1
+            }
+        },
+        "transaction": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "DISCOUNT_DOCUMENT",
+                        "DISCOUNT_POSITION",
+                        "DISCOUNT_DOCUMENT_POSITION",
+                        "DOCUMENT_CANCEL",
+                        "DOCUMENT_OPEN",
+                        "DOCUMENT_CLOSE",
+                        "DOCUMENT_CLOSE_FPRINT",
+                        "REGISTER_POSITION",
+                        "REGISTER_BILLS",
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "INVENTORY",
+                        "PAYMENT",
+                        "OPEN_SESSION",
+                        "CLOSE_SESSION",
+                        "FPRINT_OPEN_SESSION",
+                        "FPRINT_X_REPORT",
+                        "FPRINT_Z_REPORT",
+                        "POSITION_TAX",
+                        "REVALUATION"
+                    ]
+                }
+            }
+        }
+    }
+}
