@@ -139,6 +139,9 @@
         },
         "huy": {
             "type": "object",
+            "example": {
+                "uuid": "0d1ebd90-36ec-475d-92e6-37adf54f18ac"
+            },
             "properties": {
                 "uuid": {
                     "type": "string"
@@ -218,6 +221,17 @@
                     "items": [
                         {
                             "type": "object",
+                            "example": {
+                                "id": 12,
+                                "type": "DOCUMENT_OPEN",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "baseDocumentNumber": null,
+                                "baseDocumentUUID": null,
+                                "clientName": null,
+                                "clientPhone": null,
+                                "couponNumber": 145695
+                            },
                             "properties": {
                                 "id": {
                                     "type": "number"
