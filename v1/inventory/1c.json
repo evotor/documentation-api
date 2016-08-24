@@ -473,7 +473,22 @@
                     "type": "string"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "SELL",
+                        "PAYBACK",
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "OPEN_SESSION",
+                        "FPRINT_OPERATION",
+                        "CLOSE_SESSION",
+                        "INVENTORY",
+                        "ACCEPT",
+                        "RETURN",
+                        "WRITE_OFF",
+                        "REVALUATION",
+                        "OPEN_TARE"
+                    ]
                 },
                 "transactions": {
                     "type": "array",
@@ -485,14 +500,7 @@
         },
         "transaction": {
             "type": "object",
-            "required": [
-                "id",
-                "type"
-            ],
             "properties": {
-                "id": {
-                    "type": "string"
-                },
                 "type": {
                     "type": "string",
                     "enum": [
@@ -519,30 +527,6 @@
                     ]
                 }
             }
-        },
-        "paymentTransaction": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/transaction"
-                },
-                {
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "PAYMENT"
-                            ]
-                        },
-                        "summ": {
-                            "type": "number"
-                        },
-                        "paymentType": {
-                            "type": "number"
-                        }
-                    }
-                }
-            ]
         }
     }
 }
