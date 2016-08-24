@@ -61,6 +61,34 @@
                     }
                 }
             }
+        },
+        "/api/v1/inventories/stores/{storeUuid}/huy": {
+            "get": {
+                "summary": "Общий запрос - загрузка документов с сервера Эвотор в 1С",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "storeUuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "массив документов",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/huy"
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "parameters": {
@@ -106,6 +134,38 @@
                     "items": {
                         "$ref": "#/definitions/transaction"
                     }
+                }
+            }
+        },
+        "huy": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "transactions": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "test": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "test_2": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    ]
                 }
             }
         },
