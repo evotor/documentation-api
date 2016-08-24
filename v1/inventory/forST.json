@@ -438,6 +438,35 @@
                 "type": {
                     "type": "string",
                     "enum": [
+                        "SELL",
+                        "PAYBACK",
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "OPEN_SESSION",
+                        "FPRINT_OPERATION",
+                        "CLOSE_SESSION",
+                        "INVENTORY",
+                        "ACCEPT",
+                        "RETURN",
+                        "WRITE_OFF",
+                        "REVALUATION",
+                        "OPEN_TARE"
+                    ]
+                },
+                "transactions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/transaction"
+                    }
+                }
+            }
+        },
+        "transaction": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
                         "DISCOUNT_DOCUMENT",
                         "DISCOUNT_POSITION",
                         "DISCOUNT_DOCUMENT_POSITION",
@@ -458,35 +487,6 @@
                         "FPRINT_Z_REPORT",
                         "POSITION_TAX",
                         "REVALUATION"
-                    ]
-                },
-                "transactions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/transaction"
-                    }
-                }
-            }
-        },
-        "transaction": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "SELL",
-                        "PAYBACK",
-                        "CASH_INCOME",
-                        "CASH_OUTCOME",
-                        "OPEN_SESSION",
-                        "FPRINT_OPERATION",
-                        "CLOSE_SESSION",
-                        "INVENTORY",
-                        "ACCEPT",
-                        "RETURN",
-                        "WRITE_OFF",
-                        "REVALUATION",
-                        "OPEN_TARE"
                     ]
                 }
             }
