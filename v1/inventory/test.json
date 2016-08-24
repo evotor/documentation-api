@@ -177,19 +177,6 @@
         },
         "documentSell": {
             "type": "object",
-            "example": {
-                "uuid": "0d1ebd90-36ec-475d-92e6-37adf54f18ac",
-                "type": "SELL",
-                "sessionUUID": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
-                "sessionNumber": 1,
-                "openUserCode": "1",
-                "closeUserCode": "1",
-                "openDate": 1471365897000,
-                "closeDate": 1471365897000,
-                "number": 5,
-                "closeSum": "11138.000",
-                "closeResultSum": "10767.480"
-            },
             "properties": {
                 "uuid": {
                     "type": "string"
