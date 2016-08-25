@@ -6,7 +6,7 @@
     "description": "Описание запросов товароучетной системы [клиент] к API Облака Эвотор [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
   },
   "paths": {
-    "/api/v1/inventories/employees/search": {
+    "/api/v1/employees/search": {
       "get": {
         "summary": "Список сотрудников",
         "description": "Получение списка сотрудников Эвотор \n",
@@ -18,17 +18,17 @@
             "$ref": "#/parameters/authForPartner"
           },
           {
-            "name": "employeeId",
+            "name": "employeeUuid",
             "in": "query",
             "type": "string"
           },
           {
-            "name": "storeId",
+            "name": "storeUuid",
             "in": "query",
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "userUuid",
             "in": "query",
             "type": "string"
           }
@@ -50,7 +50,7 @@
         }
       }
     },
-    "/api/v1/inventories/stores/search": {
+    "/api/v1/stores/search": {
       "get": {
         "summary": "Список торговых точек",
         "description": "Получение списка торговых точек Эвотор \n",
@@ -62,12 +62,12 @@
             "$ref": "#/parameters/authForPartner"
           },
           {
-            "name": "userId",
+            "name": "userUuid",
             "in": "query",
             "type": "string"
           },
           {
-            "name": "storeId",
+            "name": "storeUuid",
             "in": "query",
             "type": "string"
           }
@@ -92,7 +92,7 @@
   },
   "parameters": {
     "authForPartner": {
-      "name": "basic auth",
+      "name": "token or basic auth",
       "in": "header",
       "description": "авторизация для партнера в Эвотор",
       "required": true,
