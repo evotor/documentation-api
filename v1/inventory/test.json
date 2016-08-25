@@ -61,34 +61,6 @@
                     }
                 }
             }
-        },
-        "/api/v1/inventories/stores/{storeUuid}/huy": {
-            "get": {
-                "summary": "Общий запрос - загрузка документов с сервера Эвотор в 1С",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "storeUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "массив документов",
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/huy"
-                            }
-                        }
-                    }
-                }
-            }
         }
     },
     "parameters": {
@@ -134,47 +106,6 @@
                     "items": {
                         "$ref": "#/definitions/transaction"
                     }
-                }
-            }
-        },
-        "huy": {
-            "type": "object",
-            "example": {
-                "uuid": "0d1ebd90-36ec-475d-92e6-37adf54f18ac"
-            },
-            "properties": {
-                "uuid": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "transactions": {
-                    "type": "array",
-                    "items": [
-                        {
-                            "type": "object",
-                            "example": {
-                                "test": "huy"
-                            },
-                            "properties": {
-                                "test": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        {
-                            "type": "object",
-                            "example": {
-                                "test_2": "huy_2"
-                            },
-                            "properties": {
-                                "test_2": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    ]
                 }
             }
         },
@@ -265,6 +196,30 @@
                         },
                         {
                             "type": "object",
+                            "example": {
+                                "id": 20,
+                                "type": "REGISTER_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "alcoholByVolume": "0.000",
+                                "alcoholProductKindCode": 0,
+                                "balanceQuantity": "300.000",
+                                "barcode": null,
+                                "commodityCode": "2",
+                                "commodityName": "Какое-то название продукта",
+                                "commodityType": "NORMAL",
+                                "costPrice": "0.000",
+                                "fprintSection": "0",
+                                "mark": null,
+                                "measureName": "кг",
+                                "tareVolume": "0.000",
+                                "price": "25.000",
+                                "quantity": "30.000",
+                                "resultPrice": "23.040",
+                                "resultSumm": "691.130",
+                                "sum": "750.130",
+                                "positionId": -1
+                            },
                             "properties": {
                                 "id": {
                                     "type": "number"
@@ -332,6 +287,674 @@
                                 },
                                 "positionId": {
                                     "type": "number"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 13,
+                                "type": "DISCOUNT_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "discountSum": "37.500",
+                                "discountType": "1",
+                                "percent": "5.000"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "discountSum": {
+                                    "type": "string"
+                                },
+                                "discountType": {
+                                    "type": "number"
+                                },
+                                "percent": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 15,
+                                "type": "DISCOUNT_DOCUMENT_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "clientName": null,
+                                "clientPhone": null,
+                                "couponNumber": 145695,
+                                "discountDocumentSum": "333.020",
+                                "discountPositionPercent": "3.000",
+                                "discountPositionSum": "21.370",
+                                "discountType": "1"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "clientName": {
+                                    "type": "string"
+                                },
+                                "clientPhone": {
+                                    "type": "string"
+                                },
+                                "couponNumber": {
+                                    "type": "number"
+                                },
+                                "discountDocumentSum": {
+                                    "type": "string"
+                                },
+                                "discountPositionPercent": {
+                                    "type": "string"
+                                },
+                                "discountPositionSum": {
+                                    "type": "string"
+                                },
+                                "discountType": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 16,
+                                "type": "POSITION_TAX",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "barcode": null,
+                                "commodityCode": "2",
+                                "resultPrice": "23.040",
+                                "resultSum": "691.130",
+                                "resultTaxSum": "105.430",
+                                "taxGroupCode": "1",
+                                "taxPercent": "18.000",
+                                "taxRateCode": "1",
+                                "taxSum": "105.430"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "barcode": {
+                                    "type": "string"
+                                },
+                                "commodityCode": {
+                                    "type": "string"
+                                },
+                                "resultPrice": {
+                                    "type": "string"
+                                },
+                                "resultSum": {
+                                    "type": "string"
+                                },
+                                "resultTaxSum": {
+                                    "type": "string"
+                                },
+                                "taxGroupCode": {
+                                    "type": "string"
+                                },
+                                "taxPercent": {
+                                    "type": "string"
+                                },
+                                "taxRateCode": {
+                                    "type": "string"
+                                },
+                                "taxSum": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 17,
+                                "type": "REGISTER_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "alcoholByVolume": "0.000",
+                                "alcoholProductKindCode": 0,
+                                "balanceQuantity": "145.000",
+                                "barcode": null,
+                                "commodityCode": "1",
+                                "commodityName": "Какое-то название продукта",
+                                "commodityType": "NORMAL",
+                                "costPrice": "0.000",
+                                "fprintSection": "0",
+                                "mark": null,
+                                "measureName": "кг",
+                                "tareVolume": "0.000",
+                                "price": "20.000",
+                                "quantity": "1.000",
+                                "resultPrice": "19.400",
+                                "resultSumm": "19.400",
+                                "sum": "20.000",
+                                "positionId": -1
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "alcoholByVolume": {
+                                    "type": "string"
+                                },
+                                "alcoholProductKindCode": {
+                                    "type": "number"
+                                },
+                                "balanceQuantity": {
+                                    "type": "string"
+                                },
+                                "barcode": {
+                                    "type": "string"
+                                },
+                                "commodityCode": {
+                                    "type": "string"
+                                },
+                                "commodityName": {
+                                    "type": "string"
+                                },
+                                "commodityType": {
+                                    "type": "string"
+                                },
+                                "costPrice": {
+                                    "type": "string"
+                                },
+                                "fprintSection": {
+                                    "type": "string"
+                                },
+                                "mark": {
+                                    "type": "string"
+                                },
+                                "measureName": {
+                                    "type": "string"
+                                },
+                                "tareVolume": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "string"
+                                },
+                                "quantity": {
+                                    "type": "string"
+                                },
+                                "resultPrice": {
+                                    "type": "string"
+                                },
+                                "resultSumm": {
+                                    "type": "string"
+                                },
+                                "sum": {
+                                    "type": "string"
+                                },
+                                "positionId": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 18,
+                                "type": "DISCOUNT_DOCUMENT_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "clientName": null,
+                                "clientPhone": null,
+                                "couponNumber": 145695,
+                                "discountDocumentSum": "333.020",
+                                "discountPositionPercent": "3.000",
+                                "discountPositionSum": "0.600",
+                                "discountType": "1"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "clientName": {
+                                    "type": "string"
+                                },
+                                "clientPhone": {
+                                    "type": "string"
+                                },
+                                "couponNumber": {
+                                    "type": "number"
+                                },
+                                "discountDocumentSum": {
+                                    "type": "string"
+                                },
+                                "discountPositionPercent": {
+                                    "type": "string"
+                                },
+                                "discountPositionSum": {
+                                    "type": "string"
+                                },
+                                "discountType": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 19,
+                                "type": "POSITION_TAX",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "barcode": null,
+                                "commodityCode": "1",
+                                "resultPrice": "19.400",
+                                "resultSum": "19.400",
+                                "resultTaxSum": "2.960",
+                                "taxGroupCode": "1",
+                                "taxPercent": "18.000",
+                                "taxRateCode": "1",
+                                "taxSum": "2.960"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "barcode": {
+                                    "type": "string"
+                                },
+                                "commodityCode": {
+                                    "type": "string"
+                                },
+                                "resultPrice": {
+                                    "type": "string"
+                                },
+                                "resultSum": {
+                                    "type": "string"
+                                },
+                                "resultTaxSum": {
+                                    "type": "string"
+                                },
+                                "taxGroupCode": {
+                                    "type": "string"
+                                },
+                                "taxPercent": {
+                                    "type": "string"
+                                },
+                                "taxRateCode": {
+                                    "type": "string"
+                                },
+                                "taxSum": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 17,
+                                "type": "REGISTER_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "alcoholByVolume": "0.000",
+                                "alcoholProductKindCode": 0,
+                                "balanceQuantity": "0.000",
+                                "barcode": null,
+                                "commodityCode": "3",
+                                "commodityName": "Какое-то название продукта",
+                                "commodityType": "NORMAL",
+                                "costPrice": "0.000",
+                                "fprintSection": "0",
+                                "mark": null,
+                                "measureName": "кг",
+                                "tareVolume": "0.000",
+                                "price": "288.000",
+                                "quantity": "36.000",
+                                "resultPrice": "279.360",
+                                "resultSumm": "10056.950",
+                                "sum": "10368.000",
+                                "positionId": 1
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "alcoholByVolume": {
+                                    "type": "string"
+                                },
+                                "alcoholProductKindCode": {
+                                    "type": "number"
+                                },
+                                "balanceQuantity": {
+                                    "type": "string"
+                                },
+                                "barcode": {
+                                    "type": "string"
+                                },
+                                "commodityCode": {
+                                    "type": "string"
+                                },
+                                "commodityName": {
+                                    "type": "string"
+                                },
+                                "commodityType": {
+                                    "type": "string"
+                                },
+                                "costPrice": {
+                                    "type": "string"
+                                },
+                                "fprintSection": {
+                                    "type": "string"
+                                },
+                                "mark": {
+                                    "type": "string"
+                                },
+                                "measureName": {
+                                    "type": "string"
+                                },
+                                "tareVolume": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "string"
+                                },
+                                "quantity": {
+                                    "type": "string"
+                                },
+                                "resultPrice": {
+                                    "type": "string"
+                                },
+                                "resultSumm": {
+                                    "type": "string"
+                                },
+                                "sum": {
+                                    "type": "string"
+                                },
+                                "positionId": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 21,
+                                "type": "DISCOUNT_DOCUMENT_POSITION",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "clientName": null,
+                                "clientPhone": null,
+                                "couponNumber": 145695,
+                                "discountDocumentSum": "333.020",
+                                "discountPositionPercent": "3.000",
+                                "discountPositionSum": "311.050",
+                                "discountType": "1"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "clientName": {
+                                    "type": "string"
+                                },
+                                "clientPhone": {
+                                    "type": "string"
+                                },
+                                "couponNumber": {
+                                    "type": "number"
+                                },
+                                "discountDocumentSum": {
+                                    "type": "string"
+                                },
+                                "discountPositionPercent": {
+                                    "type": "string"
+                                },
+                                "discountPositionSum": {
+                                    "type": "string"
+                                },
+                                "discountType": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 15,
+                                "type": "DISCOUNT_DOCUMENT",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "clientName": null,
+                                "clientPhone": null,
+                                "couponNumber": 145695,
+                                "discountSum": "333.020",
+                                "discountType": "1",
+                                "percent": "3.000"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "clientName": {
+                                    "type": "string"
+                                },
+                                "clientPhone": {
+                                    "type": "string"
+                                },
+                                "couponNumber": {
+                                    "type": "number"
+                                },
+                                "discountSum": {
+                                    "type": "string"
+                                },
+                                "discountType": {
+                                    "type": "string"
+                                },
+                                "percent": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 23,
+                                "type": "PAYMENT",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "paymentType": "CASH",
+                                "rrn": null,
+                                "sum": "11000.000"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "paymentType": {
+                                    "type": "string"
+                                },
+                                "rrn": {
+                                    "type": "string"
+                                },
+                                "sum": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": 24,
+                                "type": "PAYMENT",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "paymentType": "CASH",
+                                "rrn": null,
+                                "sum": "-232.520"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "paymentType": {
+                                    "type": "string"
+                                },
+                                "rrn": {
+                                    "type": "string"
+                                },
+                                "sum": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "example": {
+                                "id": null,
+                                "type": "DOCUMENT_CLOSE",
+                                "creationDate": 1471365897000,
+                                "userCode": "1",
+                                "clientName": null,
+                                "clientPhone": null,
+                                "couponNumber": 145695,
+                                "quantity": "67.000",
+                                "sum": "10767.480"
+                            },
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "creationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "userCode": {
+                                    "type": "string"
+                                },
+                                "clientName": {
+                                    "type": "string"
+                                },
+                                "clientPhone": {
+                                    "type": "string"
+                                },
+                                "couponNumber": {
+                                    "type": "number"
+                                },
+                                "quantity": {
+                                    "type": "string"
+                                },
+                                "sum": {
+                                    "type": "string"
                                 }
                             }
                         }
