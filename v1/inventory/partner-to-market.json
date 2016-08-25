@@ -108,20 +108,23 @@
         "name"
       ],
       "properties": {
-        "uuid": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "role": {
-          "type": "string",
-          "enum": [
-            "ADMIN",
-            "CASHIER"
-          ]
-        }
-      }
+                "uuid": {
+                    "type": "string",
+                    "description": "уникальный UUID сотрудника в Эвотор"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "наименование сотрудника (Фамилия Имя) в Эвотор"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "роль сотрудника (пока только Админ и Кассир)",
+                    "enum": [
+                        "ADMIN",
+                        "CASHIER"
+                    ]
+                }
+            }
     },
     "store": {
       "type": "object",
@@ -130,16 +133,19 @@
         "name"
       ],
       "properties": {
-        "uuid": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        }
-      }
+                "uuid": {
+                    "type": "string",
+                    "description": "уникальный UUID точки продаж в Эвотор"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "наименование точки продаж в Эвотор"
+                },
+                "address": {
+                    "type": "string",
+                    "description": "адресс точки продаж в Эвотор"
+                }
+            }
     }
   }
 }
