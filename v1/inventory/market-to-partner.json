@@ -387,7 +387,7 @@
                     "type": "string",
                     "description": "артикул"
                 },
-                "parentCode": {
+                "parentUuid": {
                     "type": "string",
                     "description": "код группы товаров (родительская папка)"
                 },
