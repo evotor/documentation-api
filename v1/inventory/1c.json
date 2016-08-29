@@ -302,6 +302,13 @@
                         "type": "string"
                     }
                 },
+                "alcocodes": {
+                    "type": "array",
+                    "description": "массив алкокодов",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "name": {
                     "type": "string",
                     "description": "наименование товара / услуги"
@@ -320,11 +327,17 @@
                 },
                 "measureName": {
                     "type": "string",
-                    "description": "ед. измерения"
+                    "description": "ед. измерения",
                 },
                 "tax": {
                     "type": "string",
-                    "description": "налог / ставка НДС"
+                    "description": "налог / ставка НДС.",
+                    "enum": [
+                        "null",
+                        "0.000",
+                        "10.000",
+                        "18.000"
+                    ]
                 },
                 "allowToSell": {
                     "type": "boolean",
