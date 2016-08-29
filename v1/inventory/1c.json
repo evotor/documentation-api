@@ -307,15 +307,15 @@
                     "description": "наименование товара / услуги"
                 },
                 "price": {
-                    "type": "number",
+                    "type": "string",
                     "description": "цена продажи"
                 },
                 "quantity": {
-                    "type": "number",
+                    "type": "string",
                     "description": "кол-во товара. параметр опциональный, зависит от типа запроса. в GET - он обязательный, в POST - может осутствовать"
                 },
                 "costPrice": {
-                    "type": "number",
+                    "type": "string",
                     "description": "закупочная цена"
                 },
                 "measureName": {
@@ -323,7 +323,7 @@
                     "description": "ед. измерения"
                 },
                 "tax": {
-                    "type": "number",
+                    "type": "string",
                     "description": "налог / ставка НДС"
                 },
                 "allowToSell": {
@@ -356,7 +356,7 @@
                     ]
                 },
                 "alcoholByVolume": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "крепость алкогольной  продукции"
                 },
                 "alcoholProductKindCode": {
@@ -364,7 +364,7 @@
                     "description": "код вида алкогольной продукции"
                 },
                 "tarVolume": {
-                    "type": "number",
+                    "type": "string",
                     "description": "емкость тары, л.̆"
                 },
                 "imagePath": {
