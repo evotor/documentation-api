@@ -189,7 +189,7 @@
                                 "description": "кол-во данного товара"
                             },
                             "price": {
-                                "type": "string"
+                                "type": "string",
                                 "description": "цена продажи данного товара"
                             },
                             "purchasePrice": {
