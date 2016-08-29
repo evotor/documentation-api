@@ -208,7 +208,6 @@
                 "type"
             ],
             "properties": {
-                "properties": {
                 "uuid": {
                     "type": "string",
                     "description": "уникальный UUID продукта в Эвотор"
