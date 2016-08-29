@@ -126,7 +126,7 @@
                 },
                 "shiftId": {
                     "description": "номер смены",
-                    "type": "number"
+                    "type": "string"
                 },
                 "employeeUuid": {
                     "type": "string",
@@ -175,67 +175,68 @@
                                 ]
                             },
                             "barcode": {
-                                "type": "number"
+                                "type": "string"
                             },
                             "alcoCode": {
-                                "type": "number"
+                                "type": "string"
                             },
                             "mesuareName": {
                                 "type": "string",
                                 "description": "единица измерения"
                             },
                             "quantity": {
-                                "type": "number",
+                                "type": "string",
                                 "description": "кол-во данного товара"
                             },
                             "price": {
-                                "type": "number"
+                                "type": "string"
+                                "description": "цена продажи данного товара"
                             },
                             "purchasePrice": {
-                                "type": "number",
+                                "type": "string",
                                 "description": "цена закупки данного товара"
                             },
                             "sumPrice": {
-                                "type": "number",
+                                "type": "string",
                                 "description": "общая цена данного товара"
                             },
                             "tax": {
-                                "type": "number",
+                                "type": "string",
                                 "description": "сумма налога на данный товар"
                             },
                             "taxPercent": {
-                                "type": "number",
+                                "type": "string",
                                 "description": "общий налог в % на данный товар"
                             },
                             "discount": {
-                                "type": "number",
+                                "type": "string",
                                 "description": "общая сумма скидки на данный товар"
                             },
                             "discountPercent": {
-                                "type": "number",
+                                "type": "string",
                                 "description": "общая скидка в % на данный товар"
                             }
                         }
                     }
                 },
                 "totalTax": {
-                    "type": "number",
+                    "type": "string",
                     "description": "общая сумма налога"
                 },
                 "totalTaxPercent": {
-                    "type": "number",
+                    "type": "string",
                     "description": "общий налог в %"
                 },
                 "totalDiscount": {
-                    "type": "number",
+                    "type": "string",
                     "description": "общая сумма скидки"
                 },
                 "totalDiscountPercent": {
-                    "type": "number",
+                    "type": "string",
                     "description": "общая скидка в %"
                 },
                 "totalAmount": {
-                    "type": "number",
+                    "type": "string",
                     "description": "общая сумма чека"
                 },
                 "clientUuid": {
