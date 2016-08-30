@@ -45,6 +45,46 @@
                 }
             }
         },
+        "/api/v1/inventories/employees/{uuidEmployee}/code": {
+            "put": {
+                "summary": "создание связки сотрудника Эвотор и сотрудника в 1С",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuidEmployee",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
         "/api/v1/inventories/stores/search": {
             "get": {
                 "summary": "Список торговых точек",
@@ -69,6 +109,46 @@
                                 "$ref": "#/definitions/store"
                             }
                         }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/stores/{uuidStore}/code": {
+            "put": {
+                "summary": "создание связки магазина Эвотор и магазина в 1С",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuidStore",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
                     },
                     "default": {
                         "description": "unexpected error"
@@ -334,8 +414,11 @@
                     "description": "налог / ставка НДС. Параметр NO_VAT - не облагается налогом",
                     "enum": [
                         "NO_VAT",
+                        "VAT_0",
                         "VAT_10",
-                        "VAT_18"
+                        "VAT_18",
+                        "VAT_10_110",
+                        "VAT_18_118"
                     ]
                 },
                 "allowToSell": {
