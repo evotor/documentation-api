@@ -446,6 +446,10 @@
                     "type": "string",
                     "description": "наименование сотрудника (Фамилия Имя) в Эвотор"
                 },
+                "code": {
+                    "type": "string",
+                    "description": "код сотрудника во внешней системе"
+                },
                 "role": {
                     "type": "string",
                     "description": "роль сотрудника (пока только Админ и Кассир)",
@@ -470,6 +474,10 @@
                 "name": {
                     "type": "string",
                     "description": "наименование точки продаж в Эвотор"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "код точки продаж во внешней системе"
                 },
                 "address": {
                     "type": "string",
