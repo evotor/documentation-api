@@ -47,7 +47,7 @@
         },
         "/api/v1/inventories/employees/{uuidEmployee}/code": {
             "put": {
-                "summary": "создание связки сотрудника Эвотор и сотрудника в 1С",
+                "summary": "Связка сотрудника Эвотор и сотрудника в 1С",
                 "produces": [
                     "application/json"
                 ],
@@ -118,7 +118,7 @@
         },
         "/api/v1/inventories/stores/{uuidStore}/code": {
             "put": {
-                "summary": "создание связки магазина Эвотор и магазина в 1С",
+                "summary": "Связка магазина Эвотор и магазина в 1С",
                 "produces": [
                     "application/json"
                 ],
