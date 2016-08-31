@@ -111,6 +111,7 @@
         },
         "documentSell": {
             "type": "object",
+            "example": null,
             "properties": {
                 "uuid": {
                     "type": "string"
@@ -217,6 +218,7 @@
                             "type": "object",
                             "example": {
                                 "id": 13,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "REGISTER_POSITION",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -224,7 +226,7 @@
                                 "alcoholProductKindCode": 0,
                                 "balanceQuantity": "300.000",
                                 "barcode": null,
-                                "commodityCode": "2",
+                                "commodityCode": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "commodityName": "Какое-то название продукта",
                                 "commodityType": "NORMAL",
                                 "costPrice": "0.000",
@@ -275,6 +277,10 @@
                                 "barcode": {
                                     "type": "string",
                                     "description": "штрихкод"
+                                },
+                                "commodityUuid": {
+                                    "type": "string",
+                                    "description": "уникальный UUID товара"
                                 },
                                 "commodityName": {
                                     "type": "string",
@@ -334,6 +340,7 @@
                             "type": "object",
                             "example": {
                                 "id": 14,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "DISCOUNT_POSITION",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -375,6 +382,7 @@
                             "type": "object",
                             "example": {
                                 "id": 15,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "DISCOUNT_DOCUMENT_POSITION",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -440,11 +448,12 @@
                             "type": "object",
                             "example": {
                                 "id": 16,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "POSITION_TAX",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
                                 "barcode": null,
-                                "commodityCode": "2",
+                                "commodityCode": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "resultPrice": "23.040",
                                 "resultSum": "691.130",
                                 "resultTaxSum": "105.430",
@@ -474,31 +483,40 @@
                                     "description": "код пользователя (кассира)"
                                 },
                                 "barcode": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "штрихкод"
                                 },
-                                "commodityCode": {
-                                    "type": "string"
+                                "commodityUuid": {
+                                    "type": "string",
+                                    "description": "уникальный UUID товара"
                                 },
                                 "resultPrice": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "Итоговая цена со скидками"
                                 },
                                 "resultSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "Итоговая сумма в базовой валюте со скидками"
                                 },
                                 "resultTaxSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "Сумма налога в базовой валюте"
                                 },
                                 "taxGroupCode": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "налоговая группа (пока не используется во внешних интеграциях)"
                                 },
                                 "taxPercent": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "налог в процентах"
                                 },
                                 "taxRateCode": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "Код налоговой ставки"
                                 },
                                 "taxSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма налога"
                                 }
                             }
                         },
@@ -506,6 +524,7 @@
                             "type": "object",
                             "example": {
                                 "id": 17,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "REGISTER_POSITION",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -513,7 +532,7 @@
                                 "alcoholProductKindCode": 0,
                                 "balanceQuantity": "145.000",
                                 "barcode": null,
-                                "commodityCode": "1",
+                                "commodityCode": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "commodityName": "Какое-то название продукта",
                                 "commodityType": "NORMAL",
                                 "costPrice": "0.000",
@@ -534,7 +553,8 @@
                                     "description": "уникальный идентификатор, используется партнером"
                                 },
                                 "id": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "не используется партнером, чисто для внутренних целей"
                                 },
                                 "type": {
                                     "type": "string",
@@ -549,58 +569,76 @@
                                     "description": "код пользователя (кассира)"
                                 },
                                 "alcoholByVolume": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "репость алкогольной продукции"
                                 },
                                 "alcoholProductKindCode": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "код вида алкогольной продукции"
                                 },
                                 "balanceQuantity": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "остаток товара"
                                 },
                                 "barcode": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "штрихкод"
                                 },
-                                "commodityCode": {
-                                    "type": "string"
+                                "commodityUuid": {
+                                    "type": "string",
+                                    "description": "уникальный UUID товара"
                                 },
                                 "commodityName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "название товара"
                                 },
                                 "commodityType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип товара"
                                 },
                                 "costPrice": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "закупочная цена товара"
                                 },
                                 "fprintSection": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "секция в ККМ, для внешних интеграций всегда 0"
                                 },
                                 "mark": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "код акцизной марки"
                                 },
                                 "measureName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "ед. измерения"
                                 },
                                 "tareVolume": {
-                                    "type": "string"
-                                },
-                                "price": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "емкость тары, л."
                                 },
                                 "quantity": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "кол-во проданного товара"
+                                },
+                                "price": {
+                                    "type": "string",
+                                    "description": "цена продажи ДО скидки"
                                 },
                                 "resultPrice": {
-                                    "type": "string"
-                                },
-                                "resultSumm": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "цена продажи ПОСЛЕ скидки"
                                 },
                                 "sum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "общая сумма позиции ДО скидки"
+                                },
+                                "resultSumm": {
+                                    "type": "string",
+                                    "description": "общая сумма позиции ПОСЛЕ скидки"
                                 },
                                 "positionId": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "не используется во внешних интеграциях"
                                 }
                             }
                         },
@@ -608,6 +646,7 @@
                             "type": "object",
                             "example": {
                                 "id": 18,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "DISCOUNT_DOCUMENT_POSITION",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -652,16 +691,20 @@
                                     "description": "номер купона"
                                 },
                                 "discountDocumentSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма скидки которая распростронялась на весь чек"
                                 },
                                 "discountPositionPercent": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "скидка в процентах на конкретную позицию"
                                 },
                                 "discountPositionSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма скидки на конкретную позицию"
                                 },
                                 "discountType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип скидки (не используется во внешних интеграциях)"
                                 }
                             }
                         },
@@ -669,11 +712,12 @@
                             "type": "object",
                             "example": {
                                 "id": 19,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "POSITION_TAX",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
                                 "barcode": null,
-                                "commodityCode": "1",
+                                "commodityCode": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "resultPrice": "19.400",
                                 "resultSum": "19.400",
                                 "resultTaxSum": "2.960",
@@ -705,8 +749,9 @@
                                 "barcode": {
                                     "type": "string"
                                 },
-                                "commodityCode": {
-                                    "type": "string"
+                                "commodityUuid": {
+                                    "type": "string",
+                                    "description": "уникальный UUID товара"
                                 },
                                 "resultPrice": {
                                     "type": "string"
@@ -735,6 +780,7 @@
                             "type": "object",
                             "example": {
                                 "id": 20,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "REGISTER_POSITION",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -742,7 +788,7 @@
                                 "alcoholProductKindCode": 0,
                                 "balanceQuantity": "0.000",
                                 "barcode": null,
-                                "commodityCode": "3",
+                                "commodityCode": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "commodityName": "Какое-то название продукта",
                                 "commodityType": "NORMAL",
                                 "costPrice": "0.000",
@@ -789,8 +835,9 @@
                                 "barcode": {
                                     "type": "string"
                                 },
-                                "commodityCode": {
-                                    "type": "string"
+                                "commodityUuid": {
+                                    "type": "string",
+                                    "description": "уникальный UUID товара"
                                 },
                                 "commodityName": {
                                     "type": "string"
@@ -837,6 +884,7 @@
                             "type": "object",
                             "example": {
                                 "id": 21,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "DISCOUNT_DOCUMENT_POSITION",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -898,6 +946,7 @@
                             "type": "object",
                             "example": {
                                 "id": 22,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "DISCOUNT_DOCUMENT",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -941,13 +990,16 @@
                                     "description": "номер купона"
                                 },
                                 "discountSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма скидки которая распростронялась на весь чек"
                                 },
                                 "discountType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип скидки (не используется во внешних интеграциях)"
                                 },
                                 "percent": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "скидка в процентах на весь чек"
                                 }
                             }
                         },
@@ -955,6 +1007,7 @@
                             "type": "object",
                             "example": {
                                 "id": 23,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "PAYMENT",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -983,13 +1036,16 @@
                                     "description": "код пользователя (кассира)"
                                 },
                                 "paymentType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "способ оплаты"
                                 },
                                 "rrn": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "референс-номер для возвратов в случае безналичной оплаты"
                                 },
                                 "sum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "если сумма положительная, значит мы ее получили от клиента (если отрицательная, значит сдача)"
                                 }
                             }
                         },
@@ -997,6 +1053,7 @@
                             "type": "object",
                             "example": {
                                 "id": 24,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "PAYMENT",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
@@ -1025,13 +1082,16 @@
                                     "description": "код пользователя (кассира)"
                                 },
                                 "paymentType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "способ оплаты"
                                 },
                                 "rrn": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "референс-номер для возвратов в случае безналичной оплаты"
                                 },
                                 "sum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "если сумма положительная, значит мы ее получили от клиента (если отрицательная, значит сдача)"
                                 }
                             }
                         },
@@ -1039,6 +1099,7 @@
                             "type": "object",
                             "example": {
                                 "id": 25,
+                                "uuid": "afb1dc26-46c3-4193-a0fd-b46e7eccfc75",
                                 "type": "DOCUMENT_CLOSE",
                                 "creationDate": 1471365897000,
                                 "userUuid": "1",
