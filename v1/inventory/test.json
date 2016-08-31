@@ -115,37 +115,45 @@
                 "uuid": {
                     "type": "string"
                 },
+                "number": {
+                    "type": "number",
+                    "description": "номер документа"
+                },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "тип документа"
                 },
                 "sessionUUID": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "UUID смены"
                 },
                 "sessionNumber": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "номер смены"
                 },
-                "openUserCode": {
-                    "type": "string"
+                "openUserUuid": {
+                    "type": "string",
+                    "description": "UUID юзера, который открыл документ"
                 },
-                "closeUserCode": {
-                    "type": "string"
+                "closeUserUuid": {
+                    "type": "string",
+                    "description": "UUID юзера, который заакрыл документ"
                 },
                 "openDate": {
-                    "type": "string",
-                    "format": "date-time"
+                    "type": "number",
+                    "description": "дата открытия"
                 },
                 "closeDate": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "number": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "дата закрытия"
                 },
                 "closeSum": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "общая сумма чека без учета скидок"
                 },
                 "closeResultSum": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "финальная сумма чека c учетом скидок"
                 },
                 "transactions": {
                     "type": "array",
@@ -156,7 +164,7 @@
                                 "id": 12,
                                 "type": "DOCUMENT_OPEN",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "baseDocumentNumber": null,
                                 "baseDocumentUUID": null,
                                 "clientName": null,
@@ -164,43 +172,54 @@
                                 "couponNumber": 145695
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "baseDocumentNumber": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "номер документ основания (обычно для возврата)"
                                 },
                                 "baseDocumentUUID": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "UUID документ основания (обычно для возврата)"
                                 },
                                 "clientName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "имя клиента"
                                 },
                                 "clientPhone": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "телефон клиента"
                                 },
                                 "couponNumber": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "номер купона"
                                 }
                             }
                         },
                         {
                             "type": "object",
                             "example": {
-                                "id": 20,
+                                "id": 13,
                                 "type": "REGISTER_POSITION",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "alcoholByVolume": "0.000",
                                 "alcoholProductKindCode": 0,
                                 "balanceQuantity": "300.000",
@@ -217,86 +236,107 @@
                                 "quantity": "30.000",
                                 "resultPrice": "23.040",
                                 "resultSumm": "691.130",
-                                "sum": "750.130",
+                                "sum": "750.000",
                                 "positionId": -1
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "не используется партнером, чисто для внутренних целей"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "alcoholByVolume": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "репость алкогольной продукции"
                                 },
                                 "alcoholProductKindCode": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "код вида алкогольной продукции"
                                 },
                                 "balanceQuantity": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "остаток товара"
                                 },
                                 "barcode": {
-                                    "type": "string"
-                                },
-                                "commodityCode": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "штрихкод"
                                 },
                                 "commodityName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "название товара"
                                 },
                                 "commodityType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип товара"
                                 },
                                 "costPrice": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "закупочная цена товара"
                                 },
                                 "fprintSection": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "секция в ККМ, для внешних интеграций всегда 0"
                                 },
                                 "mark": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "код акцизной марки"
                                 },
                                 "measureName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "ед. измерения"
                                 },
                                 "tareVolume": {
-                                    "type": "string"
-                                },
-                                "price": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "емкость тары, л."
                                 },
                                 "quantity": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "кол-во проданного товара"
+                                },
+                                "price": {
+                                    "type": "string",
+                                    "description": "цена продажи ДО скидки"
                                 },
                                 "resultPrice": {
-                                    "type": "string"
-                                },
-                                "resultSumm": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "цена продажи ПОСЛЕ скидки"
                                 },
                                 "sum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "общая сумма позиции ДО скидки"
+                                },
+                                "resultSumm": {
+                                    "type": "string",
+                                    "description": "общая сумма позиции ПОСЛЕ скидки"
                                 },
                                 "positionId": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "не используется во внешних интеграциях"
                                 }
                             }
                         },
                         {
                             "type": "object",
                             "example": {
-                                "id": 13,
+                                "id": 14,
                                 "type": "DISCOUNT_POSITION",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "discountSum": "37.500",
                                 "discountType": "1",
                                 "percent": "5.000"
@@ -306,23 +346,28 @@
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "discountSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма скидки на позицию"
                                 },
                                 "discountType": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "тип скидки (во внешних интеграциях не используется)"
                                 },
                                 "percent": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "скидка в процентах"
                                 }
                             }
                         },
@@ -332,7 +377,7 @@
                                 "id": 15,
                                 "type": "DISCOUNT_DOCUMENT_POSITION",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "clientName": null,
                                 "clientPhone": null,
                                 "couponNumber": 145695,
@@ -342,39 +387,52 @@
                                 "discountType": "1"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "clientName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "имя клиента"
                                 },
                                 "clientPhone": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "телефон клиента"
                                 },
                                 "couponNumber": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "номер купона"
                                 },
                                 "discountDocumentSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма скидки которая распростронялась на весь чек"
                                 },
                                 "discountPositionPercent": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "скидка в процентах на конкретную позицию"
                                 },
                                 "discountPositionSum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма скидки на конкретную позицию"
                                 },
                                 "discountType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип скидки (не используется во внешних интеграциях)"
                                 }
                             }
                         },
@@ -384,7 +442,7 @@
                                 "id": 16,
                                 "type": "POSITION_TAX",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "barcode": null,
                                 "commodityCode": "2",
                                 "resultPrice": "23.040",
@@ -396,18 +454,24 @@
                                 "taxSum": "105.430"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "barcode": {
                                     "type": "string"
@@ -444,7 +508,7 @@
                                 "id": 17,
                                 "type": "REGISTER_POSITION",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "alcoholByVolume": "0.000",
                                 "alcoholProductKindCode": 0,
                                 "balanceQuantity": "145.000",
@@ -465,18 +529,24 @@
                                 "positionId": -1
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "alcoholByVolume": {
                                     "type": "string"
@@ -540,7 +610,7 @@
                                 "id": 18,
                                 "type": "DISCOUNT_DOCUMENT_POSITION",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "clientName": null,
                                 "clientPhone": null,
                                 "couponNumber": 145695,
@@ -550,27 +620,36 @@
                                 "discountType": "1"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "clientName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "имя клиента"
                                 },
                                 "clientPhone": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "телефон клиента"
                                 },
                                 "couponNumber": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "номер купона"
                                 },
                                 "discountDocumentSum": {
                                     "type": "string"
@@ -592,7 +671,7 @@
                                 "id": 19,
                                 "type": "POSITION_TAX",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "barcode": null,
                                 "commodityCode": "1",
                                 "resultPrice": "19.400",
@@ -604,18 +683,24 @@
                                 "taxSum": "2.960"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "barcode": {
                                     "type": "string"
@@ -649,10 +734,10 @@
                         {
                             "type": "object",
                             "example": {
-                                "id": 17,
+                                "id": 20,
                                 "type": "REGISTER_POSITION",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "alcoholByVolume": "0.000",
                                 "alcoholProductKindCode": 0,
                                 "balanceQuantity": "0.000",
@@ -673,18 +758,24 @@
                                 "positionId": 1
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "alcoholByVolume": {
                                     "type": "string"
@@ -748,7 +839,7 @@
                                 "id": 21,
                                 "type": "DISCOUNT_DOCUMENT_POSITION",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "clientName": null,
                                 "clientPhone": null,
                                 "couponNumber": 145695,
@@ -758,27 +849,36 @@
                                 "discountType": "1"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "clientName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "имя клиента"
                                 },
                                 "clientPhone": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "телефон клиента"
                                 },
                                 "couponNumber": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "номер купона"
                                 },
                                 "discountDocumentSum": {
                                     "type": "string"
@@ -797,10 +897,10 @@
                         {
                             "type": "object",
                             "example": {
-                                "id": 15,
+                                "id": 22,
                                 "type": "DISCOUNT_DOCUMENT",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "clientName": null,
                                 "clientPhone": null,
                                 "couponNumber": 145695,
@@ -809,27 +909,36 @@
                                 "percent": "3.000"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "clientName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "имя клиента"
                                 },
                                 "clientPhone": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "телефон клиента"
                                 },
                                 "couponNumber": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "номер купона"
                                 },
                                 "discountSum": {
                                     "type": "string"
@@ -848,24 +957,30 @@
                                 "id": 23,
                                 "type": "PAYMENT",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "paymentType": "CASH",
                                 "rrn": null,
                                 "sum": "11000.000"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "paymentType": {
                                     "type": "string"
@@ -884,24 +999,30 @@
                                 "id": 24,
                                 "type": "PAYMENT",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "paymentType": "CASH",
                                 "rrn": null,
                                 "sum": "-232.520"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "paymentType": {
                                     "type": "string"
@@ -917,10 +1038,10 @@
                         {
                             "type": "object",
                             "example": {
-                                "id": null,
+                                "id": 25,
                                 "type": "DOCUMENT_CLOSE",
                                 "creationDate": 1471365897000,
-                                "userCode": "1",
+                                "userUuid": "1",
                                 "clientName": null,
                                 "clientPhone": null,
                                 "couponNumber": 145695,
@@ -928,33 +1049,44 @@
                                 "sum": "10767.480"
                             },
                             "properties": {
+                                "uuid": {
+                                    "type": "string",
+                                    "description": "уникальный идентификатор, используется партнером"
+                                },
                                 "id": {
                                     "type": "number"
                                 },
                                 "type": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "тип транзакции"
                                 },
                                 "creationDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                    "type": "number",
+                                    "description": "дата"
                                 },
-                                "userCode": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "код пользователя (кассира)"
                                 },
                                 "clientName": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "имя клиента"
                                 },
                                 "clientPhone": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "телефон клиента"
                                 },
                                 "couponNumber": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "description": "номер купона"
                                 },
                                 "quantity": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "общее кол-во проданных товаров"
                                 },
                                 "sum": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "сумма чека / документа продажи"
                                 }
                             }
                         }
