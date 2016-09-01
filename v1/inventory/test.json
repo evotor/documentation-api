@@ -145,7 +145,8 @@
                     "description": "дата открытия"
                 },
                 "closeDate": {
-                    "type": "number",
+                    "type": "string",
+                    "format": "date-time"
                     "description": "дата закрытия"
                 },
                 "closeSum": {
