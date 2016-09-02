@@ -104,7 +104,7 @@
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeId}/products": {
+        "/api/v1/inventories/stores/{storeUuid}/products": {
             "get": {
                 "summary": "Получение товаров из ТУ системы",
                 "description": "Получение списка товаров из Эвотор\n. В GET запросе параметр quantity обязательный (например, в post опциональный)",
@@ -116,7 +116,7 @@
                         "$ref": "#/parameters/auth"
                     },
                     {
-                        "name": "storeId",
+                        "name": "storeUuid",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -163,7 +163,7 @@
                         "$ref": "#/parameters/auth"
                     },
                     {
-                        "name": "storeId",
+                        "name": "storeUuid",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -218,7 +218,7 @@
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeId}/documents": {
+        "/api/v1/inventories/stores/{storeUuid}/documents": {
             "put": {
                 "summary": "Выгрузка документов",
                 "description": "Загрузка во внешнюю ТУ документов с транзакциями\n",
@@ -227,7 +227,7 @@
                         "$ref": "#/parameters/auth"
                     },
                     {
-                        "name": "storeId",
+                        "name": "storeUuid",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -363,15 +363,15 @@
                     "description": "наименование товара / услуги"
                 },
                 "price": {
-                    "type": "string",
+                    "type": "number",
                     "description": "цена продажи"
                 },
                 "quantity": {
-                    "type": "string",
+                    "type": "number",
                     "description": "кол-во товара. параметр опциональный, зависит от типа запроса. в GET - он обязательный, в POST - может осутствовать"
                 },
                 "costPrice": {
-                    "type": "string",
+                    "type": "number",
                     "description": "закупочная цена"
                 },
                 "measureName": {
@@ -396,7 +396,7 @@
                     "description": "описание товара / услуги"
                 },
                 "articleNumber": {
-                    "type": "string",
+                    "type": "number",
                     "description": "артикул"
                 },
                 "parentUuid": {
@@ -417,7 +417,7 @@
                     ]
                 },
                 "alcoholByVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "крепость алкогольной  продукции"
                 },
                 "alcoholProductKindCode": {
@@ -425,7 +425,7 @@
                     "description": "код вида алкогольной продукции"
                 },
                 "tarVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "емкость тары, л.̆"
                 },
                 "fields": {
@@ -496,12 +496,24 @@
                     "type": "number",
                     "description": "номер телефона сотрудника в Эвотор в формате 79001234455"
                 },
+                "stores": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "storeUuid": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
                 "role": {
                     "type": "string",
                     "description": "роль сотрудника (пока только Админ и Кассир)",
                     "enum": [
                         "ADMIN",
-                        "CASHIER"
+                        "CASHIER",
+                        "OTHER"
                     ]
                 }
             }
