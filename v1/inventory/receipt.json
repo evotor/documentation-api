@@ -118,7 +118,8 @@
                 },
                 "dateTime": {
                     "description": "дата и время",
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "type": {
                     "description": "тип чека (продажа, возврат)",
@@ -185,58 +186,58 @@
                                 "description": "единица измерения"
                             },
                             "quantity": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "кол-во данного товара"
                             },
                             "price": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "цена продажи данного товара"
                             },
                             "purchasePrice": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "цена закупки данного товара"
                             },
                             "sumPrice": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "общая цена данного товара"
                             },
                             "tax": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "сумма налога на данный товар"
                             },
                             "taxPercent": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "общий налог в % на данный товар"
                             },
                             "discount": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "общая сумма скидки на данный товар"
                             },
                             "discountPercent": {
-                                "type": "string",
+                                "type": "number",
                                 "description": "общая скидка в % на данный товар"
                             }
                         }
                     }
                 },
                 "totalTax": {
-                    "type": "string",
+                    "type": "number",
                     "description": "общая сумма налога"
                 },
                 "totalTaxPercent": {
-                    "type": "string",
+                    "type": "number",
                     "description": "общий налог в %"
                 },
                 "totalDiscount": {
-                    "type": "string",
+                    "type": "number",
                     "description": "общая сумма скидки"
                 },
                 "totalDiscountPercent": {
-                    "type": "string",
+                    "type": "number",
                     "description": "общая скидка в %"
                 },
                 "totalAmount": {
-                    "type": "string",
+                    "type": "number",
                     "description": "общая сумма чека"
                 },
                 "clientUuid": {
