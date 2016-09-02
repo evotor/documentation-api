@@ -201,7 +201,7 @@
         }
     },
     "definitions": {
-        "product": {
+            "product": {
             "type": "object",
             "required": [
                 "uuid",
@@ -235,15 +235,15 @@
                     "description": "наименование товара / услуги"
                 },
                 "price": {
-                    "type": "string",
+                    "type": "number",
                     "description": "цена продажи"
                 },
                 "quantity": {
-                    "type": "string",
+                    "type": "number",
                     "description": "кол-во товара. параметр опциональный, зависит от типа запроса. в GET - он обязательный, в POST - может осутствовать"
                 },
                 "costPrice": {
-                    "type": "string",
+                    "type": "number",
                     "description": "закупочная цена"
                 },
                 "measureName": {
@@ -268,7 +268,7 @@
                     "description": "описание товара / услуги"
                 },
                 "articleNumber": {
-                    "type": "string",
+                    "type": "number",
                     "description": "артикул"
                 },
                 "parentUuid": {
@@ -289,7 +289,7 @@
                     ]
                 },
                 "alcoholByVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "крепость алкогольной  продукции"
                 },
                 "alcoholProductKindCode": {
@@ -297,7 +297,7 @@
                     "description": "код вида алкогольной продукции"
                 },
                 "tarVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "емкость тары, л.̆"
                 },
                 "fields": {
@@ -306,7 +306,7 @@
                 }
             }
         },
-        "productCreate": {
+            "productCreate": {
             "type": "object",
             "required": [
                 "uuid",
@@ -340,11 +340,11 @@
                     "description": "наименование товара / услуги"
                 },
                 "price": {
-                    "type": "string",
+                    "type": "number",
                     "description": "цена продажи"
                 },
                 "costPrice": {
-                    "type": "string",
+                    "type": "number",
                     "description": "закупочная цена"
                 },
                 "measureName": {
@@ -369,7 +369,7 @@
                     "description": "описание товара / услуги"
                 },
                 "articleNumber": {
-                    "type": "string",
+                    "type": "number",
                     "description": "артикул"
                 },
                 "parentUuid": {
@@ -390,7 +390,7 @@
                     ]
                 },
                 "alcoholByVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "крепость алкогольной  продукции"
                 },
                 "alcoholProductKindCode": {
@@ -398,7 +398,7 @@
                     "description": "код вида алкогольной продукции"
                 },
                 "tarVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "емкость тары, л.̆"
                 },
                 "fields": {
