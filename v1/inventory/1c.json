@@ -394,15 +394,15 @@
                     "description": "наименование товара / услуги"
                 },
                 "price": {
-                    "type": "string",
+                    "type": "number",
                     "description": "цена продажи"
                 },
                 "quantity": {
-                    "type": "string",
+                    "type": "number",
                     "description": "кол-во товара. параметр опциональный, зависит от типа запроса. в GET - он обязательный, в POST - может осутствовать"
                 },
                 "costPrice": {
-                    "type": "string",
+                    "type": "number",
                     "description": "закупочная цена"
                 },
                 "measureName": {
@@ -414,11 +414,8 @@
                     "description": "налог / ставка НДС. Параметр NO_VAT - не облагается налогом",
                     "enum": [
                         "NO_VAT",
-                        "VAT_0",
                         "VAT_10",
-                        "VAT_18",
-                        "VAT_10_110",
-                        "VAT_18_118"
+                        "VAT_18"
                     ]
                 },
                 "allowToSell": {
@@ -430,7 +427,7 @@
                     "description": "описание товара / услуги"
                 },
                 "articleNumber": {
-                    "type": "string",
+                    "type": "number",
                     "description": "артикул"
                 },
                 "parentUuid": {
@@ -451,7 +448,7 @@
                     ]
                 },
                 "alcoholByVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "крепость алкогольной  продукции"
                 },
                 "alcoholProductKindCode": {
@@ -459,7 +456,7 @@
                     "description": "код вида алкогольной продукции"
                 },
                 "tarVolume": {
-                    "type": "string",
+                    "type": "number",
                     "description": "емкость тары, л.̆"
                 },
                 "fields": {
@@ -515,7 +512,8 @@
             "required": [
                 "uuid",
                 "role",
-                "name"
+                "name",
+                "stores"
             ],
             "properties": {
                 "uuid": {
@@ -529,6 +527,17 @@
                 "code": {
                     "type": "string",
                     "description": "код сотрудника во внешней системе"
+                },
+                "stores": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "storeUuid": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 },
                 "role": {
                     "type": "string",
