@@ -186,7 +186,9 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
           "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Configuration of Partner</a>" +
           "  <br>" +
-          "  <a href='/docs/v1/inventory/example/put.documents.payload.json'>Document example with transactions</a>" +
+          "  <a href='/docs/v1/inventory/example/docs.json'> <span style='color:red;'>New!</span> Document example with transactions</a>" +
+          "  <br>" +
+          "  <a href='/docs/v1/inventory/example/products.json'> <span style='color:red;'>New!</span> Example Products</a>" +
           "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/receipt.json'>Receipts - online</a>" +
           "  <br>" +
