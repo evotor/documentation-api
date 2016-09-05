@@ -178,9 +178,6 @@
                             "barcode": {
                                 "type": "string"
                             },
-                            "alcoCode": {
-                                "type": "string"
-                            },
                             "mesuareName": {
                                 "type": "string",
                                 "description": "единица измерения"
@@ -193,7 +190,7 @@
                                 "type": "number",
                                 "description": "цена продажи данного товара"
                             },
-                            "purchasePrice": {
+                            "costPrice": {
                                 "type": "number",
                                 "description": "цена закупки данного товара"
                             },
@@ -212,10 +209,6 @@
                             "discount": {
                                 "type": "number",
                                 "description": "общая сумма скидки на данный товар"
-                            },
-                            "discountPercent": {
-                                "type": "number",
-                                "description": "общая скидка в % на данный товар"
                             }
                         }
                     }
@@ -224,17 +217,9 @@
                     "type": "number",
                     "description": "общая сумма налога"
                 },
-                "totalTaxPercent": {
-                    "type": "number",
-                    "description": "общий налог в %"
-                },
                 "totalDiscount": {
                     "type": "number",
                     "description": "общая сумма скидки"
-                },
-                "totalDiscountPercent": {
-                    "type": "number",
-                    "description": "общая скидка в %"
                 },
                 "totalAmount": {
                     "type": "number",
