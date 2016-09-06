@@ -236,21 +236,7 @@
                 "responses": {
                     "200": {
                         "description": "Successful response",
-                        "schema": {
-                            "title": "Массив привязок",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "uuid": {
-                                        "type": "string"
-                                    },
-                                    "id": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
+                        
                     },
                     "401": {
                         "$ref": "#/responses/status401"
