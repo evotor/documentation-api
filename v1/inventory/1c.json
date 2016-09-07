@@ -30,7 +30,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successful response",
                         "schema": {
                             "title": "список сотрудников",
                             "type": "array",
@@ -235,7 +235,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Successful response"
                         
                     },
                     "401": {
