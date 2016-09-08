@@ -161,8 +161,8 @@
         },
         "/api/v1/events/billing": {
             "post": {
-                "summary": "Эвента биллинга по пользователю",
-                "description": "",
+                "summary": "Event: начало триала подписки",
+                "description": "ВАЖНО: хост у EVENTS всегда один и тотже, из-за невозможности в Open API отобразить несколько запросов к одному URL, сделан лайфхак - добавление нижнего подчеркивания",
                 "produces": [
                     "application/json"
                 ],
@@ -178,6 +178,25 @@
                         "schema": {
                             "$ref": "#/definitions/subscriptionCreated"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/events/billing_": {
+            "post": {
+                "summary": "Event: успешная оплата",
+                "description": "ВАЖНО: хост у EVENTS всегда один и тотже, из-за невозможности в Open API отобразить несколько запросов к одному URL, сделан лайфхак - добавление нижнего подчеркивания",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
                     },
                     {
                         "name": "paymentSuccessed",
@@ -187,6 +206,25 @@
                         "schema": {
                             "$ref": "#/definitions/paymentSuccessed"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/events/billing__": {
+            "post": {
+                "summary": "Event: подписка активирована",
+                "description": "ВАЖНО: хост у EVENTS всегда один и тотже, из-за невозможности в Open API отобразить несколько запросов к одному URL, сделан лайфхак - добавление нижнего подчеркивания",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
                     },
                     {
                         "name": "subscriptionActivated",
@@ -196,6 +234,25 @@
                         "schema": {
                             "$ref": "#/definitions/subscriptionActivated"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/events/billing___": {
+            "post": {
+                "summary": "Event: оплата не прошла",
+                "description": "ВАЖНО: хост у EVENTS всегда один и тотже, из-за невозможности в Open API отобразить несколько запросов к одному URL, сделан лайфхак - добавление нижнего подчеркивания",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
                     },
                     {
                         "name": "paymentFailed",
