@@ -35,36 +35,6 @@
                         "description": "Successful response"
                     }
                 }
-            },
-            "get": {
-                "summary": "Запрос партнером информации по UUID чека",
-                "description": "Партнер может получить по UUID чека его состав. \n",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "uuid",
-                        "description": "uuid чека",
-                        "in": "query",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/receipt"
-                            }
-                        }
-                    }
-                }
             }
         }
     },
