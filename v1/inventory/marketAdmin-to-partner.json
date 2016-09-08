@@ -159,9 +159,9 @@
                 }
             }
         },
-        "/api/v1/events/billing/subscriptionCreated": {
+        "/api/v1/events/billing": {
             "post": {
-                "summary": "Event: начало триала подписки",
+                "summary": "Эвента биллинга по пользователю",
                 "description": "",
                 "produces": [
                     "application/json"
@@ -171,165 +171,39 @@
                         "$ref": "#/parameters/authEvotor"
                     },
                     {
-                        "name": "user",
+                        "name": "subscriptionCreated",
+                        "description": "Event: начало триала подписки",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "date": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                },
-                                "data": {
-                                    "type": "object",
-                                    "properties": {
-                                        "trialDurationDays": {
-                                            "type": "number"
-                                        },
-                                        "user": {
-                                            "$ref": "#/definitions/user"
-                                        }
-                                    }
-                                }
-                            }
+                            "$ref": "#/definitions/subscriptionCreated"
                         }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    }
-                }
-            }
-        },
-        "/api/v1/events/billing/paymentSuccessed": {
-            "post": {
-                "summary": "Event: успешная оплата",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/authEvotor"
                     },
                     {
-                        "name": "user",
+                        "name": "paymentSuccessed",
+                        "description": "Event: успешная оплата",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "date": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                },
-                                "data": {
-                                    "type": "object",
-                                    "properties": {
-                                        "amount": {
-                                            "type": "number"
-                                        },
-                                        "user": {
-                                            "$ref": "#/definitions/user"
-                                        }
-                                    }
-                                }
-                            }
+                            "$ref": "#/definitions/paymentSuccessed"
                         }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    }
-                }
-            }
-        },
-        "/api/v1/events/billing/subscriptionActivated": {
-            "post": {
-                "summary": "Event: подписка активирована",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/authEvotor"
                     },
                     {
-                        "name": "user",
+                        "name": "subscriptionActivated",
+                        "description": "Event: подписка активирована",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "date": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                },
-                                "data": {
-                                    "type": "object",
-                                    "properties": {
-                                        "user": {
-                                            "$ref": "#/definitions/user"
-                                        }
-                                    }
-                                }
-                            }
+                            "$ref": "#/definitions/subscriptionActivated"
                         }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    }
-                }
-            }
-        },
-        "/api/v1/events/billing/paymentFailed": {
-            "post": {
-                "summary": "Event: оплата не прошла",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/authEvotor"
                     },
                     {
-                        "name": "user",
+                        "name": "paymentFailed",
+                        "description": "Event: оплата не прошла",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "date": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                },
-                                "data": {
-                                    "type": "object",
-                                    "properties": {
-                                        "amount": {
-                                            "type": "number"
-                                        },
-                                        "nextPaymentAtemptInDays": {
-                                            "type": "number",
-                                            "description": "через сколько дней будет следующая попытка списать деньги"
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "description": "описание ошибки"
-                                        },
-                                        "user": {
-                                            "$ref": "#/definitions/user"
-                                        }
-                                    }
-                                }
-                            }
+                            "$ref": "#/definitions/paymentFailed"
                         }
                     }
                 ],
@@ -370,6 +244,91 @@
                 },
                 "CUSTOM_FIELD_NAME_2": {
                     "type": "string"
+                }
+            }
+        },
+        "subscriptionCreated": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "trialDurationDays": {
+                            "type": "number"
+                        },
+                        "user": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                }
+            }
+        },
+        "paymentSuccessed": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "amount": {
+                            "type": "number"
+                        },
+                        "user": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                }
+            }
+        },
+        "subscriptionActivated": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "user": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                }
+            }
+        },
+        "paymentFailed": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "amount": {
+                            "type": "number"
+                        },
+                        "nextPaymentAtemptInDays": {
+                            "type": "number",
+                            "description": "через сколько дней будет следующая попытка списать деньги"
+                        },
+                        "error": {
+                            "type": "string",
+                            "description": "описание ошибки"
+                        },
+                        "user": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
                 }
             }
         }
