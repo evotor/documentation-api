@@ -177,7 +177,7 @@
           "type": "string",
           "description": "id пользователя в системе эвтор"
         },
-        "userName": {
+        "username": {
           "type": "string"
         },
         "password": {
