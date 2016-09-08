@@ -1,196 +1,381 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "0.0.1-SNAPSHOT",
-    "title": "Управление учетными записями товароучетной системы (ТУ)",
-    "description": "Описание запросов Эвотор [сервер] к API товароучетной системы [сервер]. Эти запросы управляют учетными записями партнера (проверка наличия, создание, установка или деактивация того или иного тарифа)"
-  },
-  "paths": {
-    "/api/v1/user/verify": {
-      "post": {
-        "summary": "Верификация пользователя ТУ",
-        "description": "Выполняет следующие задачи  1) проверка существует ли пользователь в системе партнера  2) проверка билится ли пользователь в системе партнера 3) если в системе партнера испозуется авторизация через token, то его нужно вернуть как параметр в ответе. >\n",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/authEvotor"
-          },
-          {
-            "name": "user",
-            "in": "body",
-            "description": "параметры необходимые для получения данных о пользователе",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/user"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "title": "данные пользователя",
-              "type": "object",
-              "required": [
-                "userId",
-                "hasBilling"
-              ],
-              "properties": {
-                "userId": {
-                  "type": "string",
-                  "description": "id пользователя в системе партнера"
-                },
-                "hasBilling": {
-                  "type": "boolean"
-                },
-                "token": {
-                  "description": "опциональный параметр, возвращется если партнер использует авторизацию через token в запросах товароучетного API",
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "пользователь не найден"
-          }
-        }
-      }
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "Управление учетными записями товароучетной системы (ТУ)",
+        "description": "Описание запросов Эвотор [сервер] к API товароучетной системы [сервер]. Эти запросы управляют учетными записями партнера (проверка наличия, создание, установка или деактивация того или иного тарифа)"
     },
-    "/api/v1/user/create": {
-      "post": {
-        "summary": "Создание пользователя",
-        "description": "Создание пользователя в системе партнера",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/authEvotor"
-          },
-          {
-            "name": "user",
-            "in": "body",
-            "description": "параметры необходимые для создания пользователя в партнере",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/user"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "title": "данные пользователя",
-              "type": "object",
-              "required": [
-                "userId"
-              ],
-              "properties": {
-                "userId": {
-                  "type": "string"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "token": {
-                  "description": "опциональный параметр, возвращется если партнер использует авторизацию через token в запросах товароучетного API",
-                  "type": "string"
+    "paths": {
+        "/api/v1/user/verify": {
+            "post": {
+                "summary": "Верификация пользователя ТУ",
+                "description": "Выполняет следующие задачи  1) проверка существует ли пользователь в системе партнера  2) проверка билится ли пользователь в системе партнера 3) если в системе партнера испозуется авторизация через token, то его нужно вернуть как параметр в ответе. >\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "параметры необходимые для получения данных о пользователе",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "данные пользователя",
+                            "type": "object",
+                            "required": [
+                                "userId",
+                                "hasBilling"
+                            ],
+                            "properties": {
+                                "userId": {
+                                    "type": "string",
+                                    "description": "id пользователя в системе партнера"
+                                },
+                                "hasBilling": {
+                                    "type": "boolean"
+                                },
+                                "token": {
+                                    "description": "опциональный параметр, возвращется если партнер использует авторизацию через token в запросах товароучетного API",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "пользователь не найден"
+                    }
                 }
-              }
             }
-          }
+        },
+        "/api/v1/user/create": {
+            "post": {
+                "summary": "Создание пользователя",
+                "description": "Создание пользователя в системе партнера",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "параметры необходимые для создания пользователя в партнере",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "данные пользователя",
+                            "type": "object",
+                            "required": [
+                                "userId"
+                            ],
+                            "properties": {
+                                "userId": {
+                                    "type": "string"
+                                },
+                                "error": {
+                                    "type": "string"
+                                },
+                                "token": {
+                                    "description": "опциональный параметр, возвращется если партнер использует авторизацию через token в запросах товароучетного API",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/tariff": {
+            "post": {
+                "summary": "Установка тарифа ",
+                "description": "Установка тарифа учетки не только для новых пользователей, но и для ранее созданных учеток НЕ от нашего лица (типа юзер сам заходил ранее и создал)",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "параметры необходимые для установки тарифа пользователю в партнере",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "userId"
+                            ],
+                            "properties": {
+                                "userId": {
+                                    "type": "string"
+                                },
+                                "tariffId": {
+                                    "type": "number"
+                                },
+                                "status": {
+                                    "type": "string",
+                                    "enum": [
+                                        "ACTIVE",
+                                        "INACTIVE"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/events/billing/subscriptionCreated": {
+            "post": {
+                "summary": "Начало триала подписки",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "id пользователя в системе эвтор"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "trialDurationDays": {
+                                            "type": "number"
+                                        },
+                                        "user": {
+                                            "$ref": "#/definitions/user"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/events/billing/paymentSuccessed": {
+            "post": {
+                "summary": "Успешная оплата",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "id пользователя в системе эвтор"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "amount": {
+                                            "type": "number"
+                                        },
+                                        "user": {
+                                            "$ref": "#/definitions/user"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/events/billing/subscriptionActivated": {
+            "post": {
+                "summary": "Успешная оплата",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "id пользователя в системе эвтор"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/definitions/user"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/events/billing/paymentFailed": {
+            "post": {
+                "summary": "Оплата не прошла",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authEvotor"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "id пользователя в системе эвтор"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "amount": {
+                                            "type": "number"
+                                        },
+                                        "nextPaymentAtemptInDays": {
+                                            "type": "number",
+                                            "description": "через сколько дней будет следующая попытка списать деньги"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "description": "описание ошибки"
+                                        },
+                                        "user": {
+                                            "$ref": "#/definitions/user"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
         }
-      }
     },
-    "/api/v1/user/tariff": {
-      "post": {
-        "summary": "Установка тарифа ",
-        "description": "Установка тарифа учетки не только для новых пользователей, но и для ранее созданных учеток НЕ от нашего лица (типа юзер сам заходил ранее и создал)",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/authEvotor"
-          },
-          {
-            "name": "user",
-            "in": "body",
-            "description": "параметры необходимые для установки тарифа пользователю в партнере",
+    "parameters": {
+        "authEvotor": {
+            "name": "basic auth / api key",
+            "in": "header",
+            "description": "авторизация Эвотор в системе партнера",
             "required": true,
-            "schema": {
-              "type": "object",
-              "required": [
-                "userId"
-              ],
-              "properties": {
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "user": {
+            "type": "object",
+            "properties": {
                 "userId": {
-                  "type": "string"
+                    "type": "string",
+                    "description": "id пользователя в системе эвтор"
                 },
-                "tariffId": {
-                  "type": "number"
+                "userName": {
+                    "type": "string"
                 },
-                "status": {
-                  "type": "string",
-                  "enum": [
-                    "ACTIVE",
-                    "INACTIVE"
-                  ]
+                "password": {
+                    "type": "string"
+                },
+                "CUSTOM_FIELD_NAME_1": {
+                    "type": "string",
+                    "description": "набор полей (например, номер телефона / email) выбирает партнер, которые необходимы для проверки наличия пользователя в системе и проверки платит ли этот пользователь"
+                },
+                "CUSTOM_FIELD_NAME_2": {
+                    "type": "string"
                 }
-              }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
-                }
-              }
-            }
-          }
         }
-      }
     }
-  },
-  "parameters": {
-    "authEvotor": {
-      "name": "basic auth",
-      "in": "header",
-      "description": "авторизация Эвотор в системе партнера",
-      "required": true,
-      "type": "string"
-    }
-  },
-  "definitions": {
-    "user": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "id пользователя в системе эвтор"
-        },
-        "userName": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "CUSTOM_FIELD_NAME_1": {
-          "type": "string",
-          "description": "набор полей (например, номер телефона / email) выбирает партнер, которые необходимы для проверки наличия пользователя в системе и проверки платит ли этот пользователь"
-        },
-        "CUSTOM_FIELD_NAME_2": {
-          "type": "string"
-        }
-      }
-    }
-  }
 }
