@@ -179,8 +179,7 @@
                             "properties": {
                                 "date": {
                                     "type": "string",
-                                    "format": "date-time",
-                                    "description": "id пользователя в системе эвтор"
+                                    "format": "date-time"
                                 },
                                 "data": {
                                     "type": "object",
@@ -224,8 +223,7 @@
                             "properties": {
                                 "date": {
                                     "type": "string",
-                                    "format": "date-time",
-                                    "description": "id пользователя в системе эвтор"
+                                    "format": "date-time"
                                 },
                                 "data": {
                                     "type": "object",
@@ -269,8 +267,7 @@
                             "properties": {
                                 "date": {
                                     "type": "string",
-                                    "format": "date-time",
-                                    "description": "id пользователя в системе эвтор"
+                                    "format": "date-time"
                                 },
                                 "data": {
                                     "type": "object",
@@ -311,8 +308,7 @@
                             "properties": {
                                 "date": {
                                     "type": "string",
-                                    "format": "date-time",
-                                    "description": "id пользователя в системе эвтор"
+                                    "format": "date-time"
                                 },
                                 "data": {
                                     "type": "object",
