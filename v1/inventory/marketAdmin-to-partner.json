@@ -307,6 +307,10 @@
         "subscriptionCreated": {
             "type": "object",
             "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "тип эвента, в данном случае subscriptionCreated"
+                },
                 "date": {
                     "type": "string",
                     "format": "date-time"
@@ -327,6 +331,10 @@
         "paymentSuccessed": {
             "type": "object",
             "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "тип эвента, в данном случае paymentSuccessed"
+                },
                 "date": {
                     "type": "string",
                     "format": "date-time"
@@ -347,6 +355,10 @@
         "subscriptionActivated": {
             "type": "object",
             "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "тип эвента, в данном случае subscriptionActivated"
+                },
                 "date": {
                     "type": "string",
                     "format": "date-time"
@@ -364,6 +376,10 @@
         "paymentFailed": {
             "type": "object",
             "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "тип эвента, в данном случае paymentFailed"
+                },
                 "date": {
                     "type": "string",
                     "format": "date-time"
