@@ -34,16 +34,17 @@
                             "title": "данные пользователя",
                             "type": "object",
                             "required": [
-                                "userId",
+                                "userUuid",
                                 "hasBilling"
                             ],
                             "properties": {
-                                "userId": {
+                                "userUuid": {
                                     "type": "string",
-                                    "description": "id пользователя в системе партнера"
+                                    "description": "уникальный id пользователя в системе Эвотор"
                                 },
                                 "hasBilling": {
-                                    "type": "boolean"
+                                    "type": "boolean",
+                                    "description": "платит ли пользователь в системе партнера"
                                 },
                                 "token": {
                                     "description": "опциональный параметр, возвращется если партнер использует авторизацию через token в запросах товароучетного API",
@@ -86,11 +87,12 @@
                             "title": "данные пользователя",
                             "type": "object",
                             "required": [
-                                "userId"
+                                "userUuid"
                             ],
                             "properties": {
-                                "userId": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "уникальный id пользователя в системе Эвотор"
                                 },
                                 "error": {
                                     "type": "string"
@@ -124,11 +126,12 @@
                         "schema": {
                             "type": "object",
                             "required": [
-                                "userId"
+                                "userUuid"
                             ],
                             "properties": {
-                                "userId": {
-                                    "type": "string"
+                                "userUuid": {
+                                    "type": "string",
+                                    "description": "уникальный id пользователя в системе Эвотор"
                                 },
                                 "tariffId": {
                                     "type": "number"
@@ -285,11 +288,11 @@
         "user": {
             "type": "object",
             "properties": {
-                "userId": {
+                "userUuid": {
                     "type": "string",
-                    "description": "id пользователя в системе эвтор"
+                    "description": "уникальный id пользователя в системе Эвотор"
                 },
-                "userName": {
+                "username": {
                     "type": "string"
                 },
                 "password": {
