@@ -324,8 +324,9 @@
                         "trialDurationDays": {
                             "type": "number"
                         },
-                        "user": {
-                            "$ref": "#/definitions/user"
+                        "userUuid": {
+                            "type": "string",
+                            "description": "uuid пользователя Эвотор"
                         }
                     }
                 }
@@ -348,8 +349,9 @@
                         "amount": {
                             "type": "number"
                         },
-                        "user": {
-                            "$ref": "#/definitions/user"
+                        "userUuid": {
+                            "type": "string",
+                            "description": "uuid пользователя Эвотор"
                         }
                     }
                 }
@@ -369,8 +371,9 @@
                 "data": {
                     "type": "object",
                     "properties": {
-                        "user": {
-                            "$ref": "#/definitions/user"
+                        "userUuid": {
+                            "type": "string",
+                            "description": "uuid пользователя Эвотор"
                         }
                     }
                 }
@@ -401,8 +404,9 @@
                             "type": "string",
                             "description": "описание ошибки"
                         },
-                        "user": {
-                            "$ref": "#/definitions/user"
+                        "userUuid": {
+                            "type": "string",
+                            "description": "uuid пользователя Эвотор"
                         }
                     }
                 }
