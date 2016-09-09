@@ -7,6 +7,31 @@
     },
     "paths": {
         "/api/v1/inventories/products/{uuid}": {
+            "get": {
+                "summary": "Получение товара по uuid",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response, объект продукта",
+                        "schema": {
+                            "$ref": "#/definitions/product"
+                        }
+                    }
+                }
+            },
             "put": {
                 "summary": "Изменение товара по uuid",
                 "produces": [
