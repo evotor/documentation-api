@@ -326,14 +326,14 @@
                     "description": "описание товара / услуги"
                 },
                 "articleNumber": {
-                    "type": "number",
+                    "type": "string",
                     "description": "артикул"
                 },
                 "parentUuid": {
                     "type": "string",
                     "description": "код группы товаров (родительская папка)"
                 },
-                "isGroup": {
+                "group": {
                     "type": "boolean",
                     "description": "группа или нет"
                 },
