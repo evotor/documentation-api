@@ -182,8 +182,8 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
           "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor - Partner API</a>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>partner - Evotor API</a>" +
-          "  <br>" +
+          // "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>Partner - Evotor API</a>" +
+          // "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Managing user & Billing</a>" +
           "  <br>" +
           "  <a href='/docs/v1/inventory/example/sell_docs_new.json'> <span style='color:red;'>New!</span> Document example with transactions</a>" +
