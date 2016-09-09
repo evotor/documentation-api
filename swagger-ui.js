@@ -180,13 +180,13 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
       buffer = "<div id=\"swagger_sidebar\">\n    <div class=\"sticky-nav-placeholder\">\n        <div class=\"sticky-nav\">\n            <div class=\"mobile-nav\">\n                <span class=\"select-label\">API Reference: </span><span data-selected-value></span>\n            </div>\n\n            " +
           "<div class='swagger-section market-links-block'>" +
           "  <br>" +
-          "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor - partner API</a>" +
+          "  <a href='/docs/?url=/docs/v1/inventory/market-to-partner.json'>Evotor - Partner API</a>" +
           "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/partner-to-market.json'>partner - Evotor API</a>" +
           "  <br>" +
           "  <a href='/docs/?url=/docs/v1/inventory/marketAdmin-to-partner.json'>Managing user & Billing</a>" +
           "  <br>" +
-          "  <a href='/docs/v1/inventory/example/docs.json'> <span style='color:red;'>New!</span> Document example with transactions</a>" +
+          "  <a href='/docs/v1/inventory/example/sell_docs_new.json'> <span style='color:red;'>New!</span> Document example with transactions</a>" +
           "  <br>" +
           "  <a href='/docs/v1/inventory/example/products.json'> <span style='color:red;'>New!</span> Example Products</a>" +
           "  <br>" +
