@@ -6,6 +6,39 @@
         "description": "Описание запросов смарт-терминала [клиент] к API Эвотор [сервер]. Предполагается, что СТ хранит у себя мэпинг своих сущностей и сущностей облака Эвотор."
     },
     "paths": {
+        "/api/v1/inventories/products/{uuid}": {
+            "put": {
+                "summary": "Изменение товара по uuid",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "product",
+                        "in": "body",
+                        "description": "измененный объект продукта",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/productCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
         "/api/v1/inventories/products": {
             "get": {
                 "summary": "Получение товаров из облака Эвотор",
@@ -201,7 +234,7 @@
         }
     },
     "definitions": {
-            "product": {
+        "product": {
             "type": "object",
             "required": [
                 "uuid",
@@ -306,7 +339,7 @@
                 }
             }
         },
-            "productCreate": {
+        "productCreate": {
             "type": "object",
             "required": [
                 "uuid",
