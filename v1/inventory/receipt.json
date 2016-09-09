@@ -148,7 +148,7 @@
                             "barcode": {
                                 "type": "string"
                             },
-                            "mesuareName": {
+                            "measureName": {
                                 "type": "string",
                                 "description": "единица измерения"
                             },
