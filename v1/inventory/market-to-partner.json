@@ -384,7 +384,10 @@
                     "enum": [
                         "NO_VAT",
                         "VAT_10",
-                        "VAT_18"
+                        "VAT_18",
+                        "VAT_0",
+                        "VAT_18_118",
+                        "VAT_10_110"
                     ]
                 },
                 "allowToSell": {
