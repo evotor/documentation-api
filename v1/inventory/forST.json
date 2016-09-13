@@ -354,7 +354,7 @@
                     "type": "number",
                     "description": "код вида алкогольной продукции"
                 },
-                "tarVolume": {
+                "tareVolume": {
                     "type": "number",
                     "description": "емкость тары, л.̆"
                 },
@@ -455,7 +455,7 @@
                     "type": "number",
                     "description": "код вида алкогольной продукции"
                 },
-                "tarVolume": {
+                "tareVolume": {
                     "type": "number",
                     "description": "емкость тары, л.̆"
                 },
