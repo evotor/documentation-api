@@ -321,9 +321,9 @@
     },
     "parameters": {
         "auth": {
-            "name": "basic auth or token",
+            "name": "auth",
             "in": "header",
-            "description": "пользовательская авторизация в системе партнера",
+            "description": "Пользовательская авторизация в системе партнера.\nЭто может быть basic auth, API key или token.\nПередается в заголовке, в поле Authorization.",
             "required": true,
             "type": "string"
         }
