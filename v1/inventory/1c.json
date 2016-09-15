@@ -317,7 +317,79 @@
                     }
                 }
             }
-        }
+        },
+				"/api/v1/inventories/devices/search": {
+			"get": {
+				"summary": "Список смарт-терминалов",
+				"description": "Получение списка смарт-терминалов из Эвотор. Если не указывать дополнительные параметры (например, deviceUuid), тогда вернутся все смарт-терминалы по пользователю",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "deviceUuid",
+						"in": "query",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"schema": {
+							"title": "Список смарт-терминалов",
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/device"
+							}
+						}
+					},
+					"default": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+		"/api/v1/inventories/devices/{deviceUuid}/code": {
+			"put": {
+				"summary": "Связка магазина Эвотор и магазина в 1С",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/auth"
+					},
+					{
+						"name": "deviceUuid",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "code",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"properties": {
+								"code": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response"
+					},
+					"default": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		}
+		
     },
     "responses": {
         "status401": {
@@ -630,6 +702,23 @@
                         "POSITION_TAX",
                         "REVALUATION"
                     ]
+                }
+            }
+        },
+		"device": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "deviceUuid терминала в Эвотор"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "имя смарт-терминала в Эвотор"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "код смарт-терминала в товароучетной системе"
                 }
             }
         }
