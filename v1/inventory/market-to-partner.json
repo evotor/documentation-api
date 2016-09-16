@@ -8,8 +8,8 @@
     "paths": {
         "/api/v1/inventories/employees": {
             "put": {
-                "summary": "Создание/редактирвоание сотрудников",
-                "description": "Создание сотрудника / сотрудников в системе партнера.\nПодразумевается, что мы мастер-система и все изменения сотрудников будут исходить от нас.\n",
+                "summary": "Создание/редактирование сотрудников",
+                "description": "Создание сотрудника/сотрудников в системе партнера.\nПодразумевается, что мы мастер-система и все изменения сотрудников будут исходить от нас.\n",
                 "produces": [
                     "application/json"
                 ],
@@ -58,7 +58,7 @@
         },
         "/api/v1/inventories/stores": {
             "put": {
-                "summary": "Создание/редактирвоание точек продаж",
+                "summary": "Создание/редактирование точек продаж",
                 "description": "Создание точки / точек продаж в системе партнера\nПодразумевается, что мы мастер-система и все изменения точек продаж будут исходить от нас.\n",
                 "produces": [
                     "application/json"
@@ -302,7 +302,98 @@
                     }
                 }
             }
-        }
+        },
+			"put": {
+				"summary": "Создание/редактирование касс (смарт-терминалов)",
+				"description": "Создание касс (смарт-терминалов) в системе партнера.\nПодразумевается, что мы мастер-система и все изменения касс (смарт-терминалов) будут исходить от нас.\n",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/auth"
+					},
+					{
+						"name": "device",
+						"in": "body",
+						"description": "Массив касс (смарт-терминалов) Эвотор",
+						"required": true,
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/device"
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"schema": {
+							"title": "Массив привязок",
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"uuid": {
+										"type": "string"
+									},
+									"partnerId": {
+										"type": "string",
+										"description": "Идентификатор партнера-посредника. Используется в случаях, когда интеграция с сервисом-партнером производится не напрямую (посредник хранит у себя сопоставление сущностей Эвотора с сущностями сервиса-партнера).\nЕсли взаимодействие производится без посредника - атрибут возвращать не обязательно. Достаточно ответа 200 OK"
+									}
+								}
+							}
+						}
+					},
+					"default": {
+						"description": "Unexpected error"
+					}
+				}
+			}
+		},
+			"get": {
+			"summary": "Список касс (смарт-терминалов)",
+			"produces": [
+				"application/json"
+			],
+			"parameters": [
+				{
+				"$ref": "#/parameters/authForPartner"
+				},
+				{
+				"name": "deviceUuid",
+				"in": "query",
+				"type": "string"
+				},
+				{
+				"name": "storeUuid",
+				"in": "query",
+				"type": "string"
+				},
+				{
+				"name": "userUuid",
+				"in": "query",
+				"type": "string"
+				}
+			],
+			"responses": {
+				"200": {
+				"description": "Successful response",
+				"schema": {
+					"title": "список касс (смарт-терминалов)",
+					"type": "array",
+					"items": {
+					"$ref": "#/definitions/device"
+					}
+				}
+				},
+				"default": {
+				"description": "unexpected error"
+				}
+			}
+			}
+		}
     },
     "responses": {
         "status401": {
@@ -611,6 +702,23 @@
                         "POSITION_TAX",
                         "REVALUATION"
                     ]
+                }
+            }
+        },
+		"device": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "deviceUuid смарт-терминала (кассы) в Эвотор"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "имя смарт-терминала (кассы) в Эвотор"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "код смарт-терминала (кассы) в товароучетной системе"
                 }
             }
         }
