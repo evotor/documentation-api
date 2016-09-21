@@ -134,7 +134,8 @@
                                     "description": "уникальный id пользователя в системе Эвотор"
                                 },
                                 "tariffId": {
-                                    "type": "number"
+                                    "type": "string",
+									"description": "код тарифа в системе Эвотор"
                                 },
                                 "status": {
                                     "type": "string",
