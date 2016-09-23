@@ -29,7 +29,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Пользователь авторизован",
                         "schema": {
                             "title": "данные пользователя",
                             "type": "object",
@@ -53,9 +53,15 @@
                             }
                         }
                     },
+                    "401": {
+                        "description": "Авторизация server-to-server не удалась"
+                    },
                     "404": {
-                        "description": "пользователь не найден"
-                    }
+                        "description": "Пользователь не найден"
+                    },
+                    "422": {
+                        "description": "Пользовательская авторизация не удалась"
+                    }                    
                 }
             }
         },
@@ -82,7 +88,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Пользователь создан",
                         "schema": {
                             "title": "данные пользователя",
                             "type": "object",
@@ -103,6 +109,12 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Авторизация server-to-server не удалась"
+                    },
+                    "409": {
+                        "description": "Пользователь уже существует"
                     }
                 }
             }
