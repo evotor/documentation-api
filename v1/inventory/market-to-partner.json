@@ -675,9 +675,17 @@
                     "type": "string",
                     "description": "имя смарт-терминала (кассы) в Эвотор"
                 },
-                "storeUuid": {
-                    "type": "string",
-                    "description": "идентификатор магазина в Эвотор, к которому привязан смарт-терминал (касса)",
+                "stores": {
+                    "type": "array",
+                    "description": "магазины в Эвотор, к которым привязан смарт-терминал (касса)",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "storeUuid": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 }
             }
         }
