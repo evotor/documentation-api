@@ -1,11 +1,42 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.0.1-SNAPSHOT",
+        "version": "1.0.1-SNAPSHOT",
         "title": "API Эвотор для продуктов 1С",
         "description": "Описание запросов Эвотор [сервер] для продуктов 1С [клиент]. Логика работы следующая - каждый раз, когда юзер заходит в 1с необходимо выполнить синхронизацию базы 1С (точнее выгрузить актуальные данные из Эвотор). Нужно выгружать сотрудников, точки продаж, продукты и документы."
     },
     "paths": {
+        "/api/v1/inventories/stores/search": {
+            "get": {
+                "summary": "Список торговых точек",
+                "description": "Получение списка торговых точек Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все точки продаж по пользователю.\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "storeUuid",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "список торговых точек",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
         "/api/v1/inventories/employees/search": {
             "get": {
                 "summary": "Список сотрудников",
@@ -38,6 +69,80 @@
                                 "$ref": "#/definitions/employee"
                             }
                         }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/devices/search": {
+            "get": {
+                "summary": "Список смарт-терминалов",
+                "description": "Получение списка смарт-терминалов из Эвотор. Если не указывать дополнительные параметры (например, deviceUuid), тогда вернутся все смарт-терминалы по пользователю",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "deviceUuid",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Список смарт-терминалов",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/device"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/stores/{uuidStore}/code": {
+            "put": {
+                "summary": "Связка магазина Эвотор и магазина в 1С",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuidStore",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
                     },
                     "default": {
                         "description": "unexpected error"
@@ -85,40 +190,9 @@
                 }
             }
         },
-        "/api/v1/inventories/stores/search": {
-            "get": {
-                "summary": "Список торговых точек",
-                "description": "Получение списка торговых точек Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все точки продаж по пользователю.\n",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "storeUuid",
-                        "in": "query",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "список торговых точек",
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/store"
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-        },
-        "/api/v1/inventories/stores/{uuidStore}/code": {
+        "/api/v1/inventories/devices/{deviceUuid}/code": {
             "put": {
-                "summary": "Связка магазина Эвотор и магазина в 1С",
+                "summary": "Связка смарт-терминала Эвотор и кассы в 1С",
                 "produces": [
                     "application/json"
                 ],
@@ -127,7 +201,7 @@
                         "$ref": "#/parameters/auth"
                     },
                     {
-                        "name": "uuidStore",
+                        "name": "deviceUuid",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -151,7 +225,7 @@
                         "description": "Successful response"
                     },
                     "default": {
-                        "description": "unexpected error"
+                        "description": "Unexpected error"
                     }
                 }
             }
@@ -236,7 +310,43 @@
                 "responses": {
                     "200": {
                         "description": "Successful response"
-                        
+                    },
+                    "401": {
+                        "$ref": "#/responses/status401"
+                    },
+                    "402": {
+                        "$ref": "#/responses/status402"
+                    },
+                    "404": {
+                        "$ref": "#/responses/status404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/status500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/status503"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "1С удаляет номенклатуру в Эвотор",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "storeUuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
                     },
                     "401": {
                         "$ref": "#/responses/status401"
@@ -317,82 +427,7 @@
                     }
                 }
             }
-        },
-		"/api/v1/inventories/devices/search": {
-			"get": {
-				"summary": "Список смарт-терминалов",
-				"description": "Получение списка смарт-терминалов из Эвотор. Если не указывать дополнительные параметры (например, deviceUuid), тогда вернутся все смарт-терминалы по пользователю",
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"$ref": "#/parameters/auth"
-					},
-					{
-						"name": "deviceUuid",
-						"in": "query",
-						"type": "string"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Successful response",
-						"schema": {
-							"title": "Список смарт-терминалов",
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/device"
-							}
-						}
-					},
-					"default": {
-						"description": "Unexpected error"
-					}
-				}
-			}
-		},
-		"/api/v1/inventories/devices/{deviceUuid}/code": {
-			"put": {
-				"summary": "Связка магазина Эвотор и магазина в 1С",
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"$ref": "#/parameters/auth"
-					},
-					{
-						"name": "deviceUuid",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "code",
-						"in": "body",
-						"required": true,
-						"schema": {
-							"type": "string",
-							"properties": {
-								"code": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Successful response"
-					},
-					"default": {
-						"description": "Unexpected error"
-					}
-				}
-			}
-		}
-		
+        }
     },
     "responses": {
         "status401": {
@@ -708,7 +743,7 @@
                 }
             }
         },
-		"device": {
+        "device": {
             "type": "object",
             "properties": {
                 "uuid": {
