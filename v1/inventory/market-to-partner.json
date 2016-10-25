@@ -385,8 +385,9 @@
             "type": "object",
             "required": [
                 "uuid",
+                "type",
                 "code",
-                "type"
+                "name"
             ],
             "properties": {
                 "uuid": {
