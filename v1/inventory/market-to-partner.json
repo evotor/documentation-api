@@ -385,6 +385,7 @@
             "type": "object",
             "required": [
                 "uuid",
+                "code",
                 "type"
             ],
             "properties": {
@@ -394,7 +395,7 @@
                 },
                 "code": {
                     "type": "string",
-                    "description": "синхронизация по нему НЕ производится. это просто еще один атрибут товара, нужен например для работы с весами или с некоторыми ТУ системами, типа 1С"
+                    "description": "код товара. Номенклатура без кода товара не отображается на смарт-терминале"
                 },
                 "barcodes": {
                     "type": "array",
@@ -616,7 +617,7 @@
                         "CASH_INCOME",
                         "CASH_OUTCOME",
                         "OPEN_SESSION",
-                        "FPRINT_OPERATION",
+                        "FPRINT",
                         "CLOSE_SESSION",
                         "INVENTORY",
                         "ACCEPT",
@@ -643,7 +644,6 @@
                         "DISCOUNT_DOCUMENT",
                         "DISCOUNT_POSITION",
                         "DISCOUNT_DOCUMENT_POSITION",
-                        "DOCUMENT_CANCEL",
                         "DOCUMENT_OPEN",
                         "DOCUMENT_CLOSE",
                         "DOCUMENT_CLOSE_FPRINT",
