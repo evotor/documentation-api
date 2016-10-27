@@ -361,7 +361,7 @@
                 },
                 "tareVolume": {
                     "type": "number",
-                    "description": "емкость тары, л.̆"
+                    "description": "емкость тары, л. (не более 3 знаков в дробной части)"
                 },
                 "fields": {
                     "type": "object",
@@ -462,7 +462,7 @@
                 },
                 "tareVolume": {
                     "type": "number",
-                    "description": "емкость тары, л.̆"
+                    "description": "емкость тары, л. (не более 3 знаков в дробной части)"
                 },
                 "fields": {
                     "type": "object",

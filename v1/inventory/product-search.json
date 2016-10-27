@@ -91,7 +91,7 @@
                 },
                 "tareVolume": {
                     "type": "string",
-                    "description": "емкость тары, л."
+                    "description": "емкость тары, л. (не более 3 знаков в дробной части)"
                 },
                 "measure": {
                     "type": "string",
