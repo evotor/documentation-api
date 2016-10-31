@@ -398,14 +398,14 @@
                     "type": "string",
                     "description": "код товара. Не более 10 символов. Номенклатура без кода товара не отображается на смарт-терминале"
                 },
-                "barcodes": {
+                "barCodes": {
                     "type": "array",
                     "description": "массив штрихкодов",
                     "items": {
                         "type": "string"
                     }
                 },
-                "alcocodes": {
+                "alcoCodes": {
                     "type": "array",
                     "description": "массив алкокодов",
                     "items": {
