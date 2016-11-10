@@ -553,6 +553,10 @@
                     "type": "string",
                     "description": "наименование сотрудника (Фамилия) в Эвотор"
                 },
+				"patronymicName": {
+                    "type": "string",
+                    "description": "наименование сотрудника (Отчество) в Эвотор"
+                },
                 "telephone": {
                     "type": "number",
                     "description": "номер телефона сотрудника в Эвотор в формате 79001234455"
