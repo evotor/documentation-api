@@ -168,11 +168,36 @@
                         "$ref": "#/parameters/auth"
                     },
                     {
-                        "name": "storeUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    }
+          						"name" : "X-Total-Items-Count",
+          						"in" : "header",
+          						"description" : "Всего элементов в многостраничной выборке",
+          						"required" : true,
+          						"type" : "string"
+          					}, {
+          						"name" : "X-Pagination-Page-Size",
+          						"in" : "header",
+          						"description" : "Количество элементов на текущей странице в многостраничной выборке",
+          						"required" : true,
+          						"type" : "string"
+          					}, {
+          						"name" : "X-Pagination-Next-Page",
+          						"in" : "header",
+          						"description" : "Номер следующей страницы в многостраничной выборке",
+          						"required" : true,
+          						"type" : "string"
+          					}, {
+          						"name" : "X-Pagination-Total-Page-Count",
+          						"in" : "header",
+          						"description" : "Всего страниц в многостраничной выборке",
+          						"required" : true,
+          						"type" : "string"
+          					}, {
+          						"name" : "storeUuid",
+          						"in" : "path",
+          						"description" : "Уникальный идентификатор магазина в Эвотор",
+          						"required" : true,
+          						"type" : "string"
+          					}
                 ],
                 "responses": {
                     "200": {
@@ -373,9 +398,9 @@
     },
     "parameters": {
         "auth": {
-            "name": "auth",
+            "name": "Authorization",
             "in": "header",
-            "description": "Пользовательская авторизация в системе партнера.\nЭто может быть basic auth, API key или token.\nПередается в заголовке, в поле Authorization.",
+            "description": "Пользовательская Bearer-авторизация в системе партнера",
             "required": true,
             "type": "string"
         }
