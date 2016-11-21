@@ -172,25 +172,25 @@
                         "in" : "header",
                         "description" : "Всего элементов в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
                         "required" : false,
-                        "type" : "string"
+                        "type" : "number"
                     }, {
                         "name" : "X-Pagination-Page-Size",
                         "in" : "header",
                         "description" : "Количество элементов на текущей странице в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
                         "required" : false,
-                        "type" : "string"
+                        "type" : "number"
                     }, {
                         "name" : "X-Pagination-Next-Page",
                         "in" : "header",
                         "description" : "Номер следующей страницы в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
                         "required" : false,
-                        "type" : "string"
+                        "type" : "number"
                     }, {
                         "name" : "X-Pagination-Total-Page-Count",
                         "in" : "header",
                         "description" : "Всего страниц в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
                         "required" : false,
-                        "type" : "string"
+                        "type" : "number"
                     }, {
                         "name" : "storeUuid",
                         "in" : "path",
@@ -202,13 +202,13 @@
                         "in" : "path",
                         "description" : "Номер страницы для многостраничной выборки. Включает режим постраничного вывода. Должен использоваться вместе с атрибутом size",
                         "required" : false,
-                        "type" : "string"
+                        "type" : "number"
                     }, {
                         "name" : "size",
                         "in" : "path",
                         "description" : "Размер страницы для многостраничной выборки. Включает режим постраничного вывода. Должен использоваться вместе с атрибутом page",
                         "required" : false,
-                        "type" : "string"
+                        "type" : "number"
                     }
                 ],
                 "responses": {
