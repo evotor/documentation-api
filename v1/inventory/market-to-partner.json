@@ -159,7 +159,7 @@
         "/api/v1/inventories/stores/{storeUuid}/products": {
             "get": {
                 "summary": "Получение товаров из ТУ системы",
-                "description": "Получение списка товаров из Эвотор\n. В GET запросе параметр quantity обязательный (например, в post опциональный)",
+                "description": "Получение списка товаров из товароучетной системы в облако Эвотор",
                 "produces": [
                     "application/json"
                 ],
