@@ -1,478 +1,457 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "0.0.1-SNAPSHOT",
-        "title": "API запросов Эвотор к товароучетной системе (ТУ)",
-        "description": "Описание запросов Эвотор [сервер] к API товароучетной системы [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
+    "swagger" : "2.0",
+    "info" : {
+        "version" : "0.0.1-SNAPSHOT",
+        "title" : "API запросов Эвотор к товароучетной системе (ТУ)",
+        "description" : "Описание запросов Эвотор [сервер] к API товароучетной системы [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
     },
-    "paths": {
-        "/api/v1/inventories/devices": {
-            "put": {
-                "summary": "Создание/редактирование касс (смарт-терминалов)",
-                "description": "Создание касс (смарт-терминалов) в системе партнера.\nПодразумевается, что мы мастер-система и все изменения касс (смарт-терминалов) будут исходить от нас.\n",
-                "produces": [
+    "paths" : {
+        "/api/v1/inventories/devices" : {
+            "put" : {
+                "summary" : "Создание/редактирование касс (смарт-терминалов)",
+                "description" : "Создание касс (смарт-терминалов) в системе партнера.\nПодразумевается, что мы мастер-система и все изменения касс (смарт-терминалов) будут исходить от нас.\n",
+                "produces" : [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "device",
-                        "in": "body",
-                        "description": "Массив касс (смарт-терминалов) Эвотор",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/device"
+                "parameters" : [{
+                        "$ref" : "#/parameters/auth"
+                    }, {
+                        "name" : "device",
+                        "in" : "body",
+                        "description" : "Массив касс (смарт-терминалов) Эвотор",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/device"
                             }
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "Массив привязок",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "uuid": {
-                                        "type": "string"
+                "responses" : {
+                    "200" : {
+                        "description" : "Successful response",
+                        "schema" : {
+                            "title" : "Массив привязок",
+                            "type" : "array",
+                            "items" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "uuid" : {
+                                        "type" : "string"
                                     },
-                                    "partnerId": {
-                                        "type": "string",
-                                        "description": "Идентификатор партнера-посредника. Используется в случаях, когда интеграция с сервисом-партнером производится не напрямую (посредник хранит у себя сопоставление сущностей Эвотора с сущностями сервиса-партнера).\nЕсли взаимодействие производится без посредника - атрибут возвращать не обязательно. Достаточно ответа 200 OK"
+                                    "partnerId" : {
+                                        "type" : "string",
+                                        "description" : "Идентификатор партнера-посредника. Используется в случаях, когда интеграция с сервисом-партнером производится не напрямую (посредник хранит у себя сопоставление сущностей Эвотора с сущностями сервиса-партнера).\nЕсли взаимодействие производится без посредника - атрибут возвращать не обязательно. Достаточно ответа 200 OK"
                                     }
                                 }
                             }
                         }
                     },
-                    "default": {
-                        "description": "Unexpected error"
+                    "default" : {
+                        "description" : "Unexpected error"
                     }
                 }
             }
         },
-        "/api/v1/inventories/employees": {
-            "put": {
-                "summary": "Создание/редактирование сотрудников",
-                "description": "Создание сотрудника/сотрудников в системе партнера.\nПодразумевается, что мы мастер-система и все изменения сотрудников будут исходить от нас.\n",
-                "produces": [
+        "/api/v1/inventories/employees" : {
+            "put" : {
+                "summary" : "Создание/редактирование сотрудников",
+                "description" : "Создание сотрудника/сотрудников в системе партнера.\nПодразумевается, что мы мастер-система и все изменения сотрудников будут исходить от нас.\n",
+                "produces" : [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "employee",
-                        "in": "body",
-                        "description": "Массив сотрудников Эвотор",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/employee"
+                "parameters" : [{
+                        "$ref" : "#/parameters/auth"
+                    }, {
+                        "name" : "employee",
+                        "in" : "body",
+                        "description" : "Массив сотрудников Эвотор",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/employee"
                             }
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "Массив привязок",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "uuid": {
-                                        "type": "string"
+                "responses" : {
+                    "200" : {
+                        "description" : "Successful response",
+                        "schema" : {
+                            "title" : "Массив привязок",
+                            "type" : "array",
+                            "items" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "uuid" : {
+                                        "type" : "string"
                                     },
-                                    "partnerId": {
-                                        "type": "string",
-                                        "description": "Идентификатор партнера-посредника. Используется в случаях, когда интеграция с сервисом-партнером производится не напрямую (посредник хранит у себя сопоставление сущностей Эвотора с сущностями сервиса-партнера).\nЕсли взаимодействие производится без посредника - атрибут возвращать не обязательно. Достаточно ответа 200 OK"
+                                    "partnerId" : {
+                                        "type" : "string",
+                                        "description" : "Идентификатор партнера-посредника. Используется в случаях, когда интеграция с сервисом-партнером производится не напрямую (посредник хранит у себя сопоставление сущностей Эвотора с сущностями сервиса-партнера).\nЕсли взаимодействие производится без посредника - атрибут возвращать не обязательно. Достаточно ответа 200 OK"
                                     }
                                 }
                             }
                         }
                     },
-                    "default": {
-                        "description": "unexpected error"
+                    "default" : {
+                        "description" : "unexpected error"
                     }
                 }
             }
         },
-        "/api/v1/inventories/stores": {
-            "put": {
-                "summary": "Создание/редактирование точек продаж",
-                "description": "Создание точки / точек продаж в системе партнера\nПодразумевается, что мы мастер-система и все изменения точек продаж будут исходить от нас.\n",
-                "produces": [
+        "/api/v1/inventories/stores" : {
+            "put" : {
+                "summary" : "Создание/редактирование точек продаж",
+                "description" : "Создание точки / точек продаж в системе партнера\nПодразумевается, что мы мастер-система и все изменения точек продаж будут исходить от нас.\n",
+                "produces" : [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "store",
-                        "in": "body",
-                        "description": "Массив магазинов (точек продаж) Эвотор",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/store"
+                "parameters" : [{
+                        "$ref" : "#/parameters/auth"
+                    }, {
+                        "name" : "store",
+                        "in" : "body",
+                        "description" : "Массив магазинов (точек продаж) Эвотор",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/store"
                             }
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "Массив привязок",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "uuid": {
-                                        "type": "string"
+                "responses" : {
+                    "200" : {
+                        "description" : "Successful response",
+                        "schema" : {
+                            "title" : "Массив привязок",
+                            "type" : "array",
+                            "items" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "uuid" : {
+                                        "type" : "string"
                                     },
-                                    "partnerId": {
-                                        "type": "string",
-                                        "description": "Идентификатор партнера-посредника. Используется в случаях, когда интеграция с сервисом-партнером производится не напрямую (посредник хранит у себя сопоставление сущностей Эвотора с сущностями сервиса-партнера).\nЕсли взаимодействие производится без посредника - атрибут возвращать не обязательно. Достаточно ответа 200 OK"
+                                    "partnerId" : {
+                                        "type" : "string",
+                                        "description" : "Идентификатор партнера-посредника. Используется в случаях, когда интеграция с сервисом-партнером производится не напрямую (посредник хранит у себя сопоставление сущностей Эвотора с сущностями сервиса-партнера).\nЕсли взаимодействие производится без посредника - атрибут возвращать не обязательно. Достаточно ответа 200 OK"
                                     }
                                 }
                             }
                         }
                     },
-                    "default": {
-                        "description": "unexpected error"
+                    "default" : {
+                        "description" : "unexpected error"
                     }
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeUuid}/products": {
-            "get": {
-                "summary": "Получение товаров из ТУ системы",
-                "description": "Получение списка товаров из товароучетной системы в облако Эвотор.\nПо умолчанию возвращает весь набор products в рамках storeUuid.\nПри указании параметров page и size возвращает результаты в постраничном режиме.",
-                "produces": [
+        "/api/v1/inventories/stores/{storeUuid}/products" : {
+            "get" : {
+                "summary" : "Получение товаров из ТУ системы",
+                "description" : "Получение списка товаров из товароучетной системы в облако Эвотор.\nПо умолчанию возвращает весь набор products в рамках storeUuid.\nПри указании параметров page и size возвращает результаты в постраничном режиме.",
+                "produces" : [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name" : "X-Total-Items-Count",
-                        "in" : "header",
-                        "description" : "Всего элементов в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
-                        "required" : false,
-                        "type" : "number"
-                    }, {
-                        "name" : "X-Pagination-Page-Size",
-                        "in" : "header",
-                        "description" : "Количество элементов на текущей странице в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
-                        "required" : false,
-                        "type" : "number"
-                    }, {
-                        "name" : "X-Pagination-Next-Page",
-                        "in" : "header",
-                        "description" : "Номер следующей страницы в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
-                        "required" : false,
-                        "type" : "number"
-                    }, {
-                        "name" : "X-Pagination-Total-Page-Count",
-                        "in" : "header",
-                        "description" : "Всего страниц в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
-                        "required" : false,
-                        "type" : "number"
+                "parameters" : [{
+                        "$ref" : "#/parameters/auth"
                     }, {
                         "name" : "storeUuid",
                         "in" : "path",
                         "description" : "Уникальный идентификатор магазина в Эвотор",
-                        "required" : false,
+                        "required" : true,
                         "type" : "string"
                     }, {
                         "name" : "page",
-                        "in" : "path",
+                        "in" : "query",
                         "description" : "Номер страницы для многостраничной выборки. Включает режим постраничного вывода. Должен использоваться вместе с атрибутом size",
                         "required" : false,
                         "type" : "number"
                     }, {
                         "name" : "size",
-                        "in" : "path",
+                        "in" : "query",
                         "description" : "Размер страницы для многостраничной выборки. Включает режим постраничного вывода. Должен использоваться вместе с атрибутом page",
                         "required" : false,
                         "type" : "number"
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/product"
+                "responses" : {
+                    "200" : {
+                        "description" : "Successful response",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/product"
+                            }
+                        },
+                        "headers" : {
+                            "X-Total-Items-Count" : {
+                                "description" : "Всего элементов в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
+                                "type" : "number"
+                            },
+                            "X-Pagination-Page-Size" : {
+                                "description" : "Количество элементов на текущей странице в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
+                                "type" : "number"
+                            },
+                            "X-Pagination-Next-Page" : {
+                                "description" : "Номер следующей страницы в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
+                                "type" : "number"
+                            },
+                            "X-Pagination-Total-Page-Count" : {
+                                "description" : "Всего страниц в многостраничной выборке. Возвращается только при указании в запросе параметров page и size",
+                                "type" : "number"
                             }
                         }
                     },
-                    "401": {
-                        "$ref": "#/responses/status401"
+                    "401" : {
+                        "$ref" : "#/responses/status401"
                     },
-                    "402": {
-                        "$ref": "#/responses/status402"
+                    "402" : {
+                        "$ref" : "#/responses/status402"
                     },
-                    "404": {
-                        "$ref": "#/responses/status404"
+                    "404" : {
+                        "$ref" : "#/responses/status404"
                     },
-                    "500": {
-                        "$ref": "#/responses/status500"
+                    "500" : {
+                        "$ref" : "#/responses/status500"
                     },
-                    "503": {
-                        "$ref": "#/responses/status503"
+                    "503" : {
+                        "$ref" : "#/responses/status503"
                     },
-                    "default": {
-                        "description": "unexpected error"
+                    "default" : {
+                        "description" : "unexpected error"
                     }
                 }
             },
-            "post": {
-                "summary": "Создание товаров в ТУ системе",
-                "description": "Загрузка массива новых товаров созданных на клиенте на сервер.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. \n В POST запросе параметр quantity опциональный (например, в post обязательный)",
-                "produces": [
+            "post" : {
+                "summary" : "Создание товаров в ТУ системе",
+                "description" : "Загрузка массива новых товаров созданных на клиенте на сервер.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. \n В POST запросе параметр quantity опциональный (например, в post обязательный)",
+                "produces" : [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "storeUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "products",
-                        "in": "body",
-                        "description": "массив продуктов",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/product"
+                "parameters" : [{
+                        "$ref" : "#/parameters/auth"
+                    }, {
+                        "name" : "storeUuid",
+                        "in" : "path",
+                        "required" : true,
+                        "type" : "string"
+                    }, {
+                        "name" : "products",
+                        "in" : "body",
+                        "description" : "массив продуктов",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/product"
                             }
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "title": "Массив привязок",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "uuid": {
-                                        "type": "string"
+                "responses" : {
+                    "200" : {
+                        "description" : "Successful response",
+                        "schema" : {
+                            "title" : "Массив привязок",
+                            "type" : "array",
+                            "items" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "uuid" : {
+                                        "type" : "string"
                                     },
-                                    "id": {
-                                        "type": "string"
+                                    "id" : {
+                                        "type" : "string"
                                     }
                                 }
                             }
                         }
                     },
-                    "401": {
-                        "$ref": "#/responses/status401"
+                    "401" : {
+                        "$ref" : "#/responses/status401"
                     },
-                    "402": {
-                        "$ref": "#/responses/status402"
+                    "402" : {
+                        "$ref" : "#/responses/status402"
                     },
-                    "404": {
-                        "$ref": "#/responses/status404"
+                    "404" : {
+                        "$ref" : "#/responses/status404"
                     },
-                    "500": {
-                        "$ref": "#/responses/status500"
+                    "500" : {
+                        "$ref" : "#/responses/status500"
                     },
-                    "503": {
-                        "$ref": "#/responses/status503"
+                    "503" : {
+                        "$ref" : "#/responses/status503"
                     }
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeUuid}/documents": {
-            "put": {
-                "summary": "Выгрузка документов",
-                "description": "Загрузка во внешнюю ТУ документов с транзакциями\n",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "name": "storeUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "documents",
-                        "in": "body",
-                        "description": "массив документов",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/document"
+        "/api/v1/inventories/stores/{storeUuid}/documents" : {
+            "put" : {
+                "summary" : "Выгрузка документов",
+                "description" : "Загрузка во внешнюю ТУ документов с транзакциями\n",
+                "parameters" : [{
+                        "$ref" : "#/parameters/auth"
+                    }, {
+                        "name" : "storeUuid",
+                        "in" : "path",
+                        "required" : true,
+                        "type" : "string"
+                    }, {
+                        "name" : "documents",
+                        "in" : "body",
+                        "description" : "массив документов",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/document"
                             }
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
+                "responses" : {
+                    "200" : {
+                        "description" : "OK"
                     },
-                    "401": {
-                        "$ref": "#/responses/status401"
+                    "401" : {
+                        "$ref" : "#/responses/status401"
                     },
-                    "402": {
-                        "$ref": "#/responses/status402"
+                    "402" : {
+                        "$ref" : "#/responses/status402"
                     },
-                    "404": {
-                        "$ref": "#/responses/status404"
+                    "404" : {
+                        "$ref" : "#/responses/status404"
                     },
-                    "500": {
-                        "$ref": "#/responses/status500"
+                    "500" : {
+                        "$ref" : "#/responses/status500"
                     },
-                    "503": {
-                        "$ref": "#/responses/status503"
+                    "503" : {
+                        "$ref" : "#/responses/status503"
                     }
                 }
             }
         },
-        "/api/v1/inventories/products/schemes": {
-            "get": {
-                "summary": "Схема отображения не стандартных реквизитов",
-                "description": "Получение описания дополнительных полей в продуктах\n",
-                "produces": [
+        "/api/v1/inventories/products/schemes" : {
+            "get" : {
+                "summary" : "Схема отображения не стандартных реквизитов",
+                "description" : "Получение описания дополнительных полей в продуктах\n",
+                "produces" : [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
+                "parameters" : [{
+                        "$ref" : "#/parameters/auth"
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "headers": {
-                            "ETag": {
-                                "description": "метка для кэширования на клиенте",
-                                "type": "string"
+                "responses" : {
+                    "200" : {
+                        "description" : "Successful response",
+                        "headers" : {
+                            "ETag" : {
+                                "description" : "метка для кэширования на клиенте",
+                                "type" : "string"
                             }
                         },
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/scheme"
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/scheme"
                             }
                         }
                     },
-                    "default": {
-                        "description": "unexpected error"
+                    "default" : {
+                        "description" : "unexpected error"
                     }
                 }
             }
         }
     },
-    "responses": {
-        "status401": {
-            "description": "Ключ авторизации неверный "
+    "responses" : {
+        "status401" : {
+            "description" : "Ключ авторизации неверный "
         },
-        "status402": {
-            "description": "Точка продаж, аккаунт или поддержка интеграции заблокирована"
+        "status402" : {
+            "description" : "Точка продаж, аккаунт или поддержка интеграции заблокирована"
         },
-        "status404": {
-            "description": "Не найдена указанная точка продаж"
+        "status404" : {
+            "description" : "Не найдена указанная точка продаж"
         },
-        "status500": {
-            "description": "Внутренняя ошибка сервиса"
+        "status500" : {
+            "description" : "Внутренняя ошибка сервиса"
         },
-        "status503": {
-            "description": "Сервис недоступен"
+        "status503" : {
+            "description" : "Сервис недоступен"
         }
     },
-    "parameters": {
-        "auth": {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Пользовательская Bearer-авторизация в системе партнера",
-            "required": true,
-            "type": "string"
+    "parameters" : {
+        "auth" : {
+            "name" : "Authorization",
+            "in" : "header",
+            "description" : "Пользовательская Bearer-авторизация в системе партнера",
+            "required" : true,
+            "type" : "string"
         }
     },
-    "definitions": {
-        "product": {
-            "type": "object",
-            "required": [
+    "definitions" : {
+        "product" : {
+            "type" : "object",
+            "required" : [
                 "uuid",
                 "type",
                 "code",
                 "name"
             ],
-            "properties": {
-                "uuid": {
-                    "type": "string",
-                    "description": "уникальный UUID продукта в Эвотор"
+            "properties" : {
+                "uuid" : {
+                    "type" : "string",
+                    "description" : "уникальный UUID продукта в Эвотор"
                 },
-                "code": {
-                    "type": "string",
-                    "description": "код товара. Не более 10 символов. Номенклатура без кода товара не отображается на смарт-терминале"
+                "code" : {
+                    "type" : "string",
+                    "description" : "код товара. Не более 10 символов. Номенклатура без кода товара не отображается на смарт-терминале"
                 },
-                "barCodes": {
-                    "type": "array",
-                    "description": "массив штрихкодов",
-                    "items": {
-                        "type": "string"
+                "barCodes" : {
+                    "type" : "array",
+                    "description" : "массив штрихкодов",
+                    "items" : {
+                        "type" : "string"
                     }
                 },
-                "alcoCodes": {
-                    "type": "array",
-                    "description": "массив алкокодов",
-                    "items": {
-                        "type": "string"
+                "alcoCodes" : {
+                    "type" : "array",
+                    "description" : "массив алкокодов",
+                    "items" : {
+                        "type" : "string"
                     }
                 },
-                "name": {
-                    "type": "string",
-                    "description": "наименование товара / услуги"
+                "name" : {
+                    "type" : "string",
+                    "description" : "наименование товара / услуги"
                 },
-                "price": {
-                    "type": "number",
-                    "description": "цена продажи"
+                "price" : {
+                    "type" : "number",
+                    "description" : "цена продажи"
                 },
-                "quantity": {
-                    "type": "number",
-                    "description": "кол-во товара. параметр опциональный, зависит от типа запроса. в GET - он обязательный, в POST - может осутствовать"
+                "quantity" : {
+                    "type" : "number",
+                    "description" : "кол-во товара. параметр опциональный, зависит от типа запроса. в GET - он обязательный, в POST - может осутствовать"
                 },
-                "costPrice": {
-                    "type": "number",
-                    "description": "закупочная цена"
+                "costPrice" : {
+                    "type" : "number",
+                    "description" : "закупочная цена"
                 },
-                "measureName": {
-                    "type": "string",
-                    "description": "ед. измерения"
+                "measureName" : {
+                    "type" : "string",
+                    "description" : "ед. измерения"
                 },
-                "tax": {
-                    "type": "string",
-                    "description": "налог / ставка НДС. Параметр NO_VAT - не облагается налогом",
-                    "enum": [
+                "tax" : {
+                    "type" : "string",
+                    "description" : "налог / ставка НДС. Параметр NO_VAT - не облагается налогом",
+                    "enum" : [
                         "NO_VAT",
                         "VAT_10",
                         "VAT_18",
@@ -481,88 +460,88 @@
                         "VAT_10_110"
                     ]
                 },
-                "allowToSell": {
-                    "type": "boolean",
-                    "description": "флаг. доступность для продажи"
+                "allowToSell" : {
+                    "type" : "boolean",
+                    "description" : "флаг. доступность для продажи"
                 },
-                "description": {
-                    "type": "string",
-                    "description": "описание товара / услуги"
+                "description" : {
+                    "type" : "string",
+                    "description" : "описание товара / услуги"
                 },
-                "articleNumber": {
-                    "type": "string",
-                    "description": "артикул"
+                "articleNumber" : {
+                    "type" : "string",
+                    "description" : "артикул"
                 },
-                "parentUuid": {
-                    "type": "string",
-                    "description": "Код группы товаров (родительская папка)\nЕсли родительская папка отсутстувует - принимает значение null"
+                "parentUuid" : {
+                    "type" : "string",
+                    "description" : "Код группы товаров (родительская папка)\nЕсли родительская папка отсутстувует - принимает значение null"
                 },
-                "group": {
-                    "type": "boolean",
-                    "description": "группа или нет"
+                "group" : {
+                    "type" : "boolean",
+                    "description" : "группа или нет"
                 },
-                "type": {
-                    "type": "string",
-                    "description": "тип товара - обычный, маркированный алкоголь, немаркированный алкоголь",
-                    "enum": [
+                "type" : {
+                    "type" : "string",
+                    "description" : "тип товара - обычный, маркированный алкоголь, немаркированный алкоголь",
+                    "enum" : [
                         "NORMAL",
                         "ALCOHOL_MARKED",
                         "ALCOHOL_NOT_MARKED"
                     ]
                 },
-                "alcoholByVolume": {
-                    "type": "number",
-                    "description": "крепость алкогольной  продукции"
+                "alcoholByVolume" : {
+                    "type" : "number",
+                    "description" : "крепость алкогольной  продукции"
                 },
-                "alcoholProductKindCode": {
-                    "type": "number",
-                    "description": "код вида алкогольной продукции"
+                "alcoholProductKindCode" : {
+                    "type" : "number",
+                    "description" : "код вида алкогольной продукции"
                 },
-                "tareVolume": {
-                    "type": "number",
-                    "description": "емкость тары, л. (не более 3 знаков в дробной части)"
+                "tareVolume" : {
+                    "type" : "number",
+                    "description" : "емкость тары, л. (не более 3 знаков в дробной части)"
                 },
-                "fields": {
-                    "type": "object",
-                    "description": "дополнительные поля, созданные пользователем, которые не объявлены выше (для их отрисовки на интерфейсах кассы необходимо передать их схему)"
+                "fields" : {
+                    "type" : "object",
+                    "description" : "дополнительные поля, созданные пользователем, которые не объявлены выше (для их отрисовки на интерфейсах кассы необходимо передать их схему)"
                 }
             }
         },
-        "scheme": {
-            "type": "object",
-            "properties": {
-                "uuid": {
-                    "type": "string"
+        "scheme" : {
+            "type" : "object",
+            "properties" : {
+                "uuid" : {
+                    "type" : "string"
                 },
-                "code": {
-                    "type": "string"
+                "code" : {
+                    "type" : "string"
                 },
-                "name": {
-                    "type": "string"
+                "name" : {
+                    "type" : "string"
                 },
-                "title": {
-                    "type": "string"
+                "title" : {
+                    "type" : "string"
                 },
-                "value": {
-                    "type": "object"
+                "value" : {
+                    "type" : "object"
                 },
-                "view": {
-                    "type": "object",
-                    "properties": {
-                        "input": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "enum": [
+                "view" : {
+                    "type" : "object",
+                    "properties" : {
+                        "input" : {
+                            "type" : "object",
+                            "properties" : {
+                                "type" : {
+                                    "type" : "string",
+                                    "enum" : [
                                         "TEXT",
                                         "NUMBER",
                                         "SELECT",
                                         "RADIO"
                                     ]
                                 },
-                                "data": {
-                                    "type": "object"
+                                "data" : {
+                                    "type" : "object"
                                 }
                             }
                         }
@@ -570,49 +549,49 @@
                 }
             }
         },
-        "employee": {
-            "type": "object",
-            "required": [
+        "employee" : {
+            "type" : "object",
+            "required" : [
                 "uuid",
                 "role",
                 "name"
             ],
-            "properties": {
-                "uuid": {
-                    "type": "string",
-                    "description": "уникальный UUID сотрудника в Эвотор"
+            "properties" : {
+                "uuid" : {
+                    "type" : "string",
+                    "description" : "уникальный UUID сотрудника в Эвотор"
                 },
-                "name": {
-                    "type": "string",
-                    "description": "наименование сотрудника (Имя) в Эвотор"
+                "name" : {
+                    "type" : "string",
+                    "description" : "наименование сотрудника (Имя) в Эвотор"
                 },
-                "lastName": {
-                    "type": "string",
-                    "description": "наименование сотрудника (Фамилия) в Эвотор"
+                "lastName" : {
+                    "type" : "string",
+                    "description" : "наименование сотрудника (Фамилия) в Эвотор"
                 },
-				"patronymicName": {
-                    "type": "string",
-                    "description": "наименование сотрудника (Отчество) в Эвотор"
+                "patronymicName" : {
+                    "type" : "string",
+                    "description" : "наименование сотрудника (Отчество) в Эвотор"
                 },
-                "telephone": {
-                    "type": "number",
-                    "description": "номер телефона сотрудника в Эвотор в формате 79001234455"
+                "telephone" : {
+                    "type" : "number",
+                    "description" : "номер телефона сотрудника в Эвотор в формате 79001234455"
                 },
-                "stores": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "storeUuid": {
-                                "type": "string"
+                "stores" : {
+                    "type" : "array",
+                    "items" : {
+                        "type" : "object",
+                        "properties" : {
+                            "storeUuid" : {
+                                "type" : "string"
                             }
                         }
                     }
                 },
-                "role": {
-                    "type": "string",
-                    "description": "роль сотрудника (пока только Админ и Кассир)",
-                    "enum": [
+                "role" : {
+                    "type" : "string",
+                    "description" : "роль сотрудника (пока только Админ и Кассир)",
+                    "enum" : [
                         "ADMIN",
                         "CASHIER",
                         "OTHER"
@@ -620,40 +599,40 @@
                 }
             }
         },
-        "store": {
-            "type": "object",
-            "required": [
+        "store" : {
+            "type" : "object",
+            "required" : [
                 "uuid",
                 "name"
             ],
-            "properties": {
-                "uuid": {
-                    "type": "string",
-                    "description": "уникальный UUID точки продаж в Эвотор"
+            "properties" : {
+                "uuid" : {
+                    "type" : "string",
+                    "description" : "уникальный UUID точки продаж в Эвотор"
                 },
-                "name": {
-                    "type": "string",
-                    "description": "наименование точки продаж в Эвотор"
+                "name" : {
+                    "type" : "string",
+                    "description" : "наименование точки продаж в Эвотор"
                 },
-                "address": {
-                    "type": "string",
-                    "description": "адресс точки продаж в Эвотор"
+                "address" : {
+                    "type" : "string",
+                    "description" : "адресс точки продаж в Эвотор"
                 }
             }
         },
-        "document": {
-            "type": "object",
-            "required": [
+        "document" : {
+            "type" : "object",
+            "required" : [
                 "uuid",
                 "type"
             ],
-            "properties": {
-                "uuid": {
-                    "type": "string"
+            "properties" : {
+                "uuid" : {
+                    "type" : "string"
                 },
-                "type": {
-                    "type": "string",
-                    "enum": [
+                "type" : {
+                    "type" : "string",
+                    "enum" : [
                         "SELL",
                         "PAYBACK",
                         "CASH_INCOME",
@@ -669,20 +648,20 @@
                         "OPEN_TARE"
                     ]
                 },
-                "transactions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/transaction"
+                "transactions" : {
+                    "type" : "array",
+                    "items" : {
+                        "$ref" : "#/definitions/transaction"
                     }
                 }
             }
         },
-        "transaction": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "enum": [
+        "transaction" : {
+            "type" : "object",
+            "properties" : {
+                "type" : {
+                    "type" : "string",
+                    "enum" : [
                         "DISCOUNT_DOCUMENT",
                         "DISCOUNT_POSITION",
                         "DISCOUNT_DOCUMENT_POSITION",
@@ -706,20 +685,20 @@
                 }
             }
         },
-        "device": {
-            "type": "object",
-            "properties": {
-                "uuid": {
-                    "type": "string",
-                    "description": "deviceUuid смарт-терминала (кассы) в Эвотор"
+        "device" : {
+            "type" : "object",
+            "properties" : {
+                "uuid" : {
+                    "type" : "string",
+                    "description" : "deviceUuid смарт-терминала (кассы) в Эвотор"
                 },
-                "name": {
-                    "type": "string",
-                    "description": "имя смарт-терминала (кассы) в Эвотор"
+                "name" : {
+                    "type" : "string",
+                    "description" : "имя смарт-терминала (кассы) в Эвотор"
                 },
-                "storeUuid": {
-                    "type": "string",
-                    "description": "магазин в Эвотор, к которому привязан смарт-терминал (касса)"
+                "storeUuid" : {
+                    "type" : "string",
+                    "description" : "магазин в Эвотор, к которому привязан смарт-терминал (касса)"
                 }
             }
         }
