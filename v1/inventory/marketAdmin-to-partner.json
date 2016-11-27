@@ -276,7 +276,7 @@
     },
     "parameters": {
         "authEvotor": {
-            "name": "authEvotor",
+            "name": "Authorization",
             "in": "header",
             "description": "Авторизация Эвотор в системе партнера.\nЭто может быть basic auth, API key или token.\nПараметр передается в заголовке запроса, в поле Authorization",
             "required": true,
