@@ -1,0 +1,157 @@
+[{  
+   "uuid":"d7e0a5d5-186c-4112-8813-8fb43c9aec2f",
+   "code":"4",
+   "barCodes":[  
+      "4067700002136"
+   ],
+   "alcoCodes":[  
+
+   ],
+   "name":"пиво балтика 9",
+   "price":58.000,
+   "quantity":0.000,
+   "costPrice":0.000,
+   "measureName":"шт",
+   "tax":"VAT_18",
+   "allowToSell":true,
+   "description":"",
+   "articleNumber":"",
+   "parentUuid":null,
+   "group":false,
+   "type":"ALCOHOL_NOT_MARKED",
+   "alcoholByVolume":9.000,
+   "alcoholProductKindCode":456,
+   "tareVolume":null,
+   "fields":null
+},
+{  
+   "uuid":"10f36b31-1501-4850-8878-93e85f3a3100",
+   "code":"3",
+   "barCodes":[  
+      "5000281025360"
+   ],
+   "alcoCodes":[  
+      "0150357000003625405"
+   ],
+   "name":"captain morgan",
+   "price":5000.000,
+   "quantity":0.000,
+   "costPrice":0.000,
+   "measureName":"шт",
+   "tax":"VAT_18",
+   "allowToSell":true,
+   "description":"",
+   "articleNumber":"",
+   "parentUuid":null,
+   "group":false,
+   "type":"ALCOHOL_MARKED",
+   "alcoholByVolume":0.000,
+   "alcoholProductKindCode":258,
+   "tareVolume":null,
+   "fields":null
+},
+{  
+   "uuid":"d5dc2f4c-31d9-461f-8b4c-f67afdf2c752",
+   "code":"1",
+   "barCodes":[  
+      "4601593000444"
+   ],
+   "alcoCodes":[  
+
+   ],
+   "name":"test",
+   "price":25.000,
+   "quantity":0.000,
+   "costPrice":20.000,
+   "measureName":"шт",
+   "tax":"VAT_18",
+   "allowToSell":false,
+   "description":"description",
+   "articleNumber":"",
+   "parentUuid":null,
+   "group":false,
+   "type":"NORMAL",
+   "alcoholByVolume":0.000,
+   "alcoholProductKindCode":0,
+   "tareVolume":null,
+   "fields":null
+},
+{  
+   "uuid":"a39dac5c-6468-4e87-8662-ef77619e6c40",
+   "code":"1",
+   "barCodes":[  
+
+   ],
+   "alcoCodes":[  
+
+   ],
+   "name":"test 3",
+   "price":100.000,
+   "quantity":-4.000,
+   "costPrice":0.000,
+   "measureName":"шт",
+   "tax":"NO_VAT",
+   "allowToSell":true,
+   "description":"",
+   "articleNumber":"",
+   "parentUuid":null,
+   "group":false,
+   "type":"NORMAL",
+   "alcoholByVolume":0.000,
+   "alcoholProductKindCode":0,
+   "tareVolume":0.000,
+   "fields":null
+},
+{  
+   "uuid":"fccf95a1-37cf-4270-8bdc-c2b4de0378aa",
+   "code":"3",
+   "barCodes":[  
+      "2000000000015"
+   ],
+   "alcoCodes":[  
+
+   ],
+   "name":"юра привет",
+   "price":1000.000,
+   "quantity":-3.000,
+   "costPrice":900.000,
+   "measureName":"шт",
+   "tax":"VAT_18",
+   "allowToSell":true,
+   "description":"",
+   "articleNumber":"1345",
+   "parentUuid":null,
+   "group":false,
+   "type":"NORMAL",
+   "alcoholByVolume":0.000,
+   "alcoholProductKindCode":0,
+   "tareVolume":0.000,
+   "fields":null
+},
+{  
+   "uuid":"8aad873d-d8c0-47e8-964c-149b5ba37056",
+   "code":"2",
+   "barCodes":[  
+      "2000000000008"
+   ],
+   "alcoCodes":[  
+
+   ],
+   "name":"hello",
+   "price":555.000,
+   "quantity":-2.000,
+   "costPrice":0.000,
+   "measureName":"шт",
+   "tax":"VAT_10",
+   "allowToSell":true,
+   "description":"",
+   "articleNumber":"artic1",
+   "parentUuid":null,
+   "group":false,
+   "type":"NORMAL",
+   "alcoholByVolume":0.000,
+   "alcoholProductKindCode":0,
+   "tareVolume":0.000,
+   "fields":null
+}
+]

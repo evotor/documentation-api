@@ -1,0 +1,31 @@
+{
+	"type" : "FPRINT",
+	"uuid" : "e9ed8476-ba3c-453a-a7a6-32d486a52de7",
+	"number" : 14,
+	"closeSum" : "0",
+	"openDate" : "2016-09-14T07:40:38.000+0000",
+	"closeDate" : "2016-09-14T07:40:38.000+0000",
+	"deviceUuid" : "5a188de4-49b8-4cb4-800e-eb6b5202437e",
+	"sessionUUID" : "991d1329-2cf6-4adb-8d74-cfd88e2ea6f2",
+	"openUserCode" : null,
+	"openUserUuid" : "123e4567-e89b-12d3-a456-426655440000",
+	"transactions" : [{
+			"id" : "38",
+			"cash" : 0,
+			"type" : "FPRINT_Z_REPORT",
+			"uuid" : null,
+			"total" : 0,
+			"proceeds" : 7256.4,
+			"userCode" : null,
+			"userUuid" : "123e4567-e89b-12d3-a456-426655440000",
+			"creationDate" : "2016-09-14T07:40:38.000+0000",
+			"receiptNumber" : 80,
+			"sessionNumber" : 0,
+			"documentNumber" : 139
+		}
+	],
+	"closeUserCode" : null,
+	"closeUserUuid" : "123e4567-e89b-12d3-a456-426655440000",
+	"sessionNumber" : "3",
+	"closeResultSum" : "7256.4"
+}

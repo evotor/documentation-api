@@ -1,0 +1,209 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "API запросов Эвотор по Чекам",
+        "description": "Описание запросов отправки чеков партнеру"
+    },
+    "paths": {
+        "/api/v1/receipt": {
+            "post": {
+                "summary": "Отправка чека партнеру после оплаты клиентом",
+                "description": "В данном запросе передается состав чека / чеков.\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "receipt",
+                        "in": "body",
+                        "description": "массив чеков",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/receipt"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "status401": {
+            "description": "Ключ авторизации неверный "
+        },
+        "status402": {
+            "description": "Точка продаж, аккаунт или поддержка интеграции заблокирована"
+        },
+        "status404": {
+            "description": "Не найдена указанная точка продаж"
+        },
+        "status500": {
+            "description": "Внутренняя ошибка сервиса"
+        },
+        "status503": {
+            "description": "Сервис недоступен"
+        }
+    },
+    "parameters": {
+        "auth": {
+            "name": "token",
+            "in": "header",
+            "description": "токен авторизации",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "receipt": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "deviceUuid",
+                "storeUuid",
+                "dateTime"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "уникальный ID чека."
+                },
+                "deviceUuid": {
+                    "type": "string",
+                    "description": "уникальный ID смарт-терминала."
+                },
+                "storeUuid": {
+                    "type": "string",
+                    "description": "уникальный ID магазина."
+                },
+                "dateTime": {
+                    "description": "дата и время",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "type": {
+                    "description": "тип чека (продажа, возврат)",
+                    "type": "string"
+                },
+                "shiftId": {
+                    "description": "номер смены",
+                    "type": "string"
+                },
+                "employeeUuid": {
+                    "type": "string",
+                    "description": "уникальный ID автора продажи (пользователь)"
+                },
+                "paymentSource": {
+                    "description": "Способ оплаты. PAY_CASH - оплата наличными без сдачи; PAY_CASHBACK – оплата наличными со сдачей; PAY_CARD - оплата по карте",
+                    "type": "string",
+                    "enum": [
+                        "PAY_CASH",
+                        "PAY_CASHBACK",
+                        "PAY_CARD",
+                        "OTHER"
+                    ]
+                },
+                "infoCheck": {
+                    "type": "boolean",
+                    "description": "инфо–чек (да, нет)"
+                },
+                "egais": {
+                    "type": "boolean",
+                    "description": "ЕГАИС (да, нет)"
+                },
+                "items": {
+                    "type": "array",
+                    "description": "массив с позициями в чеке",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "uuid": {
+                                "type": "string",
+                                "description": "уникальный ID товара / услуги"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "наименование товара / услуги"
+                            },
+                            "itemType": {
+                                "type": "string",
+                                "description": "тип товара - обычный, маркированный алкоголь, немаркированный алкоголь, услуга",
+                                "enum": [
+                                    "NORMAL",
+                                    "ALCOHOL_MARKED",
+                                    "ALCOHOL_NOT_MARKED",
+                                    "SERVICE"
+                                ]
+                            },
+                            "barcode": {
+                                "type": "string"
+                            },
+                            "measureName": {
+                                "type": "string",
+                                "description": "единица измерения"
+                            },
+                            "quantity": {
+                                "type": "number",
+                                "description": "кол-во данного товара"
+                            },
+                            "price": {
+                                "type": "number",
+                                "description": "цена продажи данного товара"
+                            },
+                            "costPrice": {
+                                "type": "number",
+                                "description": "цена закупки данного товара"
+                            },
+                            "sumPrice": {
+                                "type": "number",
+                                "description": "общая цена данного товара"
+                            },
+                            "tax": {
+                                "type": "number",
+                                "description": "сумма налога на данный товар"
+                            },
+                            "taxPercent": {
+                                "type": "number",
+                                "description": "общий налог в % на данный товар"
+                            },
+                            "discount": {
+                                "type": "number",
+                                "description": "общая сумма скидки на данный товар"
+                            }
+                        }
+                    }
+                },
+                "totalTax": {
+                    "type": "number",
+                    "description": "общая сумма налога"
+                },
+                "totalDiscount": {
+                    "type": "number",
+                    "description": "общая сумма скидки"
+                },
+                "totalAmount": {
+                    "type": "number",
+                    "description": "общая сумма чека"
+                },
+                "clientUuid": {
+                    "type": "string",
+                    "description": "уникальный UUID клиента (появляется, когда покутель указывает где-нибудь номер телефона / email и т.п., например, в программе лояльности)"
+                },
+                "fields": {
+                    "type": "object",
+                    "description": "дополнительные поля, например, в которых могут передаться поля пользователя для программ лояльности. эти поля передаются только тем, кто их создал. То есть партнер А, не получит поля партнера В."
+                }
+            }
+        }
+    }
+}

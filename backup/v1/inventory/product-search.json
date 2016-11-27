@@ -1,0 +1,103 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Evotor Commodity API",
+        "version": "1.0.0"
+    },
+    "host": "api.evotor.ru",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/v1/commodities": {
+            "get": {
+                "summary": "Поиск товара по штирхкодам",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "scanCode",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alcCode",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Commodity"
+                        },
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "auth": {
+            "name": "token",
+            "in": "header",
+            "description": "ключ доступа пользователя (токен)",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "Commodity": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "название товара"
+                },
+                "alcCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "scanCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "alcoholByVolume": {
+                    "type": "string",
+                    "description": "крепость алкогольной продукции"
+                },
+                "alcoholProductKindCode": {
+                    "type": "string",
+                    "description": "код вида алкогольной продукции"
+                },
+                "tareVolume": {
+                    "type": "string",
+                    "description": "емкость тары, л. (не более 3 знаков в дробной части)"
+                },
+                "measure": {
+                    "type": "string",
+                    "description": "ед. измерения"
+                }
+            }
+        }
+    }
+}

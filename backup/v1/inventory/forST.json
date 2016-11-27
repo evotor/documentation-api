@@ -1,0 +1,581 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "API Эвотор для Смарт-терминала",
+        "description": "Описание запросов смарт-терминала [клиент] к API Эвотор [сервер]. Предполагается, что СТ хранит у себя мэпинг своих сущностей и сущностей облака Эвотор."
+    },
+    "paths": {
+        "/api/v1/inventories/products/{uuid}": {
+            "get": {
+                "summary": "Получение товара по uuid",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response, объект продукта",
+                        "schema": {
+                            "$ref": "#/definitions/product"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Изменение товара по uuid",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "product",
+                        "in": "body",
+                        "description": "измененный объект продукта",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/productCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/products": {
+            "get": {
+                "summary": "Получение товаров из облака Эвотор",
+                "description": "Получение списка товаров из облака Эвотор.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/product"
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/status401"
+                    },
+                    "402": {
+                        "$ref": "#/responses/status402"
+                    },
+                    "500": {
+                        "$ref": "#/responses/status500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/status503"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Создание товаров в ТУ системе",
+                "description": "Загрузка массива новых товаров созданных на СТ на сервер Эвотор.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. ",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "products",
+                        "in": "body",
+                        "description": "массив продуктов",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/productCreate"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Массив привязок",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "uuid": {
+                                        "type": "string"
+                                    },
+                                    "evotorServerUuid": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/status401"
+                    },
+                    "402": {
+                        "$ref": "#/responses/status402"
+                    },
+                    "500": {
+                        "$ref": "#/responses/status500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/status503"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/documents": {
+            "put": {
+                "summary": "Выгрузка документов на сервер Эвотор",
+                "description": "Выгрузка документов с транзакциями\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    },
+                    {
+                        "name": "documents",
+                        "in": "body",
+                        "description": "массив документов",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/document"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/responses/status401"
+                    },
+                    "402": {
+                        "$ref": "#/responses/status402"
+                    },
+                    "500": {
+                        "$ref": "#/responses/status500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/status503"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/products/schemes": {
+            "get": {
+                "summary": "Схема отображения не стандартных реквизитов",
+                "description": "Получение описания дополнительных полей в продуктах\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/auth"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "headers": {
+                            "ETag": {
+                                "description": "метка для кэширования на клиенте",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/scheme"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "status401": {
+            "description": "Ключ авторизации неверный "
+        },
+        "status402": {
+            "description": "Точка продаж, аккаунт или поддержка интеграции заблокирована"
+        },
+        "status500": {
+            "description": "Внутренняя ошибка сервиса"
+        },
+        "status503": {
+            "description": "Сервис недоступен"
+        }
+    },
+    "parameters": {
+        "auth": {
+            "name": "core_auth",
+            "in": "header",
+            "description": "авторизация в CORE",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "product": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "type",
+                "code",
+                "name"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "уникальный UUID продукта в Эвотор"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "код товара. Не более 10 символов. Номенклатура без кода товара не отображается на смарт-терминале"
+                },
+                "barcodes": {
+                    "type": "array",
+                    "description": "массив штрихкодов",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "alcocodes": {
+                    "type": "array",
+                    "description": "массив алкокодов",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "description": "наименование товара / услуги"
+                },
+                "price": {
+                    "type": "number",
+                    "description": "цена продажи"
+                },
+                "quantity": {
+                    "type": "number",
+                    "description": "кол-во товара. параметр опциональный, зависит от типа запроса. в GET - он обязательный, в POST - может осутствовать"
+                },
+                "costPrice": {
+                    "type": "number",
+                    "description": "закупочная цена"
+                },
+                "measureName": {
+                    "type": "string",
+                    "description": "ед. измерения"
+                },
+                "tax": {
+                    "type": "string",
+                    "description": "налог / ставка НДС. Параметр NO_VAT - не облагается налогом",
+                    "enum": [
+                        "NO_VAT",
+                        "VAT_10",
+                        "VAT_18",
+                        "VAT_0",
+                        "VAT_18_118",
+                        "VAT_10_110"
+                    ]
+                },
+                "allowToSell": {
+                    "type": "boolean",
+                    "description": "флаг. доступность для продажи"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "описание товара / услуги"
+                },
+                "articleNumber": {
+                    "type": "string",
+                    "description": "артикул"
+                },
+                "parentUuid": {
+                    "type": "string",
+                    "description": "Код группы товаров (родительская папка)\nЕсли родительская папка отсутстувует - принимает значение null"
+                },
+                "group": {
+                    "type": "boolean",
+                    "description": "группа или нет"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "тип товара - обычный, маркированный алкоголь, немаркированный алкоголь",
+                    "enum": [
+                        "NORMAL",
+                        "ALCOHOL_MARKED",
+                        "ALCOHOL_NOT_MARKED"
+                    ]
+                },
+                "alcoholByVolume": {
+                    "type": "number",
+                    "description": "крепость алкогольной  продукции"
+                },
+                "alcoholProductKindCode": {
+                    "type": "number",
+                    "description": "код вида алкогольной продукции"
+                },
+                "tareVolume": {
+                    "type": "number",
+                    "description": "емкость тары, л. (не более 3 знаков в дробной части)"
+                },
+                "fields": {
+                    "type": "object",
+                    "description": "дополнительные поля, созданные пользователем, которые не объявлены выше (для их отрисовки на интерфейсах кассы необходимо передать их схему)"
+                }
+            }
+        },
+        "productCreate": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "type"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "уникальный UUID продукта в Эвотор"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "код товара. Не более 10 символов. Номенклатура без кода товара не отображается на смарт-терминале"
+                },
+                "barcodes": {
+                    "type": "array",
+                    "description": "массив штрихкодов",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "alcocodes": {
+                    "type": "array",
+                    "description": "массив алкокодов",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "description": "наименование товара / услуги"
+                },
+                "price": {
+                    "type": "number",
+                    "description": "цена продажи"
+                },
+                "costPrice": {
+                    "type": "number",
+                    "description": "закупочная цена"
+                },
+                "measureName": {
+                    "type": "string",
+                    "description": "ед. измерения"
+                },
+                "tax": {
+                    "type": "string",
+                    "description": "налог / ставка НДС. Параметр NO_VAT - не облагается налогом",
+                    "enum": [
+                        "NO_VAT",
+                        "VAT_10",
+                        "VAT_18"
+                    ]
+                },
+                "allowToSell": {
+                    "type": "boolean",
+                    "description": "флаг. доступность для продажи"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "описание товара / услуги"
+                },
+                "articleNumber": {
+                    "type": "number",
+                    "description": "артикул"
+                },
+                "parentUuid": {
+                    "type": "string",
+                    "description": "Код группы товаров (родительская папка)\nЕсли родительская папка отсутстувует - принимает значение null"
+                },
+                "isGroup": {
+                    "type": "boolean",
+                    "description": "группа или нет"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "тип товара - обычный, маркированный алкоголь, немаркированный алкоголь",
+                    "enum": [
+                        "NORMAL",
+                        "ALCOHOL_MARKED",
+                        "ALCOHOL_NOT_MARKED"
+                    ]
+                },
+                "alcoholByVolume": {
+                    "type": "number",
+                    "description": "крепость алкогольной  продукции"
+                },
+                "alcoholProductKindCode": {
+                    "type": "number",
+                    "description": "код вида алкогольной продукции"
+                },
+                "tareVolume": {
+                    "type": "number",
+                    "description": "емкость тары, л. (не более 3 знаков в дробной части)"
+                },
+                "fields": {
+                    "type": "object",
+                    "description": "дополнительные поля, созданные пользователем, которые не объявлены выше (для их отрисовки на интерфейсах кассы необходимо передать их схему)"
+                }
+            }
+        },
+        "scheme": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "object"
+                },
+                "view": {
+                    "type": "object",
+                    "properties": {
+                        "input": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "TEXT",
+                                        "NUMBER",
+                                        "SELECT",
+                                        "RADIO"
+                                    ]
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "document": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "type"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "SELL",
+                        "PAYBACK",
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "OPEN_SESSION",
+                        "FPRINT",
+                        "CLOSE_SESSION",
+                        "INVENTORY",
+                        "ACCEPT",
+                        "RETURN",
+                        "WRITE_OFF",
+                        "REVALUATION",
+                        "OPEN_TARE"
+                    ]
+                },
+                "transactions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/transaction"
+                    }
+                }
+            }
+        },
+        "transaction": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "DISCOUNT_DOCUMENT",
+                        "DISCOUNT_POSITION",
+                        "DISCOUNT_DOCUMENT_POSITION",
+                        "DOCUMENT_OPEN",
+                        "DOCUMENT_CLOSE",
+                        "DOCUMENT_CLOSE_FPRINT",
+                        "REGISTER_POSITION",
+                        "REGISTER_BILLS",
+                        "CASH_INCOME",
+                        "CASH_OUTCOME",
+                        "INVENTORY",
+                        "PAYMENT",
+                        "OPEN_SESSION",
+                        "CLOSE_SESSION",
+                        "FPRINT_OPEN_SESSION",
+                        "FPRINT_X_REPORT",
+                        "FPRINT_Z_REPORT",
+                        "POSITION_TAX",
+                        "REVALUATION"
+                    ]
+                }
+            }
+        }
+    }
+}

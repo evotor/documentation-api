@@ -13,8 +13,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "userId",
                         "in": "body",
                         "required": true,
@@ -54,8 +53,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "employeeId",
                         "in": "body",
                         "required": true,
@@ -125,8 +123,7 @@
                 "stores": {
                     "type": "array",
                     "description": "список UUID магазинов к которым сотрудник имеет доступ",
-                    "items": [
-                        {
+                    "items": [{
                             "type": "object",
                             "properties": {
                                 "storeUuid": {
@@ -137,6 +134,30 @@
                     ]
                 }
             }
+        }
+    },
+    "security": [{
+            "s2s_basic": []
+        }, {
+            "c2s_basic": []
+        }, {
+            "c2s_bearer": []
+        }
+    ],
+    "securityDefinitions": {
+        "s2s_basic": {
+            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
+            "type": "basic"
+        },
+        "c2s_basic": {
+            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "type": "basic"
+        },
+        "c2s_bearer": {
+            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
         }
     }
 }

@@ -1,0 +1,27 @@
+{
+	"type" : "CLOSE_SESSION",
+	"uuid" : "ad06e641-a2c3-4f06-b75a-bd25bfd56dd7",
+	"number" : 11,
+	"closeSum" : "158",
+	"openDate" : "2016-09-13T14:55:57.000+0000",
+	"closeDate" : "2016-09-13T14:55:57.000+0000",
+	"deviceUuid" : "5a188de4-49b8-4cb4-800e-eb6b5202437e",
+	"sessionUUID" : "150b9045-ce0f-4ee8-9222-291c6f94ea7b",
+	"openUserCode" : null,
+	"openUserUuid" : "123e4567-e89b-12d3-a456-426655440000",
+	"transactions" : [{
+			"id" : "45",
+			"type" : "CLOSE_SESSION",
+			"uuid" : null,
+			"total" : 3706,
+			"proceeds" : 158,
+			"userCode" : null,
+			"userUuid" : "123e4567-e89b-12d3-a456-426655440000",
+			"creationDate" : "2016-09-13T14:55:57.000+0000"
+		}
+	],
+	"closeUserCode" : null,
+	"closeUserUuid" : "123e4567-e89b-12d3-a456-426655440000",
+	"sessionNumber" : "1",
+	"closeResultSum" : "3706"
+}

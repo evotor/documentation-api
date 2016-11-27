@@ -1,0 +1,142 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "API Core для Market",
+        "description": ""
+    },
+    "paths": {
+        "/siteapi/employees": {
+            "post": {
+                "summary": "Получить список сотрудников",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "body",
+                        "required": true,
+                        "description": "запрос по userId",
+                        "schema": {
+                            "type": "string",
+                            "properties": {
+                                "userId": {
+                                    "type": "string",
+                                    "description": "пример user_id\":\"01-000000000000078\""
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "список сотрудников",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/employee"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/siteapi/employee": {
+            "post": {
+                "summary": "Получить объект сотрудника",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "employeeId",
+                        "in": "body",
+                        "required": true,
+                        "description": "запрос по employeeId",
+                        "schema": {
+                            "type": "string",
+                            "properties": {
+                                "employeeId": {
+                                    "type": "string",
+                                    "description": "пример employeeId\":\"01-000000000000078\""
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/employee"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "employee": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "role",
+                "stores"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "уникальный UUID сотрудника в Эвотор"
+                },
+                "firstName": {
+                    "type": "string",
+                    "description": "имя сотрудника в Эвотор"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "фамилия сотрудника в Эвотор"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "роль сотрудника (пока только Админ и Кассир)",
+                    "enum": [
+                        "ADMIN",
+                        "CASHIER"
+                    ]
+                },
+                "telephone": {
+                    "type": "number",
+                    "description": "номер телефона в формате 79683394270"
+                },
+                "pin": {
+                    "type": "number",
+                    "description": "пароль для доступа к терминалу в формате 4312"
+                },
+                "stores": {
+                    "type": "array",
+                    "description": "список UUID магазинов к которым сотрудник имеет доступ",
+                    "items": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "storeUuid": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

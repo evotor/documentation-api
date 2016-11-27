@@ -12,11 +12,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "uuid",
                         "in": "path",
                         "required": true,
@@ -37,17 +35,14 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "uuid",
                         "in": "path",
                         "required": true,
                         "type": "string"
-                    },
-                    {
+                    }, {
                         "name": "product",
                         "in": "body",
                         "description": "измененный объект продукта",
@@ -71,8 +66,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
                     }
                 ],
@@ -109,11 +103,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "products",
                         "in": "body",
                         "description": "массив продуктов",
@@ -164,11 +156,9 @@
             "put": {
                 "summary": "Выгрузка документов на сервер Эвотор",
                 "description": "Выгрузка документов с транзакциями\n",
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "documents",
                         "in": "body",
                         "description": "массив документов",
@@ -207,8 +197,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
                     }
                 ],
@@ -576,6 +565,30 @@
                     ]
                 }
             }
+        }
+    },
+    "security": [{
+            "s2s_basic": []
+        }, {
+            "c2s_basic": []
+        }, {
+            "c2s_bearer": []
+        }
+    ],
+    "securityDefinitions": {
+        "s2s_basic": {
+            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
+            "type": "basic"
+        },
+        "c2s_basic": {
+            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "type": "basic"
+        },
+        "c2s_bearer": {
+            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
         }
     }
 }

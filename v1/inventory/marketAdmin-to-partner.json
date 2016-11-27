@@ -13,11 +13,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/authEvotor"
-                    },
-                    {
+                    }, {
                         "name": "user",
                         "in": "body",
                         "description": "параметры необходимые для получения данных о пользователе",
@@ -61,7 +59,7 @@
                     },
                     "422": {
                         "description": "Пользовательская авторизация не удалась"
-                    }                    
+                    }
                 }
             }
         },
@@ -72,11 +70,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/authEvotor"
-                    },
-                    {
+                    }, {
                         "name": "user",
                         "in": "body",
                         "description": "параметры необходимые для создания пользователя в партнере",
@@ -126,11 +122,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/authEvotor"
-                    },
-                    {
+                    }, {
                         "name": "user",
                         "in": "body",
                         "description": "параметры необходимые для установки тарифа пользователю в партнере",
@@ -147,7 +141,7 @@
                                 },
                                 "tariffId": {
                                     "type": "string",
-									"description": "код тарифа в системе Эвотор"
+                                    "description": "код тарифа в системе Эвотор"
                                 },
                                 "status": {
                                     "type": "string",
@@ -182,11 +176,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/authEvotor"
-                    },
-                    {
+                    }, {
                         "name": "subscriptionCreated",
                         "description": "Event: начало триала подписки",
                         "in": "body",
@@ -210,11 +202,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/authEvotor"
-                    },
-                    {
+                    }, {
                         "name": "paymentSuccessed",
                         "description": "Event: успешная оплата",
                         "in": "body",
@@ -238,11 +228,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/authEvotor"
-                    },
-                    {
+                    }, {
                         "name": "subscriptionActivated",
                         "description": "Event: подписка активирована",
                         "in": "body",
@@ -266,11 +254,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/authEvotor"
-                    },
-                    {
+                    }, {
                         "name": "paymentFailed",
                         "description": "Event: оплата не прошла",
                         "in": "body",
@@ -424,6 +410,30 @@
                     }
                 }
             }
+        }
+    },
+    "security": [{
+            "s2s_basic": []
+        }, {
+            "c2s_basic": []
+        }, {
+            "c2s_bearer": []
+        }
+    ],
+    "securityDefinitions": {
+        "s2s_basic": {
+            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
+            "type": "basic"
+        },
+        "c2s_basic": {
+            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "type": "basic"
+        },
+        "c2s_bearer": {
+            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
         }
     }
 }

@@ -9,11 +9,9 @@
         "/api/v1/inventories/stores/{storeUuid}/documents": {
             "get": {
                 "summary": "Общий запрос - загрузка документов с сервера Эвотор в 1С",
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "storeUuid",
                         "in": "path",
                         "required": true,
@@ -37,11 +35,9 @@
         "/api/v1/inventories/stores/{storeUuid}/documentsSell": {
             "get": {
                 "summary": "ВЫГРУЗКА ДОКУМЕНТА ПРОДАЖИ",
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "storeUuid",
                         "in": "path",
                         "required": true,
@@ -159,8 +155,7 @@
                 },
                 "transactions": {
                     "type": "array",
-                    "items": [
-                        {
+                    "items": [{
                             "type": "object",
                             "example": {
                                 "id": 12,
@@ -214,8 +209,7 @@
                                     "description": "номер купона"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 13,
@@ -336,8 +330,7 @@
                                     "description": "не используется во внешних интеграциях"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 14,
@@ -378,8 +371,7 @@
                                     "description": "скидка в процентах"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 15,
@@ -444,8 +436,7 @@
                                     "description": "тип скидки (не используется во внешних интеграциях)"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 16,
@@ -520,8 +511,7 @@
                                     "description": "сумма налога"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 17,
@@ -642,8 +632,7 @@
                                     "description": "не используется во внешних интеграциях"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 18,
@@ -708,8 +697,7 @@
                                     "description": "тип скидки (не используется во внешних интеграциях)"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 19,
@@ -776,8 +764,7 @@
                                     "type": "string"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 20,
@@ -880,8 +867,7 @@
                                     "type": "number"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 21,
@@ -942,8 +928,7 @@
                                     "type": "string"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 22,
@@ -1003,8 +988,7 @@
                                     "description": "скидка в процентах на весь чек"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 23,
@@ -1049,8 +1033,7 @@
                                     "description": "если сумма положительная, значит мы ее получили от клиента (если отрицательная, значит сдача)"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 24,
@@ -1095,8 +1078,7 @@
                                     "description": "если сумма положительная, значит мы ее получили от клиента (если отрицательная, значит сдача)"
                                 }
                             }
-                        },
-                        {
+                        }, {
                             "type": "object",
                             "example": {
                                 "id": 25,
@@ -1184,6 +1166,30 @@
                     ]
                 }
             }
+        }
+    },
+    "security": [{
+            "s2s_basic": []
+        }, {
+            "c2s_basic": []
+        }, {
+            "c2s_bearer": []
+        }
+    ],
+    "securityDefinitions": {
+        "s2s_basic": {
+            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
+            "type": "basic"
+        },
+        "c2s_basic": {
+            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "type": "basic"
+        },
+        "c2s_bearer": {
+            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
         }
     }
 }

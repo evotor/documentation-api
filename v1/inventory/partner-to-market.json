@@ -1,113 +1,106 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "0.0.1-SNAPSHOT",
-    "title": "API запросов товароучетной системе (ТУ) к Эвотор",
-    "description": "Описание запросов товароучетной системы [клиент] к API Облака Эвотор [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
-  },
-  "paths": {
-    "/api/v1/employees/search": {
-      "get": {
-        "summary": "Список сотрудников",
-        "description": "Получение списка сотрудников Эвотор \n",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/authForPartner"
-          },
-          {
-            "name": "employeeUuid",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "storeUuid",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "userUuid",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "title": "список сотрудников",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/employee"
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error"
-          }
-        }
-      }
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "API запросов товароучетной системе (ТУ) к Эвотор",
+        "description": "Описание запросов товароучетной системы [клиент] к API Облака Эвотор [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
     },
-    "/api/v1/stores/search": {
-      "get": {
-        "summary": "Список торговых точек",
-        "description": "Получение списка торговых точек Эвотор \n",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/authForPartner"
-          },
-          {
-            "name": "userUuid",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "storeUuid",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "title": "список торговых точек",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/store"
-              }
+    "paths": {
+        "/api/v1/employees/search": {
+            "get": {
+                "summary": "Список сотрудников",
+                "description": "Получение списка сотрудников Эвотор \n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "$ref": "#/parameters/authForPartner"
+                    }, {
+                        "name": "employeeUuid",
+                        "in": "query",
+                        "type": "string"
+                    }, {
+                        "name": "storeUuid",
+                        "in": "query",
+                        "type": "string"
+                    }, {
+                        "name": "userUuid",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "список сотрудников",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/employee"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
             }
-          },
-          "default": {
-            "description": "unexpected error"
-          }
+        },
+        "/api/v1/stores/search": {
+            "get": {
+                "summary": "Список торговых точек",
+                "description": "Получение списка торговых точек Эвотор \n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "$ref": "#/parameters/authForPartner"
+                    }, {
+                        "name": "userUuid",
+                        "in": "query",
+                        "type": "string"
+                    }, {
+                        "name": "storeUuid",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "список торговых точек",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
         }
-      }
-    }
-  },
-  "parameters": {
-    "authForPartner": {
-      "name": "token or basic auth",
-      "in": "header",
-      "description": "авторизация для партнера в Эвотор",
-      "required": true,
-      "type": "string"
-    }
-  },
-  "definitions": {
-    "employee": {
-      "type": "object",
-      "required": [
-        "uuid",
-        "role",
-        "name"
-      ],
-      "properties": {
+    },
+    "parameters": {
+        "authForPartner": {
+            "name": "token or basic auth",
+            "in": "header",
+            "description": "авторизация для партнера в Эвотор",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "employee": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "role",
+                "name"
+            ],
+            "properties": {
                 "uuid": {
                     "type": "string",
                     "description": "уникальный UUID сотрудника в Эвотор"
@@ -129,14 +122,14 @@
                     ]
                 }
             }
-    },
-    "store": {
-      "type": "object",
-      "required": [
-        "uuid",
-        "name"
-      ],
-      "properties": {
+        },
+        "store": {
+            "type": "object",
+            "required": [
+                "uuid",
+                "name"
+            ],
+            "properties": {
                 "uuid": {
                     "type": "string",
                     "description": "уникальный UUID точки продаж в Эвотор"
@@ -150,6 +143,30 @@
                     "description": "адресс точки продаж в Эвотор"
                 }
             }
+        }
+    },
+    "security": [{
+            "s2s_basic": []
+        }, {
+            "c2s_basic": []
+        }, {
+            "c2s_bearer": []
+        }
+    ],
+    "securityDefinitions": {
+        "s2s_basic": {
+            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
+            "type": "basic"
+        },
+        "c2s_basic": {
+            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "type": "basic"
+        },
+        "c2s_bearer": {
+            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
+        }
     }
-  }
 }

@@ -13,8 +13,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "storeUuid",
                         "in": "query",
                         "type": "string"
@@ -44,16 +43,13 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "employeeUuid",
                         "in": "query",
                         "type": "string"
-                    },
-                    {
+                    }, {
                         "name": "storeUuid",
                         "in": "query",
                         "type": "string"
@@ -83,11 +79,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "deviceUuid",
                         "in": "query",
                         "type": "string"
@@ -116,17 +110,14 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "uuidStore",
                         "in": "path",
                         "required": true,
                         "type": "string"
-                    },
-                    {
+                    }, {
                         "name": "code",
                         "in": "body",
                         "required": true,
@@ -156,17 +147,14 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "uuidEmployee",
                         "in": "path",
                         "required": true,
                         "type": "string"
-                    },
-                    {
+                    }, {
                         "name": "code",
                         "in": "body",
                         "required": true,
@@ -196,17 +184,14 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "deviceUuid",
                         "in": "path",
                         "required": true,
                         "type": "string"
-                    },
-                    {
+                    }, {
                         "name": "code",
                         "in": "body",
                         "required": true,
@@ -237,11 +222,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "storeUuid",
                         "in": "path",
                         "required": true,
@@ -284,17 +267,14 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "storeUuid",
                         "in": "path",
                         "required": true,
                         "type": "string"
-                    },
-                    {
+                    }, {
                         "name": "products",
                         "in": "body",
                         "description": "массив продуктов",
@@ -333,11 +313,9 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "storeUuid",
                         "in": "path",
                         "required": true,
@@ -369,11 +347,9 @@
         "/api/v1/inventories/stores/{storeUuid}/documents": {
             "get": {
                 "summary": "Загрузка документов с сервера Эвотор в 1С",
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
-                    },
-                    {
+                    }, {
                         "name": "storeUuid",
                         "in": "path",
                         "required": true,
@@ -401,8 +377,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
+                "parameters": [{
                         "$ref": "#/parameters/auth"
                     }
                 ],
@@ -760,6 +735,30 @@
                     "description": "код смарт-терминала в товароучетной системе"
                 }
             }
+        }
+    },
+    "security": [{
+            "s2s_basic": []
+        }, {
+            "c2s_basic": []
+        }, {
+            "c2s_bearer": []
+        }
+    ],
+    "securityDefinitions": {
+        "s2s_basic": {
+            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
+            "type": "basic"
+        },
+        "c2s_basic": {
+            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "type": "basic"
+        },
+        "c2s_bearer": {
+            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
         }
     }
 }
