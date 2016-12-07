@@ -1,7 +1,7 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"version": "1.0.0-201611301831",
+		"version": "1.0.0-201612071801",
 		"title": "API запросов Эвотор к товароучетной системе (ТУ)",
 		"description": "Описание запросов Эвотор [сервер] к API товароучетной системы [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
 	},
@@ -335,39 +335,6 @@
 					}
 				}
 			}
-		},
-		"/api/v1/inventories/products/schemes": {
-			"get": {
-				"summary": "Схема отображения не стандартных реквизитов",
-				"description": "Получение описания дополнительных полей в продуктах\n",
-				"produces": [
-					"application/json"
-				],
-				"parameters": [{
-						"$ref": "#/parameters/auth"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Successful response",
-						"headers": {
-							"ETag": {
-								"description": "метка для кэширования на клиенте",
-								"type": "string"
-							}
-						},
-						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/scheme"
-							}
-						}
-					},
-					"default": {
-						"description": "unexpected error"
-					}
-				}
-			}
 		}
 	},
 	"responses": {
@@ -553,48 +520,6 @@
 				"fields": {
 					"type": "object",
 					"description": "дополнительные атрибуты товара, не входящие в стандартную схему"
-				}
-			}
-		},
-		"scheme": {
-			"type": "object",
-			"properties": {
-				"uuid": {
-					"type": "string"
-				},
-				"code": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"title": {
-					"type": "string"
-				},
-				"value": {
-					"type": "object"
-				},
-				"view": {
-					"type": "object",
-					"properties": {
-						"input": {
-							"type": "object",
-							"properties": {
-								"type": {
-									"type": "string",
-									"enum": [
-										"TEXT",
-										"NUMBER",
-										"SELECT",
-										"RADIO"
-									]
-								},
-								"data": {
-									"type": "object"
-								}
-							}
-						}
-					}
 				}
 			}
 		},
