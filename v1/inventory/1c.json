@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "1.0.1-SNAPSHOT",
+        "version": "1.0.1-201612071801",
         "title": "API Эвотор для продуктов 1С",
         "description": "Описание запросов Эвотор [сервер] для продуктов 1С [клиент]. Логика работы следующая - каждый раз, когда юзер заходит в 1с необходимо выполнить синхронизацию базы 1С (точнее выгрузить актуальные данные из Эвотор). Нужно выгружать сотрудников, точки продаж, продукты и документы."
     },
@@ -369,39 +369,6 @@
                     }
                 }
             }
-        },
-        "/api/v1/inventories/products/schemes": {
-            "get": {
-                "summary": "Схема отображения не стандартных реквизитов",
-                "description": "Получение описания дополнительных полей в продуктах\n",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [{
-                        "$ref": "#/parameters/auth"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "headers": {
-                            "ETag": {
-                                "description": "метка для кэширования на клиенте",
-                                "type": "string"
-                            }
-                        },
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/scheme"
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
         }
     },
     "responses": {
@@ -538,48 +505,6 @@
                 "fields": {
                     "type": "object",
                     "description": "дополнительные поля, созданные пользователем, которые не объявлены выше (для их отрисовки на интерфейсах кассы необходимо передать их схему)"
-                }
-            }
-        },
-        "scheme": {
-            "type": "object",
-            "properties": {
-                "uuid": {
-                    "type": "string"
-                },
-                "code": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "value": {
-                    "type": "object"
-                },
-                "view": {
-                    "type": "object",
-                    "properties": {
-                        "input": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "enum": [
-                                        "TEXT",
-                                        "NUMBER",
-                                        "SELECT",
-                                        "RADIO"
-                                    ]
-                                },
-                                "data": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
                 }
             }
         },
