@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.0.1-SNAPSHOT",
+        "version": "1.0.0-201612071801",
         "title": "API Эвотор для Смарт-терминала",
         "description": "Описание запросов смарт-терминала [клиент] к API Эвотор [сервер]. Предполагается, что СТ хранит у себя мэпинг своих сущностей и сущностей облака Эвотор."
     },
@@ -186,39 +186,6 @@
                     },
                     "503": {
                         "$ref": "#/responses/status503"
-                    }
-                }
-            }
-        },
-        "/api/v1/inventories/products/schemes": {
-            "get": {
-                "summary": "Схема отображения не стандартных реквизитов",
-                "description": "Получение описания дополнительных полей в продуктах\n",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [{
-                        "$ref": "#/parameters/auth"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "headers": {
-                            "ETag": {
-                                "description": "метка для кэширования на клиенте",
-                                "type": "string"
-                            }
-                        },
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/scheme"
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "unexpected error"
                     }
                 }
             }
@@ -456,48 +423,6 @@
                 "fields": {
                     "type": "object",
                     "description": "дополнительные поля, созданные пользователем, которые не объявлены выше (для их отрисовки на интерфейсах кассы необходимо передать их схему)"
-                }
-            }
-        },
-        "scheme": {
-            "type": "object",
-            "properties": {
-                "uuid": {
-                    "type": "string"
-                },
-                "code": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "value": {
-                    "type": "object"
-                },
-                "view": {
-                    "type": "object",
-                    "properties": {
-                        "input": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "enum": [
-                                        "TEXT",
-                                        "NUMBER",
-                                        "SELECT",
-                                        "RADIO"
-                                    ]
-                                },
-                                "data": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
                 }
             }
         },
