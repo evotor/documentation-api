@@ -5,14 +5,17 @@
         "title": "API Эвотор для продуктов 1С",
         "description": "Описание запросов Эвотор [сервер] для продуктов 1С [клиент]. Логика работы следующая - каждый раз, когда юзер заходит в 1с необходимо выполнить синхронизацию базы 1С (точнее выгрузить актуальные данные из Эвотор). Нужно выгружать сотрудников, точки продаж, продукты и документы."
     },
+	"produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/api/v1/inventories/stores/search": {
             "get": {
                 "summary": "Список торговых точек",
                 "description": "Получение списка торговых точек Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все точки продаж по пользователю.\n",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "name": "storeUuid",
                         "in": "query",
@@ -40,9 +43,6 @@
             "get": {
                 "summary": "Список сотрудников",
                 "description": "Получение списка сотрудников Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все сотрудники по пользователю.\n",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -76,9 +76,6 @@
             "get": {
                 "summary": "Список смарт-терминалов",
                 "description": "Получение списка смарт-терминалов из Эвотор. Если не указывать дополнительные параметры (например, deviceUuid), тогда вернутся все смарт-терминалы по пользователю",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -107,9 +104,6 @@
         "/api/v1/inventories/stores/{uuidStore}/code": {
             "put": {
                 "summary": "Связка магазина Эвотор и магазина в 1С",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -144,9 +138,6 @@
         "/api/v1/inventories/employees/{uuidEmployee}/code": {
             "put": {
                 "summary": "Связка сотрудника Эвотор и сотрудника в 1С",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -181,9 +172,6 @@
         "/api/v1/inventories/devices/{deviceUuid}/code": {
             "put": {
                 "summary": "Связка смарт-терминала Эвотор и кассы в 1С",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -219,9 +207,6 @@
             "get": {
                 "summary": "Получение товаров из Эвотор",
                 "description": "Получение списка товаров из Эвотор. В GET запросе параметр quantity обязательный (например, в post опциональный). ",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -264,9 +249,6 @@
             "post": {
                 "summary": "1С пополняет номенклатуру в Эвотор",
                 "description": "Загрузка массива новых товаров созданных на клиенте на сервер Эвотор.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. \n В POST запросе параметр quantity опциональный (например, в get обязательный)",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -310,9 +292,6 @@
             },
             "delete": {
                 "summary": "1С удаляет номенклатуру в Эвотор",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -660,30 +639,6 @@
                     "description": "код смарт-терминала в товароучетной системе"
                 }
             }
-        }
-    },
-    "security": [{
-            "s2s_basic": []
-        }, {
-            "c2s_basic": []
-        }, {
-            "c2s_bearer": []
-        }
-    ],
-    "securityDefinitions": {
-        "s2s_basic": {
-            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
-            "type": "basic"
-        },
-        "c2s_basic": {
-            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "type": "basic"
-        },
-        "c2s_bearer": {
-            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "in": "header",
-            "name": "Authorization",
-            "type": "apiKey"
         }
     }
 }

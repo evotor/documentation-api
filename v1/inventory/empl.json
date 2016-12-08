@@ -5,14 +5,17 @@
         "title": "API Core для Market",
         "description": ""
     },
+	"produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/siteapi/employees": {
             "post": {
                 "summary": "Получить список сотрудников",
                 "description": "",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "name": "userId",
                         "in": "body",
@@ -50,9 +53,6 @@
             "post": {
                 "summary": "Получить объект сотрудника",
                 "description": "",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "name": "employeeId",
                         "in": "body",
@@ -134,30 +134,6 @@
                     ]
                 }
             }
-        }
-    },
-    "security": [{
-            "s2s_basic": []
-        }, {
-            "c2s_basic": []
-        }, {
-            "c2s_bearer": []
-        }
-    ],
-    "securityDefinitions": {
-        "s2s_basic": {
-            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
-            "type": "basic"
-        },
-        "c2s_basic": {
-            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "type": "basic"
-        },
-        "c2s_bearer": {
-            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "in": "header",
-            "name": "Authorization",
-            "type": "apiKey"
         }
     }
 }

@@ -5,13 +5,16 @@
         "title": "API Эвотор для Смарт-терминала",
         "description": "Описание запросов смарт-терминала [клиент] к API Эвотор [сервер]. Предполагается, что СТ хранит у себя мэпинг своих сущностей и сущностей облака Эвотор."
     },
+	"produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/api/v1/inventories/products/{uuid}": {
             "get": {
                 "summary": "Получение товара по uuid",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -32,9 +35,6 @@
             },
             "put": {
                 "summary": "Изменение товара по uuid",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -63,9 +63,6 @@
             "get": {
                 "summary": "Получение товаров из облака Эвотор",
                 "description": "Получение списка товаров из облака Эвотор.",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }
@@ -100,9 +97,6 @@
             "post": {
                 "summary": "Создание товаров в ТУ системе",
                 "description": "Загрузка массива новых товаров созданных на СТ на сервер Эвотор.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. ",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -490,30 +484,6 @@
                     ]
                 }
             }
-        }
-    },
-    "security": [{
-            "s2s_basic": []
-        }, {
-            "c2s_basic": []
-        }, {
-            "c2s_bearer": []
-        }
-    ],
-    "securityDefinitions": {
-        "s2s_basic": {
-            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
-            "type": "basic"
-        },
-        "c2s_basic": {
-            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "type": "basic"
-        },
-        "c2s_bearer": {
-            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "in": "header",
-            "name": "Authorization",
-            "type": "apiKey"
         }
     }
 }

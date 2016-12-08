@@ -5,14 +5,17 @@
         "title": "API запросов товароучетной системе (ТУ) к Эвотор",
         "description": "Описание запросов товароучетной системы [клиент] к API Облака Эвотор [сервер]. Предполагается, что партнер хранит у себя мэпинг своих сущностей и сущностей Эвотор"
     },
+	"produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/api/v1/employees/search": {
             "get": {
                 "summary": "Список сотрудников",
                 "description": "Получение списка сотрудников Эвотор \n",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/authForPartner"
                     }, {
@@ -50,9 +53,6 @@
             "get": {
                 "summary": "Список торговых точек",
                 "description": "Получение списка торговых точек Эвотор \n",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [{
                         "$ref": "#/parameters/authForPartner"
                     }, {
@@ -143,30 +143,6 @@
                     "description": "адресс точки продаж в Эвотор"
                 }
             }
-        }
-    },
-    "security": [{
-            "s2s_basic": []
-        }, {
-            "c2s_basic": []
-        }, {
-            "c2s_bearer": []
-        }
-    ],
-    "securityDefinitions": {
-        "s2s_basic": {
-            "description": "Серверный ключ (basic). Используется для управления учетной записью пользователя в системе партнера (например, на этапах регистрации и установки тарифа). Также служит для получения пользовательского ключа.",
-            "type": "basic"
-        },
-        "c2s_basic": {
-            "description": "Клиентский ключ (basic). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "type": "basic"
-        },
-        "c2s_bearer": {
-            "description": "Клиентский ключ (bearer). Используется для выполнения операций в системе партнера от имени пользователя.",
-            "in": "header",
-            "name": "Authorization",
-            "type": "apiKey"
         }
     }
 }
