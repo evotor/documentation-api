@@ -393,15 +393,15 @@
                     "type": "string",
                     "description": "код товара; для групп товаров - пустая строка",
                     "minLength": 0,
-					"maxLength": 10
+                    "maxLength": 10
                 },
                 "barCodes": {
                     "type": "array",
                     "description": "массив штрихкодов; для групп товаров - пустой массив",
                     "items": {
                         "type": "string",
-						"pattern": "^[0-9]$",
-						"minLength": 1
+                        "pattern": "^[0-9]$",
+                        "minLength": 1
                     }
                 },
                 "alcoCodes": {
@@ -409,14 +409,14 @@
                     "description": "массив алкокодов (кодов алкогольной продукции ЕГАИС); для групп товаров - пустой массив",
                     "items": {
                         "type": "string",
-						"pattern": "^[0-9]{19}$"
+                        "pattern": "^[0-9]{19}$"
                     }
                 },
                 "name": {
                     "type": "string",
                     "description": "наименование товара/группы",
                     "minLength": 1,
-					"maxLength": 100
+                    "maxLength": 100
                 },
                 "price": {
                     "type": "number",
@@ -474,13 +474,13 @@
                 "description": {
                     "type": "string",
                     "description": "описание товара; для групп товаров - \"\"",
-					"minLength": 0
+                    "minLength": 0
                 },
                 "articleNumber": {
                     "type": "string",
                     "description": "артикул; для групп товаров - \"\"",
-					"minLength": 0,
-					"maxLength": 20
+                    "minLength": 0,
+                    "maxLength": 20
                 },
                 "parentUuid": {
                     "type": "string",
