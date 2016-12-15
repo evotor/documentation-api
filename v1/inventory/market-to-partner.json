@@ -386,55 +386,60 @@
             "properties": {
                 "uuid": {
                     "type": "string",
-                    "description": "UUID продукта, уникален в рамках магазина",
+                    "description": "UUID продукта; уникален в рамках магазина",
                     "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
                 },
                 "code": {
                     "type": "string",
-                    "description": "код товара. Не более 10 символов. Номенклатура без кода товара не отображается на смарт-терминале",
-                    "maxLength": 10
+                    "description": "код товара; для групп товаров - пустая строка",
+                    "minLength": 0,
+					"maxLength": 10
                 },
                 "barCodes": {
                     "type": "array",
-                    "description": "массив штрихкодов",
+                    "description": "массив штрихкодов; для групп товаров - пустой массив",
                     "items": {
-                        "type": "string"
+                        "type": "string",
+						"pattern": "^[0-9]$",
+						"minLength": 1
                     }
                 },
                 "alcoCodes": {
                     "type": "array",
-                    "description": "массив алкокодов",
+                    "description": "массив алкокодов (кодов алкогольной продукции ЕГАИС); для групп товаров - пустой массив",
                     "items": {
-                        "type": "string"
+                        "type": "string",
+						"pattern": "^[0-9]{19}$"
                     }
                 },
                 "name": {
                     "type": "string",
-                    "description": "наименование товара/группы"
+                    "description": "наименование товара/группы",
+                    "minLength": 1,
+					"maxLength": 100
                 },
                 "price": {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 9999999.99,
-                    "description": "цена продажи"
+                    "description": "цена продажи; для групп товаров - 0"
                 },
                 "quantity": {
                     "type": "number",
                     "format": "float",
-                    "minimum": 0,
-                    "description": "количество товара"
+                    "description": "количество товара (остаток); до 3 знаков в дробной части; для групп товаров - 0"
                 },
                 "costPrice": {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 9999999.99,
-                    "description": "закупочная цена"
+                    "description": "закупочная цена; для групп товаров - 0"
                 },
                 "measureName": {
                     "type": "string",
-                    "description": "единица измерения для товара",
+                    "description": "единица измерения для товара; для групп товаров - \"\"",
                     "enum": [
                         "",
                         "шт",
@@ -452,7 +457,7 @@
                 },
                 "tax": {
                     "type": "string",
-                    "description": "ставка НДС",
+                    "description": "ставка НДС; для групп товаров - \"NO_VAT\"",
                     "enum": [
                         "NO_VAT",
                         "VAT_10",
@@ -464,15 +469,18 @@
                 },
                 "allowToSell": {
                     "type": "boolean",
-                    "description": "флаг доступности товара для продажи"
+                    "description": "флаг доступности товара для продажи; для групп товаров - true"
                 },
                 "description": {
                     "type": "string",
-                    "description": "описание товара/группы"
+                    "description": "описание товара; для групп товаров - \"\"",
+					"minLength": 0
                 },
                 "articleNumber": {
                     "type": "string",
-                    "description": "артикул"
+                    "description": "артикул; для групп товаров - \"\"",
+					"minLength": 0,
+					"maxLength": 20
                 },
                 "parentUuid": {
                     "type": "string",
@@ -481,11 +489,11 @@
                 },
                 "group": {
                     "type": "boolean",
-                    "description": "флаг, определяющий, является ли элемент группой товаров"
+                    "description": "определяет, является ли элемент группой товаров; true - группа, false - товар"
                 },
                 "type": {
                     "type": "string",
-                    "description": "тип товара (обычный, маркированный алкоголь, немаркированный алкоголь); для групп товаров должен принимать значение NORMAL",
+                    "description": "тип товара (обычный, маркированный алкоголь, немаркированный алкоголь); для групп товаров - \"NORMAL\"",
                     "enum": [
                         "NORMAL",
                         "ALCOHOL_MARKED",
@@ -497,20 +505,20 @@
                     "format": "float",
                     "minimum": 0,
                     "maximum": 99.999,
-                    "description": "крепость алкогольной  продукции"
+                    "description": "крепость алкогольной  продукции, до 3 знаков в дробной части; для групп товаров - 0"
                 },
                 "alcoholProductKindCode": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999,
-                    "description": "код вида алкогольной продукции"
+                    "description": "код вида алкогольной продукции ФСРАР; для групп товаров - 0"
                 },
                 "tareVolume": {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 999.999,
-                    "description": "емкость тары в литрах"
+                    "description": "емкость тары для алкогольной продукции в литрах, до 3 знаков в дробной части; для неалкогольных типов и групп - 0"
                 },
                 "fields": {
                     "type": "object",
