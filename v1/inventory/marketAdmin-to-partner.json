@@ -301,7 +301,8 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "тип события, в данном случае trialStarted"
+                    "description": "тип события, в данном случае trialStarted",
+                    "default": "trialStarted"
                 },
                 "date": {
                     "type": "string",
@@ -337,7 +338,8 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "тип события, в данном случае paymentSuccessed"
+                    "description": "тип события, в данном случае paymentSuccessed",
+                    "default": "paymentSuccessed"
                 },
                 "date": {
                     "type": "string",
@@ -374,7 +376,8 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "тип события, в данном случае subscriptionActivated"
+                    "description": "тип события, в данном случае subscriptionActivated",
+                    "default": "subscriptionActivated"
                 },
                 "date": {
                     "type": "string",
@@ -401,7 +404,8 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "тип события, в данном случае paymentFailed"
+                    "description": "тип события, в данном случае paymentFailed",
+                    "default": "paymentFailed"
                 },
                 "date": {
                     "type": "string",
