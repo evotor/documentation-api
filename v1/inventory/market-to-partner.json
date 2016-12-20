@@ -329,7 +329,7 @@
                 },
                 "code": {
                     "type": "string",
-                    "description": "Код товара; для групп товаров - пустая строка",
+                    "description": "Код товара либо группы",
                     "minLength": 0,
                     "maxLength": 10
                 },
@@ -613,7 +613,7 @@
             "properties": {
                 "uuid": {
                     "type": "string",
-                    "description": "deviceUuid терминала в Эвотор",
+                    "description": "UUID терминала в Эвотор",
                     "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
                 },
                 "name": {
@@ -622,7 +622,7 @@
                 },
                 "storeUuid": {
                     "type": "string",
-                    "description": "Магазин в Эвотор, к которому привязан смарт-терминал",
+                    "description": "UUID магазина, к которому привязан терминал в Эвотор",
                     "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
                 }
             }
