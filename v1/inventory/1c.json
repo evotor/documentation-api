@@ -5,17 +5,13 @@
         "title": "API Эвотор для продуктов 1С",
         "description": "Описание запросов Эвотор [сервер] для продуктов 1С [клиент]. Логика работы следующая - каждый раз, когда юзер заходит в 1с необходимо выполнить синхронизацию базы 1С (точнее выгрузить актуальные данные из Эвотор). Нужно выгружать сотрудников, точки продаж, продукты и документы."
     },
-	"produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
+    "produces": ["application/json"],
+    "consumes": ["application/json"],
     "paths": {
         "/api/v1/inventories/stores/search": {
             "get": {
                 "summary": "Список торговых точек",
-                "description": "Получение списка торговых точек Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все точки продаж по пользователю.\n",
+                "description": "Получение списка торговых точек Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все точки продаж по пользователю.",
                 "parameters": [{
                         "name": "storeUuid",
                         "in": "query",
@@ -24,7 +20,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "OK",
                         "schema": {
                             "title": "список торговых точек",
                             "type": "array",
@@ -32,9 +28,6 @@
                                 "$ref": "#/definitions/store"
                             }
                         }
-                    },
-                    "default": {
-                        "description": "unexpected error"
                     }
                 }
             }
@@ -42,7 +35,7 @@
         "/api/v1/inventories/employees/search": {
             "get": {
                 "summary": "Список сотрудников",
-                "description": "Получение списка сотрудников Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все сотрудники по пользователю.\n",
+                "description": "Получение списка сотрудников Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все сотрудники по пользователю.",
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -57,7 +50,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "OK",
                         "schema": {
                             "title": "список сотрудников",
                             "type": "array",
@@ -65,9 +58,6 @@
                                 "$ref": "#/definitions/employee"
                             }
                         }
-                    },
-                    "default": {
-                        "description": "unexpected error"
                     }
                 }
             }
@@ -86,7 +76,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "OK",
                         "schema": {
                             "title": "Список смарт-терминалов",
                             "type": "array",
@@ -94,111 +84,6 @@
                                 "$ref": "#/definitions/device"
                             }
                         }
-                    },
-                    "default": {
-                        "description": "Unexpected error"
-                    }
-                }
-            }
-        },
-        "/api/v1/inventories/stores/{uuidStore}/code": {
-            "put": {
-                "summary": "Связка магазина Эвотор и магазина в 1С",
-                "parameters": [{
-                        "$ref": "#/parameters/auth"
-                    }, {
-                        "name": "uuidStore",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    }, {
-                        "name": "code",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "properties": {
-                                "code": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    },
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-        },
-        "/api/v1/inventories/employees/{uuidEmployee}/code": {
-            "put": {
-                "summary": "Связка сотрудника Эвотор и сотрудника в 1С",
-                "parameters": [{
-                        "$ref": "#/parameters/auth"
-                    }, {
-                        "name": "uuidEmployee",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    }, {
-                        "name": "code",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "properties": {
-                                "code": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    },
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-        },
-        "/api/v1/inventories/devices/{deviceUuid}/code": {
-            "put": {
-                "summary": "Связка смарт-терминала Эвотор и кассы в 1С",
-                "parameters": [{
-                        "$ref": "#/parameters/auth"
-                    }, {
-                        "name": "deviceUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    }, {
-                        "name": "code",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "properties": {
-                                "code": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response"
-                    },
-                    "default": {
-                        "description": "Unexpected error"
                     }
                 }
             }
@@ -218,37 +103,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "OK",
                         "schema": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/product"
                             }
                         }
-                    },
-                    "401": {
-                        "$ref": "#/responses/status401"
-                    },
-                    "402": {
-                        "$ref": "#/responses/status402"
-                    },
-                    "404": {
-                        "$ref": "#/responses/status404"
-                    },
-                    "500": {
-                        "$ref": "#/responses/status500"
-                    },
-                    "503": {
-                        "$ref": "#/responses/status503"
-                    },
-                    "default": {
-                        "description": "unexpected error"
                     }
                 }
             },
             "post": {
                 "summary": "1С пополняет номенклатуру в Эвотор",
-                "description": "Загрузка массива новых товаров созданных на клиенте на сервер Эвотор.\nПолучение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. \n В POST запросе параметр quantity опциональный (например, в get обязательный)",
+                "description": "Загрузка массива новых товаров созданных на клиенте на сервер Эвотор. Получение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. В POST запросе параметр quantity опциональный (например, в get обязательный)",
                 "parameters": [{
                         "$ref": "#/parameters/auth"
                     }, {
@@ -271,22 +138,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
-                    },
-                    "401": {
-                        "$ref": "#/responses/status401"
-                    },
-                    "402": {
-                        "$ref": "#/responses/status402"
-                    },
-                    "404": {
-                        "$ref": "#/responses/status404"
-                    },
-                    "500": {
-                        "$ref": "#/responses/status500"
-                    },
-                    "503": {
-                        "$ref": "#/responses/status503"
+                        "description": "OK"
                     }
                 }
             },
@@ -303,22 +155,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
-                    },
-                    "401": {
-                        "$ref": "#/responses/status401"
-                    },
-                    "402": {
-                        "$ref": "#/responses/status402"
-                    },
-                    "404": {
-                        "$ref": "#/responses/status404"
-                    },
-                    "500": {
-                        "$ref": "#/responses/status500"
-                    },
-                    "503": {
-                        "$ref": "#/responses/status503"
+                        "description": "OK"
                     }
                 }
             }
@@ -337,7 +174,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "OK",
                         "schema": {
                             "title": "массив документов",
                             "type": "array",
@@ -348,23 +185,84 @@
                     }
                 }
             }
-        }
-    },
-    "responses": {
-        "status401": {
-            "description": "Ключ авторизации неверный "
         },
-        "status402": {
-            "description": "Точка продаж, аккаунт или поддержка интеграции заблокирована"
+        "/api/v1/inventories/stores/{storeUuid}/code": {
+            "put": {
+                "summary": "Связка магазина Эвотор и магазина в 1С",
+                "parameters": [{
+                        "$ref": "#/parameters/auth"
+                    }, {
+                        "name": "storeUuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }, {
+                        "name": "code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/code"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         },
-        "status404": {
-            "description": "Не найдена указанная точка продаж"
+        "/api/v1/inventories/employees/{employeeUuid}/code": {
+            "put": {
+                "summary": "Связка сотрудника Эвотор и сотрудника в 1С",
+                "parameters": [{
+                        "$ref": "#/parameters/auth"
+                    }, {
+                        "name": "employeeUuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }, {
+                        "name": "code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/code"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         },
-        "status500": {
-            "description": "Внутренняя ошибка сервиса"
-        },
-        "status503": {
-            "description": "Сервис недоступен"
+        "/api/v1/inventories/devices/{deviceUuid}/code": {
+            "put": {
+                "summary": "Связка смарт-терминала Эвотор и кассы в 1С",
+                "parameters": [{
+                        "$ref": "#/parameters/auth"
+                    }, {
+                        "name": "deviceUuid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }, {
+                        "name": "code",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/code"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "parameters": {
@@ -379,12 +277,7 @@
     "definitions": {
         "product": {
             "type": "object",
-            "required": [
-                "uuid",
-                "type",
-                "code",
-                "name"
-            ],
+            "required": ["uuid", "type", "code", "name"],
             "properties": {
                 "uuid": {
                     "type": "string",
@@ -431,14 +324,7 @@
                 "tax": {
                     "type": "string",
                     "description": "налог / ставка НДС. Параметр NO_VAT - не облагается налогом",
-                    "enum": [
-                        "NO_VAT",
-                        "VAT_10",
-                        "VAT_18",
-                        "VAT_0",
-                        "VAT_18_118",
-                        "VAT_10_110"
-                    ]
+                    "enum": ["NO_VAT", "VAT_10", "VAT_18", "VAT_0", "VAT_18_118", "VAT_10_110"]
                 },
                 "allowToSell": {
                     "type": "boolean",
@@ -454,7 +340,7 @@
                 },
                 "parentUuid": {
                     "type": "string",
-                    "description": "Код группы товаров (родительская папка)\nЕсли родительская папка отсутстувует - принимает значение null"
+                    "description": "Код группы товаров (родительская папка). Если родительская папка отсутстувует - принимает значение null"
                 },
                 "group": {
                     "type": "boolean",
@@ -463,11 +349,7 @@
                 "type": {
                     "type": "string",
                     "description": "тип товара - обычный, маркированный алкоголь, немаркированный алкоголь",
-                    "enum": [
-                        "NORMAL",
-                        "ALCOHOL_MARKED",
-                        "ALCOHOL_NOT_MARKED"
-                    ]
+                    "enum": ["NORMAL", "ALCOHOL_MARKED", "ALCOHOL_NOT_MARKED"]
                 },
                 "alcoholByVolume": {
                     "type": "number",
@@ -489,12 +371,7 @@
         },
         "employee": {
             "type": "object",
-            "required": [
-                "uuid",
-                "role",
-                "name",
-                "stores"
-            ],
+            "required": ["uuid", "role", "name", "stores"],
             "properties": {
                 "uuid": {
                     "type": "string",
@@ -526,19 +403,13 @@
                 "role": {
                     "type": "string",
                     "description": "роль сотрудника (пока только Админ и Кассир)",
-                    "enum": [
-                        "ADMIN",
-                        "CASHIER"
-                    ]
+                    "enum": ["ADMIN", "CASHIER"]
                 }
             }
         },
         "store": {
             "type": "object",
-            "required": [
-                "uuid",
-                "name"
-            ],
+            "required": ["uuid", "name"],
             "properties": {
                 "uuid": {
                     "type": "string",
@@ -560,31 +431,14 @@
         },
         "document": {
             "type": "object",
-            "required": [
-                "uuid",
-                "type"
-            ],
+            "required": ["uuid", "type"],
             "properties": {
                 "uuid": {
                     "type": "string"
                 },
                 "type": {
                     "type": "string",
-                    "enum": [
-                        "SELL",
-                        "PAYBACK",
-                        "CASH_INCOME",
-                        "CASH_OUTCOME",
-                        "OPEN_SESSION",
-                        "FPRINT",
-                        "CLOSE_SESSION",
-                        "INVENTORY",
-                        "ACCEPT",
-                        "RETURN",
-                        "WRITE_OFF",
-                        "REVALUATION",
-                        "OPEN_TARE"
-                    ]
+                    "enum": ["SELL", "PAYBACK", "CASH_INCOME", "CASH_OUTCOME", "OPEN_SESSION", "FPRINT", "CLOSE_SESSION", "INVENTORY", "ACCEPT", "RETURN", "WRITE_OFF", "REVALUATION", "OPEN_TARE"]
                 },
                 "transactions": {
                     "type": "array",
@@ -599,27 +453,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": [
-                        "DISCOUNT_DOCUMENT",
-                        "DISCOUNT_POSITION",
-                        "DISCOUNT_DOCUMENT_POSITION",
-                        "DOCUMENT_OPEN",
-                        "DOCUMENT_CLOSE",
-                        "DOCUMENT_CLOSE_FPRINT",
-                        "REGISTER_POSITION",
-                        "REGISTER_BILLS",
-                        "CASH_INCOME",
-                        "CASH_OUTCOME",
-                        "INVENTORY",
-                        "PAYMENT",
-                        "OPEN_SESSION",
-                        "CLOSE_SESSION",
-                        "FPRINT_OPEN_SESSION",
-                        "FPRINT_X_REPORT",
-                        "FPRINT_Z_REPORT",
-                        "POSITION_TAX",
-                        "REVALUATION"
-                    ]
+                    "enum": ["DISCOUNT_DOCUMENT", "DISCOUNT_POSITION", "DISCOUNT_DOCUMENT_POSITION", "DOCUMENT_OPEN", "DOCUMENT_CLOSE", "DOCUMENT_CLOSE_FPRINT", "REGISTER_POSITION", "REGISTER_BILLS", "CASH_INCOME", "CASH_OUTCOME", "INVENTORY", "PAYMENT", "OPEN_SESSION", "CLOSE_SESSION", "FPRINT_OPEN_SESSION", "FPRINT_X_REPORT", "FPRINT_Z_REPORT", "POSITION_TAX", "REVALUATION"]
                 }
             }
         },
@@ -639,6 +473,15 @@
                     "description": "код смарт-терминала в товароучетной системе"
                 }
             }
+        },
+        "code": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            }
+
         }
     }
 }
