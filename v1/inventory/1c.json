@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "1.0.1-201612071802",
+        "version": "1.0.1-201612071801",
         "title": "API Эвотор для продуктов 1С",
         "description": "Описание запросов Эвотор [сервер] для продуктов 1С [клиент]. Логика работы следующая - каждый раз, когда юзер заходит в 1с необходимо выполнить синхронизацию базы 1С (точнее выгрузить актуальные данные из Эвотор). Нужно выгружать сотрудников, точки продаж, продукты и документы."
     },
@@ -207,6 +207,31 @@
                         "name": "storeUuid",
                         "in": "path",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceUuid",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "ltCloseDate",
+                        "in": "query",
+                        "format": "date-time",
+                        "type": "string",
+                        "description": "ДО (менее) конкретной даты, формат - 2017-01-10T09:33:19.757Z\n"
+                    },
+                    {
+                        "name": "gtCloseDate",
+                        "in": "query",
+                        "format": "date-time",
+                        "type": "string",
+                        "description": "После (более) конкретной даты, формат - 2017-01-10T09:33:19.757Z\n"
+                    },
+                    {
+                        "name": "type",
+                        "description": "можно запросить документы определенных типов (можно указать через запятую) - Кассовые - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT_OPERATION,CLOSE_SESSION - Инвентаризация - INVENTORY - Приемка - ACCEPT - Возврат поставщику - RETURN - Списание - WRITE_OFF - Акт переоценки - REVALUATION - Вскрытие тары - OPEN_TARE\n",
+                        "in": "query",
                         "type": "string"
                     }
                 ],
