@@ -267,7 +267,7 @@
     },
     "parameters": {
         "auth": {
-            "name": "token",
+            "name": "X-Authorization",
             "in": "header",
             "description": "ключ доступа пользователя (токен)",
             "required": true,
