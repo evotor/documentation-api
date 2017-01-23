@@ -58,7 +58,7 @@
                                 "token": {
                                     "description": "Ключ авторизации. Используется для авторизации пользовательских запросов в системе партнера",
                                     "type": "string",
-									"maxLength": 128,
+                                    "maxLength": 128,
                                     "default": "toaWaep4chou7ahkoogiu9Iusaht9ima"
                                 }
                             }
@@ -104,7 +104,7 @@
                                 "token": {
                                     "description": "Ключ авторизации. Используется для авторизации пользовательских запросов в системе партнера",
                                     "type": "string",
-									"maxLength": 128,
+                                    "maxLength": 128,
                                     "default": "toaWaep4chou7ahkoogiu9Iusaht9ima"
                                 }
                             }
@@ -301,7 +301,7 @@
                     "pattern": "^[а-яА-Яa-zA-Z0-9\\_\\-\\.]+\\@[а-яА-Яa-zA-Z0-9\\_\\-\\.]+\\.[а-яА-Яa-zA-Z0-9\\_\\-\\.]+$",
                     "default": "v.pupkin@pupk.in"
                 },
-                "phone": {
+                "telephone": {
                     "type": "string",
                     "description": "Пример поля для ввода номера телефона",
                     "pattern": "^\\+7[0-9]{10}$",
