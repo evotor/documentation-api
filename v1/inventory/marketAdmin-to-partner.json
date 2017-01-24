@@ -301,7 +301,7 @@
                     "pattern": "^[а-яА-Яa-zA-Z0-9\\_\\-\\.]+\\@[а-яА-Яa-zA-Z0-9\\_\\-\\.]+\\.[а-яА-Яa-zA-Z0-9\\_\\-\\.]+$",
                     "default": "v.pupkin@pupk.in"
                 },
-                "telephone": {
+                "phone": {
                     "type": "string",
                     "description": "Пример поля для ввода номера телефона",
                     "pattern": "^\\+7[0-9]{10}$",

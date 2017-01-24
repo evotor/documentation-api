@@ -490,7 +490,7 @@
                     "type": "string",
                     "description": "Отчество сотрудника в Эвотор"
                 },
-                "telephone": {
+                "phone": {
                     "type": "number",
                     "description": "Номер телефона сотрудника в Эвотор",
                     "pattern": "^7[0-9]{10}$",
