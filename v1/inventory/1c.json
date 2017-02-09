@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "1.0.1-201612071801",
-        "title": "API Эвотор для продуктов 1С",
-        "description": "Описание запросов Эвотор [сервер] для продуктов 1С [клиент]. Логика работы следующая - каждый раз, когда юзер заходит в 1с необходимо выполнить синхронизацию базы 1С (точнее выгрузить актуальные данные из Эвотор). Нужно выгружать сотрудников, точки продаж, продукты и документы."
+        "version": "1.0.2",
+        "title": "REST API Эвотор",
+        "description": "Описание запросов к REST API Эвотор."
     },
     "produces": [
         "application/json"
@@ -11,11 +11,19 @@
     "consumes": [
         "application/json"
     ],
+    "host": "api.evotor.ru",
+    "schemes": [
+        "https"
+    ],
     "paths": {
         "/api/v1/inventories/stores/search": {
+            "x-summary": "Список магазинов",
             "get": {
-                "summary": "Список торговых точек",
-                "description": "Получение списка торговых точек Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все точки продаж по пользователю.",
+                "tags": [
+                    "Evotor User"
+                ],
+                "summary": "Получить список магазинов",
+                "description": "Получение списка торговых точек Эвотор. Если не указывать дополнительные параметры (например, storeUuid), тогда вернутся все точки продаж по пользователю.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -39,9 +47,13 @@
             }
         },
         "/api/v1/inventories/employees/search": {
+            "x-summary": "Список сотрудников",
             "get": {
-                "summary": "Список сотрудников",
-                "description": "Получение списка сотрудников Эвотор. Если не указывать дополнительные параметры (например, StoreUuid), тогда вернутся все сотрудники по пользователю.",
+                "tags": [
+                    "Evotor User"
+                ],
+                "summary": "Получить список сотрудников / пользователей терминалов",
+                "description": "Получение списка сотрудников Эвотор. Если не указывать дополнительные параметры (например, storeUuid), тогда вернутся все сотрудники по пользователю.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -65,8 +77,12 @@
             }
         },
         "/api/v1/inventories/devices/search": {
+            "x-summary": "Список терминалов",
             "get": {
-                "summary": "Список смарт-терминалов",
+                "tags": [
+                    "Evotor User"
+                ],
+                "summary": "Получить список смарт-терминалов",
                 "description": "Получение списка смарт-терминалов из Эвотор. Если не указывать дополнительные параметры (например, deviceUuid), тогда вернутся все смарт-терминалы по пользователю",
                 "parameters": [
                     {
@@ -91,9 +107,12 @@
             }
         },
         "/api/v1/inventories/stores/{storeUuid}/products": {
+            "x-summary": "Обмен товарами",
             "get": {
+                "tags": [
+                    "Inventory"
+                ],
                 "summary": "Получение товаров из Эвотор",
-                "description": "Получение списка товаров из Эвотор. В GET запросе параметр quantity обязательный (например, в post опциональный). ",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -121,8 +140,10 @@
                 }
             },
             "post": {
-                "summary": "1С пополняет номенклатуру в Эвотор",
-                "description": "Загрузка массива новых товаров созданных на клиенте на сервер Эвотор. Получение в ответе привязок идентификатора товара на терминале к идентификатору на сервере. В POST запросе параметр quantity опциональный (например, в get обязательный)",
+                "tags": [
+                    "Inventory"
+                ],
+                "summary": "Загрузка товаров в Эвотор",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -157,8 +178,12 @@
             }
         },
         "/api/v1/inventories/stores/{storeUuid}/products/delete": {
+            "x-summary": "Удаление товаров",
             "post": {
-                "summary": "Удаление номенклатуры в Эвотор",
+                "tags": [
+                    "Inventory"
+                ],
+                "summary": "Удалить товар / товары в Эвотор",
                 "description": "если не передавать в body UUID номеклатуры, то будет удалена вся номеклатура из магазина.",
                 "parameters": [
                     {
@@ -194,8 +219,13 @@
             }
         },
         "/api/v1/inventories/stores/{storeUuid}/documents": {
+            "x-summary": "Документы",
             "get": {
-                "summary": "Загрузка документов с сервера Эвотор в 1С",
+                "tags": [
+                    "Inventory"
+                ],
+                "summary": "Загрузка документов с сервера Эвотор",
+                "description": "Кассовые документы:[SELL, PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT_OPERATION,CLOSE_SESSION]\n\nИнвентаризация - INVENTORY\n\nПриемка - ACCEPT\n\nВозврат поставщику - RETURN\n\nСписание - WRITE_OFF\n\nАкт переоценки - REVALUATION\n\nВскрытие тары - OPEN_TARE\n",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -249,9 +279,42 @@
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeUuid}/code": {
+        "/api/v1/inventories/employees": {
             "put": {
-                "summary": "Связка магазина Эвотор и магазина в 1С",
+                "summary": "Создание/редактирование сотрудников",
+                "description": "Создание/редактирование сотрудников в системе партнера. Эвотор является мастер-системой по данной сущности. Все изменения производимые в ЛК Эвотор реплицируются в сторону партнера.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/clientAuth"
+                    },
+                    {
+                        "name": "employee",
+                        "in": "body",
+                        "description": "Массив сотрудников Эвотор",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/employee"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/inventories/stores/{storeUuid}/code": {
+            "x-summary": "Связка магазина с сущностью разработчика",
+            "put": {
+                "tags": [
+                    "Evotor User"
+                ],
+                "summary": "Связка магазина Эвотор и магазина клиента API",
+                "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -282,8 +345,13 @@
             }
         },
         "/api/v1/inventories/employees/{employeeUuid}/code": {
+            "x-summary": "Связка сотрудника с сущностью разработчика",
             "put": {
-                "summary": "Связка сотрудника Эвотор и сотрудника в 1С",
+                "tags": [
+                    "Evotor User"
+                ],
+                "summary": "Связка сотрудника Эвотор и сотрудника клиента API",
+                "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -314,8 +382,13 @@
             }
         },
         "/api/v1/inventories/devices/{deviceUuid}/code": {
+            "x-summary": "Связка терминала с сущностью разработчика",
             "put": {
-                "summary": "Связка смарт-терминала Эвотор и кассы в 1С",
+                "tags": [
+                    "Evotor User"
+                ],
+                "summary": "Связка смарт-терминала Эвотор и кассы клиента API",
+                "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/auth"
@@ -350,9 +423,17 @@
         "auth": {
             "name": "X-Authorization",
             "in": "header",
-            "description": "ключ доступа пользователя (токен)",
+            "description": "пользовательский токен, который он получает после установки приложения использующее данный API",
             "required": true,
             "type": "string"
+        },
+        "clientAuth": {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Пользовательская Bearer-авторизация в системе партнера. Эвотор получает этот токен после создания / авторизации пользователя в системе разработчика.",
+            "required": true,
+            "type": "string",
+            "pattern": "^Bearer [a-zA-Z0-9_=-]+$"
         },
         "contentType": {
             "name": "Content-Type",
@@ -550,37 +631,48 @@
             "properties": {
                 "uuid": {
                     "type": "string",
-                    "description": "уникальный UUID сотрудника в Эвотор"
+                    "description": "Уникальный идентификатор сотрудника в Эвотор, в формате uuid4; не может быть null и пустой строкой",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                 },
                 "name": {
                     "type": "string",
-                    "description": "наименование сотрудника (Имя) в Эвотор"
+                    "description": "Имя сотрудника в Эвотор; не может быть null и пустой строкой"
                 },
                 "lastName": {
                     "type": "string",
-                    "description": "наименование сотрудника (Фамилия) в Эвотор"
+                    "description": "Фамилия сотрудника в Эвотор"
                 },
-                "code": {
+                "patronymicName": {
                     "type": "string",
-                    "description": "код сотрудника во внешней системе"
+                    "description": "Отчество сотрудника в Эвотор"
+                },
+                "phone": {
+                    "type": "number",
+                    "description": "Номер телефона сотрудника в Эвотор",
+                    "pattern": "^7[0-9]{10}$",
+                    "default": 79876543210
                 },
                 "stores": {
                     "type": "array",
+                    "description": "Массив идентификаторов магазинов, к которым привязан сотрудник",
                     "items": {
                         "type": "object",
                         "properties": {
                             "storeUuid": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Уникальный идентификатор магазина в Эвотор, в формате uuid4; не может быть null и пустой строкой",
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                             }
                         }
                     }
                 },
                 "role": {
                     "type": "string",
-                    "description": "роль сотрудника (пока только Админ и Кассир)",
+                    "description": "Роль, определяющая права доступа (влияет на доступность функциональности терминала сотруднику)",
                     "enum": [
                         "ADMIN",
-                        "CASHIER"
+                        "CASHIER",
+                        "MANUAL"
                     ]
                 }
             }
@@ -594,19 +686,36 @@
             "properties": {
                 "uuid": {
                     "type": "string",
-                    "description": "уникальный UUID точки продаж в Эвотор"
+                    "description": "Уникальный идентификатор магазина в Эвотор, в формате uuid4; не может быть null и пустой строкой",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                 },
                 "name": {
                     "type": "string",
-                    "description": "наименование точки продаж в Эвотор"
-                },
-                "code": {
-                    "type": "string",
-                    "description": "код точки продаж во внешней системе"
+                    "description": "Имя магазина в Эвотор; не может быть null и пустой строкой"
                 },
                 "address": {
                     "type": "string",
-                    "description": "адресс точки продаж в Эвотор"
+                    "description": "Адрес магазина в Эвотор"
+                }
+            }
+        },
+        "device": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "description": "Уникальный идентификатор терминала в Эвотор, в формате uuid4",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Имя терминала в Эвотор; не может быть пустой строкой и null",
+                    "minLength": 1
+                },
+                "storeUuid": {
+                    "type": "string",
+                    "description": "Уникальный идентификатор магазина в Эвотор, к которому привязан терминал, в формате uuid4; не может быть пустой строкой и null",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                 }
             }
         },
@@ -672,23 +781,6 @@
                         "POSITION_TAX",
                         "REVALUATION"
                     ]
-                }
-            }
-        },
-        "device": {
-            "type": "object",
-            "properties": {
-                "uuid": {
-                    "type": "string",
-                    "description": "deviceUuid терминала в Эвотор"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "имя смарт-терминала в Эвотор"
-                },
-                "code": {
-                    "type": "string",
-                    "description": "код смарт-терминала в товароучетной системе"
                 }
             }
         },
