@@ -279,34 +279,6 @@
                 }
             }
         },
-        "/api/v1/inventories/employees": {
-            "put": {
-                "summary": "Создание/редактирование сотрудников",
-                "description": "Создание/редактирование сотрудников в системе партнера. Эвотор является мастер-системой по данной сущности. Все изменения производимые в ЛК Эвотор реплицируются в сторону партнера.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/clientAuth"
-                    },
-                    {
-                        "name": "employee",
-                        "in": "body",
-                        "description": "Массив сотрудников Эвотор",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/employee"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
         "/api/v1/inventories/stores/{storeUuid}/code": {
             "x-summary": "Связка магазина с сущностью разработчика",
             "put": {
@@ -423,17 +395,9 @@
         "auth": {
             "name": "X-Authorization",
             "in": "header",
-            "description": "пользовательский токен, который он получает после установки приложения использующее данный API",
+            "description": "пользовательский токен, который он получает после установки приложения, использующее данный API",
             "required": true,
             "type": "string"
-        },
-        "clientAuth": {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Пользовательская Bearer-авторизация в системе партнера. Эвотор получает этот токен после создания / авторизации пользователя в системе разработчика.",
-            "required": true,
-            "type": "string",
-            "pattern": "^Bearer [a-zA-Z0-9_=-]+$"
         },
         "contentType": {
             "name": "Content-Type",
