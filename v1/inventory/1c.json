@@ -259,7 +259,7 @@
                         "description": "После (более) конкретной даты, формат - 2017-01-10T09:33:19.757Z\n"
                     },
                     {
-                        "name": "type",
+                        "name": "types",
                         "description": "можно запросить документы определенных типов (можно указать через запятую) - Кассовые - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT_OPERATION,CLOSE_SESSION - Инвентаризация - INVENTORY - Приемка - ACCEPT - Возврат поставщику - RETURN - Списание - WRITE_OFF - Акт переоценки - REVALUATION - Вскрытие тары - OPEN_TARE\n",
                         "in": "query",
                         "type": "string"
