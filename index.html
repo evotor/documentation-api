@@ -37,7 +37,8 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "https://api.evotor.ru/docs/v1/inventory/marketAdmin-to-partner.json";
+        <!--url = "https://api.evotor.ru/docs/v1/inventory/marketAdmin-to-partner.json";-->
+		url = "https://api.evotor.ru/docs/v1/evotor-to-partner.json";
       }
 
       hljs.configure({
@@ -76,10 +77,11 @@
           log("Unable to Load SwaggerUI");
         },
         docExpansion: "none",
-        apisSorter: "alpha",		
+        //apisSorter: "alpha",		
         jsonEditor: true,
         defaultModelRendering: 'schema',
-        showRequestHeaders: true
+        showRequestHeaders: true,
+		docExpansion: 'list'
       });
 	  
       window.swaggerUi.load();
@@ -111,12 +113,14 @@
 
 <script>
   var spec = {
-    'Evotor - Partner API': 'https://api.evotor.ru/docs/v1/inventory/market-to-partner.json',
+    'Вызовы Эвотор к API Партнера': 'https://api.evotor.ru/docs/v1/evotor-to-partner.json',
+    'Вызовы Партнера к API Эвотор': 'https://api.evotor.ru/docs/v1/partner-to-evotor.json'
+    /*'Evotor - Partner API': 'https://api.evotor.ru/docs/v1/inventory/market-to-partner.json',
     'Managing user & Billing': 'https://api.evotor.ru/docs/v1/inventory/marketAdmin-to-partner.json',
     'Receipts - online': 'https://api.evotor.ru/docs/v1/inventory/receipt.json',
     '1C': 'https://api.evotor.ru/docs/v1/inventory/1c.json',
     'Product search': 'https://api.evotor.ru/docs/v1/inventory/product-search.json'
-    <!--'API for smart terminal': 'https://api.evotor.ru/docs/v1/inventory/forST.json'-->
+    <!--'API for smart terminal': 'https://api.evotor.ru/docs/v1/inventory/forST.json'-->*/
   }
   var sel = $('#input_baseUrl');
   $.each(spec,function(key,val){
