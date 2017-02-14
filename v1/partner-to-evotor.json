@@ -1,6 +1,7 @@
 {
     "swagger": "2.0",
-    "info": {
+    "info":
+    {
         "version": "1.0.2",
         "title": "REST API Эвотор",
         "description": "Описание запросов к REST API Эвотор."
@@ -15,10 +16,13 @@
     "schemes": [
         "https"
     ],
-    "paths": {
-        "/api/v1/inventories/stores/search": {
+    "paths":
+    {
+        "/api/v1/inventories/stores/search":
+        {
             "x-summary": "Список магазинов",
-            "get": {
+            "get":
+            {
                 "tags": [
                     "Evotor User"
                 ],
@@ -32,13 +36,17 @@
                         "$ref": "#/parameters/contentType"
                     }
                 ],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "title": "список торговых точек",
                             "type": "array",
-                            "items": {
+                            "items":
+                            {
                                 "$ref": "#/definitions/store"
                             }
                         }
@@ -46,9 +54,11 @@
                 }
             }
         },
-        "/api/v1/inventories/employees/search": {
+        "/api/v1/inventories/employees/search":
+        {
             "x-summary": "Список сотрудников",
-            "get": {
+            "get":
+            {
                 "tags": [
                     "Evotor User"
                 ],
@@ -62,13 +72,17 @@
                         "$ref": "#/parameters/contentType"
                     }
                 ],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "title": "список сотрудников",
                             "type": "array",
-                            "items": {
+                            "items":
+                            {
                                 "$ref": "#/definitions/employee"
                             }
                         }
@@ -76,9 +90,11 @@
                 }
             }
         },
-        "/api/v1/inventories/devices/search": {
+        "/api/v1/inventories/devices/search":
+        {
             "x-summary": "Список терминалов",
-            "get": {
+            "get":
+            {
                 "tags": [
                     "Evotor User"
                 ],
@@ -92,13 +108,17 @@
                         "$ref": "#/parameters/contentType"
                     }
                 ],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "title": "Список смарт-терминалов",
                             "type": "array",
-                            "items": {
+                            "items":
+                            {
                                 "$ref": "#/definitions/device"
                             }
                         }
@@ -106,9 +126,11 @@
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeUuid}/products": {
+        "/api/v1/inventories/stores/{storeUuid}/products":
+        {
             "x-summary": "Обмен товарами",
-            "get": {
+            "get":
+            {
                 "tags": [
                     "Inventory"
                 ],
@@ -127,19 +149,24 @@
                         "type": "string"
                     }
                 ],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "type": "array",
-                            "items": {
+                            "items":
+                            {
                                 "$ref": "#/definitions/product"
                             }
                         }
                     }
                 }
             },
-            "post": {
+            "post":
+            {
                 "tags": [
                     "Inventory"
                 ],
@@ -162,24 +189,30 @@
                         "in": "body",
                         "description": "массив продуктов",
                         "required": true,
-                        "schema": {
+                        "schema":
+                        {
                             "type": "array",
-                            "items": {
+                            "items":
+                            {
                                 "$ref": "#/definitions/product"
                             }
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK"
                     }
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeUuid}/products/delete": {
+        "/api/v1/inventories/stores/{storeUuid}/products/delete":
+        {
             "x-summary": "Удаление товаров",
-            "post": {
+            "post":
+            {
                 "tags": [
                     "Inventory"
                 ],
@@ -203,24 +236,30 @@
                         "in": "body",
                         "description": "массив продуктов",
                         "required": true,
-                        "schema": {
+                        "schema":
+                        {
                             "type": "array",
-                            "items": {
+                            "items":
+                            {
                                 "$ref": "#/definitions/productToDelete"
                             }
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK"
                     }
                 }
             }
         },
-        "/api/v1/inventories/stores/{storeUuid}/documents": {
+        "/api/v1/inventories/stores/{storeUuid}/documents":
+        {
             "x-summary": "Документы",
-            "get": {
+            "get":
+            {
                 "tags": [
                     "Inventory"
                 ],
@@ -265,141 +304,38 @@
                         "type": "string"
                     }
                 ],
-                "responses": {
-                    "200": {
+                "responses":
+                {
+                    "200":
+                    {
                         "description": "OK",
-                        "schema": {
+                        "schema":
+                        {
                             "title": "массив документов",
                             "type": "array",
-                            "items": {
+                            "items":
+                            {
                                 "$ref": "#/definitions/document"
                             }
                         }
                     }
                 }
             }
-        },
-        "/api/v1/inventories/stores/{storeUuid}/code": {
-            "x-summary": "Связка магазина с сущностью разработчика",
-            "put": {
-                "tags": [
-                    "Evotor User"
-                ],
-                "summary": "Связка магазина Эвотор и магазина клиента API",
-                "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "$ref": "#/parameters/contentType"
-                    },
-                    {
-                        "name": "storeUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "code",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/code"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/api/v1/inventories/employees/{employeeUuid}/code": {
-            "x-summary": "Связка сотрудника с сущностью разработчика",
-            "put": {
-                "tags": [
-                    "Evotor User"
-                ],
-                "summary": "Связка сотрудника Эвотор и сотрудника клиента API",
-                "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "$ref": "#/parameters/contentType"
-                    },
-                    {
-                        "name": "employeeUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "code",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/code"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/api/v1/inventories/devices/{deviceUuid}/code": {
-            "x-summary": "Связка терминала с сущностью разработчика",
-            "put": {
-                "tags": [
-                    "Evotor User"
-                ],
-                "summary": "Связка смарт-терминала Эвотор и кассы клиента API",
-                "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/auth"
-                    },
-                    {
-                        "$ref": "#/parameters/contentType"
-                    },
-                    {
-                        "name": "deviceUuid",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "code",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/code"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
         }
+
     },
-    "parameters": {
-        "auth": {
+    "parameters":
+    {
+        "auth":
+        {
             "name": "X-Authorization",
             "in": "header",
             "description": "пользовательский токен, который получает юзер в интерфейсе Эвотор после установки приложения разработчика",
             "required": true,
             "type": "string"
         },
-        "contentType": {
+        "contentType":
+        {
             "name": "Content-Type",
             "in": "header",
             "description": "",
@@ -408,17 +344,22 @@
             "default": "application/json"
         }
     },
-    "definitions": {
-        "productToDelete": {
+    "definitions":
+    {
+        "productToDelete":
+        {
             "type": "object",
-            "properties": {
-                "uuid": {
+            "properties":
+            {
+                "uuid":
+                {
                     "type": "string",
                     "description": "уникальный UUID продукта в Эвотор"
                 }
             }
         },
-        "product": {
+        "product":
+        {
             "type": "object",
             "required": [
                 "alcoCodes",
@@ -441,61 +382,73 @@
                 "type",
                 "uuid"
             ],
-            "properties": {
-                "uuid": {
+            "properties":
+            {
+                "uuid":
+                {
                     "type": "string",
                     "description": "UUID продукта; уникален в рамках магазина",
                     "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
                 },
-                "code": {
+                "code":
+                {
                     "type": "string",
                     "description": "Код товара либо группы",
                     "minLength": 0,
                     "maxLength": 10
                 },
-                "barCodes": {
+                "barCodes":
+                {
                     "type": "array",
                     "description": "Массив штрихкодов; для групп товаров - пустой массив",
-                    "items": {
+                    "items":
+                    {
                         "type": "string",
                         "pattern": "^[0-9]$",
                         "minLength": 1
                     }
                 },
-                "alcoCodes": {
+                "alcoCodes":
+                {
                     "type": "array",
                     "description": "Массив алкокодов (кодов алкогольной продукции ЕГАИС); для групп товаров - пустой массив",
-                    "items": {
+                    "items":
+                    {
                         "type": "string",
                         "pattern": "^[0-9]{19}$"
                     }
                 },
-                "name": {
+                "name":
+                {
                     "type": "string",
                     "description": "Наименование товара/группы",
                     "minLength": 1,
                     "maxLength": 100
                 },
-                "price": {
+                "price":
+                {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 9999999.99,
                     "description": "Цена продажи; для групп товаров - 0"
                 },
-                "quantity": {
+                "quantity":
+                {
                     "type": "number",
                     "format": "float",
                     "description": "Количество товара (остаток); до 3 знаков в дробной части; для групп товаров - 0"
                 },
-                "costPrice": {
+                "costPrice":
+                {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 9999999.99,
                     "description": "Закупочная цена; для групп товаров - 0"
                 },
-                "measureName": {
+                "measureName":
+                {
                     "type": "string",
                     "description": "Единица измерения для товара; для групп товаров - \"\"",
                     "enum": [
@@ -513,7 +466,8 @@
                         "дроб"
                     ]
                 },
-                "tax": {
+                "tax":
+                {
                     "type": "string",
                     "description": "Ставка НДС; для групп товаров - \"NO_VAT\"",
                     "enum": [
@@ -525,31 +479,37 @@
                         "VAT_10_110"
                     ]
                 },
-                "allowToSell": {
+                "allowToSell":
+                {
                     "type": "boolean",
                     "description": "Флаг доступности товара для продажи; для групп товаров - true"
                 },
-                "description": {
+                "description":
+                {
                     "type": "string",
                     "description": "Описание товара; для групп товаров - \"\"",
                     "minLength": 0
                 },
-                "articleNumber": {
+                "articleNumber":
+                {
                     "type": "string",
                     "description": "Артикул; для групп товаров - \"\"",
                     "minLength": 0,
                     "maxLength": 20
                 },
-                "parentUuid": {
+                "parentUuid":
+                {
                     "type": "string",
                     "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
                     "description": "UUID группы товаров, к которой относится товар/группа; может быть null, если товар/группа находится в корне иерархии"
                 },
-                "group": {
+                "group":
+                {
                     "type": "boolean",
                     "description": "Определяет, является ли элемент группой товаров; true - группа, false - товар"
                 },
-                "type": {
+                "type":
+                {
                     "type": "string",
                     "description": "Тип товара (обычный, маркированный алкоголь, немаркированный алкоголь); для групп товаров - \"NORMAL\"",
                     "enum": [
@@ -558,33 +518,38 @@
                         "ALCOHOL_NOT_MARKED"
                     ]
                 },
-                "alcoholByVolume": {
+                "alcoholByVolume":
+                {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 99.999,
                     "description": "Крепость алкогольной продукции, до 3 знаков в дробной части; для групп товаров - 0"
                 },
-                "alcoholProductKindCode": {
+                "alcoholProductKindCode":
+                {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999,
                     "description": "Код вида алкогольной продукции ФСРАР; для групп товаров - 0"
                 },
-                "tareVolume": {
+                "tareVolume":
+                {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 999.999,
                     "description": "Емкость тары для алкогольной продукции в литрах, до 3 знаков в дробной части; для неалкогольных типов и групп - 0"
                 },
-                "fields": {
+                "fields":
+                {
                     "type": "object",
                     "description": "Дополнительные атрибуты товара, не входящие в стандартную схему"
                 }
             }
         },
-        "employee": {
+        "employee":
+        {
             "type": "object",
             "required": [
                 "uuid",
@@ -592,37 +557,47 @@
                 "name",
                 "stores"
             ],
-            "properties": {
-                "uuid": {
+            "properties":
+            {
+                "uuid":
+                {
                     "type": "string",
                     "description": "Уникальный идентификатор сотрудника в Эвотор, в формате uuid4; не может быть null и пустой строкой",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                 },
-                "name": {
+                "name":
+                {
                     "type": "string",
                     "description": "Имя сотрудника в Эвотор; не может быть null и пустой строкой"
                 },
-                "lastName": {
+                "lastName":
+                {
                     "type": "string",
                     "description": "Фамилия сотрудника в Эвотор"
                 },
-                "patronymicName": {
+                "patronymicName":
+                {
                     "type": "string",
                     "description": "Отчество сотрудника в Эвотор"
                 },
-                "phone": {
+                "phone":
+                {
                     "type": "number",
                     "description": "Номер телефона сотрудника в Эвотор",
                     "pattern": "^7[0-9]{10}$",
                     "default": 79876543210
                 },
-                "stores": {
+                "stores":
+                {
                     "type": "array",
                     "description": "Массив идентификаторов магазинов, к которым привязан сотрудник",
-                    "items": {
+                    "items":
+                    {
                         "type": "object",
-                        "properties": {
-                            "storeUuid": {
+                        "properties":
+                        {
+                            "storeUuid":
+                            {
                                 "type": "string",
                                 "description": "Уникальный идентификатор магазина в Эвотор, в формате uuid4; не может быть null и пустой строкой",
                                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
@@ -630,7 +605,8 @@
                         }
                     }
                 },
-                "role": {
+                "role":
+                {
                     "type": "string",
                     "description": "Роль, определяющая права доступа (влияет на доступность функциональности терминала сотруднику)",
                     "enum": [
@@ -641,59 +617,73 @@
                 }
             }
         },
-        "store": {
+        "store":
+        {
             "type": "object",
             "required": [
                 "uuid",
                 "name"
             ],
-            "properties": {
-                "uuid": {
+            "properties":
+            {
+                "uuid":
+                {
                     "type": "string",
                     "description": "Уникальный идентификатор магазина в Эвотор, в формате uuid4; не может быть null и пустой строкой",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                 },
-                "name": {
+                "name":
+                {
                     "type": "string",
                     "description": "Имя магазина в Эвотор; не может быть null и пустой строкой"
                 },
-                "address": {
+                "address":
+                {
                     "type": "string",
                     "description": "Адрес магазина в Эвотор"
                 }
             }
         },
-        "device": {
+        "device":
+        {
             "type": "object",
-            "properties": {
-                "uuid": {
+            "properties":
+            {
+                "uuid":
+                {
                     "type": "string",
                     "description": "Уникальный идентификатор терминала в Эвотор, в формате uuid4",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                 },
-                "name": {
+                "name":
+                {
                     "type": "string",
                     "description": "Имя терминала в Эвотор; не может быть пустой строкой и null",
                     "minLength": 1
                 },
-                "storeUuid": {
+                "storeUuid":
+                {
                     "type": "string",
                     "description": "Уникальный идентификатор магазина в Эвотор, к которому привязан терминал, в формате uuid4; не может быть пустой строкой и null",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
                 }
             }
         },
-        "document": {
+        "document":
+        {
             "type": "object",
             "required": [
                 "uuid",
                 "type"
             ],
-            "properties": {
-                "uuid": {
+            "properties":
+            {
+                "uuid":
+                {
                     "type": "string"
                 },
-                "type": {
+                "type":
+                {
                     "type": "string",
                     "enum": [
                         "SELL",
@@ -711,18 +701,23 @@
                         "OPEN_TARE"
                     ]
                 },
-                "transactions": {
+                "transactions":
+                {
                     "type": "array",
-                    "items": {
+                    "items":
+                    {
                         "$ref": "#/definitions/transaction"
                     }
                 }
             }
         },
-        "transaction": {
+        "transaction":
+        {
             "type": "object",
-            "properties": {
-                "type": {
+            "properties":
+            {
+                "type":
+                {
                     "type": "string",
                     "enum": [
                         "DISCOUNT_DOCUMENT",
@@ -748,10 +743,13 @@
                 }
             }
         },
-        "code": {
+        "code":
+        {
             "type": "object",
-            "properties": {
-                "code": {
+            "properties":
+            {
+                "code":
+                {
                     "type": "string"
                 }
             }

@@ -1,0 +1,126 @@
+"/api/v1/inventories/stores/{storeUuid}/code":
+{
+    "x-summary": "Связка магазина с сущностью разработчика",
+    "put":
+    {
+        "tags": [
+            "Evotor User"
+        ],
+        "summary": "Связка магазина Эвотор и магазина клиента API",
+        "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
+        "parameters": [
+            {
+                "$ref": "#/parameters/auth"
+            },
+            {
+                "$ref": "#/parameters/contentType"
+            },
+            {
+                "name": "storeUuid",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "code",
+                "in": "body",
+                "required": true,
+                "schema":
+                {
+                    "$ref": "#/definitions/code"
+                }
+            }
+        ],
+        "responses":
+        {
+            "200":
+            {
+                "description": "OK"
+            }
+        }
+    }
+},
+"/api/v1/inventories/employees/{employeeUuid}/code":
+{
+    "x-summary": "Связка сотрудника с сущностью разработчика",
+    "put":
+    {
+        "tags": [
+            "Evotor User"
+        ],
+        "summary": "Связка сотрудника Эвотор и сотрудника клиента API",
+        "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
+        "parameters": [
+            {
+                "$ref": "#/parameters/auth"
+            },
+            {
+                "$ref": "#/parameters/contentType"
+            },
+            {
+                "name": "employeeUuid",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "code",
+                "in": "body",
+                "required": true,
+                "schema":
+                {
+                    "$ref": "#/definitions/code"
+                }
+            }
+        ],
+        "responses":
+        {
+            "200":
+            {
+                "description": "OK"
+            }
+        }
+    }
+},
+"/api/v1/inventories/devices/{deviceUuid}/code":
+{
+    "x-summary": "Связка терминала с сущностью разработчика",
+    "put":
+    {
+        "tags": [
+            "Evotor User"
+        ],
+        "summary": "Связка смарт-терминала Эвотор и кассы клиента API",
+        "description": "Может быть использован опционально для назначения полю code ID сущности в ситеме партнера. В системе Эвотор это поле не учавствует ни в какой логике.",
+        "parameters": [
+            {
+                "$ref": "#/parameters/auth"
+            },
+            {
+                "$ref": "#/parameters/contentType"
+            },
+            {
+                "name": "deviceUuid",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "code",
+                "in": "body",
+                "required": true,
+                "schema":
+                {
+                    "$ref": "#/definitions/code"
+                }
+            }
+        ],
+        "responses":
+        {
+            "200":
+            {
+                "description": "OK"
+            }
+        }
+    }
+}
