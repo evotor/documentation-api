@@ -1,0 +1,1236 @@
+swagger: '2.0'
+info:
+  version: 1.0.2
+  title: Вызовы Эвотор к API Партнера
+  description: >-
+    В данном разделе описан формат API, который Партнер реализует на стороне
+    своего веб-сервиса. Вызовы инициируются Облаком Эвотор
+tags:
+  - name: Управление учетными записями
+    description: >-
+      Вызовы к системе партнера в контексте управления клиентскими учетными
+      записями
+  - name: Управление оргструктурой
+    description: Вызовы к системе партнера в контексте товароучетных сущностей
+  - name: Управление номенклатурой и документами
+    description: Вызовы к системе партнера в контексте товароучетных сущностей
+  - name: Поиск товара
+    description: Поиск товара в базе партнера по штрихкоду и/или алкокоду
+  - name: Отправка чека
+    description: Отправка упрощенной структуры чека в систему партнера
+  - name: События биллинга
+    description: 'События биллинга Эвотор, на которые может подписаться система партнера'
+host: partner.com
+schemes:
+  - https
+  - http
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /api/v1/user/verify:
+    post:
+      tags:
+        - Управление учетными записями
+      summary: Авторизация пользователя
+      description: >-
+        Авторизация уже существующего пользователя в системе партнера.
+        **ВАЖНО:** Под пользователем понимается мастер-аккаунт владельца бизнеса
+        в системе партнера
+      parameters:
+        - $ref: '#/parameters/serverAuth'
+        - name: ''
+          in: body
+          description: >-
+            Состав полей, необходимых для авторизации существующего пользователя
+            в системе партнера
+          required: true
+          schema:
+            $ref: '#/definitions/authorizeFormData'
+      responses:
+        '200':
+          description: OK
+          schema:
+            title: Данные пользователя
+            type: object
+            required:
+              - userUuid
+              - hasBilling
+              - token
+            properties:
+              userUuid:
+                type: string
+                description: Уникальный идентификатор пользователя в системе Эвотор
+                pattern: '^[0-9]{2}-[0-9]{15}$'
+                default: 01-000000000000001
+              hasBilling:
+                type: boolean
+                description: >-
+                  Флаг наличия биллинга по данному пользователю в системе
+                  партнера. Если пользователь уже оплачивает подписку на стороне
+                  партнера, то Эвотор не будет выполнять биллинг. Актуально для
+                  учетных записей, которые были изначально зарегистрированы
+                  через интерфейс партнера
+              token:
+                description: >-
+                  Ключ авторизации. Используется для авторизации
+                  пользовательских запросов в системе партнера
+                type: string
+                maxLength: 128
+                default: toaWaep4chou7ahkoogiu9Iusaht9ima
+  /api/v1/user/create:
+    post:
+      tags:
+        - Управление учетными записями
+      summary: Регистрация пользователя
+      description: >-
+        Регистрация нового пользователя в системе партнера. **ВАЖНО:** Под
+        пользователем понимается мастер-аккаунт владельца бизнеса в системе
+        партнера
+      parameters:
+        - $ref: '#/parameters/serverAuth'
+        - name: ''
+          in: body
+          description: >-
+            Состав полей, необходимых для регистрации нового пользователя в
+            системе партнера
+          required: true
+          schema:
+            $ref: '#/definitions/registerFormData'
+      responses:
+        '200':
+          description: OK
+          schema:
+            title: Данные пользователя
+            type: object
+            required:
+              - userUuid
+              - token
+            properties:
+              userUuid:
+                type: string
+                description: Уникальный идентификатор пользователя в системе Эвотор
+                pattern: '^[0-9]{2}-[0-9]{15}$'
+                default: 01-000000000000001
+              token:
+                description: >-
+                  Ключ авторизации. Используется для авторизации
+                  пользовательских запросов в системе партнера
+                type: string
+                maxLength: 128
+                default: toaWaep4chou7ahkoogiu9Iusaht9ima
+  /api/v1/user/tariff:
+    post:
+      tags:
+        - Управление учетными записями
+      summary: Активация/деактивация тарифа
+      description: >-
+        Активация/деактивация тарифа для учетной записи пользователя в системе
+        партнера
+      parameters:
+        - $ref: '#/parameters/serverAuth'
+        - name: ''
+          in: body
+          description: >-
+            Параметры, необходимые для установки тарифа пользователю системе
+            партнера
+          required: true
+          schema:
+            type: object
+            required:
+              - userUuid
+              - tariffId
+              - status
+            properties:
+              userUuid:
+                type: string
+                description: Уникальный идентификатор пользователя в системе Эвотор
+                pattern: '^[0-9]{2}-[0-9]{15}$'
+                default: 01-000000000000001
+              tariffId:
+                type: string
+                description: Код тарифа в системе Эвотор
+                pattern: '^[a-zA-Z0-9\_\-]+$'
+                default: starter
+              status:
+                type: string
+                description: >-
+                  Статус активности тарифа. "ACTIVE" отправляется при установке
+                  приложения, либо подтверждении активности тарифа. "INACTIVE" -
+                  при деактивации тарифа по причине неоплаты, либо удаления
+                  приложения
+                enum:
+                  - ACTIVE
+                  - INACTIVE
+      responses:
+        '200':
+          description: OK
+  /api/v1/events/billing:
+    post:
+      tags:
+        - События биллинга
+      summary: 'Событие: Начало пробного периода подписки'
+      description: >-
+        **ВАЖНО:** Хвост у /events/billing всегда один и тот же. Из-за
+        невозможности в Open API отобразить несколько запросов к одному URL,
+        применён обходной путь - добавление нижнего подчеркивания
+      parameters:
+        - $ref: '#/parameters/serverAuth'
+        - name: trialStarted
+          description: Начало пробного периода подписки
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/trialStarted'
+      responses:
+        '200':
+          description: OK
+  /api/v1/events/billing_:
+    post:
+      tags:
+        - События биллинга
+      summary: 'Событие: Успешная оплата подписки'
+      description: >-
+        **ВАЖНО:** Хвост у /events/billing всегда один и тот же. Из-за
+        невозможности в Open API отобразить несколько запросов к одному URL,
+        применён обходной путь - добавление нижнего подчеркивания
+      parameters:
+        - $ref: '#/parameters/serverAuth'
+        - name: paymentSuccessed
+          description: Успешная оплата подписки
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/paymentSuccessed'
+      responses:
+        '200':
+          description: OK
+  /api/v1/events/billing__:
+    post:
+      tags:
+        - События биллинга
+      summary: 'Событие: Активирован платный период подписки'
+      description: >-
+        **ВАЖНО:** Хвост у /events/billing всегда один и тот же. Из-за
+        невозможности в Open API отобразить несколько запросов к одному URL,
+        применён обходной путь - добавление нижнего подчеркивания
+      parameters:
+        - $ref: '#/parameters/serverAuth'
+        - name: subscriptionActivated
+          description: Активирован платный период подписки
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/subscriptionActivated'
+      responses:
+        '200':
+          description: OK
+  /api/v1/events/billing___:
+    post:
+      tags:
+        - События биллинга
+      summary: 'Событие: Неудачная попытка списания средств'
+      description: >-
+        **ВАЖНО:** Хвост у /events/billing всегда один и тот же. Из-за
+        невозможности в Open API отобразить несколько запросов к одному URL,
+        применён обходной путь - добавление нижнего подчеркивания
+      parameters:
+        - $ref: '#/parameters/serverAuth'
+        - name: paymentFailed
+          description: Неудачная попытка списания средств
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/paymentFailed'
+      responses:
+        '200':
+          description: OK
+  /api/v1/inventories/devices:
+    put:
+      tags:
+        - Управление оргструктурой
+      summary: Создание/редактирование терминалов
+      description: >-
+        Создание/редактирование терминалов в системе партнера. Эвотор является
+        мастер-системой по данной сущности. Все изменения производимые в ЛК
+        Эвотор реплицируются в сторону партнера.
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: device
+          in: body
+          description: Массив терминалов
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/device'
+      responses:
+        '200':
+          description: OK
+          schema:
+            title: Массив привязок
+            type: array
+            items:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  pattern: >-
+                    ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                partnerId:
+                  type: string
+                  description: >-
+                    Идентификатор партнера-посредника. Используется в случаях,
+                    когда интеграция с сервисом-партнером производится не
+                    напрямую (посредник хранит у себя сопоставление сущностей
+                    Эвотора с сущностями сервиса-партнера). Если взаимодействие
+                    производится без посредника - атрибут возвращать не
+                    обязательно.
+  /api/v1/inventories/employees:
+    put:
+      tags:
+        - Управление оргструктурой
+      summary: Создание/редактирование сотрудников
+      description: >-
+        Создание/редактирование сотрудников в системе партнера. Эвотор является
+        мастер-системой по данной сущности. Все изменения производимые в ЛК
+        Эвотор реплицируются в сторону партнера.
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: employee
+          in: body
+          description: Массив сотрудников Эвотор
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/employee'
+      responses:
+        '200':
+          description: OK
+          schema:
+            title: Массив привязок
+            type: array
+            items:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  pattern: >-
+                    ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                partnerId:
+                  type: string
+                  description: >-
+                    Идентификатор партнера-посредника. Используется в случаях,
+                    когда интеграция с сервисом-партнером производится не
+                    напрямую (посредник хранит у себя сопоставление сущностей
+                    Эвотора с сущностями сервиса-партнера). Если взаимодействие
+                    производится без посредника - атрибут возвращать не
+                    обязательно.
+  /api/v1/inventories/stores:
+    put:
+      tags:
+        - Управление оргструктурой
+      summary: Создание/редактирование магазинов
+      description: >-
+        Создание/редактирование магазинов в системе партнера. Эвотор является
+        мастер-системой по данной сущности. Все изменения производимые в ЛК
+        Эвотор реплицируются в сторону партнера.
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: store
+          in: body
+          description: Массив магазинов из Эвотор
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/store'
+      responses:
+        '200':
+          description: OK
+          schema:
+            title: Массив привязок
+            type: array
+            items:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  pattern: >-
+                    ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                partnerId:
+                  type: string
+                  description: >-
+                    Идентификатор партнера-посредника. Используется в случаях,
+                    когда интеграция с сервисом-партнером производится не
+                    напрямую (посредник хранит у себя сопоставление сущностей
+                    Эвотора с сущностями сервиса-партнера). Если взаимодействие
+                    производится без посредника - атрибут возвращать не
+                    обязательно.
+  '/api/v1/inventories/stores/{storeUuid}/products':
+    get:
+      tags:
+        - Управление номенклатурой и документами
+      summary: Получение номенклатуры системы партнера
+      description: >-
+        Загрузка номенклатуры из товароучетной системы в облако Эвотор. По
+        умолчанию возвращает весь набор products в рамках storeUuid. При
+        указании параметров page и size возвращает результаты в постраничном
+        режиме.
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: storeUuid
+          in: path
+          description: Уникальный идентификатор магазина в Эвотор
+          required: true
+          type: string
+          pattern: >-
+            ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        - name: page
+          in: query
+          description: >-
+            Номер страницы для многостраничной выборки. Включает режим
+            постраничного вывода. Должен использоваться вместе с атрибутом size
+          type: integer
+          minimum: 0
+        - name: size
+          in: query
+          description: >-
+            Размер страницы для многостраничной выборки. Включает режим
+            постраничного вывода. Должен использоваться вместе с атрибутом page
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/product'
+          headers:
+            X-Total-Items-Count:
+              description: >-
+                Всего элементов в многостраничной выборке. Возвращается только
+                при указании в запросе параметров page и size
+              type: integer
+              minimum: 0
+            X-Pagination-Page-Size:
+              description: >-
+                Количество элементов на текущей странице в многостраничной
+                выборке. Возвращается только при указании в запросе параметров
+                page и size
+              type: integer
+              minimum: 0
+            X-Pagination-Next-Page:
+              description: >-
+                Номер следующей страницы в многостраничной выборке. Возвращается
+                только при указании в запросе параметров page и size, и наличии
+                следующей страницы
+              type: integer
+              minimum: 1
+            X-Pagination-Total-Page-Count:
+              description: >-
+                Всего страниц в многостраничной выборке. Возвращается только при
+                указании в запросе параметров page и size
+              type: integer
+              minimum: 1
+    post:
+      tags:
+        - Управление номенклатурой и документами
+      summary: Создание товаров в системе партнера
+      description: >-
+        Загрузка в систему партнера массива **новых** товаров, созданных на
+        терминале
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: storeUuid
+          in: path
+          required: true
+          type: string
+          pattern: >-
+            ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        - name: products
+          in: body
+          description: Массив товаров
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/product'
+      responses:
+        '200':
+          description: OK
+          schema:
+            title: Массив привязок
+            type: array
+            items:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  pattern: >-
+                    ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                id:
+                  type: string
+  '/api/v1/inventories/stores/{storeUuid}/documents':
+    put:
+      tags:
+        - Управление номенклатурой и документами
+      summary: Выгрузка документов
+      description: Загрузка документов с транзакциями в систему партнера
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: storeUuid
+          in: path
+          required: true
+          type: string
+          pattern: >-
+            ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        - name: documents
+          in: body
+          description: Массив документов
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/document'
+      responses:
+        '200':
+          description: OK
+  /api/v1/commodities:
+    get:
+      tags:
+        - Поиск товара
+      summary: Поиск товара по штирхкодам
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: scanCode
+          in: query
+          required: true
+          type: string
+        - name: alcCode
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/commodity'
+          description: OK
+  /api/v1/receipt:
+    post:
+      tags:
+        - Отправка чека
+      summary: Отправка чека партнеру после оплаты клиентом
+      description: |
+        В данном запросе передается состав чека / чеков.
+      parameters:
+        - $ref: '#/parameters/clientAuth'
+        - name: receipt
+          in: body
+          description: массив чеков
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/receipt'
+      responses:
+        '200':
+          description: OK
+parameters:
+  serverAuth:
+    name: Authorization
+    in: header
+    description: >-
+      Авторизация Эвотор в системе партнера при помощи серверного ключа. Basic
+      либо Bearer
+    required: true
+    type: string
+    pattern: '^(Bearer|Basic) [a-zA-Z0-9_=-]+$'
+    default: Bearer evotor_token
+  clientAuth:
+    name: Authorization
+    in: header
+    description: Пользовательская Bearer-авторизация в системе партнера
+    required: true
+    type: string
+    pattern: '^Bearer [a-zA-Z0-9_=-]+$'
+definitions:
+  registerFormData:
+    type: object
+    required:
+      - userUuid
+    properties:
+      userUuid:
+        type: string
+        description: Уникальный идентификатор пользователя в Эвотор
+        pattern: '^[0-9]{2}-[0-9]{15}$'
+        default: 01-000000000000001
+      username:
+        type: string
+        description: Пример поля для ввода имени пользователя
+        default: v.pupkin
+      password:
+        type: string
+        description: Пример поля для ввода пароля
+        default: superpassword
+      email:
+        type: string
+        description: Пример поля для ввода e-mail
+        pattern: >-
+          ^[а-яА-Яa-zA-Z0-9\_\-\.]+\@[а-яА-Яa-zA-Z0-9\_\-\.]+\.[а-яА-Яa-zA-Z0-9\_\-\.]+$
+        default: v.pupkin@pupk.in
+      phone:
+        type: string
+        description: Пример поля для ввода номера телефона
+        pattern: '^\+7[0-9]{10}$'
+        default: '+79876543210'
+      customField:
+        type: string
+        description: >-
+          Пример другого поля для передачи пользовательских данных с формы
+          авторизации/регистрации в систему партнера. Выводится на формах
+          авторизации/регистрации клиента в процессе покупки приложения в
+          маркетплейсе Эвотор. Название поля должно характеризовать его
+          содержимое. Всего полей на форме может быть не больше 5-6. Не
+          допускается использование полей для ввода информации, которую
+          пользователь может указать в личном кабинете партнера после установки
+          приложения
+        default: Какое-то значение
+  authorizeFormData:
+    type: object
+    required:
+      - userUuid
+    properties:
+      userUuid:
+        type: string
+        description: Уникальный идентификатор пользователя в Эвотор
+        pattern: '^[0-9]{2}-[0-9]{15}$'
+        default: 01-000000000000001
+      username:
+        type: string
+        description: Пример поля для ввода имени пользователя
+        default: v.pupkin
+      password:
+        type: string
+        description: Пример поля для ввода пароля
+        default: superpassword
+      customField:
+        type: string
+        description: >-
+          Пример другого поля для передачи пользовательских данных с формы
+          авторизации/регистрации в систему партнера. Выводится на формах
+          авторизации/регистрации клиента в процессе покупки приложения в
+          маркетплейсе Эвотор. Название поля должно характеризовать его
+          содержимое. Всего полей на форме может быть не больше 5-6. Не
+          допускается использование полей для ввода информации, которую
+          пользователь может указать в личном кабинете партнера после установки
+          приложения
+        default: Какое-то значение
+  trialStarted:
+    type: object
+    properties:
+      type:
+        type: string
+        description: 'тип события, в данном случае trialStarted'
+        default: trialStarted
+      date:
+        type: string
+        format: date-time
+        description: дата и время активации пробного периода
+      data:
+        type: object
+        properties:
+          trialDuration:
+            type: number
+            description: длительность пробного периода
+            default: 30
+          trialPeriodMeasure:
+            type: string
+            description: единица длительности пробного периода
+            enum:
+              - day
+              - month
+              - year
+            default: day
+          userUuid:
+            type: string
+            description: Уникальный идентификатор пользователя в системе Эвотор
+            pattern: '^[0-9]{2}-[0-9]{15}$'
+            default: 01-000000000000001
+          tariffId:
+            type: string
+            description: 'код тарифа, для которого был активирован пробный период'
+            pattern: '^[a-zA-Z0-9\_\-]+$'
+            default: starter
+  paymentSuccessed:
+    type: object
+    properties:
+      type:
+        type: string
+        description: 'тип события, в данном случае paymentSuccessed'
+        default: paymentSuccessed
+      date:
+        type: string
+        format: date-time
+        description: дата и время приема платежа
+      data:
+        type: object
+        properties:
+          amount:
+            type: number
+            format: float
+            description: размер полученной оплаты
+            default: 999.99
+          currency:
+            type: string
+            description: валюта
+            enum:
+              - RUB
+            default: RUB
+          userUuid:
+            type: string
+            description: Уникальный идентификатор пользователя в системе Эвотор
+            pattern: '^[0-9]{2}-[0-9]{15}$'
+            default: 01-000000000000001
+          tariffId:
+            type: string
+            description: 'код тарифа, в рамках которого производилась оплата'
+            pattern: '^[a-zA-Z0-9\_\-]+$'
+            default: starter
+  subscriptionActivated:
+    type: object
+    properties:
+      type:
+        type: string
+        description: 'тип события, в данном случае subscriptionActivated'
+        default: subscriptionActivated
+      date:
+        type: string
+        format: date-time
+        description: дата и время активации платного периода подписки
+      data:
+        type: object
+        properties:
+          userUuid:
+            type: string
+            description: Уникальный идентификатор пользователя в системе Эвотор
+            pattern: '^[0-9]{2}-[0-9]{15}$'
+            default: 01-000000000000001
+          tariffId:
+            type: string
+            description: 'код тарифа, для которого был активирован платный период'
+            pattern: '^[a-zA-Z0-9\_\-]+$'
+            default: starter
+  paymentFailed:
+    type: object
+    properties:
+      type:
+        type: string
+        description: 'тип события, в данном случае paymentFailed'
+        default: paymentFailed
+      date:
+        type: string
+        format: date-time
+        description: дата и время неуспешной попытки списания средств
+      data:
+        type: object
+        properties:
+          amount:
+            type: number
+            format: float
+            description: размер суммы для списания
+            default: 999.99
+          currency:
+            type: string
+            description: валюта
+            enum:
+              - RUB
+            default: RUB
+          nextPaymentAtemptInDays:
+            type: integer
+            description: через сколько дней будет следующая попытка списания средств
+            default: 1
+          error:
+            type: string
+            description: описание ошибки
+            default: Недостаточно средств
+          userUuid:
+            type: string
+            description: Уникальный идентификатор пользователя в системе Эвотор
+            pattern: '^[0-9]{2}-[0-9]{15}$'
+            default: 01-000000000000001
+          tariffId:
+            type: string
+            description: >-
+              код тарифа, в рамках которого производилась попытка списания
+              средств
+            pattern: '^[a-zA-Z0-9\_\-]+$'
+            default: starter
+  product:
+    type: object
+    required:
+      - alcoCodes
+      - alcoholByVolume
+      - alcoholProductKindCode
+      - allowToSell
+      - articleNumber
+      - barCodes
+      - code
+      - costPrice
+      - description
+      - fields
+      - group
+      - measureName
+      - name
+      - parentUuid
+      - price
+      - quantity
+      - tareVolume
+      - tax
+      - type
+      - uuid
+    properties:
+      uuid:
+        type: string
+        description: >-
+          Уникальный идентификатор товара/группы в формате uuid4; уникален в
+          рамках магазина; не может быть пустой строкой
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      code:
+        type: string
+        description: Код товара либо группы; не может быть null
+        minLength: 0
+        maxLength: 10
+      barCodes:
+        type: array
+        description: >-
+          Массив штрихкодов товара; для групп товаров - пустой массив; не может
+          быть null
+        items:
+          type: string
+          pattern: '^[0-9]$'
+          minLength: 1
+      alcoCodes:
+        type: array
+        description: >-
+          Массив строк алкокодов (кодов алкогольной продукции ЕГАИС); для групп
+          товаров - пустой массив; не может быть null; алкокод не может быть
+          пустой строкой и null
+        items:
+          type: string
+          pattern: '^[0-9]{19}$'
+      name:
+        type: string
+        description: Наименование товара/группы; не может быть пустой строкой и null
+        minLength: 1
+        maxLength: 100
+      price:
+        type: number
+        format: float
+        minimum: 0
+        maximum: 9999999.99
+        description: Отпускная цена товара; для групп товаров - 0; не может быть null
+      quantity:
+        type: number
+        format: float
+        description: >-
+          Количество товара в наличии (остаток); до 3 знаков в дробной части;
+          для групп товаров - 0; не может быть null
+      costPrice:
+        type: number
+        format: float
+        minimum: 0
+        maximum: 9999999.99
+        description: Закупочная цена; для групп товаров - 0; не может быть null
+      measureName:
+        type: string
+        description: >-
+          Единица измерения для товара; для групп товаров - ""; не может быть
+          null
+        enum:
+          - ''
+          - шт
+          - кг
+          - л
+          - м
+          - км
+          - м2
+          - м3
+          - компл
+          - упак
+          - ед
+          - дроб
+      tax:
+        type: string
+        description: >-
+          Ставка НДС; для групп товаров - "NO_VAT"; не может быть null и пустой
+          строкой
+        enum:
+          - NO_VAT
+          - VAT_10
+          - VAT_18
+          - VAT_0
+          - VAT_18_118
+          - VAT_10_110
+      allowToSell:
+        type: boolean
+        description: >-
+          Флаг доступности товара для продажи; true - товар доступен для
+          добавления в чек, false - товар не доступен для добавления в чек; для
+          групп товаров - true; не может быть null
+      description:
+        type: string
+        description: Описание товара; для групп товаров - ""; не может быть null
+        minLength: 0
+      articleNumber:
+        type: string
+        description: Артикул; для групп товаров - ""; не может быть null
+        minLength: 0
+        maxLength: 20
+      parentUuid:
+        type: string
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        description: >-
+          Уникальный идентификатор группы, к которой принадлежит товар либо
+          группа, в формате uuid4; группа может быть включена в другую группу;
+          если товар/группа находится в корне иерархии, - может быть null; не
+          может быть пустой строкой
+      group:
+        type: boolean
+        description: >-
+          Определяет, является ли элемент группой товаров; true - группа, false
+          - товар; не может быть null
+      type:
+        type: string
+        description: >-
+          Тип товара; обычный ("NORMAL"), маркированный алкоголь
+          ("ALCOHOL_MARKED"), немаркированный алкоголь("ALCOHOL_NOT_MARKED");
+          для групп товаров - "NORMAL"; не может быть null
+        enum:
+          - NORMAL
+          - ALCOHOL_MARKED
+          - ALCOHOL_NOT_MARKED
+      alcoholByVolume:
+        type: number
+        format: float
+        minimum: 0
+        maximum: 99.999
+        description: >-
+          Крепость алкогольной продукции, до 3 знаков в дробной части; для
+          неалкогольных типов товаров и групп - 0; для алкоголя - в диапазоне от
+          0.001 до 99.999; не может быть null
+      alcoholProductKindCode:
+        type: integer
+        minimum: 0
+        maximum: 999
+        description: >-
+          Код вида алкогольной продукции ФСРАР; для неалкогольных типов товаров
+          и групп - 0; для алкоголя - в диапазоне от 1 до 999; не может быть
+          null
+      tareVolume:
+        type: number
+        format: float
+        minimum: 0
+        maximum: 999.999
+        description: >-
+          Емкость тары алкогольной продукции в литрах, до 3 знаков в дробной
+          части; для неалкогольных типов товаров и групп - 0; для алкоголя - в
+          диапазоне от 0.001 до 999.999; не может быть null
+      fields:
+        type: object
+        description: >-
+          Дополнительные атрибуты товара, не входящие в стандартную схему; не
+          может быть null
+  employee:
+    type: object
+    required:
+      - uuid
+      - role
+      - name
+      - stores
+    properties:
+      uuid:
+        type: string
+        description: >-
+          Уникальный идентификатор сотрудника в Эвотор, в формате uuid4; не
+          может быть null и пустой строкой
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      name:
+        type: string
+        description: Имя сотрудника в Эвотор; не может быть null и пустой строкой
+      lastName:
+        type: string
+        description: Фамилия сотрудника в Эвотор
+      patronymicName:
+        type: string
+        description: Отчество сотрудника в Эвотор
+      phone:
+        type: number
+        description: Номер телефона сотрудника в Эвотор
+        pattern: '^7[0-9]{10}$'
+        default: 79876543210
+      stores:
+        type: array
+        description: 'Массив идентификаторов магазинов, к которым привязан сотрудник'
+        items:
+          type: object
+          properties:
+            storeUuid:
+              type: string
+              description: >-
+                Уникальный идентификатор магазина в Эвотор, в формате uuid4; не
+                может быть null и пустой строкой
+              pattern: >-
+                ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      role:
+        type: string
+        description: >-
+          Роль, определяющая права доступа (влияет на доступность
+          функциональности терминала сотруднику)
+        enum:
+          - ADMIN
+          - CASHIER
+          - OTHER
+  store:
+    type: object
+    required:
+      - uuid
+      - name
+    properties:
+      uuid:
+        type: string
+        description: >-
+          Уникальный идентификатор магазина в Эвотор, в формате uuid4; не может
+          быть null и пустой строкой
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      name:
+        type: string
+        description: Имя магазина в Эвотор; не может быть null и пустой строкой
+      address:
+        type: string
+        description: Адрес магазина в Эвотор
+  document:
+    type: object
+    required:
+      - uuid
+      - type
+    properties:
+      uuid:
+        type: string
+        description: >-
+          Уникальный идентификатор документа в Эвотор, в формате uuid4; уникален
+          в рамках магазина
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      type:
+        type: string
+        enum:
+          - SELL
+          - PAYBACK
+          - CASH_INCOME
+          - CASH_OUTCOME
+          - OPEN_SESSION
+          - FPRINT
+          - CLOSE_SESSION
+          - INVENTORY
+          - ACCEPT
+          - RETURN
+          - WRITE_OFF
+          - REVALUATION
+          - OPEN_TARE
+      transactions:
+        type: array
+        items:
+          $ref: '#/definitions/transaction'
+  transaction:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - DISCOUNT_DOCUMENT
+          - DISCOUNT_POSITION
+          - DISCOUNT_DOCUMENT_POSITION
+          - DOCUMENT_OPEN
+          - DOCUMENT_CLOSE
+          - DOCUMENT_CLOSE_FPRINT
+          - REGISTER_POSITION
+          - REGISTER_BILLS
+          - CASH_INCOME
+          - CASH_OUTCOME
+          - INVENTORY
+          - PAYMENT
+          - OPEN_SESSION
+          - CLOSE_SESSION
+          - FPRINT_OPEN_SESSION
+          - FPRINT_X_REPORT
+          - FPRINT_Z_REPORT
+          - POSITION_TAX
+          - REVALUATION
+  device:
+    type: object
+    properties:
+      uuid:
+        type: string
+        description: 'Уникальный идентификатор терминала в Эвотор, в формате uuid4'
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      name:
+        type: string
+        description: Имя терминала в Эвотор; не может быть пустой строкой и null
+        minLength: 1
+      storeUuid:
+        type: string
+        description: >-
+          Уникальный идентификатор магазина в Эвотор, к которому привязан
+          терминал, в формате uuid4; не может быть пустой строкой и null
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+  commodity:
+    type: object
+    properties:
+      name:
+        type: string
+        description: название товара
+      alcCodes:
+        type: array
+        items:
+          type: string
+      scanCodes:
+        type: array
+        items:
+          type: string
+      alcoholByVolume:
+        type: string
+        description: крепость алкогольной продукции
+      alcoholProductKindCode:
+        type: string
+        description: код вида алкогольной продукции
+      tareVolume:
+        type: string
+        description: 'емкость тары, л. (не более 3 знаков в дробной части)'
+      measure:
+        type: string
+        description: ед. измерения
+  receipt:
+    type: object
+    required:
+      - uuid
+      - deviceUuid
+      - storeUuid
+      - dateTime
+    properties:
+      uuid:
+        type: string
+        description: уникальный ID чека.
+      deviceUuid:
+        type: string
+        description: уникальный ID смарт-терминала.
+      storeUuid:
+        type: string
+        description: уникальный ID магазина.
+      dateTime:
+        description: дата и время
+        type: string
+        format: date-time
+      type:
+        description: 'тип чека (продажа, возврат)'
+        type: string
+      shiftId:
+        description: номер смены
+        type: string
+      employeeUuid:
+        type: string
+        description: уникальный ID автора продажи (пользователь)
+      paymentSource:
+        description: >-
+          Способ оплаты. PAY_CASH - оплата наличными без сдачи; PAY_CASHBACK –
+          оплата наличными со сдачей; PAY_CARD - оплата по карте
+        type: string
+        enum:
+          - PAY_CASH
+          - PAY_CASHBACK
+          - PAY_CARD
+          - OTHER
+      infoCheck:
+        type: boolean
+        description: 'инфо–чек (да, нет)'
+      egais:
+        type: boolean
+        description: 'ЕГАИС (да, нет)'
+      items:
+        type: array
+        description: массив с позициями в чеке
+        items:
+          type: object
+          properties:
+            uuid:
+              type: string
+              description: уникальный ID товара / услуги
+            name:
+              type: string
+              description: наименование товара / услуги
+            itemType:
+              type: string
+              description: >-
+                тип товара - обычный, маркированный алкоголь, немаркированный
+                алкоголь, услуга
+              enum:
+                - NORMAL
+                - ALCOHOL_MARKED
+                - ALCOHOL_NOT_MARKED
+                - SERVICE
+            barcode:
+              type: string
+            measureName:
+              type: string
+              description: единица измерения
+            quantity:
+              type: number
+              description: кол-во данного товара
+            price:
+              type: number
+              description: цена продажи данного товара
+            costPrice:
+              type: number
+              description: цена закупки данного товара
+            sumPrice:
+              type: number
+              description: общая цена данного товара
+            tax:
+              type: number
+              description: сумма налога на данный товар
+            taxPercent:
+              type: number
+              description: общий налог в % на данный товар
+            discount:
+              type: number
+              description: общая сумма скидки на данный товар
+      totalTax:
+        type: number
+        description: общая сумма налога
+      totalDiscount:
+        type: number
+        description: общая сумма скидки
+      totalAmount:
+        type: number
+        description: общая сумма чека
+      clientUuid:
+        type: string
+        description: >-
+          уникальный UUID клиента (появляется, когда покутель указывает
+          где-нибудь номер телефона / email и т.п., например, в программе
+          лояльности)
+      fields:
+        type: object
+        description: >-
+          дополнительные поля, например, в которых могут передаться поля
+          пользователя для программ лояльности. эти поля передаются только тем,
+          кто их создал. То есть партнер А, не получит поля партнера В.
