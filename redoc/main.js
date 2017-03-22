@@ -43,8 +43,8 @@
     });
     schemaUrlInput.value = url;
     specs.specs = [
-      'redoc/evotor-to-partner.yaml',
-      'redoc/partner-to-evotor.yaml'
+      'redoc/evotor-callbacks.yaml',
+      'redoc/evotor-rest-api.yaml'
     ];
 
     var $specInput = document.getElementById('spec-input');

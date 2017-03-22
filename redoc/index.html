@@ -11,17 +11,17 @@
   </head>
   <body>
     <nav>
-      <header> <a href="/docs/redoc"><img alt="API Эвотор" width="152" height="45" src="/docs/redoc/logo.svg"></a> </header>
+      <header> <a href="/docs/redoc"><img alt="API Эвотор" width="152" height="45" src="images/logo.svg"></a> </header>
       <template is="dom-bind" id="specs">
         <form id="schema-url-form" is="iron-form">
           <vaadin-combo-box-light id="spec-input" items="[[specs]]" allow-custom-value>
-            <input placeholder="Выберите API для просмотра" id="schema-url-input" type="text" is="iron-input" value="https://api.evotor.ru/docs/redoc/evotor-to-partner.json">
+            <input placeholder="Выберите API для просмотра" id="schema-url-input" type="text" is="iron-input" value="https://api.evotor.ru/docs/redoc/evotor-rest-api.yaml">
           </vaadin-combo-box-light>
           <button type="submit">Открыть</button>
         </form>
       </template>
     </nav>
-    <redoc scroll-y-offset="body > nav" spec-url='/docs/redoc/evotor-to-partner.json' lazy-rendering></redoc>
+    <redoc scroll-y-offset="body > nav" spec-url='/docs/redoc/evotor-rest-api.yaml' lazy-rendering></redoc>
     <script src="/docs/redoc/main.js"> </script>
     <script src="https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js"> </script>
   </body>
