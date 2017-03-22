@@ -1,132 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Evo API - Swagger UI</title>
-  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-  <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-  <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
-
-  <script src='lib/object-assign-pollyfill.js' type='text/javascript'></script>
-  <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='lib/handlebars-4.0.5.js' type='text/javascript'></script>
-  <script src='lib/lodash.min.js' type='text/javascript'></script>
-  <script src='lib/backbone-min.js' type='text/javascript'></script>
-  <script src='swagger-ui.js' type='text/javascript'></script>
-  <script src='lib/highlight.9.1.0.pack.js' type='text/javascript'></script>
-  <script src='lib/highlight.9.1.0.pack_extended.js' type='text/javascript'></script>
-  <script src='lib/jsoneditor.min.js' type='text/javascript'></script>
-  <script src='lib/marked.js' type='text/javascript'></script>
-  <script src='lib/swagger-oauth.js' type='text/javascript'></script>
-
-  <!-- Some basic translations -->
-  <script src='lang/translator.js' type='text/javascript'></script>
-  <script src='lang/ru.js' type='text/javascript'></script>
-  <!-- <script src='lang/en.js' type='text/javascript'></script> -->
-
-  <script type="text/javascript">
-    $(function () {
-      var url = window.location.search.match(/url=([^&]+)/);
-      if (url && url.length > 1) {
-        url = decodeURIComponent(url[1]);
-      } else {
-        <!--url = "https://api.evotor.ru/docs/v1/inventory/marketAdmin-to-partner.json";-->
-		url = "https://api.evotor.ru/docs/v1/evotor-to-partner.json";
-      }
-
-      hljs.configure({
-        highlightSizeThreshold: 5000
-      });
-
-      // Pre load translate...
-      if(window.SwaggerTranslator) {
-        window.SwaggerTranslator.translate();
-      }
-      window.swaggerUi = new SwaggerUi({
-        url: url,
-		validatorUrl: undefined,
-        dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-        onComplete: function(swaggerApi, swaggerUi){
-          if(typeof initOAuth == "function") {
-            initOAuth({
-              clientId: "your-client-id",
-              clientSecret: "your-client-secret-if-required",
-              realm: "your-realms",
-              appName: "your-app-name",
-              scopeSeparator: " ",
-              additionalQueryStringParams: {}
-            });
-          }
-		  $('pre code').each(function(i, e) {
-            hljs.highlightBlock(e)
-          });
-
-          if(window.SwaggerTranslator) {
-            window.SwaggerTranslator.translate();
-          }
+  <head>
+    <title>API Эвотор</title>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" href="main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+	<nav>
+	  <header> <a href="/docs/redoc"><img alt="API Эвотор" width="152" height="45" src="images/logo.svg"></a> </header>
+      <ul id="links_container">
+      </ul>
+    </nav>
+    <redoc scroll-y-offset="body > nav"></redoc>
+    <script src="https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js"> </script>
+	<script>
+      var apis = [
+        {
+          name: 'Evotor REST API',
+          url: 'https://api.evotor.ru/docs/redoc/evotor-rest-api.yaml'
         },
-        onFailure: function(data) {
-          log("Unable to Load SwaggerUI");
-        },
-        docExpansion: "none",
-        //apisSorter: "alpha",		
-        jsonEditor: true,
-        defaultModelRendering: 'schema',
-        showRequestHeaders: true,
-		docExpansion: 'list'
-      });
-	  
-      window.swaggerUi.load();
-
-      function log() {
-        if ('console' in window) {
-          console.log.apply(console, arguments);
+        {
+          name: 'Evotor Callbacks',
+          url: 'https://api.evotor.ru/docs/redoc/evotor-callbacks.yaml'
         }
+      ];
+
+      Redoc.init(apis[0].url);
+
+      function onClick() {
+        var url = this.getAttribute('data-link');
+        Redoc.init(url);
       }
-  });
-  </script>
-</head>
 
-<body class="swagger-section">
-<div id='header'>
-  <div class="swagger-ui-wrap">
-    <a id="logo" href="https://api.evotor.ru/docs"><img class="logo__img" alt="swagger" height="30" width="30" src="images/logo_small.png" /><span class="logo__title">swagger</span></a>
-    <form id='api_selector'>
-      <!-- <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div> -->
-      <div class='input'><select id="input_baseUrl" name="baseUrl"></select></div>
-      <div id='auth_container'></div>
-      <div class='input'><a id="explore" class="header__btn" href="#" data-sw-translate>Explore</a></div>
-    </form>
-  </div>
-</div>
-
-<div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
-<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
-
-<script>
-  var spec = {
-    'Вызовы Эвотор к API Партнера': 'https://api.evotor.ru/docs/v1/evotor-to-partner.json',
-    'REST API Эвотор': 'https://api.evotor.ru/docs/v1/partner-to-evotor.json'
-    /*'Evotor - Partner API': 'https://api.evotor.ru/docs/v1/inventory/market-to-partner.json',
-    'Managing user & Billing': 'https://api.evotor.ru/docs/v1/inventory/marketAdmin-to-partner.json',
-    'Receipts - online': 'https://api.evotor.ru/docs/v1/inventory/receipt.json',
-    '1C': 'https://api.evotor.ru/docs/v1/inventory/1c.json',
-    'Product search': 'https://api.evotor.ru/docs/v1/inventory/product-search.json'
-    <!--'API for smart terminal': 'https://api.evotor.ru/docs/v1/inventory/forST.json'-->*/
-  }
-  var sel = $('#input_baseUrl');
-  $.each(spec,function(key,val){
-    var opt = $('<option>').prop('value', val).html(key);
-    sel.append(opt);
-  });
-</script>
-</body>
+      var $list = document.getElementById('links_container');
+      apis.forEach(function(api) {
+        var $listitem = document.createElement('li');
+        $listitem.setAttribute('data-link', api.url);
+        $listitem.innerText = api.name;
+        $listitem.addEventListener('click', onClick);
+        $list.appendChild($listitem);
+      });
+    </script>
+  </body>
 </html>
