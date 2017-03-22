@@ -39,7 +39,6 @@ paths:
       Возвращает массив с информацией о всех магазинах пользователя.
     parameters:
       - $ref: '#/parameters/auth'
-      - $ref: '#/parameters/contentType'
     responses:
       '200':
         description: OK
@@ -58,7 +57,6 @@ paths:
       Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
     parameters:
       - $ref: '#/parameters/auth'
-      - $ref: '#/parameters/contentType'
     responses:
       '200':
         description: OK
@@ -77,7 +75,6 @@ paths:
       Возвращает массив с информацией о всех смарт-терминалах пользователя.
     parameters:
       - $ref: '#/parameters/auth'
-      - $ref: '#/parameters/contentType'
     responses:
       '200':
         description: OK
@@ -96,7 +93,6 @@ paths:
         Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
     parameters:
       - $ref: '#/parameters/auth'
-      - $ref: '#/parameters/contentType'
       - name: storeUuid
         in: path
         required: true
@@ -168,7 +164,7 @@ paths:
     description: |
       Возвращает массив документов. Существуют следующие типы документов:
       * Кассовые документы - [SELL,
-      PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT_OPERATION,CLOSE_SESSION]
+      PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION]
       * Инвентаризация - INVENTORY
       * Приёмка - ACCEPT
       * Возврат поставщику - RETURN
@@ -177,7 +173,6 @@ paths:
       * Вскрытие тары - OPEN_TARE
     parameters:
       - $ref: '#/parameters/auth'
-      - $ref: '#/parameters/contentType'
       - name: storeUuid
         in: path
         required: true
@@ -200,7 +195,7 @@ paths:
       - name: type
         description: |
           Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
-          * кассовые документы - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT_OPERATION,CLOSE_SESSION.
+          * кассовые документы - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION.
           * инвентаризация - INVENTORY;
           * приемка - ACCEPT;
           * возврат поставщику - RETURN;
