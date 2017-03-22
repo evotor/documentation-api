@@ -135,3 +135,21 @@ header a {
       display: none;
     }
 }
+
+nav {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+}
+
+ul#links_container {
+	  margin: 0;
+	  padding: 0;
+}
+
+ul#links_container li {
+	  display: inline-block;
+	  padding: 10px;
+	  cursor: pointer;
+}
