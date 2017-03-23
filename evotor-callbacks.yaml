@@ -1050,7 +1050,7 @@ definitions:
           properties:
             uuid:
               type: string
-              description: Ууникальный идентификатор товара / услуги.
+              description: Уникальный идентификатор товара / услуги.
             name:
               type: string
               description: Наименование товара / услуги.
