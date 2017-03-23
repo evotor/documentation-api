@@ -7,7 +7,7 @@
    description: |
      Возвращает массив с информацией о всех магазинах пользователя.
    parameters:
-     - $ref: '#/parameters/auth'
+     - $ref: ./parameters.yaml#/auth
    responses:
      '200':
        description: OK
@@ -15,7 +15,7 @@
          title: Список магазинов
          type: array
          items:
-           $ref: '#/definitions/store'
+           $ref: ./definitions.yaml#/store
 /api/v1/inventories/employees/search:
  x-summary: Получить список сотрудников
  get:
@@ -25,7 +25,7 @@
    description: |
      Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
    parameters:
-     - $ref: '#/parameters/auth'
+     - $ref: ./parameters.yaml#/auth
    responses:
      '200':
        description: OK
@@ -33,7 +33,7 @@
          title: Cписок сотрудников
          type: array
          items:
-           $ref: '#/definitions/employee'
+           $ref: ./definitions.yaml#/employee
 /api/v1/inventories/devices/search:
  x-summary: Получить список смарт-терминалов
  get:
@@ -43,7 +43,7 @@
    description: |
      Возвращает массив с информацией о всех смарт-терминалах пользователя.
    parameters:
-     - $ref: '#/parameters/auth'
+     - $ref: ./parameters.yaml#/auth
    responses:
      '200':
        description: OK
@@ -51,7 +51,7 @@
          title: Список смарт-терминалов
          type: array
          items:
-           $ref: '#/definitions/device'
+           $ref: ./definitions.yaml#/device
 /api/v1/inventories/stores/{storeUuid}/products:
  x-summary: Обмен товарами
  get:
@@ -61,7 +61,7 @@
    description: |
        Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
    parameters:
-     - $ref: '#/parameters/auth'
+     - $ref: ./parameters.yaml#/auth
      - name: storeUuid
        in: path
        required: true
@@ -72,7 +72,7 @@
        schema:
          type: array
          items:
-           $ref: '#/definitions/product'
+           $ref: ./definitions.yaml#/product
  post:
    tags:
      - Товары и документы
@@ -80,8 +80,8 @@
    description: |
      Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
    parameters:
-     - $ref: '#/parameters/auth'
-     - $ref: '#/parameters/contentType'
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/contentType
      - name: storeUuid
        in: path
        required: true
@@ -93,7 +93,7 @@
        schema:
          type: array
          items:
-           $ref: '#/definitions/product'
+           $ref: ./definitions.yaml#/product
    responses:
      '200':
        description: OK
@@ -107,8 +107,8 @@
      HTTP-запрос с пустым телом удалит все товары в магазине.
      Чтобы удалить определённый товар, в теле HTTP-запроса требуется указать его UUID.
    parameters:
-     - $ref: '#/parameters/auth'
-     - $ref: '#/parameters/contentType'
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/contentType
      - name: storeUuid
        in: path
        required: true
@@ -120,7 +120,7 @@
        schema:
          type: array
          items:
-           $ref: '#/definitions/productToDelete'
+           $ref: ./definitions.yaml#/productToDelete
    responses:
      '200':
        description: OK
@@ -141,7 +141,7 @@
      * Акт переоценки - REVALUATION
      * Вскрытие тары - OPEN_TARE
    parameters:
-     - $ref: '#/parameters/auth'
+     - $ref: ./parameters.yaml#/auth
      - name: storeUuid
        in: path
        required: true
@@ -180,4 +180,4 @@
          title: Массив документов
          type: array
          items:
-           $ref: '#/definitions/document'
+           $ref: ./definitions.yaml#/document

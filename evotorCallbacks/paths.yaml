@@ -7,14 +7,14 @@
       Авторизация существующего пользователя в стороннем сервисе с помощью данных учётной записи платформы Эвотор.
       **ВАЖНО:** Под пользователем понимается мастер-аккаунт владельца бизнеса в системе партнера
     parameters:
-      - $ref: '#/parameters/serverAuth'
+      - $ref: ./parameters.yaml#/serverAuth
       - name: ''
         in: body
         description: |
           Поля, необходимые для авторизации существующего пользователя в стороннем сервисе.
         required: true
         schema:
-          $ref: '#/definitions/authorizeFormData'
+          $ref: ./definitions.yaml#/authorizeFormData
     responses:
       '200':
         description: OK
@@ -51,14 +51,14 @@
       Регистрирует новую учётную запись в стороннем сервисе.
       **ВАЖНО:** Под пользователем понимается мастер-аккаунт владельца бизнеса в системе партнера.
     parameters:
-      - $ref: '#/parameters/serverAuth'
+      - $ref: ./parameters.yaml#/serverAuth
       - name: ''
         in: body
         description: |
           Поля необходимые для регистрации нового пользователя в стороннем сервисе.
         required: true
         schema:
-          $ref: '#/definitions/registerFormData'
+          $ref: ./definitions.yaml#/registerFormData
     responses:
       '200':
         description: OK
@@ -88,7 +88,7 @@
     description: |
       Активация / деактивация тарифа для учетной записи пользователя в стороннем сервисе.
     parameters:
-      - $ref: '#/parameters/serverAuth'
+      - $ref: ./parameters.yaml#/serverAuth
       - name: ''
         in: body
         description: |
@@ -132,7 +132,7 @@
       Создать / отредактировать один или несколько смарт-терминалов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
       мастер-системой по данной сущности.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: device
         in: body
         description: Массив смарт-терминалов
@@ -140,7 +140,7 @@
         schema:
           type: array
           items:
-            $ref: '#/definitions/device'
+            $ref: ./definitions.yaml#/device
     responses:
       '200':
         description: OK
@@ -167,7 +167,7 @@
       Создать / отредактировать одного или нескольких сотрудников в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
       мастер-системой по данной сущности.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: employee
         in: body
         description: Массив сотрудников, созданных в платформе Эвотор.
@@ -175,7 +175,7 @@
         schema:
           type: array
           items:
-            $ref: '#/definitions/employee'
+            $ref: ./definitions.yaml#/employee
     responses:
       '200':
         description: OK
@@ -202,7 +202,7 @@
       Создать / отредактировать однин или несколько магазинов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
       мастер-системой по данной сущности.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: store
         in: body
         description: Массив магазинов из Эвотор
@@ -210,7 +210,7 @@
         schema:
           type: array
           items:
-            $ref: '#/definitions/store'
+            $ref: ./definitions.yaml#/store
     responses:
       '200':
         description: OK
@@ -236,7 +236,7 @@
     description: |
       Возвращает номенклатуру из стороннего сервиса в облако Эвотор. Возвращает все товары (`products`) в рамках выбранного магазина (`storeUuid`). Укажите параметры page и size чтобы получить результаты в постраничном режиме.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: storeUuid
         in: path
         description: Уникальный идентификатор магазина в облаке Эвотор.
@@ -262,7 +262,7 @@
         schema:
           type: array
           items:
-            $ref: '#/definitions/product'
+            $ref: ./definitions.yaml#/product
         headers:
           X-Total-Items-Count:
             description: |
@@ -292,7 +292,7 @@
     description: |
       Загружает в сторонний сервис массив новых товаров, созданных на терминале.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: storeUuid
         in: path
         required: true
@@ -306,7 +306,7 @@
         schema:
           type: array
           items:
-            $ref: '#/definitions/product'
+            $ref: ./definitions.yaml#/product
     responses:
       '200':
         description: OK
@@ -330,7 +330,7 @@
     description: |
       Передаёт в сторонний сервис массив документов с транзакциями.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: storeUuid
         in: path
         required: true
@@ -344,7 +344,7 @@
         schema:
           type: array
           items:
-            $ref: '#/definitions/document'
+            $ref: ./definitions.yaml#/document
     responses:
       '200':
         description: OK
@@ -356,7 +356,7 @@
     description: |
       Возвращает объект с информацией о товаре, найденного с помощью штрихкода и/или кода алкогольной продукции в базе стороннего сервиса.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: scanCode
         in: query
         required: true
@@ -368,7 +368,7 @@
     responses:
       '200':
         schema:
-          $ref: '#/definitions/commodity'
+          $ref: ./definitions.yaml#/commodity
         description: OK
 /api/v1/receipt:
   post:
@@ -378,7 +378,7 @@
     description: |
       После оплаты отправляет чек в сторонний сервис. Тело запроса содержит один или несколько чеков.
     parameters:
-      - $ref: '#/parameters/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
       - name: receipt
         in: body
         description: Массив чеков.
@@ -386,7 +386,7 @@
         schema:
           type: array
           items:
-            $ref: '#/definitions/receipt'
+            $ref: ./definitions.yaml#/receipt
     responses:
       '200':
         description: OK

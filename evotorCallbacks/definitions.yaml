@@ -472,7 +472,7 @@ document:
     transactions:
       type: array
       items:
-        $ref: '#/definitions/transaction'
+        $ref: '#/transaction'
 transaction:
   type: object
   properties:
