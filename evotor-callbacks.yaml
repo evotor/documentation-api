@@ -313,7 +313,6 @@ paths:
             X-Pagination-Page-Size:
               description: |
                 Количество элементов на текущей странице в многостраничной выборке. Возвращается, если в запросе указаны параметры `page` и `size`.
-                page и size
               type: integer
               minimum: 0
             X-Pagination-Next-Page:
