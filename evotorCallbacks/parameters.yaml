@@ -1,0 +1,17 @@
+serverAuth:
+  name: Authorization
+  in: header
+  description: |
+    Авторизация запросов облака Эвотор в стороннем сервисе. Содержит токен в зависимости от типа авторизации: Basic или Bearer.
+  required: true
+  type: string
+  pattern: '^(Bearer|Basic) [a-zA-Z0-9_=-]+$'
+  default: Bearer evotor_token
+clientAuth:
+  name: Authorization
+  in: header
+  description: |
+    Авторизация запросов облака Эвотор в стороннем сервисе. Содержит Bearer-токен авторизации.
+  required: true
+  type: string
+  pattern: '^Bearer [a-zA-Z0-9_=-]+$'

@@ -1,0 +1,183 @@
+/api/v1/inventories/stores/search:
+ x-summary: Получить список магазинов
+ get:
+   tags:
+     - Сущности пользователя Эвотор
+   summary: Получить список магазинов
+   description: |
+     Возвращает массив с информацией о всех магазинах пользователя.
+   parameters:
+     - $ref: '#/parameters/auth'
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Список магазинов
+         type: array
+         items:
+           $ref: '#/definitions/store'
+/api/v1/inventories/employees/search:
+ x-summary: Получить список сотрудников
+ get:
+   tags:
+     - Сущности пользователя Эвотор
+   summary: Получить список сотрудников
+   description: |
+     Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
+   parameters:
+     - $ref: '#/parameters/auth'
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Cписок сотрудников
+         type: array
+         items:
+           $ref: '#/definitions/employee'
+/api/v1/inventories/devices/search:
+ x-summary: Получить список смарт-терминалов
+ get:
+   tags:
+     - Сущности пользователя Эвотор
+   summary: Получить список смарт-терминалов
+   description: |
+     Возвращает массив с информацией о всех смарт-терминалах пользователя.
+   parameters:
+     - $ref: '#/parameters/auth'
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Список смарт-терминалов
+         type: array
+         items:
+           $ref: '#/definitions/device'
+/api/v1/inventories/stores/{storeUuid}/products:
+ x-summary: Обмен товарами
+ get:
+   tags:
+     - Товары и документы
+   summary: Получить список товаров
+   description: |
+       Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
+   parameters:
+     - $ref: '#/parameters/auth'
+     - name: storeUuid
+       in: path
+       required: true
+       type: string
+   responses:
+     '200':
+       description: OK
+       schema:
+         type: array
+         items:
+           $ref: '#/definitions/product'
+ post:
+   tags:
+     - Товары и документы
+   summary: Передать список товаров
+   description: |
+     Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
+   parameters:
+     - $ref: '#/parameters/auth'
+     - $ref: '#/parameters/contentType'
+     - name: storeUuid
+       in: path
+       required: true
+       type: string
+     - name: products
+       in: body
+       description: Массив товаров
+       required: true
+       schema:
+         type: array
+         items:
+           $ref: '#/definitions/product'
+   responses:
+     '200':
+       description: OK
+/api/v1/inventories/stores/{storeUuid}/products/delete:
+ x-summary: Удаление товаров
+ post:
+   tags:
+     - Товары и документы
+   summary: Удалить товар
+   description: |
+     HTTP-запрос с пустым телом удалит все товары в магазине.
+     Чтобы удалить определённый товар, в теле HTTP-запроса требуется указать его UUID.
+   parameters:
+     - $ref: '#/parameters/auth'
+     - $ref: '#/parameters/contentType'
+     - name: storeUuid
+       in: path
+       required: true
+       type: string
+     - name: products
+       in: body
+       description: Массив товаров
+       required: true
+       schema:
+         type: array
+         items:
+           $ref: '#/definitions/productToDelete'
+   responses:
+     '200':
+       description: OK
+/api/v1/inventories/stores/{storeUuid}/documents:
+ x-summary: Документы
+ get:
+   tags:
+     - Товары и документы
+   summary: Получить список документов
+   description: |
+     Возвращает массив документов. Существуют следующие типы документов:
+     * Кассовые документы - [SELL,
+     PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION]
+     * Инвентаризация - INVENTORY
+     * Приёмка - ACCEPT
+     * Возврат поставщику - RETURN
+     * Списание - WRITE_OFF
+     * Акт переоценки - REVALUATION
+     * Вскрытие тары - OPEN_TARE
+   parameters:
+     - $ref: '#/parameters/auth'
+     - name: storeUuid
+       in: path
+       required: true
+       type: string
+     - name: deviceUuid
+       in: query
+       type: string
+     - name: ltCloseDate
+       in: query
+       format: date-time
+       type: string
+       description: |
+         Ответ будет содержать документы, созданные до указанной даты. Формат времени - 2017-01-10T09:33:19.757Z
+     - name: gtCloseDate
+       in: query
+       format: date-time
+       type: string
+       description: |
+         Ответ будет содержать документы, созданные после указанной даты. Формат времени - 2017-01-10T09:33:19.757Z
+     - name: type
+       description: |
+         Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
+         * кассовые документы - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION.
+         * инвентаризация - INVENTORY;
+         * приемка - ACCEPT;
+         * возврат поставщику - RETURN;
+         * списание - WRITE_OFF;
+         * акт переоценки - REVALUATION;
+         * вскрытие тары - OPEN_TARE.
+       in: query
+       type: string
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Массив документов
+         type: array
+         items:
+           $ref: '#/definitions/document'

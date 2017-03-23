@@ -1,0 +1,301 @@
+productToDelete:
+  type: object
+  properties:
+    uuid:
+      type: string
+      description: Уникальный UUID товара в платформе Эвотор.
+product:
+  type: object
+  required:
+    - alcoCodes
+    - alcoholByVolume
+    - alcoholProductKindCode
+    - allowToSell
+    - articleNumber
+    - barCodes
+    - code
+    - costPrice
+    - description
+    - group
+    - measureName
+    - name
+    - parentUuid
+    - price
+    - quantity
+    - tareVolume
+    - tax
+    - type
+    - uuid
+  properties:
+    uuid:
+      type: string
+      description: UUID товара, уникальный в рамках магазина.
+      pattern: >-
+        ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+    code:
+      type: string
+      description: Код товара или группы товаров
+      minLength: 0
+      maxLength: 10
+    barCodes:
+      type: array
+      description: Массив штрихкодов. Для групп товаров - пустой массив.
+      items:
+        type: string
+        pattern: '^[0-9]$'
+        minLength: 1
+    alcoCodes:
+      type: array
+      description: |
+        Массив алкокодов (кодов алкогольной продукции ЕГАИС) для групп товаров - пустой массив
+      items:
+        type: string
+        pattern: '^[0-9]{19}$'
+    name:
+      type: string
+      description: Название товара или группы товаров.
+      minLength: 1
+      maxLength: 100
+    price:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9999999.99
+      description: Цена продажи. Для групп товаров указывайте 0.
+    quantity:
+      type: number
+      format: float
+      description: |
+        Остаток (количество товара). Содержит до 3 знаков после запятой. Для групп товаров указывайте 0.
+    costPrice:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9999999.99
+      description: Закупочная цена. Для групп товаров указывайте 0.
+    measureName:
+      type: string
+      description: Единица измерения товара. Для групп товаров указывайте "".
+      enum:
+        - ''
+        - шт
+        - кг
+        - л
+        - м
+        - км
+        - м2
+        - м3
+        - компл
+        - упак
+        - ед
+        - дроб
+    tax:
+      type: string
+      description: Ставка НДС. Для групп товаров указывайте "NO_VAT".
+      enum:
+        - NO_VAT
+        - VAT_10
+        - VAT_18
+        - VAT_0
+        - VAT_18_118
+        - VAT_10_110
+    allowToSell:
+      type: boolean
+      description: |
+        Определяет доступен товар для продажи или нет. Возможные значения:
+          * true - доступен;
+          * false - недоступен.
+          Для групп товаров указывайте true.
+    description:
+      type: string
+      description: Описание товара. Для групп товаров указывайте "".
+      minLength: 0
+    articleNumber:
+      type: string
+      description: Артикул товара. Для групп товаров указывайте "".
+      minLength: 0
+      maxLength: 20
+    parentUuid:
+      type: string
+      pattern: |
+        ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+      description: |
+        UUID группы товаров, к которой относится товар или другая группа товаров. Может принимать значение null, если товар или группа находятся в корне иерархии.
+    group:
+      type: boolean
+      description: |
+        Определяет, является ли элемент группой товаров или нет. Возможные значения:
+          * true - группа;
+          * false - товар.
+    type:
+      type: string
+      description: |
+        Тип товара:
+          * обычный;
+          * маркированный алкоголь;
+          * немаркированный алкоголь.
+        Для групп товаров - "NORMAL".
+      enum:
+        - NORMAL
+        - ALCOHOL_MARKED
+        - ALCOHOL_NOT_MARKED
+    alcoholByVolume:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 99.999
+      description: >-
+        Крепость алкогольной продукции, до 3 знаков после запятой. Для
+        групп товаров - 0.
+    alcoholProductKindCode:
+      type: integer
+      minimum: 0
+      maximum: 999
+      description: Код вида алкогольной продукции ФСРАР. Для групп товаров - 0.
+    tareVolume:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 999.999
+      description: |
+        Емкость тары алкогольной продукции в литрах, до 3 знаков после запятой. Для неалкогольных товаров и групп - 0.
+    fields:
+      type: object
+      description: Дополнительные атрибуты товара, не входящие в стандартную схему.
+employee:
+  type: object
+  required:
+    - uuid
+    - role
+    - name
+    - stores
+  properties:
+    uuid:
+      type: string
+      description: |
+        Уникальный идентификатор сотрудника в платформе Эвотор, в формате uuid4. Не может содержать пустую строку или принимать значение `null`.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    name:
+      type: string
+      description: Имя сотрудника в платформе Эвотор. Не может содержать пустую строку или принимать значение `null`.
+    lastName:
+      type: string
+      description: Фамилия сотрудника в платформе Эвотор.
+    patronymicName:
+      type: string
+      description: Отчество сотрудника в платформе Эвотор.
+    phone:
+      type: number
+      description: Номер телефона сотрудника в платформе Эвотор.
+      pattern: '^7[0-9]{10}$'
+      default: 79876543210
+    stores:
+      type: array
+      description: Массив идентификаторов магазинов, к которым привязан идентификатор сотрудника.
+      items:
+        type: object
+        properties:
+          storeUuid:
+            type: string
+            description: |
+              Уникальный идентификатор магазина в платформе Эвотор, в формате uuid4. Не может содержать пустую строку или принимать значение `null`.
+            pattern: >-
+              ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    role:
+      type: string
+      description: |
+        Роль, которая задаёт права доступа сотрудника. В зависимости от прав, сотрудники имеют доступ к различным функциям смарт-терминала.
+      enum:
+        - ADMIN
+        - CASHIER
+        - MANUAL
+store:
+  type: object
+  required:
+    - uuid
+    - name
+  properties:
+    uuid:
+      type: string
+      description: >-
+        Уникальный идентификатор магазина в платформе Эвотор, в формате uuid4. Не может содержать пустую строку или принимать значение `null`.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    name:
+      type: string
+      description: Имя магазина в платформе Эвотор. Не может содержать пустую строку или принимать значение `null`.
+    address:
+      type: string
+      description: Адрес магазина в платформе Эвотор.
+device:
+  type: object
+  properties:
+    uuid:
+      type: string
+      description: Уникальный идентификатор смарт-терминала в платформе Эвотор, в формате uuid4.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    name:
+      type: string
+      description: Имя смарт-терминала в платформе Эвотор. Не может содержать пустую строку или принимать значение `null`.
+      minLength: 1
+    storeUuid:
+      type: string
+      description: |
+        Уникальный идентификатор магазина в платформе Эвотор, к которому привязан смарт-терминал. Формат идентификатора - uuid4. Не может содержать пустую строку или принимать значение `null`.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+document:
+  type: object
+  required:
+    - uuid
+    - type
+  properties:
+    uuid:
+      type: string
+    type:
+      type: string
+      enum:
+        - SELL
+        - PAYBACK
+        - CASH_INCOME
+        - CASH_OUTCOME
+        - OPEN_SESSION
+        - FPRINT
+        - CLOSE_SESSION
+        - INVENTORY
+        - ACCEPT
+        - RETURN
+        - WRITE_OFF
+        - REVALUATION
+        - OPEN_TARE
+    transactions:
+      type: array
+      items:
+        $ref: '#/definitions/transaction'
+transaction:
+  type: object
+  properties:
+    type:
+      type: string
+      enum:
+        - DISCOUNT_DOCUMENT
+        - DISCOUNT_POSITION
+        - DISCOUNT_DOCUMENT_POSITION
+        - DOCUMENT_OPEN
+        - DOCUMENT_CLOSE
+        - DOCUMENT_CLOSE_FPRINT
+        - REGISTER_POSITION
+        - REGISTER_BILLS
+        - CASH_INCOME
+        - CASH_OUTCOME
+        - INVENTORY
+        - PAYMENT
+        - OPEN_SESSION
+        - CLOSE_SESSION
+        - FPRINT_OPEN_SESSION
+        - FPRINT_X_REPORT
+        - FPRINT_Z_REPORT
+        - POSITION_TAX
+        - REVALUATION

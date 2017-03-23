@@ -1,0 +1,661 @@
+registerFormData:
+  type: object
+  required:
+    - userUuid
+  properties:
+    userUuid:
+      type: string
+      description: |
+        Уникальный идентификатор пользователя платформы Эвотор.
+      pattern: '^[0-9]{2}-[0-9]{15}$'
+      default: 01-000000000000001
+    username:
+      type: string
+      description: Имя пользователя
+      default: v.pupkin
+    password:
+      type: string
+      description: Пароль
+      default: superpassword
+    email:
+      description: E-mail адрес
+      type: string
+      pattern: >-
+        ^[а-яА-Яa-zA-Z0-9\_\-\.]+\@[а-яА-Яa-zA-Z0-9\_\-\.]+\.[а-яА-Яa-zA-Z0-9\_\-\.]+$
+      default: v.pupkin@pupk.in
+    phone:
+      type: string
+      description: Номер телефона
+      pattern: '^\+7[0-9]{10}$'
+      default: '+79876543210'
+    customField:
+      type: string
+      description: |
+        Дополнительное поле для данных пользователя, которые облако передаёт в сторонний сервис во время авторизации или регистрации пользователя. Название поля характеризует его содержимое. Поле отображается в форме регистрации / авторизации на странице приложения в Магазине приложений. Форма может содержать не более шести полей. Запрещается добавлять поля для данных, которые пользователь может указать в Личном кабинете, после установки приложения.
+      default: Пример значения
+authorizeFormData:
+  type: object
+  required:
+    - userUuid
+  properties:
+    userUuid:
+      type: string
+      description: Уникальный идентификатор пользователя платформы Эвотор
+      pattern: '^[0-9]{2}-[0-9]{15}$'
+      default: 01-000000000000001
+    username:
+      type: string
+      description: Имя пользователя
+      default: v.pupkin
+    password:
+      type: string
+      description: Пароль
+      default: superpassword
+    customField:
+      type: string
+      description: |
+        Дополнительное поле для данных пользователя, которые облако передаёт в сторонний сервис во время авторизации или регистрации пользователя. Название поля характеризует его содержимое. Поле отображается в форме регистрации / авторизации на странице приложения в Магазине приложений. Форма может содержать не более шести полей. Запрещается добавлять поля для данных, которые пользователь может указать в Личном кабинете, после установки приложения.
+      default: Пример значения
+trialStarted:
+  type: object
+  properties:
+    type:
+      type: string
+      description: |
+          Тип события: `trialStarted`.
+      default: trialStarted
+    date:
+      type: string
+      format: date-time
+      description: Дата и время активации пробного периода.
+    data:
+      type: object
+      properties:
+        trialDuration:
+          type: number
+          description: Длительность пробного периода.
+          default: 30
+        trialPeriodMeasure:
+          type: string
+          description: Единица измерения длительности пробного периода.
+          enum:
+            - day
+            - month
+            - year
+          default: day
+        userUuid:
+          type: string
+          description: Уникальный идентификатор пользователя платформы Эвотор.
+          pattern: '^[0-9]{2}-[0-9]{15}$'
+          default: 01-000000000000001
+        tariffId:
+          type: string
+          description: Код тарифа, для которого активирован пробный период.
+          pattern: '^[a-zA-Z0-9\_\-]+$'
+          default: starter
+paymentSuccessed:
+  type: object
+  properties:
+    type:
+      type: string
+      description: |
+        Тип события: `paymentSuccessed`.
+      default: paymentSuccessed
+    date:
+      type: string
+      format: date-time
+      description: Дата и время платежа.
+    data:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Размер платежа.
+          default: 999.99
+        currency:
+          type: string
+          description: Валюта платежа.
+          enum:
+            - RUB
+          default: RUB
+        userUuid:
+          type: string
+          description: Уникальный идентификатор пользователя платформы Эвотор
+          pattern: '^[0-9]{2}-[0-9]{15}$'
+          default: 01-000000000000001
+        tariffId:
+          type: string
+          description: Код оплаченного тарифа.
+          pattern: '^[a-zA-Z0-9\_\-]+$'
+          default: starter
+subscriptionActivated:
+  type: object
+  properties:
+    type:
+      type: string
+      description: |
+        Тип события: `subscriptionActivated`.
+      default: subscriptionActivated
+    date:
+      type: string
+      format: date-time
+      description: Дата и время активации платного периода.
+    data:
+      type: object
+      properties:
+        userUuid:
+          type: string
+          description: Уникальный идентификатор пользователя платформы Эвотор.
+          pattern: '^[0-9]{2}-[0-9]{15}$'
+          default: 01-000000000000001
+        tariffId:
+          type: string
+          description: Код тарифа, для которого активирован платный период.
+          pattern: '^[a-zA-Z0-9\_\-]+$'
+          default: starter
+paymentFailed:
+  type: object
+  properties:
+    type:
+      type: string
+      description: |
+        Тип события: `paymentFailed`.
+      default: paymentFailed
+    date:
+      type: string
+      format: date-time
+      description: Дата и время неудачного платежа.
+    data:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Размер платежа.
+          default: 999.99
+        currency:
+          type: string
+          description: Валюта платежа.
+          enum:
+            - RUB
+          default: RUB
+        nextPaymentAtemptInDays:
+          type: integer
+          description: Через сколько дней будет повторная попытка платежа.
+          default: 1
+        error:
+          type: string
+          description: Описание ошибки.
+          default: Недостаточно средств
+        userUuid:
+          type: string
+          description: Уникальный идентификатор пользователя платформы Эвотор.
+          pattern: '^[0-9]{2}-[0-9]{15}$'
+          default: 01-000000000000001
+        tariffId:
+          type: string
+          description: |
+            Код тарифа, который оплачивал пользователь.
+          pattern: '^[a-zA-Z0-9\_\-]+$'
+          default: starter
+product:
+  type: object
+  required:
+    - alcoCodes
+    - alcoholByVolume
+    - alcoholProductKindCode
+    - allowToSell
+    - articleNumber
+    - barCodes
+    - code
+    - costPrice
+    - description
+    - fields
+    - group
+    - measureName
+    - name
+    - parentUuid
+    - price
+    - quantity
+    - tareVolume
+    - tax
+    - type
+    - uuid
+  properties:
+    uuid:
+      type: string
+      description: >-
+        Уникальный идентификатор товара/группы в формате uuid4; уникален в
+        рамках магазина; не может быть пустой строкой
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    code:
+      type: string
+      description: Код товара либо группы; не может быть null
+      minLength: 0
+      maxLength: 10
+    barCodes:
+      type: array
+      description: >-
+        Массив штрихкодов товара; для групп товаров - пустой массив; не может
+        быть null
+      items:
+        type: string
+        pattern: '^[0-9]$'
+        minLength: 1
+    alcoCodes:
+      type: array
+      description: >-
+        Массив строк алкокодов (кодов алкогольной продукции ЕГАИС); для групп
+        товаров - пустой массив; не может быть null; алкокод не может быть
+        пустой строкой и null
+      items:
+        type: string
+        pattern: '^[0-9]{19}$'
+    name:
+      type: string
+      description: Наименование товара/группы; не может быть пустой строкой и null
+      minLength: 1
+      maxLength: 100
+    price:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9999999.99
+      description: Отпускная цена товара; для групп товаров - 0; не может быть null
+    quantity:
+      type: number
+      format: float
+      description: >-
+        Количество товара в наличии (остаток); до 3 знаков в дробной части;
+        для групп товаров - 0; не может быть null
+    costPrice:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9999999.99
+      description: Закупочная цена; для групп товаров - 0; не может быть null
+    measureName:
+      type: string
+      description: >-
+        Единица измерения для товара; для групп товаров - ""; не может быть
+        null
+      enum:
+        - ''
+        - шт
+        - кг
+        - л
+        - м
+        - км
+        - м2
+        - м3
+        - компл
+        - упак
+        - ед
+        - дроб
+    tax:
+      type: string
+      description: >-
+        Ставка НДС; для групп товаров - "NO_VAT"; не может быть null и пустой
+        строкой
+      enum:
+        - NO_VAT
+        - VAT_10
+        - VAT_18
+        - VAT_0
+        - VAT_18_118
+        - VAT_10_110
+    allowToSell:
+      type: boolean
+      description: >-
+        Флаг доступности товара для продажи; true - товар доступен для
+        добавления в чек, false - товар не доступен для добавления в чек; для
+        групп товаров - true; не может быть null
+    description:
+      type: string
+      description: Описание товара; для групп товаров - ""; не может быть null
+      minLength: 0
+    articleNumber:
+      type: string
+      description: Артикул; для групп товаров - ""; не может быть null
+      minLength: 0
+      maxLength: 20
+    parentUuid:
+      type: string
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      description: >-
+        Уникальный идентификатор группы, к которой принадлежит товар либо
+        группа, в формате uuid4; группа может быть включена в другую группу;
+        если товар/группа находится в корне иерархии, - может быть null; не
+        может быть пустой строкой
+    group:
+      type: boolean
+      description: >-
+        Определяет, является ли элемент группой товаров; true - группа, false
+        - товар; не может быть null
+    type:
+      type: string
+      description: >-
+        Тип товара; обычный ("NORMAL"), маркированный алкоголь
+        ("ALCOHOL_MARKED"), немаркированный алкоголь("ALCOHOL_NOT_MARKED");
+        для групп товаров - "NORMAL"; не может быть null
+      enum:
+        - NORMAL
+        - ALCOHOL_MARKED
+        - ALCOHOL_NOT_MARKED
+    alcoholByVolume:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 99.999
+      description: >-
+        Крепость алкогольной продукции, до 3 знаков в дробной части; для
+        неалкогольных типов товаров и групп - 0; для алкоголя - в диапазоне от
+        0.001 до 99.999; не может быть null
+    alcoholProductKindCode:
+      type: integer
+      minimum: 0
+      maximum: 999
+      description: >-
+        Код вида алкогольной продукции ФСРАР; для неалкогольных типов товаров
+        и групп - 0; для алкоголя - в диапазоне от 1 до 999; не может быть
+        null
+    tareVolume:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 999.999
+      description: >-
+        Ёмкость тары алкогольной продукции в литрах, до 3 знаков после запятой. Для неалкогольных товаров и групп - 0. Для алкоголя - в
+        диапазоне от 0.001 до 999.999; не может быть null
+    fields:
+      type: object
+      description: >-
+        Дополнительные атрибуты товара, не входящие в стандартную схему; не
+        может быть null
+employee:
+  type: object
+  required:
+    - uuid
+    - role
+    - name
+    - stores
+  properties:
+    uuid:
+      type: string
+      description: |
+        Уникальный идентификатор сотрудника в платформе Эвотор, в формате uuid4. Не может содержать пустую строку или принимать значение `null`.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    name:
+      type: string
+      description: Имя сотрудника в платформе Эвотор. Не может содержать пустую строку или принимать значение `null`.
+    lastName:
+      type: string
+      description: Фамилия сотрудника в платформе Эвотор.
+    patronymicName:
+      type: string
+      description: Отчество сотрудника в платформе Эвотор.
+    phone:
+      type: number
+      description: Номер телефона сотрудника в платформе Эвотор.
+      pattern: '^7[0-9]{10}$'
+      default: 79876543210
+    stores:
+      type: array
+      description: Массив идентификаторов магазинов, к которым привязан идентификатор сотрудника.
+      items:
+        type: object
+        properties:
+          storeUuid:
+            type: string
+            description: |
+              Уникальный идентификатор магазина в платформе Эвотор, в формате uuid4. Не может содержать пустую строку или принимать значение `null`.
+            pattern: >-
+              ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    role:
+      type: string
+      description: |
+        Роль, которая задаёт права доступа сотрудника. В зависимости от прав, сотрудники имеют доступ к различным функциям смарт-терминала.
+      enum:
+        - ADMIN
+        - CASHIER
+        - OTHER
+store:
+  type: object
+  required:
+    - uuid
+    - name
+  properties:
+    uuid:
+      type: string
+      description: >-
+        Уникальный идентификатор магазина в облаке Эвотор, в формате uuid4. Не может содержать пустую строку или принимать значение `null`.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    name:
+      type: string
+      description: Имя магазина в платформе Эвотор. Не может содержать пустую строку или принимать значение `null`.
+    address:
+      type: string
+      description: Адрес магазина в платформе Эвотор.
+document:
+  type: object
+  required:
+    - uuid
+    - type
+  properties:
+    uuid:
+      type: string
+      description: >-
+        Уникальный идентификатор документа в платформе Эвотор, в формате uuid4. Уникален в рамках магазина (`storeUuid`).
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    type:
+      type: string
+      enum:
+        - SELL
+        - PAYBACK
+        - CASH_INCOME
+        - CASH_OUTCOME
+        - OPEN_SESSION
+        - FPRINT
+        - CLOSE_SESSION
+        - INVENTORY
+        - ACCEPT
+        - RETURN
+        - WRITE_OFF
+        - REVALUATION
+        - OPEN_TARE
+    transactions:
+      type: array
+      items:
+        $ref: '#/definitions/transaction'
+transaction:
+  type: object
+  properties:
+    type:
+      type: string
+      enum:
+        - DISCOUNT_DOCUMENT
+        - DISCOUNT_POSITION
+        - DISCOUNT_DOCUMENT_POSITION
+        - DOCUMENT_OPEN
+        - DOCUMENT_CLOSE
+        - DOCUMENT_CLOSE_FPRINT
+        - REGISTER_POSITION
+        - REGISTER_BILLS
+        - CASH_INCOME
+        - CASH_OUTCOME
+        - INVENTORY
+        - PAYMENT
+        - OPEN_SESSION
+        - CLOSE_SESSION
+        - FPRINT_OPEN_SESSION
+        - FPRINT_X_REPORT
+        - FPRINT_Z_REPORT
+        - POSITION_TAX
+        - REVALUATION
+device:
+  type: object
+  properties:
+    uuid:
+      type: string
+      description: Уникальный идентификатор смарт-терминала в платформе Эвотор, в формате uuid4.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+    name:
+      type: string
+      description: Имя смарт-терминала в платформе Эвотор. Не может содержать пустую строку или принимать значение `null`.
+      minLength: 1
+    storeUuid:
+      type: string
+      description: >-
+        Уникальный идентификатор магазина в платформе Эвотор, к которому привязан смарт-терминал. Формат идентификатора - uuid4. Не может содержать пустую строку или принимать значение `null`.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+commodity:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Название товара.
+    alcCodes:
+      type: array
+      items:
+        type: string
+    scanCodes:
+      type: array
+      items:
+        type: string
+    alcoholByVolume:
+      type: string
+      description: Крепость алкогольной продукции.
+    alcoholProductKindCode:
+      type: string
+      description: Код вида алкогольной продукции.
+    tareVolume:
+      type: string
+      description: Ёмкость тары алкогольной продукции в литрах, до 3 знаков после запятой.
+    measure:
+      type: string
+      description: Единицы измерения.
+receipt:
+  type: object
+  required:
+    - uuid
+    - deviceUuid
+    - storeUuid
+    - dateTime
+  properties:
+    uuid:
+      type: string
+      description: Уникальный идентификатор чека.
+    deviceUuid:
+      type: string
+      description: Уникальный идентификатор смарт-терминала.
+    storeUuid:
+      type: string
+      description: Уникальный идентификатор магазина.
+    dateTime:
+      description: Дата и время.
+      type: string
+      format: date-time
+    type:
+      description: |
+        Тип чека: продажа или возврат.
+      type: string
+    shiftId:
+      description: Номер смены.
+      type: string
+    employeeUuid:
+      type: string
+      description: Уникальный идентификатор сотрудника (пользователя, продавшего товар).
+    paymentSource:
+      description: |
+        Способ оплаты:
+          * PAY_CASH - оплата наличными без сдачи;
+          * PAY_CASHBACK – оплата наличными со сдачей;
+          * PAY_CARD - оплата по карте.
+      type: string
+      enum:
+        - PAY_CASH
+        - PAY_CASHBACK
+        - PAY_CARD
+        - OTHER
+    infoCheck:
+      type: boolean
+      description: Информационный чек. Возможные значения true или false.
+    egais:
+      type: boolean
+      description: ЕГАИС. Возможные значения true или false.
+    items:
+      type: array
+      description: Массив с позициями в чеке.
+      items:
+        type: object
+        properties:
+          uuid:
+            type: string
+            description: Уникальный идентификатор товара / услуги.
+          name:
+            type: string
+            description: Наименование товара / услуги.
+          itemType:
+            type: string
+            description: |
+              Тип товара:
+                * обычный;
+                * маркированный алкоголь;
+                * немаркированный алкоголь.
+                * услуга.
+            enum:
+              - NORMAL
+              - ALCOHOL_MARKED
+              - ALCOHOL_NOT_MARKED
+              - SERVICE
+          barcode:
+            type: string
+          measureName:
+            type: string
+            description: Единица измерения.
+          quantity:
+            type: number
+            description: Кол-во товара.
+          price:
+            type: number
+            description: Цена продажи товара.
+          costPrice:
+            type: number
+            description: Цена закупки товара.
+          sumPrice:
+            type: number
+            description: Общая цена товара/
+          tax:
+            type: number
+            description: Cумма налога на товар.
+          taxPercent:
+            type: number
+            description: Общий налог на товар. Выражается в процентах.
+          discount:
+            type: number
+            description: Общая сумма скидки на товар.
+    totalTax:
+      type: number
+      description: Общая сумма налога.
+    totalDiscount:
+      type: number
+      description: Общая сумма скидки.
+    totalAmount:
+      type: number
+      description: Общая сумма чека.
+    clientUuid:
+      type: string
+      description: |
+        Уникальный идентификатор (`uuid`) клиента. Появляется после того, как клиент указал номер телефона, e-mail или другие данные, например в программе лояльности.
+    fields:
+      type: object
+      description: |
+        Дополнительные поля. Нпример, поля пользователей программ лояльности. Поля передаются только в те сторонние сервисы, где они были созданы.
