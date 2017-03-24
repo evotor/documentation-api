@@ -1,0 +1,15 @@
+auth:
+  name: X-Authorization
+  in: header
+  description: |
+      Содержит токен, который можно получить одним из способов, описанных в разделе **Авторизация**.
+  required: true
+  type: string
+contentType:
+  name: Content-Type
+  in: header
+  description: |
+      Тип данных, которые может содержать тело HTTP-запроса. Значение по умолчанию `application/json`
+  required: true
+  type: string
+  default: application/json
