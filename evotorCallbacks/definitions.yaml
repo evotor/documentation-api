@@ -8,31 +8,31 @@ registerFormData:
       description: |
         Уникальный идентификатор пользователя платформы Эвотор.
       pattern: '^[0-9]{2}-[0-9]{15}$'
-      default: 01-000000000000001
+      example: 01-000000000000001
     username:
       type: string
       description: Имя пользователя
-      default: v.pupkin
+      example: v.pupkin
     password:
       type: string
       description: Пароль
-      default: superpassword
+      example: superpassword
     email:
       description: E-mail адрес
       type: string
       pattern: >-
         ^[а-яА-Яa-zA-Z0-9\_\-\.]+\@[а-яА-Яa-zA-Z0-9\_\-\.]+\.[а-яА-Яa-zA-Z0-9\_\-\.]+$
-      default: v.pupkin@pupk.in
+      example: v.pupkin@pupk.in
     phone:
       type: string
       description: Номер телефона
       pattern: '^\+7[0-9]{10}$'
-      default: '+79876543210'
+      example: '+79876543210'
     customField:
       type: string
       description: |
         Дополнительное поле для данных пользователя, которые облако передаёт в сторонний сервис во время авторизации или регистрации пользователя. Название поля характеризует его содержимое. Поле отображается в форме регистрации / авторизации на странице приложения в Магазине приложений. Форма может содержать не более шести полей. Запрещается добавлять поля для данных, которые пользователь может указать в Личном кабинете, после установки приложения.
-      default: Пример значения
+      example: Пример значения
 authorizeFormData:
   type: object
   required:
@@ -42,20 +42,20 @@ authorizeFormData:
       type: string
       description: Уникальный идентификатор пользователя платформы Эвотор
       pattern: '^[0-9]{2}-[0-9]{15}$'
-      default: 01-000000000000001
+      example: 01-000000000000001
     username:
       type: string
       description: Имя пользователя
-      default: v.pupkin
+      example: v.pupkin
     password:
       type: string
       description: Пароль
-      default: superpassword
+      example: superpassword
     customField:
       type: string
       description: |
         Дополнительное поле для данных пользователя, которые облако передаёт в сторонний сервис во время авторизации или регистрации пользователя. Название поля характеризует его содержимое. Поле отображается в форме регистрации / авторизации на странице приложения в Магазине приложений. Форма может содержать не более шести полей. Запрещается добавлять поля для данных, которые пользователь может указать в Личном кабинете, после установки приложения.
-      default: Пример значения
+      example: Пример значения
 trialStarted:
   type: object
   properties:
@@ -87,12 +87,12 @@ trialStarted:
           type: string
           description: Уникальный идентификатор пользователя платформы Эвотор.
           pattern: '^[0-9]{2}-[0-9]{15}$'
-          default: 01-000000000000001
+          example: 01-000000000000001
         tariffId:
           type: string
           description: Код тарифа, для которого активирован пробный период.
           pattern: '^[a-zA-Z0-9\_\-]+$'
-          default: starter
+          example: starter
 paymentSuccessed:
   type: object
   properties:
@@ -112,7 +112,7 @@ paymentSuccessed:
           type: number
           format: float
           description: Размер платежа.
-          default: 999.99
+          example: 999.99
         currency:
           type: string
           description: Валюта платежа.
@@ -123,12 +123,12 @@ paymentSuccessed:
           type: string
           description: Уникальный идентификатор пользователя платформы Эвотор
           pattern: '^[0-9]{2}-[0-9]{15}$'
-          default: 01-000000000000001
+          example: 01-000000000000001
         tariffId:
           type: string
           description: Код оплаченного тарифа.
           pattern: '^[a-zA-Z0-9\_\-]+$'
-          default: starter
+          example: starter
 subscriptionActivated:
   type: object
   properties:
@@ -148,12 +148,12 @@ subscriptionActivated:
           type: string
           description: Уникальный идентификатор пользователя платформы Эвотор.
           pattern: '^[0-9]{2}-[0-9]{15}$'
-          default: 01-000000000000001
+          example: 01-000000000000001
         tariffId:
           type: string
           description: Код тарифа, для которого активирован платный период.
           pattern: '^[a-zA-Z0-9\_\-]+$'
-          default: starter
+          example: starter
 paymentFailed:
   type: object
   properties:
@@ -173,7 +173,7 @@ paymentFailed:
           type: number
           format: float
           description: Размер платежа.
-          default: 999.99
+          example: 999.99
         currency:
           type: string
           description: Валюта платежа.
@@ -192,13 +192,13 @@ paymentFailed:
           type: string
           description: Уникальный идентификатор пользователя платформы Эвотор.
           pattern: '^[0-9]{2}-[0-9]{15}$'
-          default: 01-000000000000001
+          example: 01-000000000000001
         tariffId:
           type: string
           description: |
             Код тарифа, который оплачивал пользователь.
           pattern: '^[a-zA-Z0-9\_\-]+$'
-          default: starter
+          example: starter
 product:
   type: object
   required:
@@ -402,7 +402,7 @@ employee:
       type: number
       description: Номер телефона сотрудника в платформе Эвотор.
       pattern: '^7[0-9]{10}$'
-      default: 79876543210
+      example: 79876543210
     stores:
       type: array
       description: Массив идентификаторов магазинов, к которым привязан идентификатор сотрудника.
