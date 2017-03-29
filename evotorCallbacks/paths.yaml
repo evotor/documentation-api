@@ -42,6 +42,18 @@
               type: string
               maxLength: 128
               default: toaWaep4chou7ahkoogiu9Iusaht9ima
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/40110011006
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+      '409':
+        $ref: ../responses.yaml#/4092004
 /api/v1/user/create:
   post:
     tags:
@@ -80,6 +92,18 @@
               type: string
               maxLength: 128
               default: toaWaep4chou7ahkoogiu9Iusaht9ima
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+      '409':
+        $ref: ../responses.yaml#/4092005
 /api/v1/user/tariff:
   post:
     tags:
@@ -123,6 +147,16 @@
     responses:
       '200':
         description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/40510051007
 /api/v1/inventories/devices:
   put:
     tags:
@@ -158,6 +192,16 @@
                 type: string
                 description: >-
                   Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
 /api/v1/inventories/employees:
   put:
     tags:
@@ -193,6 +237,16 @@
                 type: string
                 description: >-
                   Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
 /api/v1/inventories/stores:
   put:
     tags:
@@ -228,6 +282,16 @@
                 type: string
                 description: >-
                   Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
 '/api/v1/inventories/stores/{storeUuid}/products':
   get:
     tags:
@@ -285,6 +349,16 @@
               Общее количество страниц в многостраничной выборке. Возвращается, если в запросе указаны параметры `page` и `size`.
             type: integer
             minimum: 1
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
   post:
     tags:
       - Товары и документы
@@ -322,6 +396,16 @@
                   ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
               id:
                 type: string
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
 '/api/v1/inventories/stores/{storeUuid}/documents':
   put:
     tags:
@@ -348,6 +432,16 @@
     responses:
       '200':
         description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
 /api/v1/commodities:
   get:
     tags:
@@ -370,6 +464,16 @@
         schema:
           $ref: ./definitions.yaml#/commodity
         description: OK
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
 /api/v1/receipt:
   post:
     tags:
@@ -390,3 +494,13 @@
     responses:
       '200':
         description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
