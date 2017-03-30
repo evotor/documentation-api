@@ -20,4 +20,4 @@ paths:
 parameters:
   $ref: ./evotorRestApi/parameters.yaml
 definitions:
-  $ref: ./evotorRestApi/definitions.yaml
+  $ref: ./definitions.yaml
