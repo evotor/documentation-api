@@ -15,7 +15,7 @@
          title: Список магазинов
          type: array
          items:
-           $ref: ./definitions.yaml#/store
+           $ref: ../definitions.yaml#/store
 /api/v1/inventories/employees/search:
  x-summary: Получить список сотрудников
  get:
@@ -33,7 +33,7 @@
          title: Cписок сотрудников
          type: array
          items:
-           $ref: ./definitions.yaml#/employee
+           $ref: ../definitions.yaml#/employee
 /api/v1/inventories/devices/search:
  x-summary: Получить список смарт-терминалов
  get:
@@ -51,7 +51,7 @@
          title: Список смарт-терминалов
          type: array
          items:
-           $ref: ./definitions.yaml#/device
+           $ref: ../definitions.yaml#/device
 /api/v1/inventories/stores/{storeUuid}/products:
  x-summary: Обмен товарами
  get:
@@ -72,7 +72,7 @@
        schema:
          type: array
          items:
-           $ref: ./definitions.yaml#/product
+           $ref: ../definitions.yaml#/product
  post:
    tags:
      - Товары и документы
@@ -93,7 +93,7 @@
        schema:
          type: array
          items:
-           $ref: ./definitions.yaml#/product
+           $ref: ../definitions.yaml#/product
    responses:
      '200':
        description: OK
@@ -120,7 +120,7 @@
        schema:
          type: array
          items:
-           $ref: ./definitions.yaml#/productToDelete
+           $ref: ../definitions.yaml#/productToDelete
    responses:
      '200':
        description: OK
@@ -154,13 +154,13 @@
        format: date-time
        type: string
        description: |
-         Ответ будет содержать документы, созданные до указанной даты. Формат времени - 2017-01-10T09:33:19.757Z
+         Ответ будет содержать документы, созданные до указанной даты. Формат времени - 2017-01-10T09:33:19.757
      - name: gtCloseDate
        in: query
        format: date-time
        type: string
        description: |
-         Ответ будет содержать документы, созданные после указанной даты. Формат времени - 2017-01-10T09:33:19.757Z
+         Ответ будет содержать документы, созданные после указанной даты. Формат времени - 2017-01-10T09:33:19.757
      - name: type
        description: |
          Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
@@ -180,4 +180,4 @@
          title: Массив документов
          type: array
          items:
-           $ref: ./definitions.yaml#/document
+           $ref: ../definitions.yaml#/document

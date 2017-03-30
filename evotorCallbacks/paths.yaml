@@ -5,7 +5,7 @@
     summary: Авторизация пользователя
     description: |
       Авторизация существующего пользователя в стороннем сервисе с помощью данных учётной записи платформы Эвотор.
-      **ВАЖНО:** Под пользователем понимается мастер-аккаунт владельца бизнеса в системе партнера
+      > Под пользователем понимается мастер-аккаунт владельца бизнеса в стороннем сервисе.
     parameters:
       - $ref: ./parameters.yaml#/serverAuth
       - name: ''
@@ -14,7 +14,7 @@
           Поля, необходимые для авторизации существующего пользователя в стороннем сервисе.
         required: true
         schema:
-          $ref: ./definitions.yaml#/authorizeFormData
+          $ref: ../definitions.yaml#/authorizeFormData
     responses:
       '200':
         description: OK
@@ -70,7 +70,7 @@
           Поля необходимые для регистрации нового пользователя в стороннем сервисе.
         required: true
         schema:
-          $ref: ./definitions.yaml#/registerFormData
+          $ref: ../definitions.yaml#/registerFormData
     responses:
       '200':
         description: OK
@@ -174,7 +174,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/device
+            $ref: ../definitions.yaml#/device
     responses:
       '200':
         description: OK
@@ -219,7 +219,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/employee
+            $ref: ../definitions.yaml#/employee
     responses:
       '200':
         description: OK
@@ -264,7 +264,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/store
+            $ref: ../definitions.yaml#/store
     responses:
       '200':
         description: OK
@@ -326,7 +326,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/product
+            $ref: ../definitions.yaml#/product
         headers:
           X-Total-Items-Count:
             description: |
@@ -380,7 +380,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/product
+            $ref: ../definitions.yaml#/product
     responses:
       '200':
         description: OK
@@ -394,8 +394,6 @@
                 type: string
                 pattern: >-
                   ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-              id:
-                type: string
       '400':
         $ref: ../responses.yaml#/40020012003
       '401':
@@ -428,7 +426,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/document
+            $ref: ../definitions.yaml#/document
     responses:
       '200':
         description: OK
@@ -452,17 +450,19 @@
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
       - name: scanCode
+        description: Штрихкод.
         in: query
         required: true
         type: string
       - name: alcCode
+        description: Код алкогольной продукции.
         in: query
         required: false
         type: string
     responses:
       '200':
         schema:
-          $ref: ./definitions.yaml#/commodity
+          $ref: ../definitions.yaml#/commodity
         description: OK
       '400':
         $ref: ../responses.yaml#/4002001
@@ -490,7 +490,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/receipt
+            $ref: ../definitions.yaml#/receipt
     responses:
       '200':
         description: OK
@@ -498,6 +498,47 @@
         $ref: ../responses.yaml#/40020012003
       '401':
         $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+/api/v1/user/token:
+  post:
+    tags:
+      - Учётные записи в стороннем сервисе
+    summary: Получить токен приложения
+    description: |
+      Получает токен приложения, после того, как пользователь установил приложение в Личном кабинете. Сторонний сервис использует токен приложения для авторизации запросов к облаку Эвотор.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - $ref: ./parameters.yaml#/Accept
+      - $ref: ./parameters.yaml#/Content-Type
+      - $ref: ./parameters.yaml#/Accept-Charset
+      - name: ''
+        in: body
+        description: Тело запроса.
+        required: true
+        schema:
+          type: object
+          required:
+            - userUuid
+            - token
+          properties:
+            userUuid:
+              $ref: ../definitions.yaml#/registerFormData/properties/userUuid
+            token:
+              type: string
+              description: Токен приложения.
+              example: f46b89a5-8e80-4591-b0aa-94551790444b
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
       '402':
         $ref: ../responses.yaml#/402
       '404':
