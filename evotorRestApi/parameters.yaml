@@ -13,3 +13,41 @@ contentType:
   required: true
   type: string
   default: application/json
+serverAuth:
+  name: Authorization
+  in: header
+  description: |
+    Авторизация запросов облака Эвотор в стороннем сервисе. Содержит токен в зависимости от типа авторизации: Basic или Bearer.
+  required: true
+  type: string
+  pattern: '^(Bearer|Basic) [a-zA-Z0-9_=-]+$'
+  example: Bearer evotor_token
+clientAuth:
+  name: Authorization
+  in: header
+  description: |
+    Авторизация запросов облака Эвотор в стороннем сервисе. Содержит Bearer-токен авторизации.
+  required: true
+  type: string
+  pattern: '^Bearer [a-zA-Z0-9_=-]+$'
+Accept:
+  name: Accept
+  in: header
+  description: Формат данных, которые должен поддерживать ресурс.
+  required: true
+  type: string
+  default: "application/json;charset=UTF-8"
+Content-Type:
+  name: Content-Type
+  in: header
+  description: Формат и способ предоставления сущности.
+  type: string
+  required: false
+  default: "application/json;charset=UTF-8"
+Accept-Charset:
+  name: Accept-Charset
+  in: header
+  description: Поддерживаемые кодировки.
+  type: string
+  required: false
+  default: "UTF-8"

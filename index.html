@@ -6,25 +6,53 @@
     <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
     <link rel="stylesheet" href="main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <style>
+    /* Add a black background color to the top navigation */
+    .topnav {
+    overflow: hidden;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+    float: center;
+    display: inline;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    }
+
+    /* Add a color to the active/current link */
+    .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+    }
+    </style>
   </head>
   <body>
 	<nav>
 	  <header> <a href="/docs"><img alt="API Эвотор" width="152" height="45" src="images/logo.svg"></a> </header>
-      <ul id="links_container">
-      </ul>
+      <div class="topnav" id="myTopnav">
+        <a href="https://developer.evotor.ru/" target="_blank">Документация</a>
+        <a href="https://lytkini.github.io/">Эвотор REST API</a>
+        <a href="https://github.com/evotor/device-app" target="_blank">SDK смарт-терминала</a>
+      </div>
     </nav>
     <redoc scroll-y-offset="body > nav"></redoc>
     <script src="https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js"> </script>
 	<script>
       var apis = [
         {
-          name: 'Запросы к облаку Эвотор',
-          url: 'https://api.evotor.ru/docs/evotor-rest-api.yaml'
+          name: 'Эвотор API',
+          url: './evotor-rest-api.yaml'
         },
-        {
-          name: 'Запросы к стороннему сервису',
-          url: 'https://api.evotor.ru/docs/evotor-callbacks.yaml'
-        }
       ];
 
       Redoc.init(apis[0].url);
@@ -37,7 +65,7 @@
       var $list = document.getElementById('links_container');
       apis.forEach(function(api) {
         var $listitem = document.createElement('li');
-        $listitem.setAttribute('data-link', api.url);
+        $listitem.setAttribute('href', api.url);
         $listitem.innerText = api.name;
         $listitem.addEventListener('click', onClick);
         $list.appendChild($listitem);
