@@ -207,7 +207,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
        type: string
        description: |
          Ответ будет содержать документы, созданные после указанной даты. Формат времени - 2017-01-10T09:33:19.757
-     - name: type
+     - name: types
        description: |
          Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
          * кассовые документы - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION.
