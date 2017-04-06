@@ -414,8 +414,6 @@ partner.ru/api/v1/user/tariff:
         $ref: ../responses.yaml#/402
       '404':
         $ref: ../responses.yaml#/404
-      '405':
-        $ref: ../responses.yaml#/40510051007
 partner.ru/api/v1/inventories/devices:
   put:
     tags:
@@ -460,7 +458,7 @@ partner.ru/api/v1/inventories/devices:
       '404':
         $ref: ../responses.yaml#/404
       '405':
-        $ref: ../responses.yaml#/4051005
+        $ref: ../responses.yaml#/40510051007
 partner.ru/api/v1/inventories/employees:
   put:
     tags:
