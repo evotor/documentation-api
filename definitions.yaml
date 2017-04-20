@@ -727,7 +727,7 @@ timestamp:
   type: string
   format: timestamp
   description: Дата и время отправки события.
-  example: 2017-04-18T11:48:26+0000
+  example: 2017-04-20T18:26:37.753+03:00
 
 
 subscriptionId:
@@ -752,7 +752,7 @@ deviceNumber:
 nextBillingDate:
   type: OffsetDateTime
   description: Дата следующего платежа.
-  example: 2017-04-18T11:48:26+0000
+  example: 2017-04-20T18:26:37.753+03:00
 
 
 chargedSum:

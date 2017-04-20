@@ -15,7 +15,7 @@ SubscriptionCreated:
         - $ref: ../definitions.yaml#/planId
     trialPeriodDuration:
       type: string
-      description: Срок бесплатного периода, выраженный в днях.
+      description: Срок бесплатного периода, выраженный в днях (P[n]DT).
       example: P30DT
     deviceNumber:
       allOf:
