@@ -2,9 +2,10 @@ auth:
   name: X-Authorization
   in: header
   description: |
-      Содержит токен, который можно получить одним из способов, описанных в разделе **Авторизация**.
+      Токен приложения, который можно получить одним из способов, описанных в разделе **Авторизация**.
   required: true
   type: string
+
 contentType:
   name: Content-Type
   in: header
@@ -13,15 +14,17 @@ contentType:
   required: true
   type: string
   default: application/json
+
 serverAuth:
   name: Authorization
   in: header
   description: |
-    Авторизация запросов облака Эвотор в стороннем сервисе. Содержит токен в зависимости от типа авторизации: Basic или Bearer.
+    "Авторизация запросов облака Эвотор в стороннем сервисе. Содержит токен в зависимости от типа авторизации: Basic или Bearer."
   required: true
   type: string
   pattern: '^(Bearer|Basic) [a-zA-Z0-9_=-]+$'
   example: Bearer evotor_token
+
 clientAuth:
   name: Authorization
   in: header
@@ -30,6 +33,7 @@ clientAuth:
   required: true
   type: string
   pattern: '^Bearer [a-zA-Z0-9_=-]+$'
+
 Accept:
   name: Accept
   in: header
@@ -37,6 +41,7 @@ Accept:
   required: true
   type: string
   default: "application/json;charset=UTF-8"
+
 Content-Type:
   name: Content-Type
   in: header
@@ -44,6 +49,7 @@ Content-Type:
   type: string
   required: false
   default: "application/json;charset=UTF-8"
+
 Accept-Charset:
   name: Accept-Charset
   in: header
@@ -51,3 +57,20 @@ Accept-Charset:
   type: string
   required: false
   default: "UTF-8"
+
+Accept-Encoding:
+  name: accept-encoding
+  in: header
+  description: Поддерживаемые форматы сжатия.
+  type: string
+  required: false
+  default: "[gzip]"
+
+storeUuid:
+  name: storeUuid
+  in: path
+  description: Идентификатор магазина (uuid4), в рамках которого действует запрос.
+  required: true
+  type: string
+  pattern: >-
+    ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$

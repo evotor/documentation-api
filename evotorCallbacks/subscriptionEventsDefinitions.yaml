@@ -1,4 +1,4 @@
-subscriptionCreated:
+SubscriptionCreated:
   type: object
   properties:
     subscriptionId:
@@ -8,110 +8,89 @@ subscriptionCreated:
       allOf:
         - $ref: ../definitions.yaml#/userId
     productId:
-      type: string
-      description: Идентификатор приложения в формате uuid4.
-      example: c0d01x35-5193-4cc2-9bfb-be20e0679498
+      allOf:
+        - $ref: ../definitions.yaml#/productId
     planId:
       allOf:
         - $ref: ../definitions.yaml#/planId
     trialPeriodDuration:
       type: string
       description: Срок бесплатного периода, выраженный в днях.
-      example: 14
+      example: P30DT
     deviceNumber:
       allOf:
       - $ref: ../definitions.yaml#/deviceNumber
     timestamp:
       allOf:
       - $ref: ../definitions.yaml#/timestamp
-subscriptionActivated:
+
+
+SubscriptionActivated:
   type: object
   properties:
     subscriptionId:
       allOf:
       - $ref: ../definitions.yaml#/subscriptionId
+    productId:
+      allOf:
+        - $ref: ../definitions.yaml#/productId
     nextBillingDate:
       allOf:
       - $ref: ../definitions.yaml#/nextBillingDate
-    timestamp:
-      allOf:
-      - $ref: ../definitions.yaml#/timestamp
-subscriptionInvoiced:
-  type: object
-  properties:
-    subscriptionId:
-      allOf:
-      - $ref: ../definitions.yaml#/subscriptionId
-    fromDate:
-      type: instant
-      description: Дата начала подписки.
-    tillDate:
-      type: instant
-      description: Дата окончания подписки.
-    sum:
-      type: money
-      description: Сумма платежа.
-    invoiceId:
-      type: string
-      description: Идентификатор инвойса.
-    dunningEnabled:
-      type: boolean
-      description: Флажок, который указывает на наличие или отсутствие напоминания о долге.
-      example: true
-    timestamp:
-      allOf:
-      - $ref: ../definitions.yaml#/timestamp
-subscriptionRenewed:
-  type: object
-  properties:
-    subscriptionId:
-      allOf:
-      - $ref: ../definitions.yaml#/subscriptionId
-    nextBillingDate:
-      allOf:
-      - $ref: ../definitions.yaml#/nextBillingDate
-    timestamp:
-      allOf:
-      - $ref: ../definitions.yaml#/timestamp
-subscriptionCanceled:
-  type: object
-  properties:
-    subscriptionId:
-      allOf:
-      - $ref: ../definitions.yaml#/subscriptionId
-    timestamp:
-      allOf:
-      - $ref: ../definitions.yaml#/timestamp
-subscriptionPlanChanged:
-  type: object
-  properties:
-    subscriptionId:
-      allOf:
-      - $ref: ../definitions.yaml#/subscriptionId
-    planId:
-      allOf:
-      - $ref: ../definitions.yaml#/planId
-    billedTill:
-        type: instant
-        description: Дата смены тарифа.
     chargedSum:
       allOf:
         - $ref: ../definitions.yaml#/chargedSum
     timestamp:
       allOf:
-        - $ref: ../definitions.yaml#/timestamp
-subscriptionDeviceNumberChanged:
+      - $ref: ../definitions.yaml#/timestamp
+
+SubscriptionRenewed:
+  type: object
+  properties:
+    subscriptionId:
+      allOf:
+      - $ref: ../definitions.yaml#/subscriptionId
+    productId:
+      allOf:
+        - $ref: ../definitions.yaml#/productId
+    nextBillingDate:
+      allOf:
+      - $ref: ../definitions.yaml#/nextBillingDate
+    timestamp:
+      allOf:
+      - $ref: ../definitions.yaml#/timestamp
+
+SubscriptionCancelled:
+  type: object
+  properties:
+    subscriptionId:
+      allOf:
+      - $ref: ../definitions.yaml#/subscriptionId
+    productId:
+      allOf:
+        - $ref: ../definitions.yaml#/productId
+    timestamp:
+      allOf:
+      - $ref: ../definitions.yaml#/timestamp
+
+SubscriptionTermsChanged:
   type: object
   properties:
       subscriptionId:
         allOf:
         - $ref: ../definitions.yaml#/subscriptionId
+      productId:
+        allOf:
+          - $ref: ../definitions.yaml#/productId
+      planId:
+        allOf:
+        - $ref: ../definitions.yaml#/planId
       deviceNumber:
         allOf:
         - $ref: ../definitions.yaml#/deviceNumber
-      billedTill:
-          type: instant
-          description: Дата, до которой тариф действует на устройстве.
+      nextBillingDate:
+        allOf:
+        - $ref: ../definitions.yaml#/nextBillingDate
       chargedSum:
         allOf:
           - $ref: ../definitions.yaml#/chargedSum
