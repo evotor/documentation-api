@@ -324,7 +324,7 @@ productSchema:
           ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
     items:
       type: array
-      desctiption: Массив полей схемы.
+      description: Массив полей схемы.
       items:
         type: object
         properties:
@@ -727,7 +727,7 @@ timestamp:
   type: string
   format: timestamp
   description: Дата и время отправки события.
-  example: 2017-04-20T18:26:37.753+03:00
+  example: 2017-04-20T18:26:37.753+0000
 
 
 subscriptionId:
@@ -750,9 +750,10 @@ deviceNumber:
 
 
 nextBillingDate:
-  type: OffsetDateTime
+  type: string
+  format: date-time
   description: Дата следующего платежа.
-  example: 2017-04-20T18:26:37.753+03:00
+  example: 2017-04-23T00:48:38.000+0000
 
 
 chargedSum:
