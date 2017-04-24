@@ -469,7 +469,7 @@ document:
   type: object
   required:
     - uuid
-    - type
+    - types
   properties:
     uuid:
       type: string
