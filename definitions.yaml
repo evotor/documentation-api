@@ -725,7 +725,7 @@ userId:
 
 timestamp:
   type: string
-  format: timestamp
+  format: date-time
   description: Дата и время отправки события.
   example: 2017-04-20T18:26:37.753+0000
 
