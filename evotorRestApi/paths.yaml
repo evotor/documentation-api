@@ -754,7 +754,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/delete:
         description: Не авторизован
 
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/extras:
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras:
   x-summary: Дополнительные поля
   get:
     tags:
