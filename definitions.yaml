@@ -102,7 +102,7 @@ SubscriptionCreated:
 
 
 SubscriptionActivated:
-  description: Подписка активирована.
+  description: Подписка активирована, началась платная фаза тарифа.
   allOf:
     - $ref: '#/events'
     - $ref: ./evotorCallbacks/subscriptionEventsDefinitions.yaml#/SubscriptionActivated
@@ -745,7 +745,7 @@ planId:
 
 deviceNumber:
   type: integer
-  description:  Идентификатор устройства.
+  description:  Количество оплаченных устройств.
   example: 352398080215959
 
 
