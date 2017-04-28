@@ -1,4 +1,4 @@
-api.evotor.ru/api/v1/inventories/stores/search:
+/api.evotor.ru/api/v1/inventories/stores/search:
  x-summary: Получить список магазинов
  get:
    tags:
@@ -18,7 +18,7 @@ api.evotor.ru/api/v1/inventories/stores/search:
            $ref: ../definitions.yaml#/store
 
 
-api.evotor.ru/api/v1/inventories/employees/search:
+/api.evotor.ru/api/v1/inventories/employees/search:
  x-summary: Получить список сотрудников
  get:
    tags:
@@ -38,7 +38,7 @@ api.evotor.ru/api/v1/inventories/employees/search:
            $ref: ../definitions.yaml#/employee
 
 
-api.evotor.ru/api/v1/inventories/devices/search:
+/api.evotor.ru/api/v1/inventories/devices/search:
  x-summary: Получить список смарт-терминалов
  get:
    tags:
@@ -58,7 +58,7 @@ api.evotor.ru/api/v1/inventories/devices/search:
            $ref: ../definitions.yaml#/device
 
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
  x-summary: Обмен товарами
  get:
    tags:
@@ -105,7 +105,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
        description: OK
 
 
-partner.ru/api/v1/inventories/stores/{storeUuid}/products:
+/partner.ru/api/v1/inventories/stores/{storeUuid}/products:
  post:
    tags:
      - Вебхуки-уведомления
@@ -153,7 +153,7 @@ partner.ru/api/v1/inventories/stores/{storeUuid}/products:
        $ref: ../responses.yaml#/4051005
 
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/delete:
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/delete:
  x-summary: Удаление товаров
  post:
    tags:
@@ -182,7 +182,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/delete:
        description: OK
 
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
  x-summary: Документы
  get:
    tags:
@@ -241,7 +241,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
            $ref: ../definitions.yaml#/document
 
 
-partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
+/partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
  put:
    tags:
      - Вебхуки-уведомления
@@ -279,7 +279,7 @@ partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
        $ref: ../responses.yaml#/4051005
 
 
-partner.ru/api/v1/user/verify:
+/partner.ru/api/v1/user/verify:
   post:
     tags:
       - Вебхуки-запросы
@@ -335,7 +335,7 @@ partner.ru/api/v1/user/verify:
         $ref: ../responses.yaml#/4092004
 
 
-partner.ru/api/v1/user/create:
+/partner.ru/api/v1/user/create:
   post:
     tags:
       - Вебхуки-запросы
@@ -385,7 +385,7 @@ partner.ru/api/v1/user/create:
         $ref: ../responses.yaml#/4092005
 
 
-partner.ru/api/v1/user/tariff:
+/partner.ru/api/v1/user/tariff:
   post:
     tags:
       - Вебхуки-запросы
@@ -438,7 +438,7 @@ partner.ru/api/v1/user/tariff:
         $ref: ../responses.yaml#/40510051007
 
 
-partner.ru/api/v1/inventories/devices:
+/partner.ru/api/v1/inventories/devices:
   put:
     tags:
       - Вебхуки-уведомления
@@ -485,7 +485,7 @@ partner.ru/api/v1/inventories/devices:
         $ref: ../responses.yaml#/4051005
 
 
-partner.ru/api/v1/inventories/employees:
+/partner.ru/api/v1/inventories/employees:
   put:
     tags:
       - Вебхуки-уведомления
@@ -532,7 +532,7 @@ partner.ru/api/v1/inventories/employees:
         $ref: ../responses.yaml#/4051005
 
 
-partner.ru/api/v1/inventories/stores:
+/partner.ru/api/v1/inventories/stores:
   put:
     tags:
       - Вебхуки-уведомления
@@ -579,7 +579,7 @@ partner.ru/api/v1/inventories/stores:
         $ref: ../responses.yaml#/4051005
 
 
-partner.ru/api/v1/receipt:
+/partner.ru/api/v1/receipt:
   post:
     tags:
       - Вебхуки-уведомления
@@ -611,7 +611,7 @@ partner.ru/api/v1/receipt:
         $ref: ../responses.yaml#/4051005
 
 
-partner.ru/api/v1/user/token:
+/partner.ru/api/v1/user/token:
   post:
     tags:
       - Вебхуки-запросы
@@ -655,7 +655,7 @@ partner.ru/api/v1/user/token:
         $ref: ../responses.yaml#/4051005
 
 
-partner.ru/api/v1/user/event:
+/partner.ru/api/v1/user/event:
   post:
     tags:
       - Вебхуки-уведомления
@@ -671,7 +671,7 @@ partner.ru/api/v1/user/event:
           $ref: ../definitions.yaml#/events
 
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:
   x-summary: Получение схем магазина
   get:
     tags:
@@ -716,7 +716,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:
         description: Не авторизован
 
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/delete:
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/delete:
  x-summary: Удаление схем
  post:
    tags:
@@ -754,7 +754,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/delete:
         description: Не авторизован
 
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras:
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras:
   x-summary: Дополнительные поля
   get:
     tags:
@@ -799,7 +799,7 @@ api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras:
       '401':
         description: Не авторизован
 
-api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras/delete:
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras/delete:
  x-summary: Удаление дополнительных полей
  post:
    tags:
