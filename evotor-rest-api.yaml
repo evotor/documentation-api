@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  $ref: ./evotorRestApi/info.yaml
+  $ref: ./info.yaml
 tags:
 
   - name: Сущности пользователя Эвотор
@@ -34,8 +34,8 @@ x-servers:
 schemes:
     - https
 paths:
-  $ref: ./evotorRestApi/paths.yaml
+  $ref: ./paths.yaml
 parameters:
-  $ref: ./evotorRestApi/parameters.yaml
+  $ref: ./parameters.yaml
 definitions:
   $ref: ./definitions.yaml

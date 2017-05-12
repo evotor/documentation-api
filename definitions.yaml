@@ -98,35 +98,72 @@ SubscriptionCreated:
   description: Подписка создана.
   allOf:
     - $ref: '#/events'
-    - $ref: ./evotorCallbacks/subscriptionEventsDefinitions.yaml#/SubscriptionCreated
+    - type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: '#/userId'
+        planId:
+          allOf:
+            - $ref: '#/planId'
+        trialPeriodDuration:
+          type: string
+          description: Срок бесплатного периода, выраженный в днях (P[n]DT).
+          example: P30DT
+        deviceNumber:
+          allOf:
+          - $ref: '#/deviceNumber'
 
 
 SubscriptionActivated:
-  description: Подписка активирована, началась платная фаза тарифа.
+  description: Подписка активирована.
   allOf:
     - $ref: '#/events'
-    - $ref: ./evotorCallbacks/subscriptionEventsDefinitions.yaml#/SubscriptionActivated
+    - type: object
+      properties:
+        nextBillingDate:
+          allOf:
+          - $ref: '#/nextBillingDate'
+        chargedSum:
+          allOf:
+            - $ref: '#/chargedSum'
 
 
 SubscriptionRenewed:
   description: Подписка создана.
   allOf:
     - $ref: '#/events'
-    - $ref: ./evotorCallbacks/subscriptionEventsDefinitions.yaml#/SubscriptionRenewed
+    - type: object
+      properties:
+        nextBillingDate:
+          allOf:
+          - $ref: '#/nextBillingDate'
 
 
 SubscriptionCancelled:
   description: Подписка создана.
   allOf:
     - $ref: '#/events'
-    - $ref: ./evotorCallbacks/subscriptionEventsDefinitions.yaml#/SubscriptionCancelled
 
 
 SubscriptionTermsChanged:
   description: Подписка создана.
   allOf:
     - $ref: '#/events'
-    - $ref: ./evotorCallbacks/subscriptionEventsDefinitions.yaml#/SubscriptionTermsChanged
+    - type: object
+      properties:
+          planId:
+            allOf:
+            - $ref: '#/planId'
+          deviceNumber:
+            allOf:
+            - $ref: '#/deviceNumber'
+          nextBillingDate:
+            allOf:
+            - $ref: '#/nextBillingDate'
+          chargedSum:
+            allOf:
+              - $ref: '#/chargedSum'
 
 
 product:
@@ -141,7 +178,6 @@ product:
     - code
     - costPrice
     - description
-    - fields
     - group
     - measureName
     - name
@@ -296,11 +332,6 @@ product:
       description: >-
         Ёмкость тары алкогольной продукции в литрах, до 3 знаков после запятой. Для неалкогольных товаров и групп - 0. Для алкоголя - в
         диапазоне от 0.001 до 999.999; не может быть null
-    fields:
-      type: object
-      description: >-
-        Дополнительные атрибуты товара, не входящие в стандартную схему; не
-        может быть null
 
 
 productSchema:
@@ -335,20 +366,40 @@ productSchema:
             type: boolean
             description: Флажок, который включает или выключает возможность редактировать поле.
             example: false
-          regexp:
-            type: string
-            description: Валидное регулярное выражение.
-            example: '\\w+'
           uuid:
             type: string
             description: Идентификатор поля в формате uuid4.
           type:
             type: string
-            description: Тип поля.
+            description: Тип поля. Может принимать значения `TEXT_FIELD` или `DICTIONARY_FIELD`. Тип поля определяет набор данных, которое оно содержит.
             example: 'TEXT_FIELD'
           data:
             type: object
-            description: Валидный JSON-объект с произвольными данными, доступными на терминале из JavaScript.
+            description: |
+               **Передаётся только в поле** `TEXT_FIELD`. Содержит валидный JSON-объект с произвольными данными, доступными на терминале из JavaScript.
+          regexp:
+            type: string
+            description: |
+                **Передаётся только в поле** `TEXT_FIELD`. Валидное регулярное выражение.
+            example: '\\w+'
+          multiple:
+            type: boolean
+            description: |
+                **Передаётся только в поле** `DICTIONARY_FIELD`. Включает или выключает возможность выбора нескольких значений.
+            example: false
+          items:
+            type: array
+            desctiption: |
+                **Передаётся только в поле** `DICTIONARY_FIELD`. Массив элементов раскрывающегося списка.
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Название элемента списка.
+                value:
+                  type: string
+                  description: uuid элемента.
 
 productExtras:
   type: array
@@ -465,6 +516,8 @@ store:
     address:
       type: string
       description: Адрес магазина в платформе Эвотор.
+
+
 document:
   type: object
   required:
@@ -705,6 +758,18 @@ events:
   type: object
   discriminator: type
   properties:
+    subscriptionId:
+      allOf:
+        - $ref: '#/subscriptionId'
+    productId:
+      allOf:
+        - $ref: '#/productId'
+    timestamp:
+      allOf:
+        - $ref: '#/timestamp'
+    sequenceNumber:
+      allOf:
+        - $ref: '#/sequenceNumber'
     type:
       description: |
         Типы событий:
@@ -713,7 +778,7 @@ events:
           * SubscriptionRenewed – подписка продлена на следующий период.
           * SubscriptionCancelled – подписка отменена.
           * SubscriptionTermsChanged – изменились условия подписки, например, тарифный план или количество устройств.
-      type: object
+      type: string
 
 
 userId:
@@ -746,7 +811,7 @@ planId:
 deviceNumber:
   type: integer
   description:  Количество оплаченных устройств.
-  example: 352398080215959
+  example: 35
 
 
 nextBillingDate:

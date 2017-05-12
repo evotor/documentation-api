@@ -15,7 +15,7 @@
          title: Список магазинов
          type: array
          items:
-           $ref: ../definitions.yaml#/store
+           $ref: ./definitions.yaml#/store
 
 
 /api.evotor.ru/api/v1/inventories/employees/search:
@@ -35,7 +35,7 @@
          title: Cписок сотрудников
          type: array
          items:
-           $ref: ../definitions.yaml#/employee
+           $ref: ./definitions.yaml#/employee
 
 
 /api.evotor.ru/api/v1/inventories/devices/search:
@@ -55,7 +55,7 @@
          title: Список смарт-терминалов
          type: array
          items:
-           $ref: ../definitions.yaml#/device
+           $ref: ./definitions.yaml#/device
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
@@ -78,7 +78,7 @@
        schema:
          type: array
          items:
-           $ref: ../definitions.yaml#/product
+           $ref: ./definitions.yaml#/product
  post:
    tags:
      - Товары и документы
@@ -99,7 +99,7 @@
        schema:
          type: array
          items:
-           $ref: ../definitions.yaml#/product
+           $ref: ./definitions.yaml#/product
    responses:
      '200':
        description: OK
@@ -127,7 +127,7 @@
        schema:
          type: array
          items:
-           $ref: ../definitions.yaml#/product
+           $ref: ./definitions.yaml#/product
    responses:
      '200':
        description: OK
@@ -176,7 +176,7 @@
        schema:
          type: array
          items:
-           $ref: ../definitions.yaml#/productToDelete
+           $ref: ./definitions.yaml#/productToDelete
    responses:
      '200':
        description: OK
@@ -238,7 +238,7 @@
          title: Массив документов
          type: array
          items:
-           $ref: ../definitions.yaml#/document
+           $ref: ./definitions.yaml#/document
 
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
@@ -263,7 +263,7 @@
        schema:
          type: array
          items:
-           $ref: ../definitions.yaml#/document
+           $ref: ./definitions.yaml#/document
    responses:
      '200':
        description: OK
@@ -295,7 +295,7 @@
           Поля, необходимые для авторизации существующего пользователя в стороннем сервисе.
         required: true
         schema:
-          $ref: ../definitions.yaml#/authorizeFormData
+          $ref: ./definitions.yaml#/authorizeFormData
     responses:
       '200':
         description: OK
@@ -309,7 +309,7 @@
           properties:
             userUuid:
               allOf:
-                - $ref: ../definitions.yaml#/userId
+                - $ref: ./definitions.yaml#/userId
             hasBilling:
               type: boolean
               description: |
@@ -351,7 +351,7 @@
           Поля необходимые для регистрации нового пользователя в стороннем сервисе.
         required: true
         schema:
-          $ref: ../definitions.yaml#/registerFormData
+          $ref: ./definitions.yaml#/registerFormData
     responses:
       '200':
         description: OK
@@ -364,7 +364,7 @@
           properties:
             userUuid:
               allOf:
-                - $ref: ../definitions.yaml#/userId
+                - $ref: ./definitions.yaml#/userId
             token:
               description: |
                 Токен, который облако Эвотор будет передавать в заголове `Authorization` с типом `Bearer`, для авторизации своих HTTP-запросов в стороннем сервисе.
@@ -408,7 +408,7 @@
           properties:
             userUuid:
               allOf:
-                - $ref: ../definitions.yaml#/userId
+                - $ref: ./definitions.yaml#/userId
             tariffId:
               type: string
               description: Код тарифа в платформе Эвотор.
@@ -455,7 +455,7 @@
         schema:
           type: array
           items:
-            $ref: ../definitions.yaml#/device
+            $ref: ./definitions.yaml#/device
     responses:
       '200':
         description: OK
@@ -502,7 +502,7 @@
         schema:
           type: array
           items:
-            $ref: ../definitions.yaml#/employee
+            $ref: ./definitions.yaml#/employee
     responses:
       '200':
         description: OK
@@ -549,7 +549,7 @@
         schema:
           type: array
           items:
-            $ref: ../definitions.yaml#/store
+            $ref: ./definitions.yaml#/store
     responses:
       '200':
         description: OK
@@ -595,7 +595,7 @@
         schema:
           type: array
           items:
-            $ref: ../definitions.yaml#/receipt
+            $ref: ./definitions.yaml#/receipt
     responses:
       '200':
         description: OK
@@ -635,7 +635,7 @@
           properties:
             userUuid:
               allOf:
-                - $ref: ../definitions.yaml#/userId
+                - $ref: ./definitions.yaml#/userId
             token:
               type: string
               description: Токен приложения.
@@ -668,7 +668,7 @@
         description: Содержимое запроса меняется в зависимости от события.
         required: true
         schema:
-          $ref: ../definitions.yaml#/events
+          $ref: ./definitions.yaml#/events
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:
@@ -706,7 +706,18 @@
         schema:
           type: array
           items:
-            $ref: ../definitions.yaml#/productSchema
+            $ref: ./definitions.yaml#/productSchema
+        x-examples:
+          application/json:
+            uuid: "string"
+            appId: "string"
+            items:
+                title: "string"
+                editable: false
+                uuid: "string"
+                type: "TEXT_FIELD"
+                data: {}
+                regexp: "\\\\w+"
     responses:
       '200':
         description: OK
@@ -769,7 +780,7 @@
       '200':
         description: OK
         schema:
-            $ref: ../definitions.yaml#/productExtras
+            $ref: ./definitions.yaml#/productExtras
       '400':
         description: Неверный запрос
       '401':
@@ -790,7 +801,7 @@
         description: Массив дополнительных полей.
         required: true
         schema:
-            $ref: ../definitions.yaml#/productExtras
+            $ref: ./definitions.yaml#/productExtras
     responses:
       '200':
         description: OK
