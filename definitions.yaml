@@ -130,7 +130,7 @@ SubscriptionActivated:
 
 
 SubscriptionRenewed:
-  description: Подписка создана.
+  description: Подписка продлена.
   allOf:
     - $ref: '#/events'
     - type: object
@@ -140,10 +140,25 @@ SubscriptionRenewed:
           - $ref: '#/nextBillingDate'
 
 
-SubscriptionCancelled:
-  description: Подписка создана.
+SubscriptionTerminated:
+  description: Подписка завершена.
   allOf:
     - $ref: '#/events'
+    - type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: '#/userId'
+
+SubscriptionTerminationRequested:
+  description: Запрос на завершение подписки.
+  allOf:
+    - $ref: '#/events'
+    - type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: '#/userId'
 
 
 SubscriptionTermsChanged:
@@ -778,7 +793,8 @@ events:
           * SubscriptionCreated – новая подписка.
           * SubscriptionActivated – подписка активирована.
           * SubscriptionRenewed – подписка продлена на следующий период.
-          * SubscriptionCancelled – подписка отменена.
+          * SubscriptionTerminated – подписка завершена.
+          * SubscriptionTerminationRequested – запрос на завершение.
           * SubscriptionTermsChanged – изменились условия подписки, например, тарифный план или количество устройств.
       type: string
 
