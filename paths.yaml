@@ -438,6 +438,30 @@
         $ref: ./responses.yaml#/40510051007
 
 
+#/api/v1/commodities:
+#  get:
+#    tags:
+#      - Вебхуки-запросы
+#    summary: По штрихкоду
+#    description: |
+#      Возвращает объект с информацией о товаре, найденного с помощью штрихкода и/или кода алкогольной продукции в базе стороннего сервиса.
+#    parameters:
+#      - $ref: ./parameters.yaml#/clientAuth
+#      - name: scanCode
+#        in: query
+#        required: true
+#        type: string
+#      - name: alcCode
+#        in: query
+#        required: false
+#        type: string
+#    responses:
+#      '200':
+#        schema:
+#          $ref: ./definitions.yaml#/commodity
+#        description: OK
+
+
 /partner.ru/api/v1/inventories/devices:
   put:
     tags:
