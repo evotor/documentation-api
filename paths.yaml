@@ -679,7 +679,7 @@
         $ref: ./responses.yaml#/4051005
 
 
-/partner.ru/api/v1/user/event:
+/partner.ru/api/v1/subscription/event:
   post:
     tags:
       - Вебхуки-уведомления
