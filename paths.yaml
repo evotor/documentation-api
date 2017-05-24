@@ -131,16 +131,6 @@
    responses:
      '200':
        description: OK
-       schema:
-         title: Массив привязок
-         type: array
-         items:
-           type: object
-           properties:
-             uuid:
-               type: string
-               pattern: >-
-                 ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
      '400':
        $ref: ./responses.yaml#/40020012003
      '401':
@@ -483,20 +473,6 @@
     responses:
       '200':
         description: OK
-        schema:
-          title: Массив привязок
-          type: array
-          items:
-            type: object
-            properties:
-              uuid:
-                type: string
-                pattern: >-
-                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-              partnerId:
-                type: string
-                description: >-
-                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -530,20 +506,6 @@
     responses:
       '200':
         description: OK
-        schema:
-          title: Массив привязок
-          type: array
-          items:
-            type: object
-            properties:
-              uuid:
-                type: string
-                pattern: >-
-                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-              partnerId:
-                type: string
-                description: >-
-                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -577,20 +539,6 @@
     responses:
       '200':
         description: OK
-        schema:
-          title: Массив привязок
-          type: array
-          items:
-            type: object
-            properties:
-              uuid:
-                type: string
-                pattern: >-
-                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-              partnerId:
-                type: string
-                description: >-
-                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -693,6 +641,9 @@
         required: true
         schema:
           $ref: ./definitions.yaml#/events
+    responses:
+      '200':
+        description: OK
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:
