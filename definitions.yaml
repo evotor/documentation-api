@@ -768,8 +768,8 @@ events:
     type:
       description: |
         Типы событий:
-          * SubscriptionCreated – новая подписка.
-          * SubscriptionActivated – подписка активирована.
+          * SubscriptionCreated – новая подписка. Приходит при начале пробного периода или перед событием SubscriptionActivated, если пробного периода нет.
+          * SubscriptionActivated – подписка активирована. Приходит по окончанию пробного периода или после события SubscriptionCreated, если пробного периода нет.
           * SubscriptionRenewed – подписка продлена на следующий период.
           * SubscriptionTerminated – подписка завершена.
           * SubscriptionTerminationRequested – запрос на завершение.

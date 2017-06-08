@@ -625,6 +625,14 @@
     description: |
        Связанные с биллингом события, которые облако Эвотор передаёт в сторонний сервис.
     parameters:
+      - name: Authorization
+        in: header
+        description: |
+          "Авторизация запросов облака Эвотор в стороннем сервисе. Содержит токен стороннего сервиса для Bearer-авторизации."
+        required: true
+        type: string
+        pattern: '^(Bearer) [a-zA-Z0-9_=-]+$'
+        example: Bearer evotor_token
       - in: body
         name: body
         description: Содержимое запроса меняется в зависимости от события.
