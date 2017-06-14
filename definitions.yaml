@@ -27,7 +27,12 @@ authorizeFormData:
     - userUuid
   properties:
     userUuid:
-      $ref: '#/userId'
+      type: string
+      description: |
+        **Важно:** Параметр `userUuid` к августу будет заменён на параметр `userId`. Используйте новое наименование параметра.
+
+        Идентификатор пользователя в облаке Эвотор.
+      pattern: '^[0-9]{2}-[0-9]{15}$'
     username:
       type: string
       description: Имя пользователя
@@ -68,7 +73,12 @@ trialStarted:
             - year
           default: day
         userUuid:
-          $ref: '#/userId'
+          type: string
+          description: |
+            **Важно:** Параметр `userUuid` к августу будет заменён на параметр `userId`. Используйте новое наименование параметра.
+
+            Идентификатор пользователя в облаке Эвотор.
+          pattern: '^[0-9]{2}-[0-9]{15}$'
         tariffId:
           type: string
           description: Код тарифа, для которого активирован пробный период.
