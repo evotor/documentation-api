@@ -838,69 +838,67 @@
         description: Не авторизован
 
 
-#/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/quantities:
-# x-summary:
-# get:
-#    tags:
-#     - Товары и документы
-#    summary: 'Получить остатки товаров в магазине'
-#    description: |
-#        Возвращает информацию об остатках всех товаров в определённом магазине (`{storeUuid}`) пользователя платформы.
-#    parameters:
-#      - $ref: ./parameters.yaml#/auth
-#      - $ref: ./parameters.yaml#/storeUuid
-#      - $ref: ./parameters.yaml#/contentType
-#    responses:
-#      '200':
-#        description: OK
-#      '401':
-#        $ref: ./responses.yaml#/40110021003
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/quantities:
+ x-summary:
+ get:
+    tags:
+     - Товары и документы
+    summary: 'Получить остатки товаров в магазине'
+    description: |
+        Возвращает информацию об остатках всех товаров в определённом магазине (`{storeUuid}`) пользователя платформы.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
+      - $ref: ./parameters.yaml#/contentType
+    responses:
+      '200':
+        description: OK
+      '401':
+        $ref: ./responses.yaml#/40110021003
 
-# post:
-#    tags:
-#     - Товары и документы
-#    summary: 'Передать остатки товара в магазине'
-#    description: |
-#        Передаёт информацию об остатках определённого товара (`{productUuid}`), в определённом магазине (`{storeUuid}`) пользователя платформы.
-#    parameters:
-#      - $ref: ./parameters.yaml#/auth
-#      - $ref: ./parameters.yaml#/storeUuid
-#      - $ref: ./parameters.yaml#/contentType
-#      - name: ''
-#        in: body
-#        description: JSON-объект, в котором требуется указать пары идентификатор продукта - остатки. Остатки требуется указывать в виде целого числа.
-#        required: true
-#        schema:
-#          type: object
-#          description:
-#        x-examples:
-#          application/json:
-#              productUuid: "quantitiesValue"
-#              productUuid2: "quantitiesValue"
-
-
-#    responses:
-#      '200':
-#        description: OK
-#      '401':
-#        $ref: ./responses.yaml#/40110021003
+ post:
+    tags:
+     - Товары и документы
+    summary: 'Передать остатки товара в магазине'
+    description: |
+        Передаёт информацию об остатках определённого товара (`{productUuid}`), в определённом магазине (`{storeUuid}`) пользователя платформы.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
+      - $ref: ./parameters.yaml#/contentType
+      - name: ''
+        in: body
+        description: JSON-объект, в котором требуется указать пары идентификатор продукта - остатки. Остатки требуется указывать в виде целого числа.
+        required: true
+        schema:
+          type: object
+          description:
+        x-examples:
+          application/json:
+              productUuid: "quantitiesValue"
+              productUuid2: "quantitiesValue"
+    responses:
+      '200':
+        description: OK
+      '401':
+        $ref: ./responses.yaml#/40110021003
 
 
-#/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/{productUuid}/quantities:
-# x-summary:
-# get:
-#    tags:
-#     - Товары и документы
-#    summary: 'Получить остатки определённого товара в магазине'
-#    description: |
-#        Возвращает информацию об остатках всех определённого товара (`{productUuid}`) в определённом магазине (`{storeUuid}`) пользователя платформы.
-#    parameters:
-#      - $ref: ./parameters.yaml#/auth
-#      - $ref: ./parameters.yaml#/storeUuid
-#      - $ref: ./parameters.yaml#/productUuid
-#      - $ref: ./parameters.yaml#/contentType
-#    responses:
-#      '200':
-#        description: OK
-#      '401':
-#        $ref: ./responses.yaml#/40110021003
+/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/{productUuid}/quantities:
+ x-summary:
+ get:
+    tags:
+     - Товары и документы
+    summary: 'Получить остатки определённого товара в магазине'
+    description: |
+        Возвращает информацию об остатках всех определённого товара (`{productUuid}`) в определённом магазине (`{storeUuid}`) пользователя платформы.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
+      - $ref: ./parameters.yaml#/productUuid
+      - $ref: ./parameters.yaml#/contentType
+    responses:
+      '200':
+        description: OK
+      '401':
+        $ref: ./responses.yaml#/40110021003
