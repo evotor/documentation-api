@@ -662,7 +662,7 @@ receipt:
       format: date-time
     type:
       description: |
-        Тип чека: продажа или возврат.
+          Тип чека – продажа.
       type: string
     shiftId:
       description: Номер смены.
