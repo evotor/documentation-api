@@ -605,8 +605,127 @@
         required: true
         schema:
           type: object
-          items:
-            $ref: ./definitions.yaml#/receipt2
+          properties:
+            id:
+              type: string
+              description: Уникальный идентификатор события отправки чека.
+            timestamp:
+              type: number
+              description: Время в Unix-формате
+            type:
+              type: string
+              description: Тип события.
+            version:
+              type: enum
+              description: Версия API.
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Идентификатор чека в формате `uuid4`.
+                  pattern:
+                deviceId:
+                  type: string
+                  description: Идентификатор устройства в формате `uuid4`.
+                  pattern:
+                storeId:
+                  type: string
+                  description: Идентификатор магазина в формате `uuid4`.
+                  pattern:
+                dateTime:
+                  type: number
+                  description: Unix-время
+                type:
+                  type: string
+                  description: Тип документа
+                shiftId:
+                  type: string
+                  description: Номер смены.
+                employeeId:
+                  type: string
+                  description: Уникальный идентификатор сотрудника (пользователя, продавшего товар).
+                  pattern:
+                paymentSource:
+                  description: |
+                    Способ оплаты:
+                      * PAY_CASH - оплата наличными без сдачи;
+                      * PAY_CASHBACK – оплата наличными со сдачей;
+                      * PAY_CARD - оплата по карте.
+                  type: string
+                  enum:
+                    - PAY_CASH
+                    - PAY_CASHBACK
+                    - PAY_CARD
+                    - OTHER
+                infoCheck:
+                  type: boolean
+                  description: Указывает фискальный документ или нет.
+                egais:
+                  type: boolean
+                  description: Указывает относится документ к ЕГАИС или нет.
+                items:
+                  type: array
+                  description: Массив с позициями чека.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Идентификатор товара/услуги в формате `uuid4`.
+                      name:
+                        type: string
+                        description: Наименование товара/услуги.
+                      itemType:
+                        type: string
+                        description: |
+                          Тип товара:
+                            * обычный;
+                            * маркированный алкоголь;
+                            * немаркированный алкоголь.
+                            * услуга.
+                        enum:
+                          - NORMAL
+                          - ALCOHOL_MARKED
+                          - ALCOHOL_NOT_MARKED
+                          - SERVICE
+                      measureName:
+                        type: string
+                        description: Единица измерения для товара.
+                      quantity:
+                        type: number
+                        description: Количество товара
+                      price:
+                        type: number
+                        description: Цена продажи товара.
+                      costPrice:
+                        type: number
+                        description: Цена закупки товара.
+                      sumPrice:
+                        type: number
+                        description: Общая цена товара/услуги.
+                      tax:
+                        type: number
+                        description: Сумма налога на товар.
+                      taxPercent:
+                        type: number
+                        description: Сумма налога на товар, выраженная в процентах.
+                      discount:
+                        type: number
+                        description: Общая сумма скидки на товар.
+                totalTax:
+                  type: number
+                  description: Общая сумма налога.
+                totalDiscount:
+                  type: number
+                  description: Общая сумма скидки.
+                totalAmount:
+                  type: number
+                  description: Общая сумма чека
+                extras:
+                  type: object
+                  description: |
+                    Дополнительные поля. Например, поля пользователей программ лояльности. Поля передаются только в те сторонние сервисы, где они были созданы.
     responses:
       '200':
         description: OK
