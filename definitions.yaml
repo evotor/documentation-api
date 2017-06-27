@@ -753,6 +753,116 @@ receipt:
       description: |
         Дополнительные поля. Например, поля пользователей программ лояльности. Поля передаются только в те сторонние сервисы, где они были созданы.
 
+receipt2:
+  type: object
+  required:
+  properties:
+    id:
+      type: string
+      description: Уникальный идентификатор чека.
+    timestamp:
+      type: enum
+      description: Время в Unix-формате
+    type:
+      type: string
+      description: Тип события.
+    version:
+      type: enum
+      description: Версия эндпоинта.
+    data:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Идентификатор чека в формате `uuid4`.
+          pattern:
+        deviceId:
+          type: string
+          description: Идентификатор устройства в формате `uuid4`.
+          pattern:
+        storeId:
+          type: string
+          description: Идентификатор магазина в формате `uuid4`.
+          pattern:
+        dateTime:
+          type: enum
+          description: Unix-время
+        type:
+          type: string
+          description: Тип документа
+        shiftId:
+          type: string
+          description: Смена, в которую был создан документ.
+        employeeId:
+          type: string
+          description: Идентификатор сотрудника в формате `uuid4`.
+          pattern:
+        paymentSource:
+          type: string
+          description: Тип оплаты.
+        infoCheck:
+          type: boolean
+          description: Флаг, указывающий на фискальность документа.
+        egais:
+          type: boolean
+          description: Флаг, указывающий относится документ к ЕГАИС или нет.
+        items:
+          type: array
+          description: Массив с позициями чека.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Идентификатор товара в формате `uuid4`.
+              name:
+                type: string
+                description: Наименование товара.
+              itemType:
+                type: string
+                description: |
+                      Тип товара; обычный ("NORMAL"), маркированный алкоголь
+                      ("ALCOHOL_MARKED"), немаркированный алкоголь("ALCOHOL_NOT_MARKED");
+                      для групп товаров - "NORMAL"; не может быть null
+              measureName:
+                type: string
+                description: Единица измерения для товара; для групп товаров - ""; не может быть null.
+              quantity:
+                type: number
+                description: кол-во товара
+              price:
+                type: number
+                description: цена товара
+              costPrice:
+                type: number
+                description:
+              sumPrice:
+                type: number
+                description:
+              tax:
+                type: number
+                description:
+              taxPercent:
+                type: number
+                description:
+              discount:
+                type: number
+                description:
+        totalTax:
+          type: number
+          description: Общая сумма налога.
+        totalDiscount:
+          type: number
+          description: Общая сумма скидки.
+        totalAmount:
+          type: number
+          description: Общая сумма чека
+        extras:
+          type: object
+          description: |
+            Дополнительные поля. Например, поля пользователей программ лояльности. Поля передаются только в те сторонние сервисы, где они были созданы.
+
+
 
 productToDelete:
   type: object

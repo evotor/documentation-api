@@ -563,7 +563,7 @@
   post:
     tags:
       - Вебхуки-уведомления
-    summary: 'Отправить чек'
+    summary: 'Отправить чек (V1) [DEPRECATED]'
     description: |
       После оплаты отправляет чек в сторонний сервис. Тело запроса содержит один или несколько чеков.
     parameters:
@@ -590,6 +590,36 @@
       '405':
         $ref: ./responses.yaml#/4051005
 
+/partner.ru/api/v1/receipt:
+  post:
+    tags:
+      - Вебхуки-уведомления
+    summary: 'Отправить чек (V2)'
+    description: |
+      После оплаты отправляет чек в сторонний сервис. Тело запроса содержит один или несколько чеков.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: receipt
+        in: body
+        description: Объект с данными о чеке.
+        required: true
+        schema:
+          type: object
+          items:
+            $ref: ./definitions.yaml#/receipt2
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ./responses.yaml#/40020012003
+      '401':
+        $ref: ./responses.yaml#/40110021003
+      '402':
+        $ref: ./responses.yaml#/402
+      '404':
+        $ref: ./responses.yaml#/404
+      '405':
+        $ref: ./responses.yaml#/4051005
 
 /partner.ru/api/v1/user/token:
   post:
