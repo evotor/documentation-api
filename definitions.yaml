@@ -671,7 +671,7 @@ receipt:
       description: Уникальный идентификатор чека.
     deviceUuid:
       type: string
-      description: Уникальный идентификатор смарт-терминала.
+      description: Уникальный идентификатор смарт-терминала. Чувствителен к регистру символов.
     storeUuid:
       type: string
       description: Уникальный идентификатор магазина.
