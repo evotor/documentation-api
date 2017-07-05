@@ -369,49 +369,68 @@ productSchema:
       type: array
       description: Массив полей схемы.
       items:
-        type: object
-        properties:
-          title:
-            type: string
-            description: Заголовок поля.
-          editable:
-            type: boolean
-            description: Флажок, который включает или выключает возможность редактировать поле.
-            example: false
-          uuid:
-            type: string
-            description: Идентификатор поля в формате uuid4.
-          type:
-            type: string
-            description: Тип поля. Может принимать значения `TEXT_FIELD` или `DICTIONARY_FIELD`. Тип поля определяет набор данных, которое оно содержит.
-            example: 'TEXT_FIELD'
-          data:
-            type: object
-            description: |
-               **Передаётся только в поле** `TEXT_FIELD`. Содержит валидный JSON-объект с произвольными данными, доступными на терминале из JavaScript.
-          regexp:
-            type: string
-            description: |
-                **Передаётся только в поле** `TEXT_FIELD`. Валидное регулярное выражение.
-            example: '\\w+'
-          multiple:
-            type: boolean
-            description: |
-                **Передаётся только в поле** `DICTIONARY_FIELD`. Включает или выключает возможность выбора нескольких значений.
-            example: false
+        $ref: '#/items'
+
+items:
+  type: object
+  discriminator: type
+  properties:
+    title:
+      type: string
+      description: Заголовок поля.
+    editable:
+      type: boolean
+      description: Флажок, который включает или выключает возможность редактировать поле.
+      example: false
+    uuid:
+      type: string
+      description: Идентификатор поля в формате uuid4.
+    type:
+      type: string
+      description: |
+          Определяет набор данных, которые содержит дополнительное поле. Может принимать значения:
+            * `TEXT_FIELD` – текстовое поле
+            * `DICTIONARY_FIELD` – словарь. Позволяет выбрать одно или несколько предустановленных значений.
+
+TEXT_FIELD:
+  allOf:
+    - $ref: '#/items'
+    - type: object
+      properties:
+        data:
+          type: object
+          description: |
+             Содержит валидный JSON-объект с произвольными данными, доступными на терминале из JavaScript.
+        regexp:
+          type: string
+          description: |
+              Валидное регулярное выражение.
+          example: '\\w+'
+
+DICTIONARY_FIELD:
+  allOf:
+    - $ref: '#/items'
+    - type: object
+      properties:
+        multiple:
+          type: boolean
+          description: |
+              Включает или выключает возможность выбора нескольких элементов раскрывающегося списка.
+          example: false
+        items:
+          type: array
+          desctiption: |
+              Массив элементов раскрывающегося списка.
           items:
-            type: array
-            desctiption: |
-                **Передаётся только в поле** `DICTIONARY_FIELD`. Массив элементов раскрывающегося списка.
-            items:
-              type: object
-              properties:
-                title:
-                  type: string
-                  description: Название элемента списка.
-                value:
-                  type: string
-                  description: uuid элемента.
+            type: object
+            description: Набор элементов раскрывающегося списка.
+            properties:
+              title:
+                type: string
+                description: Название элемента списка.
+              value:
+                type: string
+                description: uuid элемента.
 
 productExtras:
   type: array
