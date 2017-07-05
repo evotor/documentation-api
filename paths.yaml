@@ -627,7 +627,7 @@
                   pattern:
                 deviceId:
                   type: string
-                  description: Идентификатор устройства в формате `uuid4`.
+                  description: Идентификатор устройства в формате `uuid4`. Чувствителен к регистру символов.
                   pattern:
                 storeId:
                   type: string
