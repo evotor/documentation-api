@@ -95,9 +95,6 @@ SubscriptionCreated:
     - $ref: '#/events'
     - type: object
       properties:
-        userId:
-          allOf:
-            - $ref: '#/userId'
         planId:
           allOf:
             - $ref: '#/planId'
@@ -140,20 +137,12 @@ SubscriptionTerminated:
   allOf:
     - $ref: '#/events'
     - type: object
-      properties:
-        userId:
-          allOf:
-            - $ref: '#/userId'
 
 SubscriptionTerminationRequested:
   description: Запрос на завершение подписки.
   allOf:
     - $ref: '#/events'
     - type: object
-      properties:
-        userId:
-          allOf:
-            - $ref: '#/userId'
 
 
 SubscriptionTermsChanged:
@@ -901,6 +890,9 @@ events:
     productId:
       allOf:
         - $ref: '#/productId'
+    userId:
+      allOf:
+        - $ref: '#/userId'
     timestamp:
       allOf:
         - $ref: '#/timestamp'
