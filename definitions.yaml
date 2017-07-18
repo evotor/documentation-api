@@ -100,8 +100,8 @@ SubscriptionCreated:
             - $ref: '#/planId'
         trialPeriodDuration:
           type: string
-          description: Строка вида `PnDT`, где n – количество дней бесплатного периода, доступных пользователю в момент активации тарифа.
-          example: P30DT
+          description: Строка вида `PnDT`, где n – количество дней бесплатного периода, доступных пользователю в момент активации тарифа. PnDT – [формат представления времени](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+          example: P14DT
         deviceNumber:
           allOf:
           - $ref: '#/deviceNumber'
