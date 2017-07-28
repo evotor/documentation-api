@@ -771,7 +771,7 @@ receipt2:
       description: Уникальный идентификатор чека.
     timestamp:
       type: enum
-      description: Время в Unix-формате
+      description: Время в Unix-формате.
     type:
       type: string
       description: Тип события.
@@ -795,7 +795,7 @@ receipt2:
           pattern:
         dateTime:
           type: enum
-          description: Unix-время
+          description: Unix-время.
         type:
           type: string
           description: Тип документа
@@ -922,7 +922,7 @@ userId:
 timestamp:
   type: string
   format: date-time
-  description: Дата и время отправки события.
+  description: Дата и время отправки события. [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
   example: 2017-04-20T18:26:37.753+0000
 
 

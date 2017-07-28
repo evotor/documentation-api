@@ -611,7 +611,7 @@
               description: Уникальный идентификатор события отправки чека.
             timestamp:
               type: number
-              description: Время в Unix-формате
+              description: Время в миллисекундах, в Unix-формате.
             type:
               type: string
               description: Тип события.
