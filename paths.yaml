@@ -566,6 +566,7 @@
     summary: 'Отправить чек (V1) [DEPRECATED]'
     description: |
       После оплаты отправляет чек в сторонний сервис. Тело запроса содержит один или несколько чеков.
+    deprecated: true
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
       - name: receipt
