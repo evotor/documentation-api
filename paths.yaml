@@ -613,7 +613,7 @@
             timestamp:
               type: number
               description: Время в миллисекундах, в Unix-формате.
-              example: 1496826444000001
+              example: "1496826444000001"
             type:
               type: string
               description: Тип события.
@@ -638,7 +638,7 @@
                 dateTime:
                   type: number
                   description: Дата и время в формате создания чека. [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
-                  example: 2017-06-07T12:55:18Z
+                  example: "2017-06-07T12:55:18Z"
                 type:
                   type: string
                   description: Тип документа
