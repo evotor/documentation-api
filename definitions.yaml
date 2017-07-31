@@ -240,8 +240,7 @@ product:
     measureName:
       type: string
       description: >-
-        Единица измерения для товара; для групп товаров - ""; не может быть
-        null
+        Единица измерения для товара, не может быть`null`. Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д.. Для групп товаров указывается "";
       enum:
         - ''
         - шт
@@ -725,8 +724,7 @@ receipt:
           barcode:
             type: string
           measureName:
-            type: string
-            description: Единица измерения.
+            - ref: '#product/properties/measureName'
           quantity:
             type: number
             description: Кол-во товара.
@@ -834,8 +832,7 @@ receipt2:
                       ("ALCOHOL_MARKED"), немаркированный алкоголь("ALCOHOL_NOT_MARKED");
                       для групп товаров - "NORMAL"; не может быть null
               measureName:
-                type: string
-                description: Единица измерения для товара; для групп товаров - ""; не может быть null.
+                - ref: '#product/properties/measureName'
               quantity:
                 type: number
                 description: кол-во товара
