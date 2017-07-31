@@ -693,7 +693,7 @@
                           - ALCOHOL_NOT_MARKED
                           - SERVICE
                       measureName:
-                        - $ref: '.definitions/#measureName'
+                        - $ref: 'definitions/#measureName'
                       quantity:
                         type: number
                         description: Количество товара
