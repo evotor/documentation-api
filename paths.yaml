@@ -693,8 +693,7 @@
                           - ALCOHOL_NOT_MARKED
                           - SERVICE
                       measureName:
-                        type: string
-                        description: Единица измерения для товара.
+                        - $ref: '.definitions/#measureName'
                       quantity:
                         type: number
                         description: Количество товара

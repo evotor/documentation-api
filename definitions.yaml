@@ -238,6 +238,7 @@ product:
       maximum: 9999999.99
       description: Закупочная цена; для групп товаров - 0; не может быть null
     measureName:
+      - $ref: '#/measureName'
       type: string
       description: >-
         Единица измерения для товара, не может быть`null`. Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д.. Для групп товаров указывается "";
@@ -724,7 +725,7 @@ receipt:
           barcode:
             type: string
           measureName:
-            - ref: '#product/properties/measureName'
+            - $ref: '#/measureName'
           quantity:
             type: number
             description: Кол-во товара.
@@ -832,7 +833,7 @@ receipt2:
                       ("ALCOHOL_MARKED"), немаркированный алкоголь("ALCOHOL_NOT_MARKED");
                       для групп товаров - "NORMAL"; не может быть null
               measureName:
-                - ref: '#product/properties/measureName'
+                - $ref: '#/measureName'
               quantity:
                 type: number
                 description: кол-во товара
@@ -972,3 +973,21 @@ sequenceNumber:
   type: integer
   description: Номер события в последовательности. Номер непрерывно возрастает начиная с единицы. Необходим для соблюдения порядка обработки событий. Номер события уникален в рамках подписки (`subscriptionId`), таким образом, при переустановке приложения номерация событий начнётся сначала
   example: 4
+
+measureName:
+  type: string
+  description: >-
+    Единица измерения для товара, не может быть`null`. Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д.. Для групп товаров указывается "";
+  enum:
+    - ''
+    - шт
+    - кг
+    - л
+    - м
+    - км
+    - м2
+    - м3
+    - компл
+    - упак
+    - ед
+    - дроб
