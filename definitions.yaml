@@ -94,6 +94,9 @@ SubscriptionCreated:
   allOf:
     - $ref: '#/events'
     - type: object
+    - required:
+        - planId
+        - trialPeriodDuration
       properties:
         planId:
           allOf:
@@ -112,6 +115,8 @@ SubscriptionActivated:
   allOf:
     - $ref: '#/events'
     - type: object
+    - required:
+        - nextBillingDate
       properties:
         nextBillingDate:
           allOf:
@@ -126,10 +131,15 @@ SubscriptionRenewed:
   allOf:
     - $ref: '#/events'
     - type: object
+    - required:
+        - nextBillingDate
       properties:
         nextBillingDate:
           allOf:
           - $ref: '#/nextBillingDate'
+        chargedSum:
+          allOf:
+            - $ref: '#/chargedSum'
 
 
 SubscriptionTerminated:
@@ -146,7 +156,7 @@ SubscriptionTerminationRequested:
 
 
 SubscriptionTermsChanged:
-  description: Подписка создана.
+  description: Условия подписки изменились. Поля `planId`, `deviceNumber`, `nextBillingDate` и `chargedSum` приходят только в том случае, если при изменении подписки произошли изменения соответствующего параметра.
   allOf:
     - $ref: '#/events'
     - type: object
@@ -912,6 +922,12 @@ events:
   type: object
   discriminator: type
   properties:
+    required:
+      - subscriptionId
+      - userId
+      - productId
+      - sequenceNumber
+      - timestamp
     subscriptionId:
       allOf:
         - $ref: '#/subscriptionId'
@@ -981,7 +997,7 @@ nextBillingDate:
 
 chargedSum:
   type: object
-  description: Удержанная сумма. До двух знаков после запятой.
+  description: Удержанная сумма. Поле не приходит, если после изменения подписки будет удерживаться меньшая сумма, а так же если изменение условий подписки произошло во время пробного периода. До двух знаков после запятой.
   properties:
     amount:
       type: number
