@@ -920,14 +920,14 @@ productToDelete:
 
 events:
   type: object
+  required:
+    - subscriptionId
+    - userId
+    - productId
+    - sequenceNumber
+    - timestamp
   discriminator: type
   properties:
-    required:
-      - subscriptionId
-      - userId
-      - productId
-      - sequenceNumber
-      - timestamp
     subscriptionId:
       allOf:
         - $ref: '#/subscriptionId'
