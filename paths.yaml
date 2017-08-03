@@ -1020,7 +1020,7 @@
       '200':
         description: OK
         examples:
-            application/json: { "35fac185-8e78-4495-b7d2-7a3aac129356:" 1.23, "a0128ed3-06b6-4dd3-99f6-6eb8f5545b80": "2.0" }
+            application/json: { "35fac185-8e78-4495-b7d2-7a3aac129356": "1.23", "a0128ed3-06b6-4dd3-99f6-6eb8f5545b80": "2.0" }
       '401':
         $ref: ./responses.yaml#/40110021003
 
