@@ -12,10 +12,18 @@
      '200':
        description: OK
        schema:
-         title: Список магазинов
-         type: array
-         items:
-           $ref: ./definitions.yaml#/store
+         - name: Authorization
+           in: header
+           description: |
+             "Авторизация запросов облака Эвотор в стороннем сервисе. Содержит токен стороннего сервиса для Bearer-авторизации."
+           required: true
+           type: string
+           pattern: '^(Bearer) [a-zA-Z0-9_=-]+$'
+           example: Bearer evotor_token
+         - title: Список магазинов
+           type: array
+           items:
+             $ref: ./definitions.yaml#/store
 
 
 /api.evotor.ru/api/v1/inventories/employees/search:
@@ -879,15 +887,23 @@
             $ref: ./definitions.yaml#/productSchema
         x-examples:
           application/json:
-            uuid: "string"
-            appId: "string"
-            items:
-                title: "string"
-                editable: false
-                uuid: "string"
-                type: "TEXT_FIELD"
-                data: {}
-                regexp: "\\\\w+"
+            - uuid: "string"
+              appId: "string"
+              items:
+                - title: "string"
+                  editable: true
+                  uuid: "string"
+                  type: "TEXT_FIELD"
+                  data: {}
+                  regexp: "\\\\w+"
+                - title: "string"
+                  editable: false
+                  uuid: "string"
+                  type: "DICTIONARY_FIELD"
+                  multiple: false
+                  items:
+                    - title: "string"
+                      value: "string"
     responses:
       '200':
         description: OK
@@ -1017,25 +1033,25 @@
         description: Не авторизован
 
 
-/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/quantities:
- x-summary:
- get:
-    tags:
-     - Товары и документы
-    summary: 'Получить остатки товаров в магазине'
-    description: |
-        Возвращает информацию об остатках всех товаров в определённом магазине (`{storeUuid}`) пользователя платформы. Ответ содержит JSON-объект с набором пар {"идентификатор товара" - "остаток"} (см. пример ответа).
-    parameters:
-      - $ref: ./parameters.yaml#/auth
-      - $ref: ./parameters.yaml#/storeUuid
-      - $ref: ./parameters.yaml#/contentType
-    responses:
-      '200':
-        description: OK
-        examples:
-            application/json: { "35fac185-8e78-4495-b7d2-7a3aac129356": "1.23", "a0128ed3-06b6-4dd3-99f6-6eb8f5545b80": "2.0" }
-      '401':
-        $ref: ./responses.yaml#/40110021003
+#/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/quantities:
+# x-summary:
+# get:
+#    tags:
+#     - Товары и документы
+#    summary: 'Получить остатки товаров в магазине'
+#    description: |
+#        Возвращает информацию об остатках всех товаров в определённом магазине (`{storeUuid}`) пользователя платформы. Ответ содержит JSON-объект с набором пар {"идентификатор товара" - "остаток"} (см. пример ответа).
+#    parameters:
+#      - $ref: ./parameters.yaml#/auth
+#      - $ref: ./parameters.yaml#/storeUuid
+#      - $ref: ./parameters.yaml#/contentType
+#    responses:
+#      '200':
+#        description: OK
+#        examples:
+#            application/json: { "35fac185-8e78-4495-b7d2-7a3aac129356": "1.23", "a0128ed3-06b6-4dd3-99f6-6eb8f5545b80": "2.0" }
+#      '401':
+#        $ref: ./responses.yaml#/40110021003
 
 # post:
 #    tags:
@@ -1065,21 +1081,21 @@
 #        $ref: ./responses.yaml#/40110021003
 
 
-/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/{productUuid}/quantities:
- x-summary:
- get:
-    tags:
-     - Товары и документы
-    summary: 'Получить остатки определённого товара в магазине'
-    description: |
-        Возвращает информацию об остатках всех определённого товара (`{productUuid}`) в определённом магазине (`{storeUuid}`) пользователя платформы.
-    parameters:
-      - $ref: ./parameters.yaml#/auth
-      - $ref: ./parameters.yaml#/storeUuid
-      - $ref: ./parameters.yaml#/productUuid
-      - $ref: ./parameters.yaml#/contentType
-    responses:
-      '200':
-        description: OK
-      '401':
-        $ref: ./responses.yaml#/40110021003
+#/api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/{productUuid}/quantities:
+# x-summary:
+# get:
+#    tags:
+#     - Товары и документы
+#    summary: 'Получить остатки определённого товара в магазине'
+#    description: |
+#        Возвращает информацию об остатках всех определённого товара (`{productUuid}`) в определённом магазине (`{storeUuid}`) пользователя платформы.
+#    parameters:
+#      - $ref: ./parameters.yaml#/auth
+#      - $ref: ./parameters.yaml#/storeUuid
+#      - $ref: ./parameters.yaml#/productUuid
+#      - $ref: ./parameters.yaml#/contentType
+#    responses:
+#      '200':
+#        description: OK
+#      '401':
+#        $ref: ./responses.yaml#/40110021003
