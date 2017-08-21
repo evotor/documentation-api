@@ -612,7 +612,7 @@
 #      '405':
 #        $ref: ./responses.yaml#/4051005
 
-/partner.ru/api/v1/receipt:
+/partner.ru/api/v2/receipts:
   post:
     tags:
       - Вебхуки-уведомления
@@ -684,7 +684,7 @@
                     - OTHER
                 infoCheck:
                   type: boolean
-                  description: Указывает фискальный документ или нет.
+                  description: Признак того, является чек информационным (`true`) или фискальным (`false`).
                 egais:
                   type: boolean
                   description: Указывает относится документ к ЕГАИС или нет.
