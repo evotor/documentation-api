@@ -24,7 +24,20 @@
            type: array
            items:
              $ref: ./definitions.yaml#/store
-
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 /api.evotor.ru/api/v1/inventories/employees/search:
  x-summary: Получить список сотрудников
@@ -44,6 +57,20 @@
          type: array
          items:
            $ref: ./definitions.yaml#/employee
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/devices/search:
@@ -64,6 +91,20 @@
          type: array
          items:
            $ref: ./definitions.yaml#/device
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
@@ -87,6 +128,20 @@
          type: array
          items:
            $ref: ./definitions.yaml#/product
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
  post:
    tags:
      - Товары и документы
@@ -111,6 +166,20 @@
    responses:
      '200':
        description: OK
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/products:
@@ -139,6 +208,20 @@
    responses:
      '200':
        description: OK
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
      '400':
        $ref: ./responses.yaml#/40020012003
      '401':
@@ -178,6 +261,20 @@
    responses:
      '200':
        description: OK
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
@@ -249,6 +346,20 @@
          type: array
          items:
            $ref: ./definitions.yaml#/document
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
@@ -277,6 +388,20 @@
    responses:
      '200':
        description: OK
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
      '400':
        $ref: ./responses.yaml#/40020012003
      '401':
@@ -336,6 +461,20 @@
               type: string
               maxLength: 128
               default: toaWaep4chou7ahkoogiu9Iusaht9ima
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -386,6 +525,20 @@
               type: string
               maxLength: 128
               default: toaWaep4chou7ahkoogiu9Iusaht9ima
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -473,6 +626,20 @@
         schema:
           $ref: ./definitions.yaml#/commodity
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -502,6 +669,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -535,6 +716,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -568,6 +763,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -767,6 +976,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012003
       '401':
@@ -814,6 +1037,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -847,6 +1084,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:
@@ -863,6 +1114,20 @@
     responses:
       '200':
         description: OK
+#       headers:
+#         X-RateLimit-Limit:
+#           schema:
+#             type: integer
+#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#         X-RateLimit-Remaining:
+#           schema:
+#             type: integer
+#           description: Количество запросов, оставшихся в текущем временном интервале.
+#         X-RateLimit-Reset:
+#           schema:
+#             type: string
+#             format: integer
+#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -907,6 +1172,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -945,6 +1224,20 @@
    responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -967,6 +1260,20 @@
         description: OK
         schema:
             $ref: ./definitions.yaml#/productExtras
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -991,6 +1298,20 @@
     responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -1027,6 +1348,20 @@
    responses:
       '200':
         description: OK
+#        headers:
+#          X-RateLimit-Limit:
+#            schema:
+#              type: integer
+#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+#          X-RateLimit-Remaining:
+#            schema:
+#              type: integer
+#            description: Количество запросов, оставшихся в текущем временном интервале.
+#          X-RateLimit-Reset:
+#            schema:
+#              type: string
+#              format: integer
+#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
