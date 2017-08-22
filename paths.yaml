@@ -12,18 +12,10 @@
      '200':
        description: OK
        schema:
-         - name: Authorization
-           in: header
-           description: |
-             "Авторизация запросов облака Эвотор в стороннем сервисе. Содержит токен стороннего сервиса для Bearer-авторизации."
-           required: true
-           type: string
-           pattern: '^(Bearer) [a-zA-Z0-9_=-]+$'
-           example: Bearer evotor_token
-         - title: Список магазинов
-           type: array
-           items:
-             $ref: ./definitions.yaml#/store
+          title: Список магазинов
+          type: array
+          items:
+            $ref: ./definitions.yaml#/store
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
