@@ -109,10 +109,7 @@
        Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
    parameters:
      - $ref: ./parameters.yaml#/auth
-     - name: storeUuid
-       in: path
-       required: true
-       type: string
+     - $ref: ./parameters.yaml#/storeUuid
    responses:
      '200':
        description: OK
@@ -143,10 +140,7 @@
    parameters:
      - $ref: ./parameters.yaml#/auth
      - $ref: ./parameters.yaml#/contentType
-     - name: storeUuid
-       in: path
-       required: true
-       type: string
+     - $ref: ./parameters.yaml#/storeUuid
      - name: products
        in: body
        description: Массив товаров
@@ -183,7 +177,7 @@
      Загружает в сторонний сервис массив новых товаров, созданных на терминале.
    parameters:
      - $ref: ./parameters.yaml#/clientAuth
-     - name: storeUuid
+     - $ref: ./parameters.yaml#/storeUuid
        in: path
        required: true
        type: string
@@ -238,10 +232,7 @@
    parameters:
      - $ref: ./parameters.yaml#/auth
      - $ref: ./parameters.yaml#/contentType
-     - name: storeUuid
-       in: path
-       required: true
-       type: string
+     - $ref: ./parameters.yaml#/storeUuid
      - name: products
        in: body
        description: Массив товаров
@@ -276,24 +267,17 @@
      - Товары и документы
    summary: 'Получить список документов'
    description: |
-     Возвращает массив документов. Существуют следующие типы документов:
-     * Кассовые документы - [SELL,
-     PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION]
-     * Инвентаризация - INVENTORY
-     * Приёмка - ACCEPT
-     * Возврат поставщику - RETURN
-     * Списание - WRITE_OFF
-     * Акт переоценки - REVALUATION
-     * Вскрытие тары - OPEN_TARE
+     Возвращает массив документов.
    parameters:
      - $ref: ./parameters.yaml#/auth
-     - name: storeUuid
-       in: path
-       required: true
-       type: string
+     - $ref: ./parameters.yaml#/storeUuid
      - name: deviceUuid
        in: query
        type: string
+       description: |
+         Идентификатор устройства в Облаке Эвотор.
+
+         Формат – `uuid4`. Регистрозависимый.
      - name: ltCloseDate
        in: query
        format: date-time
@@ -321,13 +305,13 @@
      - name: types
        description: |
          Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
-         * кассовые документы - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION.
-         * инвентаризация - INVENTORY;
-         * приемка - ACCEPT;
-         * возврат поставщику - RETURN;
-         * списание - WRITE_OFF;
-         * акт переоценки - REVALUATION;
-         * вскрытие тары - OPEN_TARE.
+         * Кассовые документы – `SELL`,`PAYBACK`,`CASH_INCOME`,`CASH_OUTCOME`,`OPEN_SESSION`,`FPRINT`,`CLOSE_SESSION`.
+         * Инвентаризация – `INVENTORY`;
+         * Приемка – `ACCEPT`;
+         * Возврат поставщику – `RETURN`;
+         * Списание – `WRITE_OFF`;
+         * Акт переоценки – `REVALUATION`;
+         * Вскрытие тары – `OPEN_TARE`.
        in: query
        type: string
    responses:
@@ -363,12 +347,7 @@
      Передаёт в сторонний сервис массив документов с транзакциями.
    parameters:
      - $ref: ./parameters.yaml#/clientAuth
-     - name: storeUuid
-       in: path
-       required: true
-       type: string
-       pattern: >-
-         ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+     - $ref: ./parameters.yaml#/storeUuid
      - name: documents
        in: body
        description: Массив документов
@@ -380,20 +359,6 @@
    responses:
      '200':
        description: OK
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
      '400':
        $ref: ./responses.yaml#/40020012003
      '401':
@@ -617,20 +582,6 @@
     responses:
       '200':
         description: OK
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -664,20 +615,6 @@
     responses:
       '200':
         description: OK
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -711,20 +648,6 @@
     responses:
       '200':
         description: OK
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/4002001
       '401':
@@ -924,20 +847,6 @@
     responses:
       '200':
         description: OK
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012003
       '401':
@@ -980,20 +889,6 @@
     responses:
       '200':
         description: OK
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -1027,20 +922,6 @@
     responses:
       '200':
         description: OK
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:

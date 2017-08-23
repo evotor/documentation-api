@@ -71,17 +71,24 @@ Accept-Encoding:
 storeUuid:
   name: storeUuid
   in: path
-  description: Идентификатор магазина (uuid4), в рамках которого действует запрос.
+  description: |
+    Идентификатор магазина в Облаке Эвотор, в рамках которого действует запрос.
+
+    Формат – `uuid4`.
   required: true
   type: string
   pattern: >-
     ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+  example: 20170222-5A12-403A-80F6-75C361356826
 
 productUuid:
   name: productUuid
   in: path
-  description: Идентификатор товара (uuid4), для которого действует запрос.
+  description: |
+    Идентификатор товара в Облаке Эвотор, для которого действует запрос.
+
+    Формат – `uuid4`.
   required: true
   type: string
-  pattern: >-
+  pattern: |
     ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
