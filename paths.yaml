@@ -412,10 +412,12 @@
       - Вебхуки-запросы
     summary: 'Авторизация пользователя'
     description: |
-      Авторизация существующего пользователя в стороннем сервисе с помощью данных учётной записи платформы Эвотор.
+      Авторизация существующего пользователя в стороннем сервисе с помощью данных учётной записи Личного кабинета Эвотор.
       > Под пользователем понимается мастер-аккаунт владельца бизнеса в стороннем сервисе.
     parameters:
       - $ref: ./parameters.yaml#/serverAuth
+      - $ref: ./parameters.yaml#/Accept
+      - $ref: ./parameters.yaml#/Content-Type
       - name: ''
         in: body
         description: |
@@ -430,43 +432,26 @@
           title: Данные пользователя
           type: object
           required:
-            - userUuid
+            - userId
             - hasBilling
             - token
           properties:
-            userUuid:
-              type: string
-              description: |
-                **Важно:** Параметр `userUuid` к августу будет заменён на параметр `userId`. Используйте новое наименование параметра.
-
-                Идентификатор пользователя в облаке Эвотор.
-              pattern: '^[0-9]{2}-[0-9]{15}$'
+            userId:
+              $ref: './definitions.yaml#/userId'
             hasBilling:
               type: boolean
               description: |
-                Определяет наличие подписки пользователя в стороннем сервисе. Эвотор не взимает плату, если на момент авторизации пользователь оплачивает подписку в стороннем сервисе.
+                Определяет наличие биллинга по данному пользователю в стороннем сервисе.
 
-                Работает, когда учётная запись, первоначально зарегестрированна с помощью интерфейса партнёра.
+                Эвотор не выполняет биллинг, если на момент авторизации пользователь оплачивает подписку в стороннем сервисе.
+
+                Работает, когда учётная запись, первоначально зарегестрированна через интерфей партнёра.
             token:
               description: |
                 Токен, который облако Эвотор будет передавать в заголове `Authorization` с типом `Bearer`, для авторизации своих HTTP-запросов в стороннем сервисе.
               type: string
               maxLength: 128
-              default: toaWaep4chou7ahkoogiu9Iusaht9ima
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+              example: toaWaep4chou7ahkoogiu9Iusaht9ima
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -486,6 +471,8 @@
       Регистрирует новую учётную запись в стороннем сервисе.
       **ВАЖНО:** Под пользователем понимается мастер-аккаунт владельца бизнеса в системе партнера.
     parameters:
+      - $ref: ./parameters.yaml#/Accept
+      - $ref: ./parameters.yaml#/Content-Type
       - $ref: ./parameters.yaml#/serverAuth
       - name: ''
         in: body
@@ -504,33 +491,14 @@
             - userUuid
             - token
           properties:
-            userUuid:
-              type: string
-              description: |
-                **Важно:** Параметр `userUuid` к августу будет заменён на параметр `userId`. Используйте новое наименование параметра.
-
-                Идентификатор пользователя в облаке Эвотор.
-              pattern: '^[0-9]{2}-[0-9]{15}$'
+            userId:
+              $ref: './definitions.yaml#/userId'
             token:
               description: |
                 Токен, который облако Эвотор будет передавать в заголове `Authorization` с типом `Bearer`, для авторизации своих HTTP-запросов в стороннем сервисе.
               type: string
               maxLength: 128
-              default: toaWaep4chou7ahkoogiu9Iusaht9ima
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+              example: toaWaep4chou7ahkoogiu9Iusaht9ima
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -609,29 +577,17 @@
         in: query
         required: true
         type: string
+        description: Штрихкод товара.
       - name: alcCode
         in: query
         required: false
         type: string
+        description: Код алкогольной продукции ЕГАИС.
     responses:
       '200':
         schema:
           $ref: ./definitions.yaml#/commodity
         description: OK
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         $ref: ./responses.yaml#/40020012002
       '401':
@@ -1016,15 +972,10 @@
             - token
           properties:
             userUuid:
-              type: string
-              description: |
-                **Важно:** Параметр `userUuid` к августу будет заменён на параметр `userId`. Используйте новое наименование параметра.
-
-                Идентификатор пользователя в облаке Эвотор.
-              pattern: '^[0-9]{2}-[0-9]{15}$'
+              $ref: './definitions.yaml#/userId'
             token:
               type: string
-              description: Токен приложения.
+              description: Токен, с которым приложение будет обращаться в Облако Эвотор для запроса данных по пользователю с идентификатором `userId`.
               example: f46b89a5-8e80-4591-b0aa-94551790444b
     responses:
       '200':

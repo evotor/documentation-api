@@ -662,7 +662,7 @@ device:
       description: |
         Уникальный идентификатор смарт-терминала в Облаке Эвотор.
 
-        Формат -- `uuid4`.
+        Формат – `uuid4`.
       pattern: >-
         ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
       example: 20170222-D58C-40E0-8051-B53ADFF38860
@@ -690,26 +690,33 @@ commodity:
   type: object
   properties:
     name:
+      $ref: '#/product/properties/name'
       type: string
       description: Название товара.
     alcCodes:
+      $ref: '#/product/properties/alcoCodes'
       type: array
       items:
         type: string
     scanCodes:
+      $ref: '#/product/properties/barCodes'
       type: array
       items:
         type: string
     alcoholByVolume:
+      $ref: '#/product/properties/alcoholByVolume'
       type: string
       description: Крепость алкогольной продукции.
     alcoholProductKindCode:
+      $ref: '#/product/properties/alcoholProductKindCode'
       type: string
       description: Код вида алкогольной продукции.
     tareVolume:
+      $ref: '#/product/properties/tareVolume'
       type: string
       description: Ёмкость тары алкогольной продукции в литрах, до 3 знаков после запятой.
     measure:
+      $ref: '#/product/properties/measureName'
       type: string
       description: Единицы измерения.
 
