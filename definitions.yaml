@@ -691,34 +691,18 @@ commodity:
   properties:
     name:
       $ref: '#/product/properties/name'
-      type: string
-      description: Название товара.
     alcCodes:
       $ref: '#/product/properties/alcoCodes'
-      type: array
-      items:
-        type: string
     scanCodes:
       $ref: '#/product/properties/barCodes'
-      type: array
-      items:
-        type: string
     alcoholByVolume:
       $ref: '#/product/properties/alcoholByVolume'
-      type: string
-      description: Крепость алкогольной продукции.
     alcoholProductKindCode:
       $ref: '#/product/properties/alcoholProductKindCode'
-      type: string
-      description: Код вида алкогольной продукции.
     tareVolume:
       $ref: '#/product/properties/tareVolume'
-      type: string
-      description: Ёмкость тары алкогольной продукции в литрах, до 3 знаков после запятой.
     measure:
       $ref: '#/product/properties/measureName'
-      type: string
-      description: Единицы измерения.
 
 
 receipt:
