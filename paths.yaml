@@ -453,7 +453,7 @@
           title: Данные пользователя
           type: object
           required:
-            - userUuid
+            - userId
             - token
           properties:
             userId:
