@@ -976,23 +976,23 @@
             $ref: ./definitions.yaml#/productSchema
         x-examples:
           application/json:
-            - uuid: "string"
-              appId: "string"
+            - uuid: "1eaca77f-1579-5078-a726-83c892348acd"
+              appId: "1eaca77f-1579-5078-a726-83c892348abc"
               items:
-                - title: "string"
+                - title: "Схема 1"
                   editable: true
-                  uuid: "string"
+                  uuid: "1eaca77f-8937-5314-a726-83c892348acd"
                   type: "TEXT_FIELD"
                   data: {}
                   regexp: "\\\\w+"
-                - title: "string"
+                - title: "Схема 2"
                   editable: false
-                  uuid: "string"
+                  uuid: "1eaca88f-1579-5078-a726-83c892348acd"
                   type: "DICTIONARY_FIELD"
                   multiple: false
                   items:
-                    - title: "string"
-                      value: "string"
+                    - title: "Элемент 1"
+                      value: "1eaca77f-1579-5078-a726-83c892348ghj"
     responses:
       '200':
         description: OK
@@ -1039,12 +1039,13 @@
          type: array
          items:
            type: string
-           description: Идентификатор (uuid4) схемы в платформе Эвотор. Идентификаторы уникальны в рамках приложения.
+           description: |
+             Идентификатор схемы в Облаке Эвотор, уникальный в рамках приложения.
+
+             Формат – `uuid4`.
            pattern: >-
              ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-           example: |
-             {идентификатор схемы 1}",
-             "{идентификатор схемы n}
+           example: 1eaca77f-1579-5078-a726-83c892348acd
    responses:
       '200':
         description: OK
@@ -1165,10 +1166,11 @@
          type: array
          items:
            type: string
-           description: Идентификатор (uuid4) дополнительного поля в платформе Эвотор. Идентификаторы уникальны в рамках приложения.
-           example: |
-               {идентификатор дополнительного поля 1}",
-               "{идентификатор дополнительного поля n}
+           description: |
+             Идентификатор дополнительного поля в Облаке Эвотор, уникальный в рамках приложения.
+
+             Формат – `uuid4`.
+           example: 2bnmv77f-1579-5078-a726-83c892348acd
    responses:
       '200':
         description: OK
