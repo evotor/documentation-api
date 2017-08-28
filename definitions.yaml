@@ -103,7 +103,10 @@ SubscriptionCreated:
             - $ref: '#/planId'
         trialPeriodDuration:
           type: string
-          description: Строка вида `PnDT`, где n – количество дней бесплатного периода, доступных пользователю в момент активации тарифа. PnDT – [формат представления времени](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+          description: |
+            Строка вида `PnDT`, где n – количество дней бесплатного периода, доступных пользователю в момент активации тарифа.
+
+            PnDT – [формат представления времени](https://en.wikipedia.org/wiki/ISO_8601#Durations).
           example: P14DT
         deviceNumber:
           allOf:
@@ -1008,12 +1011,6 @@ productToDelete:
 
 events:
   type: object
-  required:
-    - subscriptionId
-    - userId
-    - productId
-    - sequenceNumber
-    - timestamp
   discriminator: type
   properties:
     subscriptionId:
@@ -1034,18 +1031,21 @@ events:
     type:
       description: |
         Типы событий:
-          * SubscriptionCreated – новая подписка. Приходит при начале пробного периода или перед событием SubscriptionActivated, если пробного периода нет.
-          * SubscriptionActivated – подписка активирована. Приходит по окончанию пробного периода или после события SubscriptionCreated, если пробного периода нет.
-          * SubscriptionRenewed – подписка продлена на следующий период.
-          * SubscriptionTerminated – подписка завершена.
-          * SubscriptionTerminationRequested – запрос на завершение.
-          * SubscriptionTermsChanged – изменились условия подписки, например, тарифный план или количество устройств.
+          * `SubscriptionCreated` – новая подписка. Приходит при начале пробного периода или перед событием *SubscriptionActivated*, если пробного периода нет.
+          * `SubscriptionActivated` – подписка активирована. Приходит по окончанию пробного периода или после события *SubscriptionCreated*, если пробного периода нет.
+          * `SubscriptionRenewed` – подписка продлена на следующий период.
+          * `SubscriptionTerminated` – подписка завершена.
+          * `SubscriptionTerminationRequested` – запрос на завершение.
+          * `SubscriptionTermsChanged` – изменились условия подписки, например, тарифный план или количество устройств.
       type: string
 
 
 userId:
   type: string
-  description: Идентификатор пользователя в облаке Эвотор.
+  description: |
+    Идентификатор пользователя в Облаке Эвотор.
+
+    Не может быть `null`.
   pattern: '^[0-9]{2}-[0-9]{15}$'
   example: 01-000000000000001
 
@@ -1053,13 +1053,19 @@ userId:
 timestamp:
   type: string
   format: date-time
-  description: Дата и время отправки события. [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
+  description: |
+    Дата и время отправки события.
+
+    [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
   example: 2017-04-20T18:26:37.753+0000
 
 
 subscriptionId:
   type: string
-  description: Идентификатор подписки (uuid4).
+  description: |
+    Идентификатор подписки.
+
+    Формат – `uuid4`.
   pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
   example: a99fbf70-6307-4acc-b61c-741ee9eef6c0
 
@@ -1085,7 +1091,10 @@ nextBillingDate:
 
 chargedSum:
   type: object
-  description: Удержанная сумма. Поле не приходит, если после изменения подписки будет удерживаться меньшая сумма, а так же если изменение условий подписки произошло во время пробного периода. До двух знаков после запятой.
+  description: |
+    Удержанная сумма. Поле не приходит, если после изменения подписки будет удерживаться меньшая сумма, а так же если изменение условий подписки произошло во время пробного периода.
+
+    До двух знаков в дробной части.
   properties:
     amount:
       type: number
@@ -1098,7 +1107,10 @@ chargedSum:
 
 productId:
   type: string
-  description: Идентификатор приложения (uuid4).
+  description: |
+    Идентификатор приложения.
+
+    Формат – `uuid4`.
   pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
   example: c0d01x35-5193-4cc2-9bfb-be20e0679498
 
