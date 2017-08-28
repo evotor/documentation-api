@@ -726,31 +726,19 @@
               properties:
                 id:
                   type: string
-                  description: |
-                    Идентификатор чека.
-
-                    Формат – `uuid4`.
+                  description: Идентификатор чека в формате `uuid4`.
                   pattern:
                 deviceId:
                   type: string
-                  description: |
-                    Идентификатор устройства в Облаке Эвотор.
-
-                    Формат – `uuid4`. Регистрозависимый.
+                  description: Идентификатор устройства в формате `uuid4`. Чувствителен к регистру символов.
                   pattern:
                 storeId:
                   type: string
-                  description: |
-                    Идентификатор магазина
-
-                    Формат – `uuid4`.
+                  description: Идентификатор магазина в формате `uuid4`.
                   pattern:
                 dateTime:
                   type: number
-                  description: |
-                    Дата и время в формате создания чека.
-
-                    [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
+                  description: Дата и время в формате создания чека. [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
                   example: "2017-06-07T12:55:18Z"
                 type:
                   type: string
@@ -776,7 +764,7 @@
                     - OTHER
                 infoCheck:
                   type: boolean
-                  description: Указывает фискальный документ или нет.
+                  description: Признак того, является чек информационным (`true`) или фискальным (`false`).
                 egais:
                   type: boolean
                   description: Указывает относится документ к ЕГАИС или нет.
@@ -788,13 +776,10 @@
                     properties:
                       id:
                         type: string
-                        description: |
-                          Идентификатор товара.
-
-                          Формат – `uuid4`.
+                        description: Идентификатор товара/услуги в формате `uuid4`.
                       name:
                         type: string
-                        description: Название товара.
+                        description: Наименование товара/услуги.
                       itemType:
                         type: string
                         description: |
@@ -810,14 +795,8 @@
                           - SERVICE
                       measureName:
                         type: string
-                        description: |
-                          Единица измерения для товара.
-
-                          >Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д..
-
-                          Для групп товаров указывается "".
-
-                          Не может быть`null`
+                        description: >-
+                          Единица измерения для товара, не может быть`null`. Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д.. Для групп товаров указывается "";
                         enum:
                           - ''
                           - шт
@@ -833,16 +812,16 @@
                           - дроб
                       quantity:
                         type: number
-                        description: Количество товара.
+                        description: Количество товара
                       price:
                         type: number
-                        description: Отпускная цена товара.
+                        description: Цена продажи товара.
                       costPrice:
                         type: number
-                        description: Закупочная цена товара.
+                        description: Цена закупки товара.
                       sumPrice:
                         type: number
-                        description: Общая цена товара.
+                        description: Общая цена товара/услуги.
                       tax:
                         type: number
                         description: Сумма налога на товар.
@@ -860,13 +839,11 @@
                   description: Общая сумма скидки.
                 totalAmount:
                   type: number
-                  description: Общая сумма чека.
+                  description: Общая сумма чека
                 extras:
                   type: object
                   description: |
-                    Дополнительные поля. Например, поля пользователей программ лояльности.
-
-                    Поля хранятся в контексте приложения. При отправке в сторонний сервис, Облако Эвотор фильтрует поля таким образом, что сторонний сервис получает только те поля которые были созданы соответствующим приложением, установленным на терминале.
+                    Дополнительные поля. Например, поля пользователей программ лояльности. Поля хранятся в контексте приложения. При отправке в сторонний сервис, Облако Эвотор фильтрует поля таким образом, что сторонний сервис получает только те поля которые были созданы соответствующим приложением, установленным на терминале.
     responses:
       '200':
         description: OK
