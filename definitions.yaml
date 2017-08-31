@@ -75,7 +75,7 @@ trialStarted:
 SubscriptionCreated:
   description: Подписка создана.
   allOf:
-    - $ref: '#/events'
+    - $ref: '#/subscriptionevents'
     - type: object
     - required:
         - planId
@@ -87,9 +87,9 @@ SubscriptionCreated:
         trialPeriodDuration:
           type: string
           description: |
-            Строка вида `PnDT`, где n – количество дней бесплатного периода, доступных пользователю в момент активации тарифа.
+              Строка вида `PnDT`, где n – количество дней бесплатного периода, доступных пользователю в момент активации тарифа.
 
-            PnDT – [формат представления времени](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+              PnDT – [формат представления времени](https://en.wikipedia.org/wiki/ISO_8601#Durations).
           example: P14DT
         deviceNumber:
           allOf:
@@ -99,7 +99,7 @@ SubscriptionCreated:
 SubscriptionActivated:
   description: Подписка активирована.
   allOf:
-    - $ref: '#/events'
+    - $ref: '#/subscriptionevents'
     - type: object
     - required:
         - nextBillingDate
@@ -115,7 +115,7 @@ SubscriptionActivated:
 SubscriptionRenewed:
   description: Подписка продлена.
   allOf:
-    - $ref: '#/events'
+    - $ref: '#/subscriptionevents'
     - type: object
     - required:
         - nextBillingDate
@@ -131,20 +131,20 @@ SubscriptionRenewed:
 SubscriptionTerminated:
   description: Подписка завершена. Приходит, если не прошла регулярная оплата, независимо от того запросил пользователь завершение подписки или нет.
   allOf:
-    - $ref: '#/events'
+    - $ref: '#/subscriptionevents'
     - type: object
 
 SubscriptionTerminationRequested:
   description: Пользователь отправил запрос на завершение подписки (удалил приложение из Личного кабинета). Пользователь может возобновить подписку до окончания оплаченного периода.
   allOf:
-    - $ref: '#/events'
+    - $ref: '#/subscriptionevents'
     - type: object
 
 
 SubscriptionTermsChanged:
   description: Условия подписки изменились. Поля `planId`, `deviceNumber`, `nextBillingDate` и `chargedSum` приходят только в том случае, если при изменении подписки произошли изменения соответствующего параметра.
   allOf:
-    - $ref: '#/events'
+    - $ref: '#/subscriptionevents'
     - type: object
       properties:
           planId:
@@ -227,7 +227,7 @@ product:
         Если товар не относится к алкогольной продукции – пустой массив.
       items:
         type: string
-        description: 19-ти значный код алкогольной продукции ЕГАИС
+        description: 19-ти значный код алкогольной продукции ЕГАИС.
         pattern: '^[0-9]{19}$'
         example: "0000000000000000001"
     name:
@@ -616,8 +616,8 @@ employee:
 
         Не может содержать пустую строку или принимать значение `null`.
       pattern: >-
-        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-      example: 20170222-5670-4067-8017-ff5f40f1a23e
+        ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+      example: 20170222-5670-4067-8017-FF5F40F1A23E
     name:
       type: string
       description: |
@@ -1095,7 +1095,7 @@ productToDelete:
       description: Уникальный UUID товара в платформе Эвотор.
 
 
-events:
+subscriptionevents:
   type: object
   discriminator: type
   properties:
@@ -1125,6 +1125,41 @@ events:
           * `SubscriptionTerminated` – Подписка завершена. Приходит если не прошла регулярная оплата, независимо от того запросил пользователь завершение подписки или нет.
       type: string
 
+appevents:
+  type: object
+  discriminator: type
+  required:
+    - Id
+    - timestamp
+    - version
+    - type
+    - data
+  properties:
+    Id:
+      allOf:
+        - $ref: '#/eventId'
+    timestamp:
+      type: string
+      description: |
+        Дата и время отправки события, в миллисекундах
+
+        В формате unix timestamp.
+      example: 1504168645290
+    version:
+      allOf:
+        - $ref: '#/apiVersion'
+    type:
+      description: |
+        Типы событий:
+          * `ApplicationInstalled` – приложение активировано.
+          * `ApplicationUninstalled` – приложение деактивировано.
+      type: string
+
+apiVersion:
+  type: enum
+  description: Версия API, к которой относятся события.
+  default: 2
+
 
 userId:
   type: string
@@ -1144,7 +1179,6 @@ timestamp:
 
     [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
   example: 2017-04-20T18:26:37.753+0000
-
 
 subscriptionId:
   type: string
@@ -1222,3 +1256,50 @@ measureName:
     - упак
     - ед
     - дроб
+
+eventId:
+  type: string
+  description: |
+    Идентификатор события.
+
+    Формат – `uuid4`.
+  pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+  example: a99fbf70-6307-4acc-b61c-741ee9eef6c0
+
+ApplicationInstalled:
+  description: Приложение активировано.
+  allOf:
+    - $ref: '#/appevents'
+    - type: object
+      properties:
+        data:
+          type: object
+          required:
+            - productId
+            - userId
+          properties:
+            productId:
+              allOf:
+                - $ref: '#/productSchema/properties/appId'
+            userId:
+              allOf:
+                - $ref: '#/userId'
+
+ApplicationUninstalled:
+  description: Приложение деактивировано.
+  allOf:
+    - $ref: '#/appevents'
+    - type: object
+      properties:
+        data:
+          type: object
+          required:
+            - productId
+            - userId
+          properties:
+            productId:
+              allOf:
+                - $ref: '#/productSchema/properties/appId'
+            userId:
+              allOf:
+                - $ref: '#/userId'
