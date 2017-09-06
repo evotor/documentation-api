@@ -372,17 +372,19 @@ product:
       type: string
       description: |
         Тип товара:
-          * "NORMAL" – обычный;
-          * "ALCOHOL_MARKED" – маркированный алкоголь;
-          * "ALCOHOL_NOT_MARKED" – немаркированный алкоголь.
+          * `NORMAL` – обычный;
+          * `ALCOHOL_MARKED` – маркированный алкоголь;
+          * `ALCOHOL_NOT_MARKED` – немаркированный алкоголь;
+          * `SERVICE` – услуга.
 
-        Для групп товаров – "NORMAL".
+        Для групп товаров – `NORMAL`.
 
         Не может быть `null`.
       enum:
         - NORMAL
         - ALCOHOL_MARKED
         - ALCOHOL_NOT_MARKED
+        - SERVICE
       example: ALCOHOL_NOT_MARKED
     alcoholByVolume:
       type: number
@@ -1028,11 +1030,7 @@ receipt2:
                 type: string
                 description: Наименование товара.
               itemType:
-                type: string
-                description: |
-                      Тип товара; обычный ("NORMAL"), маркированный алкоголь
-                      ("ALCOHOL_MARKED"), немаркированный алкоголь("ALCOHOL_NOT_MARKED");
-                      для групп товаров - "NORMAL"; не может быть null
+                $ref: '#/product/properties/type'
               measureName:
                 type: string
                 description: >-
