@@ -1,0 +1,84 @@
+{
+	"timeZoneOffset": 28800000,
+	"extras": {},
+	"sessionId": "e9a25dcb-51ac-4d2b-a3a3-29f09ea881a8",//Идентификатор смены (uuid4).
+	"type": "BUY",//Тип документа (строка).
+	"body":
+	{
+		"baseDocumentNumber": 7,
+		"baseDocumentId": "67e3a4b3-22a7-48bd-9e60-e793106725f4",
+		"payments": [
+			{
+				"parts": [
+					{
+						"partSum": 101,
+						"printGroupId": "fb4d0527-984c-4bd7-be8c-7df3f6290486"
+					}
+				],
+				"sum": 101,
+				"id": "cc86cdb5-51cd-4402-87ae-ba5632171ce3",
+				"type": "CASH"//Способ оплаты.
+			},
+			{
+				"parts": [
+					{
+						"printGroupId": "fb4d0527-984c-4bd7-be8c-7df3f6290486"
+					}
+				],
+				"sum": 0,
+				"id": "cc86cdb5-51cd-4402-87ae-ba5632171ce3",
+				"type": "CASH"
+			}
+		],
+		"printGroups": [
+			{
+				"id": "fb4d0527-984c-4bd7-be8c-7df3f6290486",
+				"type": "INVOICE"
+			},
+			{
+				"id": "fb4d0527-984c-4bd7-be8c-7df3f6290486",
+				"type": "INVOICE"
+			},
+			{
+				"id": "fb4d0527-984c-4bd7-be8c-7df3f6290486",
+				"type": "INVOICE"
+			}
+		],
+		"positions": [
+			{
+				"quantity": 1,
+				"productId": "00000000-0000-0000-0000-000000000027",//Идентификатор товара (uuid4).
+				"initialQuantity": 0,
+				"resultSum": 101,
+				"extraKeys": [],
+				"costPrice": 0,
+				"alcoholByVolume": 0,//Крепость алкогольной продукции.
+				"sum": 101,
+				"tax":
+				{
+					"resultSum": 0,//Сумма налога в базовой валюте.
+					"sum": 0,//Сумма налога (число).
+					"type": "NO_VAT"
+				},
+				"measureName": "дроб",//Единицы измерения.
+				"productName": "Позиция по свободной цене",//Наименование товара.
+				"alcoholProductKindCode": 0,//Код вида алкогольной продукции ФСРАР.
+				"price": 101,
+				"printGroupId": "fb4d0527-984c-4bd7-be8c-7df3f6290486",
+				"tareVolume": 0,//Ёмкость тары алкогольной продукции в литрах.
+				"id": 42,
+				"productType": "NORMAL"//Тип товара.
+			}
+		],
+		"posPrintResults": []
+	},
+	"storeId": "20170524-4ECD-4026-80BB-62828BE15368",//Идентификатор магазина (uuid4).
+	"version": "V2",//Версия протокола документа.
+	"deviceId": "20170906-6871-4061-8033-A7D6110DEFA7",//Идентификатор смарт-терминала (uuid4).
+	"closeDate": "2017-09-06T16:18:32.000+0000",
+	"number": 9,
+	"sessionNumber": 1,//Номер смены.
+	"deviceImei": "352398080695887",//IMEI смарт-терминала.
+	"id": "42e9ac67-20fc-405a-8bc4-7bc1f3d77d1b",
+	"closeUserId": "20161208-C0F1-405A-806D-A3F633F1F2D7"//Идентификатор сотрудника (пользователя), который открыл документ(uuid4).
+}

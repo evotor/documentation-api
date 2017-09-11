@@ -1,0 +1,73 @@
+{
+	"timeZoneOffset": 10800000,
+	"extras": {},
+	"sessionId": "1c854b73-5a99-4cad-942c-12291920abce",//Идентификатор смены (uuid4).
+	"type": "BUYBACK",//Тип документа (строка).
+	"body":
+	{
+		"resultSum": 117,
+		"payments": [
+			{
+				"parts": [
+					{
+						"partSum": 117
+					}
+				],
+				"sum": 117,
+				"id": "d6f246c1-7528-4a29-90b9-f6f22874515f",
+				"type": "CASH"//Способ оплаты.
+			},
+			{
+				"parts": [{}
+				],
+				"sum": 0,
+				"id": "d6f246c1-7528-4a29-90b9-f6f22874515f",
+				"type": "CASH"//Способ оплаты.
+			}
+		],
+		"sum": 117,
+		"positions": [
+			{
+				"code": "100007",
+				"quantity": 1,
+				"productId": "d9ac9bc9-6e59-44e5-bea5-c042bd2db929",//Идентификатор товара (uuid4).
+				"initialQuantity": -21,
+				"resultSum": 117,
+				"costPrice": 0,
+				"alcoholByVolume": 0,//Крепость алкогольной продукции.
+				"sum": 117,
+				"tax":
+				{
+					"resultSum": 17.85,//Сумма налога в базовой валюте.
+					"sum": 17.85,//Сумма налога (число).
+					"type": "VAT_18"
+				},
+				"measureName": "шт",//Единицы измерения.
+				"productName": "Ассорти (конфеты)",//Наименование товара.
+				"alcoholProductKindCode": 0,//Код вида алкогольной продукции ФСРАР.
+				"price": 117,
+				"tareVolume": 0,//Ёмкость тары алкогольной продукции в литрах.
+				"id": 54,
+				"productType": "NORMAL"//Тип товара.
+			}
+		],
+		"posPrintResults": [
+			{
+				"sessionNumber": 0,
+				"documentNumber": 145,
+				"receiptDate": "08092017",
+				"checkSum": 117,
+				"receiptNumber": 56
+			}
+		]
+	},
+	"storeId": "20170726-083C-402D-806A-2CCA7773EFC0",//Идентификатор магазина (uuid4).
+	"version": "V2",//Версия протокола документа.
+	"deviceId": "20170908-96F7-40E9-80FF-C8892C35F096",//Идентификатор смарт-терминала (uuid4).
+	"closeDate": "2017-09-08T08:04:05.000+0000",
+	"number": 15,
+	"sessionNumber": 3,//Номер смены.
+	"deviceImei": "352398080259478",//IMEI смарт-терминала.
+	"id": "757b6ae9-6af7-4811-b686-351f841e7953",
+	"closeUserId": "20170523-C2AC-40A4-8027-55609A845896"//Идентификатор сотрудника (пользователя), который открыл документ(uuid4).
+}
