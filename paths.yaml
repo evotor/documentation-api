@@ -137,6 +137,8 @@
    summary: 'Передать список товаров'
    description: |
      Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
+
+     > С 1.11.2017 Облако перестанет обрабатывать запросы содержащие некорректную схему товаров. Вы по-прежнему сможете получить из Облака ранее созданные товары с некорректной схемой.
    parameters:
      - $ref: ./parameters.yaml#/auth
      - $ref: ./parameters.yaml#/contentType
@@ -152,7 +154,15 @@
    responses:
      '200':
        description: OK
-#       headers:
+       headers:
+         X-Products-Violations-Count:
+           schema:
+             type: integer
+           description: Количество элементов, которые не соответствуют схеме.
+         X-Products-Violations:
+           schema:
+             type: string
+           description: Подробное описание перх 20-ти ошибок.
 #         X-RateLimit-Limit:
 #           schema:
 #             type: integer
