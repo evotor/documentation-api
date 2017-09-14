@@ -1094,7 +1094,10 @@ productToDelete:
   properties:
     uuid:
       type: string
-      description: Уникальный UUID товара в платформе Эвотор.
+      description: |
+        Уникальный UUID товара в платформе Эвотор.
+
+        >Запрос с пустым телом удаляет все товары в магазине.
 
 
 subscriptionevents:
