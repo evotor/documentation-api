@@ -16,6 +16,8 @@
           type: array
           items:
             $ref: ./definitions.yaml#/store
+     '413':
+       description: Превышен максимальный объём данных в запросе
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
@@ -49,6 +51,8 @@
          type: array
          items:
            $ref: ./definitions.yaml#/employee
+     '413':
+       description: Превышен максимальный объём данных в запросе
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
@@ -83,6 +87,8 @@
          type: array
          items:
            $ref: ./definitions.yaml#/device
+     '413':
+       description: Превышен максимальный объём данных в запросе
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
@@ -117,6 +123,8 @@
          type: array
          items:
            $ref: ./definitions.yaml#/product
+     '413':
+       description: Превышен максимальный объём данных в запросе
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
@@ -163,6 +171,8 @@
            schema:
              type: string
            description: Подробное описание первых 20-ти ошибок.
+     '413':
+       description: Превышен максимальный объём данных в запросе
 #         X-RateLimit-Limit:
 #           schema:
 #             type: integer
@@ -254,6 +264,8 @@
    responses:
      '200':
        description: OK
+     '413':
+       description: Превышен максимальный объём данных в запросе
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
@@ -332,6 +344,8 @@
          type: array
          items:
            $ref: ./definitions.yaml#/document
+     '413':
+       description: Превышен максимальный объём данных в запросе
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
@@ -1004,6 +1018,8 @@
     responses:
       '200':
         description: OK
+      '413':
+        description: Превышен максимальный объём данных в запросе
 #       headers:
 #         X-RateLimit-Limit:
 #           schema:
@@ -1062,6 +1078,8 @@
     responses:
       '200':
         description: OK
+      '413':
+        description: Превышен максимальный объём данных в запросе
 #        headers:
 #          X-RateLimit-Limit:
 #            schema:
@@ -1114,6 +1132,8 @@
    responses:
       '200':
         description: OK
+      '413':
+        description: Превышен максимальный объём данных в запросе
 #        headers:
 #          X-RateLimit-Limit:
 #            schema:
@@ -1150,6 +1170,8 @@
         description: OK
         schema:
             $ref: ./definitions.yaml#/productExtras
+      '413':
+        description: Превышен максимальный объём данных в запросе
 #        headers:
 #          X-RateLimit-Limit:
 #            schema:
@@ -1188,6 +1210,8 @@
     responses:
       '200':
         description: OK
+      '413':
+        description: Превышен максимальный объём данных в запросе
 #        headers:
 #          X-RateLimit-Limit:
 #            schema:
@@ -1238,6 +1262,8 @@
    responses:
       '200':
         description: OK
+      '413':
+        description: Превышен максимальный объём данных в запросе
 #        headers:
 #          X-RateLimit-Limit:
 #            schema:
