@@ -739,6 +739,8 @@
               type: number
               description: Время в миллисекундах, в Unix-формате.
               example: "1496826444000001"
+            userId:
+              $ref: ./definitions.yaml#/userId
             type:
               type: string
               description: Тип события.
