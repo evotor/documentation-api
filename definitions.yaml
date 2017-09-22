@@ -164,25 +164,11 @@ SubscriptionTermsChanged:
 product:
   type: object
   required:
-    - alcoCodes
-    - alcoholByVolume
-    - alcoholProductKindCode
-    - allowToSell
-    - articleNumber
-    - barCodes
-    - code
-    - costPrice
-    - description
     - group
-    - measureName
     - name
-    - parentUuid
-    - price
-    - quantity
-    - tareVolume
-    - tax
-    - type
     - uuid
+    - type
+  discriminator: type
   properties:
     uuid:
       type: string
@@ -197,41 +183,6 @@ product:
       pattern: >-
         ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
       example: 01ba18b6-8707-5f47-3d9c-4db058054cb2
-    code:
-      type: string
-      description: |
-        Код товара или группы товаров.
-
-        Не может быть `null`.
-      minLength: 0
-      maxLength: 10
-      example: "6"
-    barCodes:
-      type: array
-      x-nullable: true
-      description: |
-        Массив штрихкодов товара.
-
-        Для групп товаров - пустой массив или `null`.
-      items:
-        type: string
-        pattern: '^[0-9]$'
-        minLength: 1
-        example: "2000000000060"
-    alcoCodes:
-      type: array
-      x-nullable: true
-      description: |
-        Массив строк кодов алкогольной продукции ЕГАИС.
-
-        Для групп товаров – пустой массив или `null`.
-
-        Если товар не относится к алкогольной продукции – пустой массив.
-      items:
-        type: string
-        description: 19-ти значный код алкогольной продукции ЕГАИС.
-        pattern: '^[0-9]{19}$'
-        example: "0000000000000000001"
     name:
       type: string
       description: |
@@ -241,110 +192,15 @@ product:
       minLength: 1
       maxLength: 100
       example: Сидр
-    price:
-      type: number
-      format: float
-      minimum: 0
-      maximum: 9999999.99
-      description: |
-        Отпускная цена товара.
-
-        Для групп товаров – 0
-
-        Не может быть `null`.
-      example: 123.12
-    quantity:
-      type: number
-      format: float
-      description: |
-        Количество товара в наличии (остаток). До трёх знаков в дробной части.
-
-        Для групп товаров – 0.
-
-        Не может быть `null`.
-      example: 12
-    costPrice:
-      type: number
-      format: float
-      minimum: 0
-      maximum: 9999999.99
-      description: |
-        Закупочная цена товара.
-
-        Для групп товаров – 0.
-
-        Не может быть `null`.
-      example: 100.123
-    measureName:
-      type: string
-      description: |
-        Единица измерения товара.
-
-        >Товароучётные системы могут задавать свои единицы измерения, например: "пара", "палета", "карат" и т.д..
-
-        Не может быть`null`.
-
-        Для групп товаров указывайте "".
-      enum:
-        - ''
-        - шт
-        - кг
-        - л
-        - м
-        - км
-        - м2
-        - м3
-        - компл
-        - упак
-        - ед
-        - дроб
-      example: шт
-    tax:
-      type: string
-      description: |
-        Ставка НДС для товара.
-
-        Для групп товаров - "NO_VAT".
-
-        Не может быть `null` или пустой строкой.
-      enum:
-        - NO_VAT
-        - VAT_10
-        - VAT_18
-        - VAT_0
-        - VAT_18_118
-        - VAT_10_110
-      example: VAT_18
-    allowToSell:
+    group:
       type: boolean
       description: |
-        Указывает можно добавить товар в чек или нельзя:
-          * `true` – товар можно добавить в чек;
-          * `false` - товар нельзя добавить в чек.
+        Указывает является элемент товаром или группой товаров:
+          * `true` – группа товаров;
+          * `false` – товар.
 
-          Для групп товаров – `true`.
-
-          Не может быть `null`.
-      example: true
-    description:
-      type: string
-      x-nullable: true
-      description: |
-        Описание товара.
-
-        Для групп товаров – "" или `null`.
-      example: Вкусный яблочный сидр.
-      minLength: 0
-    articleNumber:
-      type: string
-      x-nullable: true
-      description: |
-        Артикул товара.
-
-        Для групп товаров – "" или `null`.
-      minLength: 0
-      maxLength: 20
-      example: сид123
+        Не может быть `null`.
+      example: false
     parentUuid:
       type: string
       x-nullable: true
@@ -363,14 +219,12 @@ product:
 
         Не может быть пустой строкой.
       example: 1ddea16b-971b-dee5-3798-1b29a7aa2e27
-    group:
+    hasVariants:
       type: boolean
       description: |
-        Указывает является элемент товаром или группой товаров:
-          * `true` – группа товаров;
-          * `false` – товар.
+        Определяет являет группа хранилищем для модификаций или нет.
 
-        Не может быть `null`.
+        > **Поле передаётся только если `group = true`**.
       example: false
     type:
       type: string
@@ -381,7 +235,7 @@ product:
           * `ALCOHOL_NOT_MARKED` – немаркированный алкоголь;
           * `SERVICE` – услуга.
 
-        Для групп товаров – `NORMAL`.
+        > **Поле передаётся только если `group = false`.**
 
         Не может быть `null`.
       enum:
@@ -390,51 +244,170 @@ product:
         - ALCOHOL_NOT_MARKED
         - SERVICE
       example: ALCOHOL_NOT_MARKED
-    alcoholByVolume:
-      type: number
-      format: float
-      x-nullable: true
-      minimum: 0
-      maximum: 99.999
-      description: |
-        Крепость алкогольной продукции. До трёх знаков в дробной части.
 
-        Для алкогольных товаров значение может быть в диапазоне от
-        0.001 до 99.999.
 
-        Для неалкогольных товаров – 0.
+NORMAL:
+  allOf:
+    - $ref: '#/product'
+    - type: object
+      required:
+        - allowToSell
+        - group
+        - measureName
+        - name
+        - price
+        - quantity
+        - tax
+        - type
+        - uuid
+      properties:
+        quantity:
+          $ref: '#/fieldQuantity'
+        measureName:
+          $ref: '#/fieldMeasureName'
+        tax:
+          $ref: '#/fieldTax'
+        price:
+          $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
+        costPrice:
+          $ref: '#/fieldCostPrice'
+        description:
+          $ref: '#/fieldDescription'
+        articleNumber:
+          $ref: '#/fieldArticleNumber'
+        code:
+          $ref: '#/fieldCode'
+        barCodes:
+          $ref: '#/fieldBarCodes'
+        attributes:
+          $ref: '#/fieldAttributes'
 
-        Для групп товаров – 0 или `null`.
-      example: 5.45
-    alcoholProductKindCode:
-      type: integer
-      x-nullable: true
-      minimum: 0
-      maximum: 999
-      description: |
-        Код вида алкогольной продукции ФСРАР.
 
-        Для алкогольных товаров значение может быть в диапазоне от 1 до 999.
+ALCOHOL_NOT_MARKED:
+  allOf:
+    - $ref: '#/product'
+    - type: object
+      required:
+        - alcoholByVolume
+        - alcoholProductKindCode
+        - allowToSell
+        - barCodes
+        - code
+        - description
+        - measureName
+        - parentUuid
+        - price
+        - quantity
+        - tareVolume
+        - tax
+      properties:
+        alcoholByVolume:
+          $ref: '#/fieldAlcoholByVolume'
+        alcoholProductKindCode:
+          $ref: '#/fieldAlcoholProductKindCode'
+        tareVolume:
+          $ref: '#/fieldTareVolume'
+        quantity:
+          $ref: '#/fieldQuantity'
+        measureName:
+          $ref: '#/fieldMeasureName'
+        tax:
+          $ref: '#/fieldTax'
+        price:
+          $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
+        alcoCodes:
+          $ref: '#/fieldAlcoCodes'
+        costPrice:
+          $ref: '#/fieldCostPrice'
+        description:
+          $ref: '#/fieldDescription'
+        articleNumber:
+          $ref: '#/fieldArticleNumber'
+        code:
+          $ref: '#/fieldCode'
+        barCodes:
+          $ref: '#/fieldBarCodes'
+        attributes:
+          $ref: '#/fieldAttributes'
 
-        Для неалкогольных товаров – 0.
+ALCOHOL_MARKED:
+  allOf:
+    - $ref: '#/product'
+    - type: object
+      required:
+        - alcoCodes
+        - alcoholByVolume
+        - alcoholProductKindCode
+        - allowToSell
+        - measureName
+        - parentUuid
+        - price
+        - quantity
+        - tareVolume
+        - tax
+      properties:
+        alcoholByVolume:
+          $ref: '#/fieldAlcoholByVolume'
+        alcoholProductKindCode:
+          $ref: '#/fieldAlcoholProductKindCode'
+        tareVolume:
+          $ref: '#/fieldTareVolume'
+        quantity:
+          $ref: '#/fieldQuantity'
+        measureName:
+          $ref: '#/fieldMeasureName'
+        tax:
+          $ref: '#/fieldTax'
+        price:
+          $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
+        alcoCodes:
+          $ref: '#/fieldAlcoCodes'
+        costPrice:
+          $ref: '#/fieldCostPrice'
+        description:
+          $ref: '#/fieldDescription'
+        articleNumber:
+          $ref: '#/fieldArticleNumber'
+        code:
+          $ref: '#/fieldCode'
+        barCodes:
+          $ref: '#/fieldBarCodes'
+        attributes:
+          $ref: '#/fieldAttributes'
 
-        Для групп товаров – 0 или `null`.
-      example: 123
-    tareVolume:
-      type: number
-      x-nullable: true
-      format: float
-      minimum: 0
-      maximum: 999.999
-      description: |
-        Ёмкость тары алкогольной продукции в литрах. До трёх знаков после запятой.
-
-        Для алкоголя значение может быть диапазоне от 0.001 до 999.999.
-
-        Для неалкогольных товаров – 0.
-
-        Для групп товаров – 0 или `null`.
-      example: 0.57
+SERVICE:
+  allOf:
+    - $ref: '#/product'
+    - type: object
+      required:
+        - measureName
+        - price
+        - tax
+      properties:
+        measureName:
+          $ref: '#/fieldMeasureName'
+        tax:
+          $ref: '#/fieldTax'
+        price:
+          $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
+        description:
+          $ref: '#/fieldDescription'
+        articleNumber:
+          $ref: '#/fieldArticleNumber'
+        code:
+          $ref: '#/fieldCode'
+        barCodes:
+          $ref: '#/fieldBarCodes'
+        attributes:
+          $ref: '#/fieldAttributes'
 
 
 productSchema:
@@ -827,266 +800,192 @@ commodity:
     name:
       $ref: '#/product/properties/name'
     alcCodes:
-      $ref: '#/product/properties/alcoCodes'
+      $ref: '#/fieldAlcoCodes'
     scanCodes:
-      $ref: '#/product/properties/barCodes'
+      $ref: '#/fieldBarCodes'
     alcoholByVolume:
-      $ref: '#/product/properties/alcoholByVolume'
+      $ref: '#/fieldAlcoholByVolume'
     alcoholProductKindCode:
-      $ref: '#/product/properties/alcoholProductKindCode'
+      $ref: '#/fieldAlcoholProductKindCode'
     tareVolume:
-      $ref: '#/product/properties/tareVolume'
+      $ref: '#/fieldTareVolume'
     measure:
-      $ref: '#/product/properties/measureName'
+      $ref: '#/fieldMeasureName'
 
 
 receipt:
-  type: object
-  required:
-    - uuid
-    - deviceUuid
-    - storeUuid
-    - dateTime
-  properties:
-    uuid:
-      type: string
-      description: Уникальный идентификатор чека.
-    deviceUuid:
-      type: string
-      description: Уникальный идентификатор смарт-терминала. Чувствителен к регистру символов.
-    storeUuid:
-      type: string
-      description: Уникальный идентификатор магазина.
-    dateTime:
-      description: Дата и время.
-      type: string
-      format: date-time
-    type:
-      description: |
-          Тип чека – продажа.
-      type: string
-    shiftId:
-      description: Номер смены.
-      type: string
-    employeeUuid:
-      type: string
-      description: Уникальный идентификатор сотрудника (пользователя, продавшего товар).
-    paymentSource:
-      description: |
-        Способ оплаты:
-          * PAY_CASH - оплата наличными без сдачи;
-          * PAY_CASHBACK – оплата наличными со сдачей;
-          * PAY_CARD - оплата по карте.
-      type: string
-      enum:
-        - PAY_CASH
-        - PAY_CASHBACK
-        - PAY_CARD
-        - OTHER
-    infoCheck:
-      type: boolean
-      description: Информационный чек. Возможные значения true или false.
-    egais:
-      type: boolean
-      description: ЕГАИС. Возможные значения true или false.
-    items:
-      type: array
-      description: Массив с позициями в чеке.
-      items:
+  in: body
+  description: Объект с данными о чеке.
+  required: true
+  schema:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Уникальный идентификатор события отправки чека.
+      timestamp:
+        type: number
+        description: Время в миллисекундах, в Unix-формате.
+        example: "1496826444000001"
+      userId:
+        $ref: '#/userId'
+      type:
+        type: string
+        description: Тип события.
+      version:
+        type: enum
+        description: Версия API.
+        example: 2
+      data:
         type: object
         properties:
-          uuid:
-            type: string
-            description: Уникальный идентификатор товара / услуги.
-          name:
-            type: string
-            description: Наименование товара / услуги.
-          itemType:
+          id:
             type: string
             description: |
-              Тип товара:
-                * обычный;
-                * маркированный алкоголь;
-                * немаркированный алкоголь.
-                * услуга.
-            enum:
-              - NORMAL
-              - ALCOHOL_MARKED
-              - ALCOHOL_NOT_MARKED
-              - SERVICE
-          barcode:
-            type: string
-          measureName:
-            type: string
-            description: >-
-              Единица измерения для товара, не может быть`null`. Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д.. Для групп товаров указывается "";
-            enum:
-              - ''
-              - шт
-              - кг
-              - л
-              - м
-              - км
-              - м2
-              - м3
-              - компл
-              - упак
-              - ед
-              - дроб
-          quantity:
-            type: number
-            description: Кол-во товара.
-          price:
-            type: number
-            description: Цена продажи товара.
-          costPrice:
-            type: number
-            description: Цена закупки товара.
-          sumPrice:
-            type: number
-            description: Общая цена товара/
-          tax:
-            type: number
-            description: Cумма налога на товар.
-          taxPercent:
-            type: number
-            description: Общий налог на товар. Выражается в процентах.
-          discount:
-            type: number
-            description: Общая сумма скидки на товар.
-    totalTax:
-      type: number
-      description: Общая сумма налога.
-    totalDiscount:
-      type: number
-      description: Общая сумма скидки.
-    totalAmount:
-      type: number
-      description: Общая сумма чека.
-    extras:
-      type: object
-      description: |
-        Дополнительные поля. Например, поля пользователей программ лояльности. Поля хранятся в контексте приложения. При отправке в сторонний сервис, Облако Эвотор фильтрует поля таким образом, что сторонний сервис получает только те поля которые были созданы соответствующим приложением, установленным на терминале.
+              Идентификатор чека.
 
-receipt2:
-  type: object
-  required:
-  properties:
-    id:
-      type: string
-      description: Уникальный идентификатор чека.
-    timestamp:
-      type: enum
-      description: Время в Unix-формате.
-    type:
-      type: string
-      description: Тип события.
-    version:
-      type: enum
-      description: Версия эндпоинта.
-    data:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Идентификатор чека в формате `uuid4`.
-          pattern:
-        deviceId:
-          type: string
-          description: Идентификатор устройства в формате `uuid4`. Чувствителен к регистру символов.
-          pattern:
-        storeId:
-          type: string
-          description: Идентификатор магазина в формате `uuid4`.
-          pattern:
-        dateTime:
-          type: enum
-          description: Unix-время.
-        type:
-          type: string
-          description: Тип документа
-        shiftId:
-          type: string
-          description: Смена, в которую был создан документ.
-        employeeId:
-          type: string
-          description: Идентификатор сотрудника в формате `uuid4`.
-          pattern:
-        paymentSource:
-          type: string
-          description: Тип оплаты.
-        infoCheck:
-          type: boolean
-          description: Флаг, указывающий на фискальность документа.
-        egais:
-          type: boolean
-          description: Флаг, указывающий относится документ к ЕГАИС или нет.
-        items:
-          type: array
-          description: Массив с позициями чека.
+              Формат – `uuid4`.
+            pattern:
+          deviceId:
+            type: string
+            description: |
+              Идентификатор устройства в Облаке Эвотор.
+
+              Формат – `uuid4`. Регистрозависимый.
+            pattern:
+          storeId:
+            type: string
+            description: |
+              Идентификатор магазина.
+
+              Формат – `uuid4`.
+            pattern:
+          dateTime:
+            type: number
+            description: |
+              Дата и время в формате создания чека.
+
+              [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
+            example: "2017-06-07T12:55:18Z"
+          type:
+            type: string
+            description: Тип документа
+          shiftId:
+            type: string
+            description: Номер смены.
+          employeeId:
+            type: string
+            description: Уникальный идентификатор сотрудника (пользователя, продавшего товар).
+            pattern:
+          paymentSource:
+            description: |
+              Способ оплаты:
+                * PAY_CASH - оплата наличными без сдачи;
+                * PAY_CASHBACK – оплата наличными со сдачей;
+                * PAY_CARD - оплата по карте.
+            type: string
+            enum:
+              - PAY_CASH
+              - PAY_CASHBACK
+              - PAY_CARD
+              - OTHER
+          infoCheck:
+            type: boolean
+            description: |
+              Флаг, указывающий на фискальность документа:
+                * `true` – информационный чек;
+                * `false` – фискальный чек.
+
+          egais:
+            type: boolean
+            description: Указывает относится документ к ЕГАИС или нет.
           items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Идентификатор товара в формате `uuid4`.
-              name:
-                type: string
-                description: Наименование товара.
-              itemType:
-                $ref: '#/product/properties/type'
-              measureName:
-                type: string
-                description: >-
-                  Единица измерения для товара, не может быть`null`. Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д.. Для групп товаров указывается "";
-                enum:
-                  - ''
-                  - шт
-                  - кг
-                  - л
-                  - м
-                  - км
-                  - м2
-                  - м3
-                  - компл
-                  - упак
-                  - ед
-                  - дроб
-              quantity:
-                type: number
-                description: кол-во товара
-              price:
-                type: number
-                description: цена товара
-              costPrice:
-                type: number
-                description:
-              sumPrice:
-                type: number
-                description:
-              tax:
-                type: number
-                description:
-              taxPercent:
-                type: number
-                description:
-              discount:
-                type: number
-                description:
-        totalTax:
-          type: number
-          description: Общая сумма налога.
-        totalDiscount:
-          type: number
-          description: Общая сумма скидки.
-        totalAmount:
-          type: number
-          description: Общая сумма чека
-        extras:
-          type: object
-          description: |
-            Дополнительные поля. Например, поля пользователей программ лояльности. Поля хранятся в контексте приложения. При отправке в сторонний сервис, Облако Эвотор фильтрует поля таким образом, что сторонний сервис получает только те поля которые были созданы соответствующим приложением, установленным на терминале.
+            type: array
+            description: Массив с позициями чека.
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: |
+                    Идентификатор товара.
 
+                    Формат – `uuid4`.
+                name:
+                  type: string
+                  description: Название товара.
+                itemType:
+                  type: string
+                  description: |
+                    Тип товара:
+                      * обычный;
+                      * маркированный алкоголь;
+                      * немаркированный алкоголь;
+                      * услуга.
+                  enum:
+                    - NORMAL
+                    - ALCOHOL_MARKED
+                    - ALCOHOL_NOT_MARKED
+                    - SERVICE
+                measureName:
+                  type: string
+                  description: |
+                    Единица измерения для товара.
+
+                    >Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д..
+
+                    Для групп товаров указывается "".
+
+                    Не может быть`null`
+                  enum:
+                    - ''
+                    - шт
+                    - кг
+                    - л
+                    - м
+                    - км
+                    - м2
+                    - м3
+                    - компл
+                    - упак
+                    - ед
+                    - дроб
+                quantity:
+                  type: number
+                  description: Количество товара.
+                price:
+                  type: number
+                  description: Отпускная цена товара.
+                costPrice:
+                  type: number
+                  description: Закупочная цена товара.
+                sumPrice:
+                  type: number
+                  description: Общая цена товара.
+                tax:
+                  type: number
+                  description: Сумма налога на товар.
+                taxPercent:
+                  type: number
+                  description: Сумма налога на товар, выраженная в процентах.
+                discount:
+                  type: number
+                  description: Общая сумма скидки на товар.
+          totalTax:
+            type: number
+            description: Общая сумма налога.
+          totalDiscount:
+            type: number
+            description: Общая сумма скидки.
+          totalAmount:
+            type: number
+            description: Общая сумма чека.
+          extras:
+            type: object
+            description: |
+              Дополнительные поля. Например, поля пользователей программ лояльности.
+
+              Поля хранятся в контексте приложения. При отправке в сторонний сервис, Облако Эвотор фильтрует поля таким образом, что сторонний сервис получает только те поля которые были созданы соответствующим приложением, установленным на терминале.
 
 
 productToDelete:
@@ -1308,3 +1207,195 @@ ApplicationUninstalled:
             userId:
               allOf:
                 - $ref: '#/userId'
+
+
+
+
+########
+#FIELDS#
+########
+
+fieldQuantity:
+  type: number
+  format: float
+  description: |
+    Количество товара в наличии (остаток). До трёх знаков в дробной части.
+
+    Не может быть `null`.
+
+    >**Поле передаётся только если `group = false`.**
+  example: 12
+fieldMeasureName:
+  type: string
+  description: |
+    Единица измерения товара.
+
+    >Товароучётные системы могут задавать свои единицы измерения, например: "пара", "палета", "карат" и т.д..
+
+    Не может быть`null`.
+
+    >**Поле передаётся только если `group = false`.**
+  enum:
+    - ''
+    - шт
+    - кг
+    - л
+    - м
+    - км
+    - м2
+    - м3
+    - компл
+    - упак
+    - ед
+    - дроб
+  example: шт
+fieldTax:
+  type: string
+  description: |
+    Ставка НДС для товара.
+
+    Не может быть `null` или пустой строкой.
+
+    >**Поле передаётся только если `group = false`.**
+  enum:
+    - NO_VAT
+    - VAT_10
+    - VAT_18
+    - VAT_0
+    - VAT_18_118
+    - VAT_10_110
+  example: VAT_18
+fieldPrice:
+  type: number
+  format: float
+  minimum: 0
+  maximum: 9999999.99
+  description: |
+    Отпускная цена товара.
+
+    Не может быть `null`.
+
+    >**Поле передаётся только если `group = false`.**
+  example: 123.12
+fieldAllowToSell:
+  type: boolean
+  description: |
+    Указывает можно добавить товар в чек или нельзя:
+      * `true` – товар можно добавить в чек;
+      * `false` - товар нельзя добавить в чек.
+
+      Не может быть `null`.
+
+      >**Поле передаётся только если `group = false`.**
+  example: true
+fieldCostPrice:
+  type: number
+  format: float
+  minimum: 0
+  maximum: 9999999.99
+  description: |
+    Закупочная цена товара.
+
+    Не может быть `null`.
+
+    >**Поле передаётся только если `group = false`.**
+  example: 100.123
+fieldDescription:
+  type: string
+  x-nullable: true
+  description: |
+    Описание товара.
+
+    >**Поле передаётся только если `group = false`.**
+  example: Вкусный яблочный сидр.
+  minLength: 0
+fieldArticleNumber:
+  type: string
+  x-nullable: true
+  description: |
+    Артикул товара.
+
+    >**Поле передаётся только если `group = false`.**
+  minLength: 0
+  maxLength: 20
+  example: сид123
+fieldCode:
+  type: string
+  description: |
+    Код товара или группы товаров.
+
+    >**Поле передаётся только если `group = false`.**
+  minLength: 0
+  maxLength: 10
+  example: "6"
+fieldBarCodes:
+  type: array
+  x-nullable: true
+  description: |
+    Массив штрихкодов товара.
+
+    >**Поле передаётся только если `group = false`.**
+  items:
+    type: string
+    pattern: '^[0-9]$'
+    minLength: 1
+    example: "2000000000060"
+fieldAlcoholByVolume:
+  type: number
+  format: float
+  x-nullable: true
+  minimum: 0
+  maximum: 99.999
+  description: |
+    Крепость алкогольной продукции. До трёх знаков в дробной части.
+
+    Для алкогольных товаров значение может быть в диапазоне от
+    0.001 до 99.999.
+
+    >**Поле передаётся только если `group = false`.**
+  example: 5.45
+fieldAlcoholProductKindCode:
+  type: integer
+  x-nullable: true
+  minimum: 0
+  maximum: 999
+  description: |
+    Код вида алкогольной продукции ФСРАР.
+
+    Для алкогольных товаров значение может быть в диапазоне от 1 до 999.
+
+    >**Поле передаётся только если `group = false`.**
+  example: 123
+fieldTareVolume:
+  type: number
+  x-nullable: true
+  format: float
+  minimum: 0
+  maximum: 999.999
+  description: |
+    Ёмкость тары алкогольной продукции в литрах. До трёх знаков после запятой.
+
+    Для алкоголя значение может быть диапазоне от 0.001 до 999.999.
+
+    >**Поле передаётся только если `group = false`.**
+  example: 0.57
+fieldAlcoCodes:
+  type: array
+  x-nullable: true
+  description: |
+    Массив строк кодов алкогольной продукции ЕГАИС.
+
+    Если товар не относится к алкогольной продукции – пустой массив.
+
+    >**Поле передаётся только если `group = false`.**
+  items:
+    type: string
+    description: 19-ти значный код алкогольной продукции ЕГАИС.
+    pattern: '^[0-9]{19}$'
+    example: "0000000000000000001"
+fieldAttributes:
+  type: object
+  description: |
+    Содержит перечисление характеристик для модификации товара в пар ключ-значение.
+
+    Например: {"key1": "value1", "key2": "value2", ... "keyN": "valueN"}

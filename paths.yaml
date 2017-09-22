@@ -123,6 +123,39 @@
          type: array
          items:
            $ref: ./definitions.yaml#/product
+       x-examples:
+         application/json:
+            [
+              {
+                "uuid": "01ba18b6-8707-5f47-3d9c-4db058054cb2",
+                "code": "6",
+                "barCodes": [
+                  "2000000000060"
+                ],
+                "alcoCodes": [
+                  "0000000000000000001"
+                ],
+                "name": "Сидр",
+                "price": 123.12,
+                "quantity": 12,
+                "costPrice": 100.123,
+                "measureName": "шт",
+                "tax": "VAT_18",
+                "allowToSell": true,
+                "description": "Вкусный яблочный сидр.",
+                "articleNumber": "сид123",
+                "parentUuid": "1ddea16b-971b-dee5-3798-1b29a7aa2e27",
+                "group": false,
+                "type": "ALCOHOL_NOT_MARKED",
+                "alcoholByVolume": 5.45,
+                "alcoholProductKindCode": 123,
+                "tareVolume": 0.57,
+                "attributes": {
+                  "ключ1": "значение1",
+                  "ключ2": "значение2"
+                }
+              }
+            ]
      '413':
        description: Превышен максимальный объём данных в запросе
 #       headers:
@@ -159,6 +192,39 @@
          type: array
          items:
            $ref: ./definitions.yaml#/product
+       x-examples:
+         application/json:
+            [
+              {
+                "uuid": "01ba18b6-8707-5f47-3d9c-4db058054cb2",
+                "code": "6",
+                "barCodes": [
+                  "2000000000060"
+                ],
+                "alcoCodes": [
+                  "0000000000000000001"
+                ],
+                "name": "Сидр",
+                "price": 123.12,
+                "quantity": 12,
+                "costPrice": 100.123,
+                "measureName": "шт",
+                "tax": "VAT_18",
+                "allowToSell": true,
+                "description": "Вкусный яблочный сидр.",
+                "articleNumber": "сид123",
+                "parentUuid": "1ddea16b-971b-dee5-3798-1b29a7aa2e27",
+                "group": false,
+                "type": "ALCOHOL_NOT_MARKED",
+                "alcoholByVolume": 5.45,
+                "alcoholProductKindCode": 123,
+                "tareVolume": 0.57,
+                "attributes": {
+                  "ключ1": "значение1",
+                  "ключ2": "значение2"
+                }
+              }
+            ]
    responses:
      '200':
        description: OK
@@ -725,179 +791,8 @@
       После оплаты отправляет чек в сторонний сервис. Тело запроса содержит один или несколько чеков.
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
-      - name: receipt
-        in: body
-        description: Объект с данными о чеке.
-        required: true
-        schema:
-          type: object
-          properties:
-            id:
-              type: string
-              description: Уникальный идентификатор события отправки чека.
-            timestamp:
-              type: number
-              description: Время в миллисекундах, в Unix-формате.
-              example: "1496826444000001"
-            userId:
-              $ref: ./definitions.yaml#/userId
-            type:
-              type: string
-              description: Тип события.
-            version:
-              type: enum
-              description: Версия API.
-              example: 2
-            data:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: |
-                    Идентификатор чека.
+      - $ref: ./definitions.yaml#/receipt
 
-                    Формат – `uuid4`.
-                  pattern:
-                deviceId:
-                  type: string
-                  description: |
-                    Идентификатор устройства в Облаке Эвотор.
-
-                    Формат – `uuid4`. Регистрозависимый.
-                  pattern:
-                storeId:
-                  type: string
-                  description: |
-                    Идентификатор магазина.
-
-                    Формат – `uuid4`.
-                  pattern:
-                dateTime:
-                  type: number
-                  description: |
-                    Дата и время в формате создания чека.
-
-                    [В соответствовии с ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC)
-                  example: "2017-06-07T12:55:18Z"
-                type:
-                  type: string
-                  description: Тип документа
-                shiftId:
-                  type: string
-                  description: Номер смены.
-                employeeId:
-                  type: string
-                  description: Уникальный идентификатор сотрудника (пользователя, продавшего товар).
-                  pattern:
-                paymentSource:
-                  description: |
-                    Способ оплаты:
-                      * PAY_CASH - оплата наличными без сдачи;
-                      * PAY_CASHBACK – оплата наличными со сдачей;
-                      * PAY_CARD - оплата по карте.
-                  type: string
-                  enum:
-                    - PAY_CASH
-                    - PAY_CASHBACK
-                    - PAY_CARD
-                    - OTHER
-                infoCheck:
-                  type: boolean
-                  description: |
-                    Флаг, указывающий на фискальность документа:
-                      * `true` – информационный чек;
-                      * `false` – фискальный чек.
-
-                egais:
-                  type: boolean
-                  description: Указывает относится документ к ЕГАИС или нет.
-                items:
-                  type: array
-                  description: Массив с позициями чека.
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        description: |
-                          Идентификатор товара.
-
-                          Формат – `uuid4`.
-                      name:
-                        type: string
-                        description: Название товара.
-                      itemType:
-                        type: string
-                        description: |
-                          Тип товара:
-                            * обычный;
-                            * маркированный алкоголь;
-                            * немаркированный алкоголь;
-                            * услуга.
-                        enum:
-                          - NORMAL
-                          - ALCOHOL_MARKED
-                          - ALCOHOL_NOT_MARKED
-                          - SERVICE
-                      measureName:
-                        type: string
-                        description: |
-                          Единица измерения для товара.
-
-                          >Товароучётные системы могут задавать свои единицы измерения, например, "пара", "палета", "карат" и т.д..
-
-                          Для групп товаров указывается "".
-
-                          Не может быть`null`
-                        enum:
-                          - ''
-                          - шт
-                          - кг
-                          - л
-                          - м
-                          - км
-                          - м2
-                          - м3
-                          - компл
-                          - упак
-                          - ед
-                          - дроб
-                      quantity:
-                        type: number
-                        description: Количество товара.
-                      price:
-                        type: number
-                        description: Отпускная цена товара.
-                      costPrice:
-                        type: number
-                        description: Закупочная цена товара.
-                      sumPrice:
-                        type: number
-                        description: Общая цена товара.
-                      tax:
-                        type: number
-                        description: Сумма налога на товар.
-                      taxPercent:
-                        type: number
-                        description: Сумма налога на товар, выраженная в процентах.
-                      discount:
-                        type: number
-                        description: Общая сумма скидки на товар.
-                totalTax:
-                  type: number
-                  description: Общая сумма налога.
-                totalDiscount:
-                  type: number
-                  description: Общая сумма скидки.
-                totalAmount:
-                  type: number
-                  description: Общая сумма чека.
-                extras:
-                  type: object
-                  description: |
-                    Дополнительные поля. Например, поля пользователей программ лояльности.
-
-                    Поля хранятся в контексте приложения. При отправке в сторонний сервис, Облако Эвотор фильтрует поля таким образом, что сторонний сервис получает только те поля которые были созданы соответствующим приложением, установленным на терминале.
     responses:
       '200':
         description: OK
