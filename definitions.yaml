@@ -1002,6 +1002,13 @@ productToDelete:
 subscriptionevents:
   type: object
   discriminator: type
+  required:
+    - subscriptionId
+    - productId
+    - userId
+    - timestamp
+    - sequenceNumber
+    - type
   properties:
     subscriptionId:
       allOf:
