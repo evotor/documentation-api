@@ -38,7 +38,7 @@ x-servers:
   - url: //
     description: 'Веб-адрес запроса:'
 schemes:
-    - https
+    - http
 paths:
   $ref: ./paths.yaml
 parameters:
