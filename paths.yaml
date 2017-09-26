@@ -11,6 +11,24 @@
    responses:
      '200':
        description: OK
+       headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         X-RateLimit-Limit:
+           schema:
+             type: integer
+           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+         X-RateLimit-Remaining:
+           schema:
+             type: integer
+           description: Количество запросов, оставшихся в текущем временном интервале.
+         X-RateLimit-Reset:
+           schema:
+             type: string
+             format: integer
+           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
        schema:
           title: Список магазинов
           type: array
@@ -18,20 +36,6 @@
             $ref: ./definitions.yaml#/store
      '413':
        description: Превышен максимальный объём данных в запросе
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 /api.evotor.ru/api/v1/inventories/employees/search:
  x-summary: Получить список сотрудников
@@ -46,6 +50,24 @@
    responses:
      '200':
        description: OK
+       headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         X-RateLimit-Limit:
+           schema:
+             type: integer
+           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+         X-RateLimit-Remaining:
+           schema:
+             type: integer
+           description: Количество запросов, оставшихся в текущем временном интервале.
+         X-RateLimit-Reset:
+           schema:
+             type: string
+             format: integer
+           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
        schema:
          title: Cписок сотрудников
          type: array
@@ -53,20 +75,6 @@
            $ref: ./definitions.yaml#/employee
      '413':
        description: Превышен максимальный объём данных в запросе
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/devices/search:
@@ -82,6 +90,24 @@
    responses:
      '200':
        description: OK
+       headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         X-RateLimit-Limit:
+           schema:
+             type: integer
+           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+         X-RateLimit-Remaining:
+           schema:
+             type: integer
+           description: Количество запросов, оставшихся в текущем временном интервале.
+         X-RateLimit-Reset:
+           schema:
+             type: string
+             format: integer
+           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
        schema:
          title: Список смарт-терминалов
          type: array
@@ -89,20 +115,6 @@
            $ref: ./definitions.yaml#/device
      '413':
        description: Превышен максимальный объём данных в запросе
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
@@ -119,6 +131,24 @@
    responses:
      '200':
        description: OK
+       headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         X-RateLimit-Limit:
+           schema:
+             type: integer
+           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+         X-RateLimit-Remaining:
+           schema:
+             type: integer
+           description: Количество запросов, оставшихся в текущем временном интервале.
+         X-RateLimit-Reset:
+           schema:
+             type: string
+             format: integer
+           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
        schema:
          type: array
          items:
@@ -158,20 +188,7 @@
             ]
      '413':
        description: Превышен максимальный объём данных в запросе
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+
  post:
    tags:
      - Товары и документы
@@ -237,21 +254,25 @@
            schema:
              type: string
            description: Подробное описание первых 20-ти ошибок.
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         X-RateLimit-Limit:
+           schema:
+             type: integer
+           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+         X-RateLimit-Remaining:
+           schema:
+             type: integer
+           description: Количество запросов, оставшихся в текущем временном интервале.
+         X-RateLimit-Reset:
+           schema:
+             type: string
+             format: integer
+           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
      '413':
        description: Превышен максимальный объём данных в запросе
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/products:
@@ -280,20 +301,6 @@
    responses:
      '200':
        description: OK
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
      '400':
        $ref: ./responses.yaml#/40020012003
      '401':
@@ -330,22 +337,26 @@
    responses:
      '200':
        description: OK
+       headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         X-RateLimit-Limit:
+           schema:
+             type: integer
+           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+         X-RateLimit-Remaining:
+           schema:
+             type: integer
+           description: Количество запросов, оставшихся в текущем временном интервале.
+         X-RateLimit-Reset:
+           schema:
+             type: string
+             format: integer
+           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
      '413':
        description: Превышен максимальный объём данных в запросе
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
@@ -405,6 +416,24 @@
    responses:
      '200':
        description: OK
+       headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         X-RateLimit-Limit:
+           schema:
+             type: integer
+           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+         X-RateLimit-Remaining:
+           schema:
+             type: integer
+           description: Количество запросов, оставшихся в текущем временном интервале.
+         X-RateLimit-Reset:
+           schema:
+             type: string
+             format: integer
+           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
        schema:
          title: Массив документов
          type: array
@@ -412,20 +441,6 @@
            $ref: ./definitions.yaml#/document
      '413':
        description: Превышен максимальный объём данных в запросе
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
 
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
@@ -915,22 +930,27 @@
     responses:
       '200':
         description: OK
+        headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+
       '413':
         description: Превышен максимальный объём данных в запросе
-#       headers:
-#         X-RateLimit-Limit:
-#           schema:
-#             type: integer
-#           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#         X-RateLimit-Remaining:
-#           schema:
-#             type: integer
-#           description: Количество запросов, оставшихся в текущем временном интервале.
-#         X-RateLimit-Reset:
-#           schema:
-#             type: string
-#             format: integer
-#           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -975,22 +995,26 @@
     responses:
       '200':
         description: OK
+        headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '413':
         description: Превышен максимальный объём данных в запросе
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -1029,22 +1053,27 @@
    responses:
       '200':
         description: OK
+        headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+
       '413':
         description: Превышен максимальный объём данных в запросе
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -1065,24 +1094,29 @@
     responses:
       '200':
         description: OK
+        headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+
         schema:
             $ref: ./definitions.yaml#/productExtras
       '413':
         description: Превышен максимальный объём данных в запросе
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -1107,22 +1141,27 @@
     responses:
       '200':
         description: OK
+        headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+
       '413':
         description: Превышен максимальный объём данных в запросе
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
@@ -1159,22 +1198,27 @@
    responses:
       '200':
         description: OK
+        headers:
+#         X-Evotor-Deprecation-Warning:
+#           description: |
+#             URL будет отключён после <время отключения URL>.
+#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+
       '413':
         description: Превышен максимальный объём данных в запросе
-#        headers:
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
       '400':
         description: Неверный запрос
       '401':
