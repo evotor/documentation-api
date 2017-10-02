@@ -300,6 +300,39 @@
          type: array
          items:
            $ref: ./definitions.yaml#/product
+       x-examples:
+         application/json:
+            [
+              {
+                "uuid": "01ba18b6-8707-5f47-3d9c-4db058054cb2",
+                "code": "6",
+                "barCodes": [
+                  "2000000000060"
+                ],
+                "alcoCodes": [
+                  "0000000000000000001"
+                ],
+                "name": "Сидр",
+                "price": 123.12,
+                "quantity": 12,
+                "costPrice": 100.123,
+                "measureName": "шт",
+                "tax": "VAT_18",
+                "allowToSell": true,
+                "description": "Вкусный яблочный сидр.",
+                "articleNumber": "сид123",
+                "parentUuid": "1ddea16b-971b-dee5-3798-1b29a7aa2e27",
+                "group": false,
+                "type": "ALCOHOL_NOT_MARKED",
+                "alcoholByVolume": 5.45,
+                "alcoholProductKindCode": 123,
+                "tareVolume": 0.57,
+                "attributes": {
+                  "ключ1": "значение1",
+                  "ключ2": "значение2"
+                }
+              }
+            ]
    responses:
      '200':
        description: OK
