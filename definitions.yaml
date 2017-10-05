@@ -201,8 +201,6 @@ product:
 
         Не может быть `null`.
       example: false
-    allowToSell:
-      $ref: '#/fieldAllowToSell'
     parentUuid:
       type: string
       x-nullable: true
@@ -271,6 +269,8 @@ NORMAL:
           $ref: '#/fieldTax'
         price:
           $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
         costPrice:
           $ref: '#/fieldCostPrice'
         description:
@@ -317,6 +317,8 @@ ALCOHOL_NOT_MARKED:
           $ref: '#/fieldTax'
         price:
           $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
         alcoCodes:
           $ref: '#/fieldAlcoCodes'
         costPrice:
@@ -362,6 +364,8 @@ ALCOHOL_MARKED:
           $ref: '#/fieldTax'
         price:
           $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
         alcoCodes:
           $ref: '#/fieldAlcoCodes'
         costPrice:
@@ -392,6 +396,8 @@ SERVICE:
           $ref: '#/fieldTax'
         price:
           $ref: '#/fieldPrice'
+        allowToSell:
+          $ref: '#/fieldAllowToSell'
         description:
           $ref: '#/fieldDescription'
         articleNumber:
@@ -1287,6 +1293,7 @@ fieldAllowToSell:
 
       Не может быть `null`.
 
+      >**Поле передаётся только если `group = false`.**
   example: true
 fieldCostPrice:
   type: number
