@@ -13,10 +13,10 @@
      '200':
        description: OK
        headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         Warning:
+           description: |
+             URL будет отключён после <время отключения URL>.
+             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
          X-RateLimit-Limit:
            schema:
              type: integer
@@ -53,10 +53,10 @@
      '200':
        description: OK
        headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         Warning:
+           description: |
+             URL будет отключён после <время отключения URL>.
+             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
          X-RateLimit-Limit:
            schema:
              type: integer
@@ -94,10 +94,10 @@
      '200':
        description: OK
        headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         Warning:
+           description: |
+             URL будет отключён после <время отключения URL>.
+             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
          X-RateLimit-Limit:
            schema:
              type: integer
@@ -136,10 +136,10 @@
      '200':
        description: OK
        headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         Warning:
+           description: |
+             URL будет отключён после <время отключения URL>.
+             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
          X-RateLimit-Limit:
            schema:
              type: integer
@@ -260,10 +260,10 @@
            schema:
              type: string
            description: Подробное описание первых 20-ти ошибок.
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         Warning:
+           description: |
+             URL будет отключён после <время отключения URL>.
+             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
          X-RateLimit-Limit:
            schema:
              type: integer
@@ -378,10 +378,10 @@
      '200':
        description: OK
        headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         Warning:
+           description: |
+             URL будет отключён после <время отключения URL>.
+             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
          X-RateLimit-Limit:
            schema:
              type: integer
@@ -458,10 +458,10 @@
      '200':
        description: OK
        headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+         Warning:
+           description: |
+             URL будет отключён после <время отключения URL>.
+             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
          X-RateLimit-Limit:
            schema:
              type: integer
@@ -980,10 +980,10 @@
       '200':
         description: OK
         headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
           X-RateLimit-Limit:
             schema:
               type: integer
@@ -1045,10 +1045,10 @@
       '200':
         description: OK
         headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
           X-RateLimit-Limit:
             schema:
               type: integer
@@ -1103,10 +1103,10 @@
       '200':
         description: OK
         headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
           X-RateLimit-Limit:
             schema:
               type: integer
@@ -1145,10 +1145,10 @@
       '200':
         description: OK
         headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
           X-RateLimit-Limit:
             schema:
               type: integer
@@ -1192,10 +1192,10 @@
       '200':
         description: OK
         headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
           X-RateLimit-Limit:
             schema:
               type: integer
@@ -1249,10 +1249,10 @@
       '200':
         description: OK
         headers:
-#         X-Evotor-Deprecation-Warning:
-#           description: |
-#             URL будет отключён после <время отключения URL>.
-#             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
           X-RateLimit-Limit:
             schema:
               type: integer
