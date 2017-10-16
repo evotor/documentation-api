@@ -8,6 +8,7 @@
      Возвращает массив с информацией о всех магазинах пользователя.
    parameters:
      - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/Content-Type
    responses:
      '200':
        description: OK
@@ -47,6 +48,7 @@
      Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
    parameters:
      - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/Content-Type
    responses:
      '200':
        description: OK
@@ -87,6 +89,7 @@
      Возвращает массив с информацией о всех смарт-терминалах пользователя.
    parameters:
      - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/Content-Type
    responses:
      '200':
        description: OK
@@ -128,6 +131,7 @@
    parameters:
      - $ref: ./parameters.yaml#/auth
      - $ref: ./parameters.yaml#/storeUuid
+     - $ref: ./parameters.yaml#/Content-Type
    responses:
      '200':
        description: OK
@@ -286,6 +290,7 @@
      Загружает в сторонний сервис массив новых товаров, созданных на терминале.
    parameters:
      - $ref: ./parameters.yaml#/clientAuth
+     - $ref: ./parameters.yaml#/Content-Type
      - $ref: ./parameters.yaml#/storeUuid
        in: path
        required: true
@@ -405,6 +410,7 @@
    parameters:
      - $ref: ./parameters.yaml#/auth
      - $ref: ./parameters.yaml#/storeUuid
+     - $ref: ./parameters.yaml#/Content-Type
      - name: deviceUuid
        in: query
        type: string
@@ -488,6 +494,7 @@
    parameters:
      - $ref: ./parameters.yaml#/clientAuth
      - $ref: ./parameters.yaml#/storeUuid
+     - $ref: ./parameters.yaml#/contentType
      - name: documents
        in: body
        description: Массив документов
@@ -547,9 +554,9 @@
               type: boolean
               description: |
                 Определяет, на чьей стороне производится биллинг по данному пользователю.
-                
+
                 true - в стороннем сервисе
-                
+
                 false - на стороне Эвотор
 
                 Эвотор не выполняет биллинг, если на момент авторизации пользователь оплачивает подписку в стороннем сервисе.
@@ -682,6 +689,7 @@
       Возвращает объект с информацией о товаре, найденном в базе стороннего сервиса с помощью штрихкода и/или кода алкогольной продукции.
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/Content-Type
       - name: scanCode
         in: query
         required: true
@@ -711,10 +719,10 @@
       - Вебхуки-уведомления
     summary: 'Создать смарт-терминал'
     description: |
-      Создать / отредактировать один или несколько смарт-терминалов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
-      мастер-системой по данной сущности.
+      Создать / отредактировать один или несколько смарт-терминалов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является мастер-системой по данной сущности.
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/Content-Type
       - name: device
         in: body
         description: Массив смарт-терминалов
@@ -744,10 +752,10 @@
       - Вебхуки-уведомления
     summary: 'Создать сотрудника'
     description: |
-      Создать / отредактировать одного или нескольких сотрудников в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
-      мастер-системой по данной сущности.
+      Создать / отредактировать одного или нескольких сотрудников в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является мастер-системой по данной сущности.
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/Content-Type
       - name: employee
         in: body
         description: Массив сотрудников, созданных в платформе Эвотор.
@@ -777,10 +785,10 @@
       - Вебхуки-уведомления
     summary: 'Создать магазин'
     description: >-
-      Создать / отредактировать однин или несколько магазинов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
-      мастер-системой по данной сущности.
+      Создать / отредактировать однин или несколько магазинов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является     мастер-системой по данной сущности.
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/Content-Type
       - name: store
         in: body
         description: Массив магазинов из Эвотор
@@ -846,6 +854,7 @@
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
       - $ref: ./definitions.yaml#/receipt
+      - $ref: ./parameters.yaml#/Content-Type
 
     responses:
       '200':
@@ -917,7 +926,8 @@
           * `SubscriptionActivated` – подписка активирована. Сообщает об успешной оплате. Приходит после окончания пробного периода или после SubscriptionCreated, если пробного периода нет.
           * `SubscriptionTerminated` – Подписка завершена. Приходит если не прошла регулярная оплата, независимо от того запросил пользователь завершение подписки или нет.
     parameters:
-      - $ref: './parameters.yaml#/clientAuth'
+      - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/Content-Type
       - name: body
         in: body
         description: Содержимое запроса меняется в зависимости от события.
@@ -940,10 +950,10 @@
 
         Интервал повторной отправки события около одной минуты.
     parameters:
-      - $ref: './parameters.yaml#/clientAuth'
-      - $ref: './parameters.yaml#/contentType'
-      - $ref: './parameters.yaml#/Accept'
-      - $ref: './parameters.yaml#/Accept-Charset'
+      - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/contentType
+      - $ref: ./parameters.yaml#/Accept
+      - $ref: ./parameters.yaml#/Accept-Charset
       - name: body
         in: body
         description: Содержимое запроса меняется в зависимости от события.
@@ -1002,7 +1012,7 @@
     description: |
       Создаёт / изменяет схемы товаров для определённого магазина (`{storeUuid}`) пользователя платформы. Эвотор создаёт схему в рамках приложения. Эвотор определяет приложение по токену, который сторонний сервис передаёт в заголовке `X-Authorization`.
     parameters:
-      - $ref: ./parameters.yaml#/Content-Type
+      - $ref: ./parameters.yaml#/contentType
       - $ref: ./parameters.yaml#/auth
       - name: schemas
         in: body
@@ -1130,6 +1140,7 @@
     parameters:
       - $ref: ./parameters.yaml#/auth
       - $ref: ./parameters.yaml#/storeUuid
+      - $ref: ./parameters.yaml#/Content-Type
     responses:
       '200':
         description: OK

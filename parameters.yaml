@@ -47,9 +47,9 @@ Accept:
 Content-Type:
   name: Content-Type
   in: header
-  description: Формат и способ предоставления сущности.
+  description: Формат и способ предоставления данных.
   type: string
-  required: false
+  required: true
   default: "application/json;charset=UTF-8"
 
 Accept-Charset:
