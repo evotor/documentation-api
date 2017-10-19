@@ -889,10 +889,10 @@
         schema:
           type: object
           required:
-            - userUuid
+            - userId
             - token
           properties:
-            userUuid:
+            userId:
               $ref: './definitions.yaml#/userId'
             token:
               type: string
