@@ -2,7 +2,7 @@ auth:
   name: X-Authorization
   in: header
   description: |
-      [Токен приложения](https://developer.evotor.ru/docs/doc_authorization.html), который можно получить одним из способов, описанных в разделе **Авторизация**.
+      Токен Облака Эвотор, который можно получить одним из способов, описанных в разделе документации [**Авторизация запросов к Облаку Эвотор**](https://developer.evotor.ru/docs/doc_authorization.html).
   required: true
   type: string
 
@@ -19,7 +19,7 @@ serverAuth:
   name: Authorization
   in: header
   description: |
-    [Токен стороннего сервиса](https://developer.evotor.ru/docs/doc_evotor_api_authorization.html#serverToken) для авторизации вебхуков Облака Эвотор в стороннем сервисе.
+    [Токен приложения стороннего сервиса](https://developer.evotor.ru/docs/doc_evotor_api_authorization.html#serverToken) для авторизации вебхуков Облака Эвотор в стороннем сервисе.
 
     Токен зависит от типа авторизации: Basic или Bearer.
   required: true
@@ -31,7 +31,7 @@ clientAuth:
   name: Authorization
   in: header
   description: |
-    [Токен пользователя](https://developer.evotor.ru/docs/doc_evotor_api_authorization.html#usersToken) для авторизации вебхуков Облака Эвотор в стороннем сервисе.
+    [Токен пользователя приложения стороннего сервиса](https://developer.evotor.ru/docs/doc_evotor_api_authorization.html#usersToken) для авторизации вебхуков Облака Эвотор в стороннем сервисе.
   required: true
   type: string
   pattern: '^Bearer [a-zA-Z0-9_=-]+$'
