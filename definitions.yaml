@@ -1040,13 +1040,13 @@ appevents:
   type: object
   discriminator: type
   required:
-    - Id
+    - id
     - timestamp
     - version
     - type
     - data
   properties:
-    Id:
+    id:
       allOf:
         - $ref: '#/eventId'
     timestamp:
