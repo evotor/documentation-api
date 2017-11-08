@@ -1402,7 +1402,7 @@ fieldAlcoCodes:
     example: "0000000000000000001"
 fieldAttributes:
   type: object
-  description: |
-    Содержит перечисление характеристик для модификации товара в пар ключ-значение.
-
-    Например: {"key1": "value1", "key2": "value2", ... "keyN": "valueN"}
+#  description: |
+#    Содержит перечисление характеристик для модификации товара в пар ключ-значение.
+#
+#    Например: {"key1": "value1", "key2": "value2", ... "keyN": "valueN"}
