@@ -700,7 +700,7 @@ document:
   type: object
   required:
     - uuid
-    - types
+    - type
   properties:
     uuid:
       type: string
@@ -711,7 +711,7 @@ document:
       pattern: >-
         ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
       example: 20170222-d58c-40e0-8051-b53adff38860
-    types:
+    type:
       type: string
       description: Тип документа.
       enum:
