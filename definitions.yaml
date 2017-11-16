@@ -1426,8 +1426,6 @@ fieldCode:
   type: string
   description: |
     Код товара или группы товаров.
-
-    >**Поле передаётся только если `group = false`.**
   minLength: 0
   maxLength: 10
   example: "6"
