@@ -701,6 +701,21 @@ document:
   required:
     - uuid
     - type
+    - deviceUuid
+    - closeDate
+    - openDate
+    - openUserCode
+    - openUserUuid
+    - closeUserCode
+    - closeUserUuid
+    - sessionUUID
+    - sessionNumber
+    - number
+    - closeResultSum
+    - closeSum
+    - storeUuid
+    - extras
+    - version
   properties:
     uuid:
       type: string
@@ -732,6 +747,87 @@ document:
       type: array
       items:
         $ref: '#/transaction'
+    deviceUuid:
+      type: string
+      description: |
+        Идентификатор устройства в Облаке Эвотор.
+
+        Формат – `uuid4`. Регистрозависимый.
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+    closeDate:
+      format: date-time
+      type: string
+      description: |
+        Дата закрытия документа в соответствии с ISO 8601.
+
+        Формат времени - 2017-01-10T09:33:19.757+0000
+      example: 2017-01-10T09:33:19.757+0000
+    openDate:
+      format: date-time
+      type: string
+      description: |
+        Дата открытия документа в соответствии с ISO 8601.
+
+        Формат времени - 2017-01-10T09:33:19.757+0000
+      example: 2017-01-10T09:33:19.757+0000
+    openUserCode:
+      x-nullable: true
+      type: number
+      description: Код сотрудника, который открыл документ.
+      example: null
+    openUserUuid:
+      type: string
+      description: Идентификатор сотрудника, который открыл документ в формате `uuid4`.
+      example: 20170417-46B8-40B9-802E-4DEB67C07565
+    closeUserCode:
+      x-nullable: true
+      type: number
+      description: Код сотрудника, который закрыл документ.
+      example: null
+    closeUserUuid:
+      type: string
+      description: Идентификатор сотрудника, который закрыл документ в формате `uuid4`.
+      example: 20170417-46B8-40B9-802E-4DEB67C07565
+    sessionUUID:
+      type: string
+      description: Идентификатор смены, в течение которой был создан документ.
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+    sessionNumber:
+      type: string
+      description: Номер смены.
+      example: 80
+    number:
+      type: number
+      description: Номер документа.
+      example: 1937
+    closeResultSum:
+      type: string
+      description: Окончательная сумма чека с учётом скидок.
+      example: 1
+    closeSum:
+      type: string
+      description: Общая сумма чека (число) без учёта скидок.
+      example: 1
+    storeUuid:
+      type: string
+      description: Идентификатор магазина в формате uuid4.
+      example: 20170928-3176-40EB-80E2-A11F032E282A
+    extras:
+      type: object
+      x-nullable: true
+      description: |
+        Поля с дополнительной информацией. По токену Облака Эвотор, с которым пришёл запрос, определяется какие дополнительные поля необходимо вернуть.
+    version:
+      type: string
+      enum:
+        - V1
+        - V2
+      description: Версия формата документа.
+      example: V1
+
+
 
 
 transaction:
@@ -852,14 +948,14 @@ receipt:
               Идентификатор устройства в Облаке Эвотор.
 
               Формат – `uuid4`. Регистрозависимый.
-            pattern:
+            pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
           storeId:
             type: string
             description: |
               Идентификатор магазина.
 
               Формат – `uuid4`.
-            pattern:
+            pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
           dateTime:
             type: number
             description: |

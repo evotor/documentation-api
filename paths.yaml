@@ -482,9 +482,6 @@
          type: array
          items:
            $ref: ./definitions.yaml#/document
-     '413':
-       description: Превышен максимальный объём данных в запросе
-
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
  put:
