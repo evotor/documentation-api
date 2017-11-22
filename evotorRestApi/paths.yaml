@@ -1,0 +1,819 @@
+api.evotor.ru/api/v1/inventories/stores/search:
+ x-summary: Получить список магазинов
+ get:
+   tags:
+     - Сущности пользователя Эвотор
+   summary: '[GET] Получить список магазинов'
+   description: |
+     Возвращает массив с информацией о всех магазинах пользователя.
+   parameters:
+     - $ref: ./parameters.yaml#/auth
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Список магазинов
+         type: array
+         items:
+           $ref: ../definitions.yaml#/store
+
+
+api.evotor.ru/api/v1/inventories/employees/search:
+ x-summary: Получить список сотрудников
+ get:
+   tags:
+     - Сущности пользователя Эвотор
+   summary: '[GET] Получить список сотрудников'
+   description: |
+     Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
+   parameters:
+     - $ref: ./parameters.yaml#/auth
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Cписок сотрудников
+         type: array
+         items:
+           $ref: ../definitions.yaml#/employee
+
+
+api.evotor.ru/api/v1/inventories/devices/search:
+ x-summary: Получить список смарт-терминалов
+ get:
+   tags:
+     - Сущности пользователя Эвотор
+   summary: '[GET] Получить список смарт-терминалов'
+   description: |
+     Возвращает массив с информацией о всех смарт-терминалах пользователя.
+   parameters:
+     - $ref: ./parameters.yaml#/auth
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Список смарт-терминалов
+         type: array
+         items:
+           $ref: ../definitions.yaml#/device
+
+
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
+ x-summary: Обмен товарами
+ get:
+   tags:
+     - Товары и документы
+   summary: '[GET] Получить список товаров'
+   description: |
+       Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
+   parameters:
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/storeUuid
+   responses:
+     '200':
+       description: OK
+       schema:
+         type: array
+         items:
+           $ref: ../definitions.yaml#/product
+ post:
+   tags:
+     - Товары и документы
+   summary: '[POST] Передать список товаров'
+   description: |
+     Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
+   parameters:
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/contentType
+     - $ref: ./parameters.yaml#/storeUuid
+       in: path
+       required: true
+       type: string
+     - name: products
+       in: body
+       description: Массив товаров
+       required: true
+       schema:
+         type: array
+         items:
+           $ref: ../definitions.yaml#/product
+   responses:
+     '200':
+       description: OK
+
+
+partner.ru/api/v1/inventories/stores/{storeUuid}/products:
+ post:
+   tags:
+     - Вебхуки-уведомления
+   summary: '[POST] Создать товары'
+   description: |
+     Загружает в сторонний сервис массив новых товаров, созданных на терминале.
+   parameters:
+     - $ref: ./parameters.yaml#/clientAuth
+     - $ref: ./parameters.yaml#/storeUuid
+     - name: products
+       in: body
+       description: Массив товаров
+       required: true
+       schema:
+         type: array
+         items:
+           $ref: ../definitions.yaml#/product
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Массив привязок
+         type: array
+         items:
+           type: object
+           properties:
+             uuid:
+               type: string
+               pattern: >-
+                 ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+     '400':
+       $ref: ../responses.yaml#/40020012003
+     '401':
+       $ref: ../responses.yaml#/40110021003
+     '402':
+       $ref: ../responses.yaml#/402
+     '404':
+       $ref: ../responses.yaml#/404
+     '405':
+       $ref: ../responses.yaml#/4051005
+
+
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/delete:
+ x-summary: Удаление товаров
+ post:
+   tags:
+     - Товары и документы
+   summary: '[POST] Удалить товар'
+   description: |
+     HTTP-запрос с пустым телом удалит все товары в магазине.
+     Чтобы удалить определённый товар, в теле HTTP-запроса требуется указать его UUID.
+   parameters:
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/contentType
+     - $ref: ./parameters.yaml#/storeUuid
+     - name: products
+       in: body
+       description: Массив товаров
+       required: true
+       schema:
+         type: array
+         items:
+           $ref: ../definitions.yaml#/productToDelete
+   responses:
+     '200':
+       description: OK
+
+
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
+ x-summary: Документы
+ get:
+   tags:
+     - Товары и документы
+   summary: '[GET] Получить список документов'
+   description: |
+     Возвращает массив документов. Существуют следующие типы документов:
+     * Кассовые документы - [SELL,
+     PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION]
+     * Инвентаризация - INVENTORY
+     * Приёмка - ACCEPT
+     * Возврат поставщику - RETURN
+     * Списание - WRITE_OFF
+     * Акт переоценки - REVALUATION
+     * Вскрытие тары - OPEN_TARE
+   parameters:
+     - $ref: ./parameters.yaml#/contentType
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/Accept-Encoding
+     - $ref: ./parameters.yaml#/storeUuid
+       in: path
+       required: true
+       type: string
+     - name: deviceUuid
+       in: query
+       type: string
+     - name: ltCloseDate
+       in: query
+       format: date-time
+       type: string
+       description: |
+         Ответ будет содержать документы, созданные до указанной даты. Формат времени - 2017-04-18T11:48:26+00:00
+     - name: gtCloseDate
+       in: query
+       format: date-time
+       type: string
+       description: |
+         Ответ будет содержать документы, созданные после указанной даты. Формат времени - 2017-04-18T11:48:26+00:00
+     - name: types
+       description: |
+         Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
+         * кассовые документы - SELL,PAYBACK,CASH_INCOME,CASH_OUTCOME,OPEN_SESSION,FPRINT,CLOSE_SESSION.
+         * инвентаризация - INVENTORY;
+         * приемка - ACCEPT;
+         * возврат поставщику - RETURN;
+         * списание - WRITE_OFF;
+         * акт переоценки - REVALUATION;
+         * вскрытие тары - OPEN_TARE.
+       in: query
+       type: string
+   responses:
+     '200':
+       description: OK
+       schema:
+         title: Массив документов
+         type: array
+         items:
+           $ref: ../definitions.yaml#/document
+
+
+partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
+ put:
+   tags:
+     - Вебхуки-уведомления
+   summary: '[PUT] Передать документы'
+   description: |
+     Передаёт в сторонний сервис массив документов с транзакциями.
+   parameters:
+     - $ref: ./parameters.yaml#/clientAuth
+     - $ref: ./parameters.yaml#/storeUuid
+     - name: documents
+       in: body
+       description: Массив документов
+       required: true
+       schema:
+         type: array
+         items:
+           $ref: ../definitions.yaml#/document
+   responses:
+     '200':
+       description: OK
+     '400':
+       $ref: ../responses.yaml#/40020012003
+     '401':
+       $ref: ../responses.yaml#/40110021003
+     '402':
+       $ref: ../responses.yaml#/402
+     '404':
+       $ref: ../responses.yaml#/404
+     '405':
+       $ref: ../responses.yaml#/4051005
+
+
+partner.ru/api/v1/user/verify:
+  post:
+    tags:
+      - Вебхуки-запросы
+    summary: '[POST] Авторизация пользователя'
+    description: |
+      Авторизация существующего пользователя в стороннем сервисе с помощью данных учётной записи платформы Эвотор.
+      > Под пользователем понимается мастер-аккаунт владельца бизнеса в стороннем сервисе.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - name: ''
+        in: body
+        description: |
+          Поля, необходимые для авторизации существующего пользователя в стороннем сервисе.
+        required: true
+        schema:
+          $ref: ../definitions.yaml#/authorizeFormData
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Данные пользователя
+          type: object
+          required:
+            - userUuid
+            - hasBilling
+            - token
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            hasBilling:
+              type: boolean
+              description: |
+                Определяет наличие биллинга по данному пользователю в стороннем сервисе. Эвотор не выполняет биллинг, если на момент авторизации пользователь оплачивает подписку в стороннем сервисе.
+                Работает, когда учётная запись, первоначально зарегестрированна через интерфей партнёра.
+            token:
+              description: |
+                Токен, который облако Эвотор будет передавать в заголове `Authorization` с типом `Bearer`, для авторизации своих HTTP-запросов в стороннем сервисе.
+              type: string
+              maxLength: 128
+              default: toaWaep4chou7ahkoogiu9Iusaht9ima
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/40110011006
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+      '409':
+        $ref: ../responses.yaml#/4092004
+
+
+partner.ru/api/v1/user/create:
+  post:
+    tags:
+      - Вебхуки-запросы
+    summary: '[POST] Регистрация учётной записи'
+    description: |
+      Регистрирует новую учётную запись в стороннем сервисе.
+      **ВАЖНО:** Под пользователем понимается мастер-аккаунт владельца бизнеса в системе партнера.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - name: ''
+        in: body
+        description: |
+          Поля необходимые для регистрации нового пользователя в стороннем сервисе.
+        required: true
+        schema:
+          $ref: ../definitions.yaml#/registerFormData
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Данные пользователя
+          type: object
+          required:
+            - userUuid
+            - token
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            token:
+              description: |
+                Токен, который облако Эвотор будет передавать в заголове `Authorization` с типом `Bearer`, для авторизации своих HTTP-запросов в стороннем сервисе.
+              type: string
+              maxLength: 128
+              default: toaWaep4chou7ahkoogiu9Iusaht9ima
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+      '409':
+        $ref: ../responses.yaml#/4092005
+
+
+partner.ru/api/v1/user/tariff:
+  post:
+    tags:
+      - Вебхуки-запросы
+    summary: '[POST] Активация / деактивация тарифа'
+    description: |
+      Активация / деактивация тарифа для учетной записи пользователя в стороннем сервисе.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - name: ''
+        in: body
+        description: |
+          Параметры, необходимые для активации тарифа в стороннем сервисе.
+        required: true
+        schema:
+          type: object
+          required:
+            - userUuid
+            - tariffId
+            - status
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            tariffId:
+              type: string
+              description: Код тарифа в платформе Эвотор.
+              pattern: '^[a-zA-Z0-9\_\-]+$'
+              default: starter
+            status:
+              type: string
+              description: >-
+                Статус тарифа. Возможные значения:
+                 * ACTIVE -  установка приложения или подтверждение активности тарифа.
+                 * INACTIVE - удаление приложение или деактивация тарифа из-за неоплаты.
+              enum:
+                - ACTIVE
+                - INACTIVE
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+
+
+partner.ru/api/v1/inventories/devices:
+  put:
+    tags:
+      - Вебхуки-уведомления
+    summary: '[PUT] Создать смарт-терминал'
+    description: |
+      Создать / отредактировать один или несколько смарт-терминалов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
+      мастер-системой по данной сущности.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: device
+        in: body
+        description: Массив смарт-терминалов
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/device
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Массив привязок
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                pattern: >-
+                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              partnerId:
+                type: string
+                description: >-
+                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/40510051007
+
+
+partner.ru/api/v1/inventories/employees:
+  put:
+    tags:
+      - Вебхуки-уведомления
+    summary: '[PUT] Создать сотрудника'
+    description: |
+      Создать / отредактировать одного или нескольких сотрудников в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
+      мастер-системой по данной сущности.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: employee
+        in: body
+        description: Массив сотрудников, созданных в платформе Эвотор.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/employee
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Массив привязок
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                pattern: >-
+                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              partnerId:
+                type: string
+                description: >-
+                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+
+
+partner.ru/api/v1/inventories/stores:
+  put:
+    tags:
+      - Вебхуки-уведомления
+    summary: '[PUT] Создать магазин'
+    description: >-
+      Создать / отредактировать однин или несколько магазинов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
+      мастер-системой по данной сущности.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: store
+        in: body
+        description: Массив магазинов из Эвотор
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/store
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Массив привязок
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                pattern: >-
+                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              partnerId:
+                type: string
+                description: >-
+                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+
+
+partner.ru/api/v1/receipt:
+  post:
+    tags:
+      - Вебхуки-уведомления
+    summary: '[POST] Отправить чек'
+    description: |
+      После оплаты отправляет чек в сторонний сервис. Тело запроса содержит один или несколько чеков.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: receipt
+        in: body
+        description: Массив чеков.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/receipt
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+
+
+partner.ru/api/v1/user/token:
+  post:
+    tags:
+      - Вебхуки-запросы
+    summary: '[POST] Передача токена приложения'
+    description: |
+      Передаёт токен приложения, после того, как пользователь установил приложение в Личном кабинете. Сторонний сервис использует токен приложения для авторизации запросов к облаку Эвотор.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - $ref: ./parameters.yaml#/Accept
+      - $ref: ./parameters.yaml#/Content-Type
+      - $ref: ./parameters.yaml#/Accept-Charset
+      - name: ''
+        in: body
+        description: Тело запроса.
+        required: true
+        schema:
+          type: object
+          required:
+            - userUuid
+            - token
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            token:
+              type: string
+              description: Токен приложения.
+              example: f46b89a5-8e80-4591-b0aa-94551790444b
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+#partner.ru/api/v1/user/event:
+#  post:
+#    tags:
+#      - Вебхуки-уведомления
+#    summary: '[POST] События биллинга'
+#    description: |
+#       Связанные с биллингом события, которые облако Эвотор передаёт в сторонний сервис.
+#    parameters:
+#      - in: body
+#        name: body
+#        description: Содержимое запроса меняется в зависимости от события.
+#        required: true
+#        schema:
+#          $ref: ../definitions.yaml#/events
+
+
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes:
+  x-summary: Получение схем магазина
+  get:
+    tags:
+      - Товары и документы
+    summary: '[GET] Получить схемы магазина'
+    description: |
+        Возвращает схемы для определённого магазина (`{storeUuid}`) пользователя платформы. Эвотор возвращает схемы в соответствии с приложением, создавшим схемы. Эвотор определяет приложение по токену, который сторонний сервис передаёт в заголовке `X-Authorization`.
+    parameters:
+      - $ref: ./parameters.yaml#/Content-Type
+      - $ref: ./parameters.yaml#/auth
+    responses:
+      '200':
+        description: OK
+      '400':
+        description: Неверный запрос
+      '401':
+        description: Не авторизован
+
+  post:
+    tags:
+      - Товары и документы
+    summary: '[POST] Создать / Изменить схемы для магазина'
+    description: |
+      Создаёт / изменяет схемы для определённого магазина (`{storeUuid}`) пользователя платформы. Эвотор создаёт схему в рамках приложения. Эвотор определяет приложение по токену, который сторонний сервис передаёт в заголовке `X-Authorization`.
+    parameters:
+      - $ref: ./parameters.yaml#/Content-Type
+      - $ref: ./parameters.yaml#/auth
+      - name: schemas
+        in: body
+        description: Массив значений схемы.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/productSchema
+    responses:
+      '200':
+        description: OK
+      '400':
+        description: Неверный запрос
+      '401':
+        description: Не авторизован
+
+
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/delete:
+ x-summary: Удаление схем
+ post:
+   tags:
+     - Товары и документы
+   summary: '[POST] Удалить схемы магазина'
+   description: |
+     Удаляет указанные схемы.
+
+     В теле запроса укажите один или несколько идентификаторов схем, которые требуется удалить.
+
+     Запрос с пустым телом удаляет все схемы.
+   parameters:
+     - $ref: ./parameters.yaml#/contentType
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/storeUuid
+     - name: schemas
+       in: body
+       description: Массив идентификаторов схем.
+       schema:
+         type: array
+         items:
+           type: string
+           description: Идентификатор (uuid4) схемы в платформе Эвотор. Идентификаторы уникальны в рамках приложения.
+           pattern: >-
+             ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+           example: |
+             {идентификатор схемы 1}",
+             "{идентификатор схемы n}
+   responses:
+      '200':
+        description: OK
+      '400':
+        description: Неверный запрос
+      '401':
+        description: Не авторизован
+
+
+
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/extras:
+  x-summary: Дополнительные поля
+  get:
+    tags:
+     - Товары и документы
+    summary: '[GET] Получить дополнительные поля товара'
+    description: |
+        Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
+    responses:
+      '200':
+        description: OK
+        schema:
+            $ref: ../definitions.yaml#/productExtras
+      '400':
+        description: Неверный запрос
+      '401':
+        description: Не авторизован
+
+  post:
+    tags:
+     - Товары и документы
+    summary: '[POST] Создать / Изменить дополнительные поля товара'
+    description: |
+      Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/contentType
+      - $ref: ./parameters.yaml#/storeUuid
+      - name: extras
+        in: body
+        description: Массив дополнительных полей.
+        required: true
+        schema:
+            $ref: ../definitions.yaml#/productExtras
+    responses:
+      '200':
+        description: OK
+      '400':
+        description: Неверный запрос
+      '401':
+        description: Не авторизован
+
+api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras/delete:
+ x-summary: Удаление дополнительных полей
+ post:
+   tags:
+     - Товары и документы
+   summary: '[POST] Удалить дополнительное поле'
+   description: |
+     Удаляет указанные дополнительные поля.
+
+     В теле запроса укажите один или несколько идентификаторов дополнительных полей, которые требуется удалить.
+
+     Запрос с пустым телом удаляет все дополнительные поля.
+   parameters:
+     - $ref: ./parameters.yaml#/contentType
+     - $ref: ./parameters.yaml#/auth
+     - $ref: ./parameters.yaml#/storeUuid
+     - name: extras
+       in: body
+       description: Массив идентификаторов дополнительных полей.
+       required: true
+       schema:
+         type: array
+         items:
+           type: string
+           description: Идентификатор (uuid4) дополнительного поля в платформе Эвотор. Идентификаторы уникальны в рамках приложения.
+           example: |
+               {идентификатор дополнительного поля 1}",
+               "{идентификатор дополнительного поля n}
+   responses:
+      '200':
+        description: OK
+      '400':
+        description: Неверный запрос
+      '401':
+        description: Не авторизован
