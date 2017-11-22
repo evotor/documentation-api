@@ -1,0 +1,31 @@
+swagger: '2.0'
+info:
+  $ref: ./evotorRestApi/info.yaml
+tags:
+  - name: Сущности пользователя Эвотор
+    description:
+      Запросы информации о магазинах, сотрудниках и смарт-терминалах определённого пользователя платформы Эвотор.
+  - name: Товары и документы
+    description:
+      Запросы информации об определённом магазине (`storeUuid`) пользователя платформы Эвотор.
+  - name: Вебхуки-запросы
+    description:
+      Запросы к стороннему сервису. Облако Эвотор ожидает подтверждения этих запросов. Время ожидания -- 10 секунд.
+  - name: Вебхуки-уведомления
+    description:
+      События, на которые сторонний сервис может подписаться. Облако Эвотор не ожидает ответа на эти события
+produces:
+    - application/json
+consumes:
+    - application/json
+x-servers:
+  - url: //
+    description: 'Веб-адрес запроса:'
+schemes:
+    - https
+paths:
+  $ref: ./evotorRestApi/paths.yaml
+parameters:
+  $ref: ./evotorRestApi/parameters.yaml
+definitions:
+  $ref: ./definitions.yaml
