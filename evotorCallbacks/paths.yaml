@@ -1,0 +1,556 @@
+/api/v1/user/verify:
+  post:
+    tags:
+      - Учётные записи в стороннем сервисе
+    summary: Авторизация пользователя
+    description: |
+      Авторизация существующего пользователя в стороннем сервисе с помощью данных учётной записи платформы Эвотор.
+      > Под пользователем понимается мастер-аккаунт владельца бизнеса в стороннем сервисе.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - name: ''
+        in: body
+        description: |
+          Поля, необходимые для авторизации существующего пользователя в стороннем сервисе.
+        required: true
+        schema:
+          $ref: ../definitions.yaml#/authorizeFormData
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Данные пользователя
+          type: object
+          required:
+            - userUuid
+            - hasBilling
+            - token
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            hasBilling:
+              type: boolean
+              description: |
+                Определяет наличие биллинга по данному пользователю в стороннем сервисе. Эвотор не выполняет биллинг, если на момент авторизации пользователь оплачивает подписку в стороннем сервисе.
+                Работает, когда учётная запись, первоначально зарегестрированна через интерфей партнёра.
+            token:
+              description: |
+                Токен, который облако Эвотор будет передавать в заголове `Authorization` с типом `Bearer`, для авторизации своих HTTP-запросов в стороннем сервисе.
+              type: string
+              maxLength: 128
+              default: toaWaep4chou7ahkoogiu9Iusaht9ima
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/40110011006
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+      '409':
+        $ref: ../responses.yaml#/4092004
+/api/v1/user/create:
+  post:
+    tags:
+      - Учётные записи в стороннем сервисе
+    summary: Создать учётную запись
+    description: |
+      Регистрирует новую учётную запись в стороннем сервисе.
+      **ВАЖНО:** Под пользователем понимается мастер-аккаунт владельца бизнеса в системе партнера.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - name: ''
+        in: body
+        description: |
+          Поля необходимые для регистрации нового пользователя в стороннем сервисе.
+        required: true
+        schema:
+          $ref: ../definitions.yaml#/registerFormData
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Данные пользователя
+          type: object
+          required:
+            - userUuid
+            - token
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            token:
+              description: |
+                Токен, который облако Эвотор будет передавать в заголове `Authorization` с типом `Bearer`, для авторизации своих HTTP-запросов в стороннем сервисе.
+              type: string
+              maxLength: 128
+              default: toaWaep4chou7ahkoogiu9Iusaht9ima
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+      '409':
+        $ref: ../responses.yaml#/4092005
+/api/v1/user/tariff:
+  post:
+    tags:
+      - Биллинг
+    summary: Активация / деактивация тарифа
+    description: |
+      Активация / деактивация тарифа для учетной записи пользователя в стороннем сервисе.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - name: ''
+        in: body
+        description: |
+          Параметры, необходимые для активации тарифа в стороннем сервисе.
+        required: true
+        schema:
+          type: object
+          required:
+            - userUuid
+            - tariffId
+            - status
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            tariffId:
+              type: string
+              description: Код тарифа в платформе Эвотор.
+              pattern: '^[a-zA-Z0-9\_\-]+$'
+              default: starter
+            status:
+              type: string
+              description: >-
+                Статус тарифа. Возможные значения:
+                 * ACTIVE -  установка приложения или подтверждение активности тарифа.
+                 * INACTIVE - удаление приложение или деактивация тарифа из-за неоплаты.
+              enum:
+                - ACTIVE
+                - INACTIVE
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/40510051007
+/api/v1/inventories/devices:
+  put:
+    tags:
+      - Сущности пользователя Эвотор
+    summary: Создать смарт-терминал
+    description: |
+      Создать / отредактировать один или несколько смарт-терминалов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
+      мастер-системой по данной сущности.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: device
+        in: body
+        description: Массив смарт-терминалов
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/device
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Массив привязок
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                pattern: >-
+                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              partnerId:
+                type: string
+                description: >-
+                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+/api/v1/inventories/employees:
+  put:
+    tags:
+      - Сущности пользователя Эвотор
+    summary: Создать сотрудника
+    description: |
+      Создать / отредактировать одного или нескольких сотрудников в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
+      мастер-системой по данной сущности.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: employee
+        in: body
+        description: Массив сотрудников, созданных в платформе Эвотор.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/employee
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Массив привязок
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                pattern: >-
+                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              partnerId:
+                type: string
+                description: >-
+                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+/api/v1/inventories/stores:
+  put:
+    tags:
+      - Сущности пользователя Эвотор
+    summary: Создать магазин
+    description: >-
+      Создать / отредактировать однин или несколько магазинов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является
+      мастер-системой по данной сущности.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: store
+        in: body
+        description: Массив магазинов из Эвотор
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/store
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Массив привязок
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                pattern: >-
+                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              partnerId:
+                type: string
+                description: >-
+                  Идентификатор сервиса посредника. Сервис посредник хранит соответствие сущностей платформы Эвотор и стороннего сервиса, если он не интегрирован непосредственно с платформой. Если сторонний сервис интегрируется непосредственно с платформой Эвотор, атрибут возвращать не требуется.
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+'/api/v1/inventories/stores/{storeUuid}/products':
+  get:
+    tags:
+      - Товары и документы
+    summary: Получить товары
+    description: |
+      Возвращает номенклатуру из стороннего сервиса в облако Эвотор. Возвращает все товары (`products`) в рамках выбранного магазина (`storeUuid`). Укажите параметры page и size чтобы получить результаты в постраничном режиме.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: storeUuid
+        in: path
+        description: Уникальный идентификатор магазина в облаке Эвотор.
+        required: true
+        type: string
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      - name: page
+        in: query
+        description: |
+          Включает режим постраничного вывода и задаёт номер страницы в выборке. Используйте вместе с параметром `size`.
+        type: integer
+        minimum: 0
+      - name: size
+        in: query
+        description: |
+          Включает режим постраничного вывода и задаёт размер страницы в выборке. Используйте вместе с параметром `page`.
+        type: integer
+        minimum: 1
+    responses:
+      '200':
+        description: OK
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/product
+        headers:
+          X-Total-Items-Count:
+            description: |
+              Общее количество элементов в многостраничной выборке. Возвращается, если в запросе указаны параметры `page` и `size`.
+              > Число возвращаемых элементов, должно совпадать с числом, указанным в заголовке.
+            type: integer
+            minimum: 0
+          X-Pagination-Page-Size:
+            description: |
+              Количество элементов на текущей странице в многостраничной выборке. Возвращается, если в запросе указаны параметры `page` и `size`.
+            type: integer
+            minimum: 0
+          X-Pagination-Next-Page:
+            description: |
+              Номер следующей страницы в многостраничной выборке. Возвращается, если в запросе указаны параметры `page` и `size`, и существует следующая страница.
+            type: integer
+            minimum: 1
+          X-Pagination-Total-Page-Count:
+            description: >-
+              Общее количество страниц в многостраничной выборке. Возвращается, если в запросе указаны параметры `page` и `size`.
+            type: integer
+            minimum: 1
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+  post:
+    tags:
+      - Товары и документы
+    summary: Создать товары
+    description: |
+      Загружает в сторонний сервис массив новых товаров, созданных на терминале.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: storeUuid
+        in: path
+        required: true
+        type: string
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      - name: products
+        in: body
+        description: Массив товаров
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/product
+    responses:
+      '200':
+        description: OK
+        schema:
+          title: Массив привязок
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                pattern: >-
+                  ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+'/api/v1/inventories/stores/{storeUuid}/documents':
+  put:
+    tags:
+      - Товары и документы
+    summary: Передать документы
+    description: |
+      Передаёт в сторонний сервис массив документов с транзакциями.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: storeUuid
+        in: path
+        required: true
+        type: string
+        pattern: >-
+          ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      - name: documents
+        in: body
+        description: Массив документов
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/document
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+/api/v1/commodities:
+  get:
+    tags:
+      - Поиск товара
+    summary: По штрихкоду
+    description: |
+      Возвращает объект с информацией о товаре, найденного с помощью штрихкода и/или кода алкогольной продукции в базе стороннего сервиса.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: scanCode
+        description: Штрихкод.
+        in: query
+        required: true
+        type: string
+      - name: alcCode
+        description: Код алкогольной продукции.
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        schema:
+          $ref: ../definitions.yaml#/commodity
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/4002001
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+/api/v1/receipt:
+  post:
+    tags:
+      - Отправка чека
+    summary: Отправить чек
+    description: |
+      После оплаты отправляет чек в сторонний сервис. Тело запроса содержит один или несколько чеков.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - name: receipt
+        in: body
+        description: Массив чеков.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ../definitions.yaml#/receipt
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012003
+      '401':
+        $ref: ../responses.yaml#/40110021003
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+/api/v1/user/token:
+  post:
+    tags:
+      - Учётные записи в стороннем сервисе
+    summary: Получить токен приложения
+    description: |
+      Получает токен приложения, после того, как пользователь установил приложение в Личном кабинете. Сторонний сервис использует токен приложения для авторизации запросов к облаку Эвотор.
+    parameters:
+      - $ref: ./parameters.yaml#/serverAuth
+      - $ref: ./parameters.yaml#/Accept
+      - $ref: ./parameters.yaml#/Content-Type
+      - $ref: ./parameters.yaml#/Accept-Charset
+      - name: ''
+        in: body
+        description: Тело запроса.
+        required: true
+        schema:
+          type: object
+          required:
+            - userUuid
+            - token
+          properties:
+            userUuid:
+              allOf:
+                - $ref: ../definitions.yaml#/userId
+            token:
+              type: string
+              description: Токен приложения.
+              example: f46b89a5-8e80-4591-b0aa-94551790444b
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ../responses.yaml#/40020012002
+      '401':
+        $ref: ../responses.yaml#/4011001
+      '402':
+        $ref: ../responses.yaml#/402
+      '404':
+        $ref: ../responses.yaml#/404
+      '405':
+        $ref: ../responses.yaml#/4051005
+/api/v1/user/event:
+  post:
+    tags:
+      - Биллинг
+    summary: События биллинга
+    description: |
+       Связанные с биллингом события, которые облако Эвотор передаёт в сторонний сервис.
+    parameters:
+      - in: body
+        name: body
+        description: Содержимое запроса меняется в зависимости от события.
+        required: true
+        schema:
+          $ref: ../definitions.yaml#/events
