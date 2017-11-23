@@ -1356,280 +1356,280 @@
 # Данные ОФД #
 ##############
 
-# /api.evotor.ru/api/v1/ofd/stores:
-#  x-summary: Получить список магазинов из ОФД
-#  get:
-#    tags:
-#      - Данные ОФД
-#    summary: 'Получить список магазинов из ОФД'
-#    description: |
-#      Возвращает массив с информацией о всех магазинах пользователя, которые зарегистрированы в ОФД.
-#    parameters:
-#      - $ref: ./parameters.yaml#/auth
-#      - $ref: ./parameters.yaml#/Content-Type
-#    responses:
-#      '200':
-#        description: OK
-#        headers:
-#          Warning:
-#            description: |
-#              URL будет отключён после <время отключения URL>.
-#              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-#        schema:
-#             title: Данные о магазине
-#             type: object
-#             description: Объект с данными о магазине.
-#             required:
-#               - version
-#               - provider
-#               - data
-#             properties:
-#               version:
-#                 type: integer
-#                 description: Версия схемы данных.
-#                 default: 2
-#               provider:
-#                 type: string
-#                 description: Источник данных.
-#                 default: OFD
-#               data:
-#                 type: array
-#                 description: Массив объектов с данными о магазине.
-#                 items:
-#                     type: object
-#                     required:
-#                       - id
-#                       - parentId
-#                       - name
-#                     properties:
-#                       id:
-#                         type: integer
-#                         description: Идентификатор магазина в ОФД.
-#                         example: 1111
-#                       parentId:
-#                         type: integer
-#                         description: Идентификатор магазина, в который вложен данных магазин. В   ОФД иерархия магазинов древовидная.
-#                         example: 2222
-#                       name:
-#                         type: string
-#                         description: Название магазина в ОФД.
-#                         example: Шаркон
-#      '413':
-#        description: Превышен максимальный объём данных в запросе
-#
-# /api.evotor.ru/api/v1/ofd/devices:
-#  x-summary: Получить список устройств из ОФД
-#  get:
-#    tags:
-#      - Данные ОФД
-#    summary: 'Получить список устройств из ОФД'
-#    description: |
-#      Возвращает массив с информацией о всех устройствах пользователя, которые зарегистрированы в ОФД.
-#    parameters:
-#      - $ref: ./parameters.yaml#/auth
-#      - $ref: ./parameters.yaml#/Content-Type
-#    responses:
-#      '200':
-#        description: OK
-#        headers:
-#          Warning:
-#            description: |
-#              URL будет отключён после <время отключения URL>.
-#              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-#        schema:
-#             title: Данные об устройстве
-#             type: object
-#             description: Объект с данными об устройстве.
-#             required:
-#               - version
-#               - provider
-#               - data
-#             properties:
-#               version:
-#                 type: integer
-#                 description: Версия схемы данных.
-#                 default: 2
-#               provider:
-#                 type: string
-#                 description: Источник данных.
-#                 default: OFD
-#               data:
-#                 type: array
-#                 description: Массив объектов с данными об устройстве.
-#                 items:
-#                     type: object
-#                     required:
-#                       - id
-#                       - storeId
-#                       - name
-#                     properties:
-#                       id:
-#                         type: integer
-#                         description: Идентификатор магазина в ОФД.
-#                         example: 1111
-#                       storeId:
-#                         type: integer
-#                         description: Идентификатор магазина, которому принадлежи устройство. В   ОФД иерархия магазинов древовидная.
-#                         example: 2222
-#                       name:
-#                         type: string
-#                         description: Название устройства в ОФД.
-#                         example: Мой любимый смарт-терминал.
-#                       address:
-#                         type: string
-#                         description: Адрес устройства.
-#                         example: г. Москва, Хамовнический вал, 5
-#      '413':
-#        description: Превышен максимальный объём данных в запросе
-#
-# /api.evotor.ru/api/v1/ofd/documents/:
-#  x-summary: Получить список документов из ОФД
-#  get:
-#    tags:
-#      - Данные ОФД
-#    summary: 'Получить список документов из ОФД'
-#    description: |
-#      Возвращает массив с информацией о документах переданных в ОФД в заданный период. Вы можете указать тип необходимых документов.
-#    parameters:
-#      - $ref: ./parameters.yaml#/auth
-#      - $ref: ./parameters.yaml#/Content-Type
-#      - name: storeId
-#        in: query
-#        type: string
-#        description: |
-#          Идентификатор магазина полученный из запрса "Получение иерархии магазинов из ОФД" в формате \d+.
-#      - name: deviceId
-#        in: query
-#        type: string
-#        description: |
-#          Идентификатор магазина полученный из запрса "Получение иерархии касс из ОФД" в формате \d+..
-#      - name: fromDate
-#        in: query
-#        format: date-time
-#        type: string
-#        description: |
-#           начало интервала дат для выгрузки документов в формате ISO-8601 (например, 2000-01-01T00:00:00.000+03:00)
-#      - name: toDate
-#        in: query
-#        format: date-time
-#        type: string
-#        description: |
-#          конец интервала дат для выгрузки документов в формате ISO-8601 (например, 2000-01-01T23:59:59.000+03:00)
-#      - name: docType
-#        description: |
-#          Nип документа для выгрузки из ОФД. На данный момент доступен только SELL и Z_REPORT. Можно указать несколько типов через запятую. Возможные значения:
-#          * Кассовые документы – `SELL`;
-#          * Z-отчёт – `Z_REPORT`.
-#        in: query
-#        type: string
-#    responses:
-#      '200':
-#        description: OK
-#        headers:
-#          Warning:
-#            description: |
-#              URL будет отключён после <время отключения URL>.
-#              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-#          X-RateLimit-Limit:
-#            schema:
-#              type: integer
-#            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-#          X-RateLimit-Remaining:
-#            schema:
-#              type: integer
-#            description: Количество запросов, оставшихся в текущем временном интервале.
-#          X-RateLimit-Reset:
-#            schema:
-#              type: string
-#              format: integer
-#            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-#        schema:
-#             title: Данные о магазине
-#             type: object
-#             description: Объект с данными о магазине.
-#             required:
-#               - version
-#               - provider
-#               - data
-#             properties:
-#               version:
-#                 type: integer
-#                 description: Версия схемы данных.
-#                 default: 2
-#               provider:
-#                 type: string
-#                 description: Источник данных.
-#                 default: OFD
-#               data:
-#                 type: array
-#                 description: Объект с данными о магазине
-#        x-examples:
-#           application/json:
-#              {
-#                  "version": 2,
-#                  "provider": "OFD",
-#                  "data":
-#                  [
-#                      {
-#                          "items": [
-#                              {
-#                                  "modifiers": [],
-#                                  "sum": 3000,
-#                                  "price": 1500,
-#                                  "quantity": 2,
-#                                  "ndsNo": 3000,
-#                                  "barcode": "0000000000000000",
-#                                  "name": "AVANTI KОНТАKТНЫЙ KЛЕЙ 3Г. *12 6930004012027"
-#                              }
-#                          ],
-#                          "stornoItems": [],
-#                          "modifiers": [],
-#                          "operationType": 1,
-#                          "operator": "СИС. АДМИНИСТРАТОР",
-#                          "receiptCode": 3,
-#                          "receiptDate": "2017.07.01 10:26:00.000",
-#                          "shiftNumber": 10,
-#                          "userInn": "3906972339",
-#                          "user": "ООО \"БЛЕСК\"",
-#                          "ndsNo": 3000,
-#                          "rqId": 1153819354,
-#                          "requestNumber": 4,
-#                          "totalSum": 3000,
-#                          "cashTotalSum": 3000,
-#                          "ecashTotalSum": 0,
-#                          "fiscalSign": 1552393462,
-#                          "fiscalDriveNumber": "8710000100088709",
-#                          "fiscalDocumentNumber": 335,
-#                          "taxationType": 4,
-#                      }
-#                  ]
-#              }
-#
-#      '413':
-#        description: Превышен максимальный объём данных в запросе
+ /api.evotor.ru/api/v1/ofd/stores:
+  x-summary: Получить список магазинов из ОФД
+  get:
+    tags:
+      - Данные ОФД
+    summary: 'Получить список магазинов из ОФД'
+    description: |
+      Возвращает массив с информацией о всех магазинах пользователя, которые зарегистрированы в ОФД.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/Content-Type
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+             title: Данные о магазине
+             type: object
+             description: Объект с данными о магазине.
+             required:
+               - version
+               - provider
+               - data
+             properties:
+               version:
+                 type: integer
+                 description: Версия схемы данных.
+                 default: 2
+               provider:
+                 type: string
+                 description: Источник данных.
+                 default: OFD
+               data:
+                 type: array
+                 description: Массив объектов с данными о магазине.
+                 items:
+                     type: object
+                     required:
+                       - id
+                       - parentId
+                       - name
+                     properties:
+                       id:
+                         type: integer
+                         description: Идентификатор магазина в ОФД.
+                         example: 1111
+                       parentId:
+                         type: integer
+                         description: Идентификатор магазина, в который вложен данных магазин. В   ОФД иерархия магазинов древовидная.
+                         example: 2222
+                       name:
+                         type: string
+                         description: Название магазина в ОФД.
+                         example: Шаркон
+      '413':
+        description: Превышен максимальный объём данных в запросе
+
+ /api.evotor.ru/api/v1/ofd/devices:
+  x-summary: Получить список устройств из ОФД
+  get:
+    tags:
+      - Данные ОФД
+    summary: 'Получить список устройств из ОФД'
+    description: |
+      Возвращает массив с информацией о всех устройствах пользователя, которые зарегистрированы в ОФД.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/Content-Type
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+             title: Данные об устройстве
+             type: object
+             description: Объект с данными об устройстве.
+             required:
+               - version
+               - provider
+               - data
+             properties:
+               version:
+                 type: integer
+                 description: Версия схемы данных.
+                 default: 2
+               provider:
+                 type: string
+                 description: Источник данных.
+                 default: OFD
+               data:
+                 type: array
+                 description: Массив объектов с данными об устройстве.
+                 items:
+                     type: object
+                     required:
+                       - id
+                       - storeId
+                       - name
+                     properties:
+                       id:
+                         type: integer
+                         description: Идентификатор магазина в ОФД.
+                         example: 1111
+                       storeId:
+                         type: integer
+                         description: Идентификатор магазина, которому принадлежи устройство. В   ОФД иерархия магазинов древовидная.
+                         example: 2222
+                       name:
+                         type: string
+                         description: Название устройства в ОФД.
+                         example: Мой любимый смарт-терминал.
+                       address:
+                         type: string
+                         description: Адрес устройства.
+                         example: г. Москва, Хамовнический вал, 5
+      '413':
+        description: Превышен максимальный объём данных в запросе
+
+ /api.evotor.ru/api/v1/ofd/documents/:
+  x-summary: Получить список документов из ОФД
+  get:
+    tags:
+      - Данные ОФД
+    summary: 'Получить список документов из ОФД'
+    description: |
+      Возвращает массив с информацией о документах переданных в ОФД в заданный период. Вы можете указать тип необходимых документов.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/Content-Type
+      - name: storeId
+        in: query
+        type: string
+        description: |
+          Идентификатор магазина полученный из запрса "Получение иерархии магазинов из ОФД" в формате \d+.
+      - name: deviceId
+        in: query
+        type: string
+        description: |
+          Идентификатор магазина полученный из запрса "Получение иерархии касс из ОФД" в формате \d+..
+      - name: fromDate
+        in: query
+        format: date-time
+        type: string
+        description: |
+           начало интервала дат для выгрузки документов в формате ISO-8601 (например, 2000-01-01T00:00:00.000+03:00)
+      - name: toDate
+        in: query
+        format: date-time
+        type: string
+        description: |
+          конец интервала дат для выгрузки документов в формате ISO-8601 (например, 2000-01-01T23:59:59.000+03:00)
+      - name: docType
+        description: |
+          Nип документа для выгрузки из ОФД. На данный момент доступен только SELL и Z_REPORT. Можно указать несколько типов через запятую. Возможные значения:
+          * Кассовые документы – `SELL`;
+          * Z-отчёт – `Z_REPORT`.
+        in: query
+        type: string
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+             title: Данные о магазине
+             type: object
+             description: Объект с данными о магазине.
+             required:
+               - version
+               - provider
+               - data
+             properties:
+               version:
+                 type: integer
+                 description: Версия схемы данных.
+                 default: 2
+               provider:
+                 type: string
+                 description: Источник данных.
+                 default: OFD
+               data:
+                 type: array
+                 description: Объект с данными о магазине
+        x-examples:
+           application/json:
+              {
+                  "version": 2,
+                  "provider": "OFD",
+                  "data":
+                  [
+                      {
+                          "items": [
+                              {
+                                  "modifiers": [],
+                                  "sum": 3000,
+                                  "price": 1500,
+                                  "quantity": 2,
+                                  "ndsNo": 3000,
+                                  "barcode": "0000000000000000",
+                                  "name": "AVANTI KОНТАKТНЫЙ KЛЕЙ 3Г. *12 6930004012027"
+                              }
+                          ],
+                          "stornoItems": [],
+                          "modifiers": [],
+                          "operationType": 1,
+                          "operator": "СИС. АДМИНИСТРАТОР",
+                          "receiptCode": 3,
+                          "receiptDate": "2017.07.01 10:26:00.000",
+                          "shiftNumber": 10,
+                          "userInn": "3906972339",
+                          "user": "ООО \"БЛЕСК\"",
+                          "ndsNo": 3000,
+                          "rqId": 1153819354,
+                          "requestNumber": 4,
+                          "totalSum": 3000,
+                          "cashTotalSum": 3000,
+                          "ecashTotalSum": 0,
+                          "fiscalSign": 1552393462,
+                          "fiscalDriveNumber": "8710000100088709",
+                          "fiscalDocumentNumber": 335,
+                          "taxationType": 4,
+                      }
+                  ]
+              }
+
+      '413':
+        description: Превышен максимальный объём данных в запросе
