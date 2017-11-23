@@ -1356,7 +1356,7 @@
 # Данные ОФД #
 ##############
 
- /api.evotor.ru/api/v1/ofd/stores:
+/api.evotor.ru/api/v1/ofd/stores:
   x-summary: Получить список магазинов из ОФД
   get:
     tags:
@@ -1430,7 +1430,7 @@
       '413':
         description: Превышен максимальный объём данных в запросе
 
- /api.evotor.ru/api/v1/ofd/devices:
+/api.evotor.ru/api/v1/ofd/devices:
   x-summary: Получить список устройств из ОФД
   get:
     tags:
@@ -1508,7 +1508,7 @@
       '413':
         description: Превышен максимальный объём данных в запросе
 
- /api.evotor.ru/api/v1/ofd/documents/:
+/api.evotor.ru/api/v1/ofd/documents/:
   x-summary: Получить список документов из ОФД
   get:
     tags:
