@@ -673,6 +673,77 @@ employee:
         - CASHIER
         - MANUAL
 
+employeeWithoutCode:
+  type: object
+  required:
+    - uuid
+    - role
+    - name
+    - stores
+  properties:
+    uuid:
+      type: string
+      description: |
+        Уникальный идентификатор сотрудника в Облаке Эвотор.
+
+        Формат – `uuid4`.
+
+        Не может содержать пустую строку или принимать значение `null`.
+      pattern: >-
+        ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+      example: 20170222-5670-4067-8017-FF5F40F1A23E
+    name:
+      type: string
+      description: |
+        Имя сотрудника, которое пользователь указал в Личном кабинете.
+
+        Не может содержать пустую строку или принимать значение `null`.
+      example: Иван
+    lastName:
+      type: string
+      x-nullable: true
+      description: |
+        Фамилия сотрудника, которую пользователь указал в Личном кабинете.
+
+        Может быть `null`.
+      example: Иванов
+    patronymicName:
+      type: string
+      x-nullable: true
+      description: |
+        Отчество сотрудника, которое пользователь указал в Личном кабинете.
+
+        Может быть `null`.
+      example: "null"
+    phone:
+      type: number
+      nullable: true
+      description: |
+        Номер телефона сотрудника в платформе Эвотор.
+
+        Может быть `null`.
+      pattern: '^7[0-9]{10}$'
+      example: 79876543210
+    stores:
+      type: array
+      description: Массив идентификаторов магазинов, которым соответствует идентификатор сотрудника. В Личном кабинете, пользователь выбирает магазины, где работает сотрудник.
+      items:
+        type: string
+        example: 20170222-d58c-40e0-8051-b53adff38860
+
+    role:
+      type: string
+      description: |
+        Роль, которая задаёт права доступа сотрудника. Роль сотрудника выбирает пользователь в Личном кабинете.
+
+        В зависимости от прав, сотрудники имеют доступ к различным функциям смарт-терминала:
+          * ADMIN – предустановленная роль администратора с полным доступом к функциям смарт-терминала.
+          * CASHIER – предустановленнная роль кассира с ограниченным доступом к функциям смарт-терминала.
+          * MANUAL – роль, которую пользователь создал вручную.
+      enum:
+        - ADMIN
+        - CASHIER
+        - MANUAL
 
 store:
   type: object
@@ -715,6 +786,38 @@ store:
          Может быть `null`.
       example: "null"
 
+storeWithoutCode:
+  type: object
+  required:
+    - uuid
+    - name
+  properties:
+    uuid:
+      type: string
+      description: |
+        Уникальный идентификатор магазина в Облаке Эвотор.
+
+        Формат – `uuid4`.
+
+        Не может содержать пустую строку или принимать значение `null`.
+      example: 20170228-F4F1-401B-80FA-9ECCA8451FFB
+      pattern: >-
+        ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+    address:
+      type: string
+      x-nullable: true
+      description: |
+        Адрес магазина, который пользователь указал в Личном кабинете.
+
+        Может быть `null`.
+      example: Россия, Москва, Старопанский переулок
+    name:
+      type: string
+      description: |
+         Имя магазина, которое пользователь указал в Личном кабинете.
+
+         Не может содержать пустую строку или принимать значение `null`.
+      example: Мой магазин
 
 document:
   type: object
@@ -909,6 +1012,34 @@ device:
          Не может быть `null`.
       example: 10800000
 
+deviceWithoutCode:
+  type: object
+  properties:
+    uuid:
+      type: string
+      description: |
+        Уникальный идентификатор смарт-терминала в Облаке Эвотор.
+
+        Формат – `uuid4`.
+      pattern: >-
+        ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+      example: 20170222-D58C-40E0-8051-B53ADFF38860
+    name:
+      type: string
+      description: |
+        Имя смарт-терминала, которое пользователь дал устройству в Личном кабинете.
+
+        Не может содержать пустую строку или принимать значение `null`.
+      example: Моя касса №3
+    storeUuid:
+      $ref: '#/store/properties/uuid'
+    timezoneOffset:
+      type: integer
+      description: |
+         Часовой пояс, в котором работает смарт-терминал.
+
+         Не может быть `null`.
+      example: 10800000
 
 commodity:
   type: object
