@@ -95,6 +95,27 @@ SubscriptionCreated:
           allOf:
           - $ref: '#/deviceNumber'
 
+AddonsUpdated:
+  description: Подписка создана.
+  allOf:
+    - $ref: '#/subscriptionevents'
+    - type: object
+    - required:
+        - addons
+      properties:
+        addons:
+          type: array
+          description: |
+              Список платных опций, которые выбрал пользователь при подписке, обновлении или изменении тарифа.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Идентификатор платной опции.
+              quantity:
+                type: integer
+                description: Количественная мера платной опции, которую выбрал пользователь
 
 SubscriptionActivated:
   description: Подписка активирована.
@@ -636,10 +657,9 @@ employee:
       description: Массив идентификаторов магазинов, которым соответствует идентификатор сотрудника. В Личном кабинете, пользователь выбирает магазины, где работает сотрудник.
       items:
         items:
-          - type: string
-            example: 20170222-d58c-40e0-8051-b53adff38860
-          - type: string
-            example: 20170222-d58c-40e0-8051-b53adff38861
+          type: string
+          example: 20170222-d58c-40e0-8051-b53adff38860
+
     role:
       type: string
       description: |
@@ -1126,6 +1146,7 @@ subscriptionevents:
       description: |
         Типы событий:
           * `SubscriptionCreated` – новая подписка. Сообщает о том, что пользователь установил приложение в Личном кабинете. Приходит в начале пробного периода или перед сообщением об успешной оплате, если пробного периода нет.
+          * `AddonsUpdated` – список платных опций, выбранных пользователем.
           * `SubscriptionActivated` – подписка активирована. Сообщает об успешной оплате.
           * `SubscriptionRenewed` – подписка продлена на следующий период. Сообщает об успешной оплате очередного периода.
           * `SubscriptionTermsChanged` – изменились условия подписки, например, тарифный план или количество устройств.
