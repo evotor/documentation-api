@@ -635,10 +635,11 @@ employee:
       type: array
       description: Массив идентификаторов магазинов, которым соответствует идентификатор сотрудника. В Личном кабинете, пользователь выбирает магазины, где работает сотрудник.
       items:
-        type: object
-        properties:
-          storeUuid:
-            $ref: '#/store/properties/uuid'
+        items:
+          - type: string
+            example: 20170222-d58c-40e0-8051-b53adff38860
+          - type: string
+            example: 20170222-d58c-40e0-8051-b53adff38861
     role:
       type: string
       description: |
