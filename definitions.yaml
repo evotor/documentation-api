@@ -1652,3 +1652,672 @@ fieldAttributes:
 #    Содержит перечисление характеристик для модификации товара в пар ключ-значение.
 #
 #    Например: {"key1": "value1", "key2": "value2", ... "keyN": "valueN"}
+
+
+
+
+###################################
+#          ДДОКУМЕНТЫ V2          #
+###################################
+
+
+document2:
+  type: object
+  discriminator: type
+  required:
+    - id
+    - type
+    - deviceId
+    - timeZoneOffset
+    - closeDate
+    - userId
+    - closeUserId
+    - sessionId
+    - sessionNumber
+    - number
+    - storeId
+  properties:
+    version:
+      type: string
+      enum:
+        - V1
+        - V2
+      description: Версия схемы документа.
+      example: V2
+    id:
+      type: string
+      description: |
+        Идентификатор документа в Облаке Эвотор, уникальный в рамках магазина `storeId`. Смарт-терминал присваивает идентификатор в момент сохранения документа.
+
+        Формат – `uuid4`.
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: 20170222-d58c-40e0-8051-b53adff38860
+    extras:
+      type: object
+      x-nullable: true
+      description: |
+        Объект с дополнительной информацией, которую приложения, установленные на смарт-терминале, могут добавлять в схему документа.
+        По токену Облака Эвотор, с которым пришёл запрос, Облако определяет какие дополнительные поля необходимо вернуть.
+    number:
+      type: number
+      description: Порядковый номер документа на смарт-терминале. Отсчёт ведётся с момента активации смарт-терминала. При выполнении программного сброса отсчёт начниается с единицы.
+      example: 1937
+    closeDate:
+      format: date-time
+      type: string
+      description: |
+        Дата на смарт-терминале в момент сохранения документа в формате ISO 8601 приведённая к TZ +0000.
+      example: 2017-01-10T09:33:19.757+0000
+    timeZoneOffset:
+      type: string
+      format: date-time
+      description:
+        Отражает настройки часового пояса на смарт-терминале в момент сохранения документа. Смещение для даты сохранения документа на смарт-терминале в миллисекундах относительно UTC.
+    sessionId:
+      type: string
+      description: Уникальный идентификатор смены. Смарт-терминал присваивает идентификатор в момент открытия смены документом OPEN_SESSION. Все документы в рамках одной смены имеют одинаковый идентификатор смены.
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+    sessionNumber:
+      type: string
+      description: Порядковый номер смены на смарт-терминале. Отсчёт ведётся с момента активации смарт-терминала. При выполнении программного сброса отсчёт начинается с единицы.
+      example: 80
+    closeUserId:
+      type: string
+      description: Уникальный идентификатор сотрудника под учётными данными которого был создан документ.
+      example: 20170417-46B8-40B9-802E-4DEB67C07565
+    deviceId:
+      type: string
+      description: |
+        Идентификатор смарт-терминала, на котором был сформирован документ.
+
+        Формат – `uuid4`. Регистрозависимый.
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+    storeId:
+      type: string
+      description: Уникальный идентификатор магазина, в котором находился смарт-терминал, когда был сформирован документ.
+      example: 20170928-3176-40EB-80E2-A11F032E282A
+    userId:
+      type: string
+      description: |
+        Идентификатор пользователя Эвотор, владельца смарт-терминала, формирующего документ.
+
+        Формат [0-9]{2}-[0-9]{15}.
+      example: 09-012345678901234
+    type:
+      type: string
+      description: |
+        Тип документа:
+
+        * `ACCEPT` - приемка товара.
+        * `CASH_INCOME` - внесение наличных в кассу.
+        * `CASH_OUTCOME` - изъятие наличных из кассы.
+        * `CLOSE_SESSION` - закрытие смены.
+        * `INVENTORY` - инвентаризация.
+        * `OPEN_SESSION` - открытие смены на смарт-терминале.
+        * `OPEN_TARE` - вскрытие тары.
+        * `PAYBACK` - возврат товара продавцу.
+        * `RETURN` - возврат товара поставщику.
+        * `REVALUATION` - переоценка товара.
+        * `SELL` - продажа товара.
+        * `WRITE_OFF` - списание товара.
+        * `X_REPORT` - X-отчет (без гашения).
+        * `Z_REPORT` - Z-отчет (с гашением).
+      enum:
+        - SELL
+        - PAYBACK
+        - CASH_INCOME
+        - CASH_OUTCOME
+        - OPEN_SESSION
+        - FPRINT
+        - CLOSE_SESSION
+        - INVENTORY
+        - ACCEPT
+        - RETURN
+        - WRITE_OFF
+        - REVALUATION
+        - OPEN_TARE
+
+
+ACCEPT:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+          required:
+            - positions
+            - sum
+          properties:
+            positions:
+              type: array
+              desctiption: Массив товарных позиций к приемке.
+              items:
+                type: object
+                properties:
+                  - $ref: '#/position'
+            supplierId:
+              type: string
+              desctiption: |
+                Идентификатор поставщика.
+
+                Формат `uuid4`.
+              pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+            sum:
+              type: number
+              desctiption: Общая стоимость принятых товарных позиций. До двух знаков в дробной части.
+              example: 2123.12
+CASH_INCOME:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+          required:
+            - sessionNumber
+            - documentNumber
+            - receiptNumber
+            - receiptDate
+            - sum
+          properties:
+            sessionNumber:
+              type: integer
+              desctiption: Номер смены в ККМ.
+              example: 1
+            documentNumber:
+              type: integer
+              desctiption: Номер документа в ККМ.
+              example: 1
+            receiptNumber:
+              type: integer
+              desctiption: Номер чека в ККМ.
+              example: 1
+            receiptDate:
+              type: string
+              desctiption: |
+                Дата печати в ККМ на момент печати документа.
+                Формат  `DDMMYYYY`.
+              example: 12122017
+            fnRegNumber:
+              type: string
+              desctiption: |
+                Заводской номер фискального накопителя.
+              example:
+            fiscalSignDocNumber:
+              type: string
+              desctiption: |
+                Номер фискального признака документа.
+              example:
+            fiscalDocumentNumber:
+              type: string
+              desctiption: |
+                Фискальный номер документа в ККМ из ФН.
+              example:
+            sum:
+              type: integer
+              desctiption: |
+                Сумма для внесения. До двух знаков в дробной части.
+              example:
+CASH_OUTCOME:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+          required:
+            - sessionNumber
+            - documentNumber
+            - receiptNumber
+            - receiptDate
+            - sum
+            - paymentCategoryName
+            - paymentCategoryId
+            - receiver
+          properties:
+            sessionNumber:
+              type: integer
+              desctiption: Номер смены в ККМ.
+              example: 1
+            documentNumber:
+              type: integer
+              desctiption: Номер документа в ККМ.
+              example: 1
+            receiptNumber:
+              type: integer
+              desctiption: Номер чека в ККМ.
+              example: 1
+            receiptDate:
+              type: string
+              desctiption: |
+                Дата печати в ККМ на момент печати документа.
+                Формат  `DDMMYYYY`.
+              example: 12122017
+            fnRegNumber:
+              type: string
+              desctiption: |
+                Заводской номер фискального накопителя.
+              example:
+            fiscalSignDocNumber:
+              type: string
+              desctiption: |
+                Номер фискального признака документа.
+              example:
+            fiscalDocumentNumber:
+              type: string
+              desctiption: |
+                Фискальный номер документа в ККМ из ФН.
+              example:
+            sum:
+              type: integer
+              desctiption: |
+                Сумма для внесения. До двух знаков в дробной части.
+              example:
+            paymentCategoryName:
+              type: string
+              desctiption: |
+                Текстовый идентификатор категории платежа.
+              enum:
+                - Инкассация
+                - Оплата поставщику
+                - Оплата услуг
+                - Аренда
+                - Заработная плата
+                - Прочее
+              example: Инкассация
+            paymentCategoryId:
+              type: integer
+              desctiption: |
+                Числовой идентификатор категории платежа.
+              enum:
+                - 1 - Инкассация
+                - 2 - Оплата поставщику
+                - 3 - Оплата услуг
+                - 4 - Аренда
+                - 5 -Заработная плата
+                - 6 - Прочее
+              example: 1
+            receiver:
+              type: string
+              desctiption: |
+                Имя получателя средств.
+              example:
+CLOSE_SESSION:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+          required:
+            - revenue
+            - total
+          properties:
+            revenue:
+              type: integer
+              desctiption: Выручка за смену. До двух знаков в дробной части.
+            total:
+              type: integer
+              desctiption: Сумма наличных средств в кассе на момент закрытия смены. До двух знаков в дробной части.
+INVENTORY:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+          required:
+            - positions
+          properties:
+            positions:
+              type: array
+              desctiption: Массив товарных позиций к инвентаризации.
+              items:
+                type: object
+                properties:
+                  position:
+                    type: object
+                    desctiption: Позиция к приёмке.
+                    required:
+                      - productId
+                      - quantity
+                      - initialQuantity
+                      - code
+                      - id
+                    properties:
+                      productId:
+                        type: string
+                        desctiption: |
+                          Идентификатор товара, уникальный в рамках магазина.
+
+                          Формат `uuid4`.
+                        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                        example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+                      quantity:
+                        type: integer
+                        description: Количество единиц товара по итогам инвентаризации. До двух знаков в дробной части.
+                        example: 123.12
+                      initialQuantity:
+                        type: integer
+                        description: Остаток товара в магазине до начала инвентаризации.
+                        example: 123.12
+                      code:
+                        type: string
+                        description: Код товара.
+                        example:
+                      id:
+                        type: integer
+                        description: Порядковый номер транзакции регистрации позиции в документе. Счет ведется на уровне терминала, начиная с единицы. Номер можно сбросить программно.
+                        example: 12
+                      uuid:
+                        type: string
+                        description: |
+                          Уникальный идентификатор товарной позиции в чеке (при преобразовании из documents.v1, получает значение null).
+
+                          > Полезен в случаях, когда нужно программно (средствами SDK) сослаться на конкретную позицию.
+
+                          **Идентификатор должен присутствовать в API партнёра.**
+                        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                        example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+                      extraKeys:
+                        type: object
+                        description: Объект, соответствующий атрибуту extras товарной позиции в момент добавления товара в документ.
+            completeInventory:
+              type: boolean
+              default: true
+              desctiption: |
+                Определяет является инветаризация полной или нет.
+
+                * `true` - инвентаризация полная (остатки меняются у всех товаров; у неупомянутых товаров остаток сбрасывается к нулю).
+                * `false` - инвентаризация частичная (остатки меняются только у перечисленных позиций).
+OPEN_SESSION:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+OPEN_TARE:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+          required:
+            - positions
+            - sum
+          properties:
+            positions:
+              type: array
+              desctiption: Массив товарных позиций к приемке.
+              items:
+                type: object
+                properties:
+                  position:
+                    type: object
+                    desctiption: Позиция к приёмке.
+                    required:
+                      - productId
+                      - quantity
+                      - initialQuantity
+                      - productType
+                      - alcoholByVolume
+                      - AlcoholProductKindCode
+                      - tareVolume
+                      - code
+                      - productName
+                      - measureName
+                      - id
+                      - price
+                      - costPrice
+                      - sum
+                    properties:
+                      productId:
+                        type: string
+                        desctiption: |
+                          Идентификатор товара, уникальный в рамках магазина.
+
+                          Формат `uuid4`.
+                        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                        example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+                      quantity:
+                        type: integer
+                        description: Количество единиц товара к продаже. До двух знаков в дробной части.
+                        example: 123.12
+                      initialQuantity:
+                        type: integer
+                        description: Остаток товара в магазине до момента продажи.
+                        example: 123.12
+                      productType:
+                        type: string
+                        description: |
+                          Тип товара:
+
+                            * `ALCOHOL_MARKED` - маркированный алкоголь.
+                            * `ALCOHOL_NOT_MARKED` - немаркированный алкоголь.
+                        example: ALCOHOL_MARKED
+                      mark:
+                        type: string
+                        description: Марка алкогольного товара.
+                        example:
+                      alcoholByVolume:
+                        type: integer
+                        description: |
+                          Объём алкоголя, содержащегося в товаре. До трёх знаков после запятой.
+
+                          **Поле обязательно для немаркированного алкоголя.**
+                        example: 123.123
+                      AlcoholProductKindCode:
+                        type: integer
+                        description: |
+                          Код вида алкогольной продукции ФСРАР.
+
+                          **Поле обязательно для алкогольных типов товаров.**
+                        example: 123.123
+                      tareVolume:
+                        type: integer
+                        description: |
+                          Ёмкость тары алкогольной продукции в литрах. До трёх знаков после запятой.
+
+                          **Поле обязательно для алкогольных типов товаров.**
+                        example: 123.123
+                      code:
+                        type: string
+                        description: Код товара.
+                        example:
+                      barcode:
+                        type: string
+                        description: Штрих код, по которому товар добавлен в чек. Поле пустое, если товар выбран на прямую из списка.
+                        example:
+                      productName:
+                        type: string
+                        description: Наименование товара.
+                        example:
+                      measureName:
+                        type: string
+                        description: Единица измерения из карточки товара.
+                        example:
+                      id:
+                        type: integer
+                        description: Порядковый номер транзакции регистрации позиции в документе. Счет ведется на уровне терминала, начиная с единицы. Номер можно сбросить программно.
+                        example: 12
+                      uuid:
+                        type: string
+                        description: |
+                          Уникальный идентификатор товарной позиции в чеке (при преобразовании из documents.v1, получает значение null).
+
+                          > Полезен в случаях, когда нужно программно (средствами SDK) сослаться на конкретную позицию.
+                        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+                        example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+                      extraKeys:
+                        type: object
+                        description: Объект, соответствующий атрибуту extras товарной позиции в момент добавления товара в документ.
+                      price:
+                        type: integer
+                        description: Отпускная стоимость единицы товара. До двух знаков после запятой.
+                        example: 12.12
+                      sum:
+                        type: integer
+                        description: Отпускная стоимость товарной позиции (price*quantity). До двух знаков после запятой.
+                        example: 12.12
+PAYBACK:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+
+RETURN:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+REVALUATION:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+SELL:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+WRITE_OFF:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+X_REPORT:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+Z_REPORT:
+  allOf:
+    - $ref: '#/document2'
+    - type: object
+      properties:
+        body:
+          type: object
+
+position:
+  type: object
+  desctiption: Позиция к приёмке.
+  required:
+    - productId
+    - quantity
+    - initialQuantity
+    - productType
+    - alcoholByVolume
+    - AlcoholProductKindCode
+    - tareVolume
+    - code
+    - productName
+    - measureName
+    - id
+    - price
+    - costPrice
+    - sum
+  properties:
+    productId:
+      type: string
+      desctiption: |
+        Идентификатор товара, уникальный в рамках магазина.
+
+        Формат `uuid4`.
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+    quantity:
+      type: integer
+      description: Количество единиц товара к приемке. До двух знаков в дробной части.
+      example: 123.12
+    initialQuantity:
+      type: integer
+      description: Остаток товара в магазине до начала приемки.
+      example: 123.12
+    barcode:
+      type: string
+      description: Штрих код, по которому товар добавили в документ приемки.
+      example:
+    productType:
+      type: string
+      description: |
+        Тип товара:
+
+          * `NORMAL` - неалкогольный товар.
+          * `ALCOHOL_MARKED` - маркированный алкоголь.
+          * `ALCOHOL_NOT_MARKED` - немаркированный алкоголь.
+          * `SERVICE` - услуга.
+      example: NORMAL
+    mark:
+      type: string
+      description: Марка алкогольного товара.
+      example:
+    alcoholByVolume:
+      type: integer
+      description: Объём алкоголя, содержащегося в товаре. До трёх знаков после запятой.
+      example: 123.123
+    AlcoholProductKindCode:
+      type: integer
+      description: Код вида алкогольной продукции ФСРАР.
+      example: 123.123
+    tareVolume:
+      type: integer
+      description: Ёмкость тары алкогольной продукции в литрах. До трёх знаков после запятой.
+      example: 123.123
+    code:
+      type: string
+      description: Код товара.
+      example:
+    productName:
+      type: string
+      description: Наименование товара.
+      example:
+    measureName:
+      type: string
+      description: Единица измерения из карточки товара.
+      example:
+    id:
+      type: integer
+      description: Порядковый номер транзакции регистрации позиции в документе. Счет ведется на уровне терминала, начиная с единицы. Номер можно сбросить программно.
+      example: 12
+    uuid:
+      type: string
+      description: |
+        Уникальный идентификатор товарной позиции в чеке (при преобразовании из documents.v1, получает значение null).
+
+        > Полезен в случаях, когда нужно программно (средствами SDK) сослаться на конкретную позицию.
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: 1022722e-9441-4beb-beae-c6bc5e7af30d
+    extraKeys:
+      type: object
+      description: Объект, соответствующий атрибуту extras товарной позиции в момент добавления товара в документ.
+    price:
+      type: integer
+      description: Отпускная стоимость единицы товара. До двух знаков после запятой.
+      example: 12.12
+    costPrice:
+      type: integer
+      description: Закупочная стоимость единицы товара. До двух знаков после запятой.
+      example: 12.12
+    sum:
+      type: integer
+      description: Отпускная стоимость товарной позиции (price*quantity). До двух знаков после запятой.
+      example: 12.12
