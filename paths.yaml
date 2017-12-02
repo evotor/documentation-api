@@ -1368,7 +1368,7 @@
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/quantities:
  x-summary:
- get:
+# get:
     tags:
      - Товары и документы
     summary: 'Получить остатки товаров в магазине'
