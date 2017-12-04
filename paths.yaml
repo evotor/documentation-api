@@ -205,7 +205,7 @@
      > С 1.11.2017 Облако перестанет обрабатывать запросы содержащие некорректную схему товаров. Вы по-прежнему сможете получить из Облака ранее созданные товары с некорректной схемой.
    parameters:
      - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/contentType
+#     - $ref: ./parameters.yaml#/contentType
      - $ref: ./parameters.yaml#/storeUuid
      - name: products
        in: body
@@ -366,7 +366,7 @@
      Чтобы удалить определённый товар, в теле HTTP-запроса требуется указать его UUID.
    parameters:
      - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/contentType
+#     - $ref: ./parameters.yaml#/contentType
      - $ref: ./parameters.yaml#/storeUuid
      - name: products
        in: body
@@ -577,7 +577,7 @@
    parameters:
      - $ref: ./parameters.yaml#/clientAuth
      - $ref: ./parameters.yaml#/storeUuid
-     - $ref: ./parameters.yaml#/contentType
+#     - $ref: ./parameters.yaml#/contentType
      - name: documents
        in: body
        description: Массив документов
@@ -1042,7 +1042,7 @@
         Интервал повторной отправки события около одной минуты.
     parameters:
       - $ref: ./parameters.yaml#/clientAuth
-      - $ref: ./parameters.yaml#/contentType
+#      - $ref: ./parameters.yaml#/contentType
       - $ref: ./parameters.yaml#/Accept
       - $ref: ./parameters.yaml#/Accept-Charset
       - name: body
@@ -1103,7 +1103,7 @@
     description: |
       Создаёт / изменяет схемы товаров для определённого магазина (`{storeUuid}`) пользователя платформы. Эвотор создаёт схему в рамках приложения. Эвотор определяет приложение по токену, который сторонний сервис передаёт в заголовке `X-Authorization`.
     parameters:
-      - $ref: ./parameters.yaml#/contentType
+#      - $ref: ./parameters.yaml#/contentType
       - $ref: ./parameters.yaml#/auth
       - name: schemas
         in: body
@@ -1173,7 +1173,7 @@
      В теле запроса укажите один или несколько идентификаторов схем, которые требуется удалить.
 
    parameters:
-     - $ref: ./parameters.yaml#/contentType
+#     - $ref: ./parameters.yaml#/contentType
      - $ref: ./parameters.yaml#/auth
      - $ref: ./parameters.yaml#/storeUuid
      - name: schemas
@@ -1271,7 +1271,7 @@
       Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
     parameters:
       - $ref: ./parameters.yaml#/auth
-      - $ref: ./parameters.yaml#/contentType
+#      - $ref: ./parameters.yaml#/contentType
       - $ref: ./parameters.yaml#/storeUuid
       - name: extras
         in: body
@@ -1320,7 +1320,7 @@
      В теле запроса укажите один или несколько идентификаторов дополнительных полей, которые требуется удалить.
 
    parameters:
-     - $ref: ./parameters.yaml#/contentType
+#     - $ref: ./parameters.yaml#/contentType
      - $ref: ./parameters.yaml#/auth
      - $ref: ./parameters.yaml#/storeUuid
      - name: extras
@@ -1377,7 +1377,7 @@
     parameters:
       - $ref: ./parameters.yaml#/auth
       - $ref: ./parameters.yaml#/storeUuid
-      - $ref: ./parameters.yaml#/contentType
+#      - $ref: ./parameters.yaml#/contentType
     responses:
       '200':
         description: OK
@@ -1395,7 +1395,7 @@
     parameters:
       - $ref: ./parameters.yaml#/auth
       - $ref: ./parameters.yaml#/storeUuid
-      - $ref: ./parameters.yaml#/contentType
+#      - $ref: ./parameters.yaml#/contentType
       - name: ''
         in: body
         description: JSON-объект, в котором требуется указать пары идентификатор продукта - остатки. Остатки можно указывать как в виде целых так и дробных чисел.
@@ -1426,7 +1426,7 @@
       - $ref: ./parameters.yaml#/auth
       - $ref: ./parameters.yaml#/storeUuid
       - $ref: ./parameters.yaml#/productUuid
-      - $ref: ./parameters.yaml#/contentType
+#      - $ref: ./parameters.yaml#/contentType
     responses:
       '200':
         description: OK
