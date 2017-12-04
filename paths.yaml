@@ -48,7 +48,7 @@
      Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
    parameters:
      - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/Content-Type
+#     - $ref: ./parameters.yaml#/Content-Type
    responses:
      '200':
        description: OK
@@ -1398,7 +1398,7 @@
       - $ref: ./parameters.yaml#/contentType
       - name: ''
         in: body
-        description: JSON-объект, в котором требуется указать пары идентификатор продукта - остатки. Остатки требуется указывать в виде целого числа.
+        description: JSON-объект, в котором требуется указать пары идентификатор продукта - остатки. Остатки можно указывать как в виде целых так и дробных чисел.
         required: true
         schema:
           type: object
