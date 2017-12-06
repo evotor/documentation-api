@@ -1,164 +1,164 @@
 /api.evotor.ru/api/v1/inventories/stores/search:
- x-summary: Получить список магазинов
- get:
-   tags:
-     - Сущности пользователя Эвотор
-   summary: 'Получить список магазинов'
-   description: |
-     Возвращает массив с информацией о всех магазинах пользователя.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
+  x-summary: Получить список магазинов
+  get:
+    tags:
+      - Сущности пользователя Эвотор
+    summary: 'Получить список магазинов'
+    description: |
+      Возвращает массив с информацией о всех магазинах пользователя.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
 #     - $ref: ./parameters.yaml#/Content-Type
-   responses:
-     '200':
-       description: OK
-       headers:
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-       schema:
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
           title: Список магазинов
           type: array
           items:
             $ref: ./definitions.yaml#/store
-     '413':
-       description: Превышен максимальный объём данных в запросе
+      '413':
+        description: Превышен максимальный объём данных в запросе
 
 /api.evotor.ru/api/v1/inventories/employees/search:
- x-summary: Получить список сотрудников
- get:
-   tags:
-     - Сущности пользователя Эвотор
-   summary: 'Получить список сотрудников'
-   description: |
-     Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
+  x-summary: Получить список сотрудников
+  get:
+    tags:
+      - Сущности пользователя Эвотор
+    summary: 'Получить список сотрудников'
+    description: |
+      Возвращает массив с информацией о всех сотрудниках пользователя. Под сотрудниками понимаются пользователи смарт-терминалов, например, кассиры.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
 #     - $ref: ./parameters.yaml#/Content-Type
-   responses:
-     '200':
-       description: OK
-       headers:
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-       schema:
-         title: Cписок сотрудников
-         type: array
-         items:
-           $ref: ./definitions.yaml#/employee
-     '413':
-       description: Превышен максимальный объём данных в запросе
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+          title: Cписок сотрудников
+          type: array
+          items:
+            $ref: ./definitions.yaml#/employee
+      '413':
+        description: Превышен максимальный объём данных в запросе
 
 
 /api.evotor.ru/api/v1/inventories/devices/search:
- x-summary: Получить список смарт-терминалов
- get:
-   tags:
-     - Сущности пользователя Эвотор
-   summary: 'Получить список смарт-терминалов'
-   description: |
-     Возвращает массив с информацией о всех смарт-терминалах пользователя.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
+  x-summary: Получить список смарт-терминалов
+  get:
+    tags:
+      - Сущности пользователя Эвотор
+    summary: 'Получить список смарт-терминалов'
+    description: |
+      Возвращает массив с информацией о всех смарт-терминалах пользователя.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
 #     - $ref: ./parameters.yaml#/Content-Type
-   responses:
-     '200':
-       description: OK
-       headers:
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-       schema:
-         title: Список смарт-терминалов
-         type: array
-         items:
-           $ref: ./definitions.yaml#/device
-     '413':
-       description: Превышен максимальный объём данных в запросе
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+          title: Список смарт-терминалов
+          type: array
+          items:
+            $ref: ./definitions.yaml#/device
+      '413':
+        description: Превышен максимальный объём данных в запросе
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products:
- x-summary: Обмен товарами
- get:
-   tags:
-     - Товары и документы
-   summary: 'Получить список товаров'
-   description: |
-       Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/storeUuid
+  x-summary: Обмен товарами
+  get:
+    tags:
+      - Товары и документы
+    summary: 'Получить список товаров'
+    description: |
+      Возвращает информацию обо всех товарах в определённом магазине (`{storeUuid}`) пользователя платформы.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
 #     - $ref: ./parameters.yaml#/Content-Type
-   responses:
-     '200':
-       description: OK
-       headers:
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-       schema:
-         type: array
-         items:
-           $ref: ./definitions.yaml#/product
-       x-examples:
-         application/json:
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+          type: array
+          items:
+            $ref: ./definitions.yaml#/product
+        x-examples:
+          application/json:
             [
               {
                 "uuid": "01ba18b6-8707-5f47-3d9c-4db058054cb2",
@@ -190,33 +190,33 @@
                 }
               }
             ]
-     '413':
-       description: Превышен максимальный объём данных в запросе
+      '413':
+        description: Превышен максимальный объём данных в запросе
 
- post:
-   tags:
-     - Товары и документы
-   summary: 'Передать список товаров'
-   description: |
-     Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
+  post:
+    tags:
+      - Товары и документы
+    summary: 'Передать список товаров'
+    description: |
+      Загружает информацию об одном или нескольких товарах в определённый магазин (`{storeUuid}`) пользователя платформы.
 
-     При обновлении товара необходимо передавать полный набор полей описания товара. Облако удаляет старые и записывает новые поля.
+      При обновлении товара необходимо передавать полный набор полей описания товара. Облако удаляет старые и записывает новые поля.
 
-     > С 1.11.2017 Облако перестанет обрабатывать запросы содержащие некорректную схему товаров. Вы по-прежнему сможете получить из Облака ранее созданные товары с некорректной схемой.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/contentType
-     - $ref: ./parameters.yaml#/storeUuid
-     - name: products
-       in: body
-       description: Массив товаров
-       required: true
-       schema:
-         type: array
-         items:
-           $ref: ./definitions.yaml#/product
-       x-examples:
-         application/json:
+      > С 1.11.2017 Облако перестанет обрабатывать запросы содержащие некорректную схему товаров. Вы по-прежнему сможете получить из Облака ранее созданные товары с некорректной схемой.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/contentType
+      - $ref: ./parameters.yaml#/storeUuid
+      - name: products
+        in: body
+        description: Массив товаров
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ./definitions.yaml#/product
+        x-examples:
+          application/json:
             [
               {
                 "uuid": "01ba18b6-8707-5f47-3d9c-4db058054cb2",
@@ -248,67 +248,67 @@
                 }
               }
             ]
-   responses:
-     '200':
-       description: OK
-       headers:
-         X-Products-Violations-Count:
-           schema:
-             type: integer
-           description: Количество элементов, которые не соответствуют схеме.
-         X-Products-Violations:
-           schema:
-             type: string
-           description: Подробное описание первых 20-ти ошибок.
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-     '413':
-       description: Превышен максимальный объём данных в запросе
+    responses:
+      '200':
+        description: OK
+        headers:
+          X-Products-Violations-Count:
+            schema:
+              type: integer
+            description: Количество элементов, которые не соответствуют схеме.
+          X-Products-Violations:
+            schema:
+              type: string
+            description: Подробное описание первых 20-ти ошибок.
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+      '413':
+        description: Превышен максимальный объём данных в запросе
 
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/products:
- post:
-   tags:
-     - Вебхуки-уведомления
-   summary: 'Создать товары'
-   description: |
-     Загружает в сторонний сервис массив новых товаров, созданных на терминале.
+  post:
+    tags:
+      - Вебхуки-уведомления
+    summary: 'Создать товары'
+    description: |
+      Загружает в сторонний сервис массив новых товаров, созданных на терминале.
 
-     Ожидает от стороннего сервиса ответа `200 ОК`. Если ответ не приходит в течение 10 секунд, Облако отправляет уведомление повторно.
-   parameters:
-     - $ref: ./parameters.yaml#/clientAuth
-     - $ref: ./parameters.yaml#/Content-Type
-     - $ref: ./parameters.yaml#/storeUuid
-       in: path
-       required: true
-       type: string
-       pattern: >-
-         ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-     - name: products
-       in: body
-       description: Массив товаров
-       required: true
-       schema:
-         type: array
-         items:
-           $ref: ./definitions.yaml#/product
-       x-examples:
-         application/json:
+      Ожидает от стороннего сервиса ответа `200 ОК`. Если ответ не приходит в течение 10 секунд, Облако отправляет уведомление повторно.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/Content-Type
+      - $ref: ./parameters.yaml#/storeUuid
+        in: path
+        required: true
+        type: string
+        pattern: |
+          ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+      - name: products
+        in: body
+        description: Массив товаров
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ./definitions.yaml#/product
+        x-examples:
+          application/json:
             [
               {
                 "uuid": "01ba18b6-8707-5f47-3d9c-4db058054cb2",
@@ -340,265 +340,265 @@
                 }
               }
             ]
-   responses:
-     '200':
-       description: OK
-     '400':
-       $ref: ./responses.yaml#/40020012003
-     '401':
-       $ref: ./responses.yaml#/40110021003
-     '402':
-       $ref: ./responses.yaml#/402
-     '404':
-       $ref: ./responses.yaml#/404
-     '405':
-       $ref: ./responses.yaml#/4051005
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ./responses.yaml#/40020012003
+      '401':
+        $ref: ./responses.yaml#/40110021003
+      '402':
+        $ref: ./responses.yaml#/402
+      '404':
+        $ref: ./responses.yaml#/404
+      '405':
+        $ref: ./responses.yaml#/4051005
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/delete:
- x-summary: Удаление товаров
- post:
-   tags:
-     - Товары и документы
-   summary: 'Удалить товар / все товары'
-   description: |
-     HTTP-запрос с пустым массивом удалит все товары в магазине.
-     Чтобы удалить определённый товар, в теле HTTP-запроса требуется указать его UUID.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/contentType
-     - $ref: ./parameters.yaml#/storeUuid
-     - name: products
-       in: body
-       description: Массив товаров
-       required: true
-       schema:
-         type: array
-         items:
-           $ref: ./definitions.yaml#/productToDelete
-   responses:
-     '200':
-       description: OK
-       headers:
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-     '413':
-       description: Превышен максимальный объём данных в запросе
+  x-summary: Удаление товаров
+  post:
+    tags:
+      - Товары и документы
+    summary: 'Удалить товар / все товары'
+    description: |
+      HTTP-запрос с пустым массивом удалит все товары в магазине.
+      Чтобы удалить определённый товар, в теле HTTP-запроса требуется указать его UUID.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/contentType
+      - $ref: ./parameters.yaml#/storeUuid
+      - name: products
+        in: body
+        description: Массив товаров
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ./definitions.yaml#/productToDelete
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+      '413':
+        description: Превышен максимальный объём данных в запросе
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/documents:
- x-summary: Документы
- get:
-   tags:
-     - Товары и документы
-   summary: 'Получить список документов'
-   description: |
-     Возвращает массив документов.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/storeUuid
+  x-summary: Документы
+  get:
+    tags:
+      - Товары и документы
+    summary: 'Получить список документов'
+    description: |
+      Возвращает массив документов.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
 #     - $ref: ./parameters.yaml#/Content-Type
-     - name: deviceUuid
-       in: query
-       type: string
-       description: |
-         Идентификатор устройства в Облаке Эвотор.
+      - name: deviceUuid
+        in: query
+        type: string
+        description: |
+          Идентификатор устройства в Облаке Эвотор.
 
-         Формат – `uuid4`. Регистрозависимый.
-     - name: ltCloseDate
-       in: query
-       format: date-time
-       type: string
-       description: |
-         Дата окончания выборки. Ответ содержит документы, созданные до указанной даты.
+          Формат – `uuid4`. Регистрозависимый.
+      - name: ltCloseDate
+        in: query
+        format: date-time
+        type: string
+        description: |
+          Дата окончания выборки. Ответ содержит документы, созданные до указанной даты.
 
-         Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
+          Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
 
-         Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
+          Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
 
-         Формат времени - 2017-01-10T09:33:19.757+0000
-     - name: gtCloseDate
-       in: query
-       format: date-time
-       type: string
-       description: |
-         Дата начала выборки. Ответ содержит документы, созданные после указанной даты.
+          Формат времени - 2017-01-10T09:33:19.757+0000
+      - name: gtCloseDate
+        in: query
+        format: date-time
+        type: string
+        description: |
+          Дата начала выборки. Ответ содержит документы, созданные после указанной даты.
 
-         Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
+          Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
 
-         Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
+          Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
 
-         Формат времени - 2017-01-10T09:33:19.757+0000
-     - name: types
-       description: |
-         Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
-         * Кассовые документы – `SELL`,`PAYBACK`,`CASH_INCOME`,`CASH_OUTCOME`,`OPEN_SESSION`,`FPRINT`,`CLOSE_SESSION`.
-         * Инвентаризация – `INVENTORY`;
-         * Приемка – `ACCEPT`;
-         * Возврат поставщику – `RETURN`;
-         * Списание – `WRITE_OFF`;
-         * Акт переоценки – `REVALUATION`;
-         * Вскрытие тары – `OPEN_TARE`.
-       in: query
-       type: string
-   responses:
-     '200':
-       description: OK
-       headers:
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-       schema:
-         title: Массив документов
-         type: array
-         items:
-           $ref: ./definitions.yaml#/document
+          Формат времени - 2017-01-10T09:33:19.757+0000
+      - name: types
+        description: |
+          Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
+          * Кассовые документы – `SELL`,`PAYBACK`,`CASH_INCOME`,`CASH_OUTCOME`,`OPEN_SESSION`,`FPRINT`,`CLOSE_SESSION`.
+          * Инвентаризация – `INVENTORY`;
+          * Приемка – `ACCEPT`;
+          * Возврат поставщику – `RETURN`;
+          * Списание – `WRITE_OFF`;
+          * Акт переоценки – `REVALUATION`;
+          * Вскрытие тары – `OPEN_TARE`.
+        in: query
+        type: string
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+          title: Массив документов
+          type: array
+          items:
+            $ref: ./definitions.yaml#/document
 
 /api.evotor.ru/api/v2/inventories/stores/{storeUuid}/documents:
- x-summary: Документы
- get:
-   tags:
-     - Товары и документы
-   summary: 'Получить список документов [V2]'
-   description: |
-     Возвращает массив документов.
-   parameters:
-     - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/storeUuid
+  x-summary: Документы
+  get:
+    tags:
+      - Товары и документы
+    summary: 'Получить список документов [V2]'
+    description: |
+      Возвращает массив документов.
+    parameters:
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
 #     - $ref: ./parameters.yaml#/Content-Type
-     - name: deviceUuid
-       in: query
-       type: string
-       description: |
-         Идентификатор устройства в Облаке Эвотор.
+      - name: deviceUuid
+        in: query
+        type: string
+        description: |
+          Идентификатор устройства в Облаке Эвотор.
 
-         Формат – `uuid4`. Регистрозависимый.
-     - name: ltCloseDate
-       in: query
-       format: date-time
-       type: string
-       description: |
-         Дата окончания выборки. Ответ содержит документы, созданные до указанной даты.
+          Формат – `uuid4`. Регистрозависимый.
+      - name: ltCloseDate
+        in: query
+        format: date-time
+        type: string
+        description: |
+          Дата окончания выборки. Ответ содержит документы, созданные до указанной даты.
 
-         Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
+          Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
 
-         Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
+          Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
 
-         Формат времени - 2017-01-10T09:33:19.757+0000
-     - name: gtCloseDate
-       in: query
-       format: date-time
-       type: string
-       description: |
-         Дата начала выборки. Ответ содержит документы, созданные после указанной даты.
+          Формат времени - 2017-01-10T09:33:19.757+0000
+      - name: gtCloseDate
+        in: query
+        format: date-time
+        type: string
+        description: |
+          Дата начала выборки. Ответ содержит документы, созданные после указанной даты.
 
-         Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
+          Если не заданы даты начала и окончания выборки, возвращаются документы созданные за последний месяц с текущей даты.
 
-         Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
+          Для выгрузки доступны документы, созданные не более шести месяцев назад, с момента выполнения запроса. Диапазон дат (от `gtCloseDate` до `ltCloseDate`) в рамках одного запроса не может превышать один месяц.
 
-         Формат времени - 2017-01-10T09:33:19.757+0000
-     - name: types
-       description: |
-         Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
-         * Кассовые документы – `SELL`,`PAYBACK`,`CASH_INCOME`,`CASH_OUTCOME`,`OPEN_SESSION`,`FPRINT`,`CLOSE_SESSION`.
-         * Инвентаризация – `INVENTORY`;
-         * Приемка – `ACCEPT`;
-         * Возврат поставщику – `RETURN`;
-         * Списание – `WRITE_OFF`;
-         * Акт переоценки – `REVALUATION`;
-         * Вскрытие тары – `OPEN_TARE`.
-       in: query
-       type: string
-   responses:
-     '200':
-       description: OK
-       headers:
-         Warning:
-           description: |
-             URL будет отключён после <время отключения URL>.
-             > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
-         X-RateLimit-Limit:
-           schema:
-             type: integer
-           description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
-         X-RateLimit-Remaining:
-           schema:
-             type: integer
-           description: Количество запросов, оставшихся в текущем временном интервале.
-         X-RateLimit-Reset:
-           schema:
-             type: string
-             format: integer
-           description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
-       schema:
-         title: Массив документов
-         type: array
-         items:
-           $ref: ./definitions.yaml#/document2
+          Формат времени - 2017-01-10T09:33:19.757+0000
+      - name: types
+        description: |
+          Ответ будет содержать документы определенных типов. Можно указать несколько типов через запятую. Возможные значения:
+          * Кассовые документы – `SELL`,`PAYBACK`,`CASH_INCOME`,`CASH_OUTCOME`,`OPEN_SESSION`,`FPRINT`,`CLOSE_SESSION`.
+          * Инвентаризация – `INVENTORY`;
+          * Приемка – `ACCEPT`;
+          * Возврат поставщику – `RETURN`;
+          * Списание – `WRITE_OFF`;
+          * Акт переоценки – `REVALUATION`;
+          * Вскрытие тары – `OPEN_TARE`.
+        in: query
+        type: string
+    responses:
+      '200':
+        description: OK
+        headers:
+          Warning:
+            description: |
+              URL будет отключён после <время отключения URL>.
+              > Заголовок добавляется к ответу сервера за несколько недель до отключения URL.
+          X-RateLimit-Limit:
+            schema:
+              type: integer
+            description: Максимальное количество запросов, которые вы можете сделать в текущем временном интервале.
+          X-RateLimit-Remaining:
+            schema:
+              type: integer
+            description: Количество запросов, оставшихся в текущем временном интервале.
+          X-RateLimit-Reset:
+            schema:
+              type: string
+              format: integer
+            description: Время, оставшееся до начала нового временного интервала. В секундах UTC.
+        schema:
+          title: Массив документов
+          type: array
+          items:
+            $ref: ./definitions.yaml#/document2
 
 /partner.ru/api/v1/inventories/stores/{storeUuid}/documents:
- put:
-   tags:
-     - Вебхуки-уведомления
-   summary: 'Передать документы'
-   description: |
-     Передаёт в сторонний сервис массив документов с транзакциями.
+  put:
+    tags:
+      - Вебхуки-уведомления
+    summary: 'Передать документы'
+    description: |
+      Передаёт в сторонний сервис массив документов с транзакциями.
 
-     Ожидает от стороннего сервиса ответа `200 ОК`. Если ответ не приходит в течение 10 секунд, Облако отправляет уведомление повторно.
-   parameters:
-     - $ref: ./parameters.yaml#/clientAuth
-     - $ref: ./parameters.yaml#/storeUuid
-     - $ref: ./parameters.yaml#/contentType
-     - name: documents
-       in: body
-       description: Массив документов
-       required: true
-       schema:
-         type: array
-         items:
-           $ref: ./definitions.yaml#/document
-   responses:
-     '200':
-       description: OK
-     '400':
-       $ref: ./responses.yaml#/40020012003
-     '401':
-       $ref: ./responses.yaml#/40110021003
-     '402':
-       $ref: ./responses.yaml#/402
-     '404':
-       $ref: ./responses.yaml#/404
-     '405':
-       $ref: ./responses.yaml#/4051005
+      Ожидает от стороннего сервиса ответа `200 ОК`. Если ответ не приходит в течение 10 секунд, Облако отправляет уведомление повторно.
+    parameters:
+      - $ref: ./parameters.yaml#/clientAuth
+      - $ref: ./parameters.yaml#/storeUuid
+      - $ref: ./parameters.yaml#/contentType
+      - name: documents
+        in: body
+        description: Массив документов
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: ./definitions.yaml#/document
+    responses:
+      '200':
+        description: OK
+      '400':
+        $ref: ./responses.yaml#/40020012003
+      '401':
+        $ref: ./responses.yaml#/40110021003
+      '402':
+        $ref: ./responses.yaml#/402
+      '404':
+        $ref: ./responses.yaml#/404
+      '405':
+        $ref: ./responses.yaml#/4051005
 
 
 /partner.ru/api/v1/user/verify:
@@ -745,7 +745,7 @@
 #              default: starter
 #            status:
 #              type: string
-#              description: >-
+#              description: |
 #                Статус тарифа. Возможные значения:
 #                 * ACTIVE -  установка приложения или подтверждение активности тарифа.
 #                 * INACTIVE - удаление приложение или деактивация тарифа из-за неоплаты.
@@ -815,7 +815,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/deviceWithoutCode
+            $ref: ./definitions.yaml#/device
     responses:
       '200':
         description: OK
@@ -850,7 +850,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/employeeWithoutCode
+            $ref: ./definitions.yaml#/employee
     responses:
       '200':
         description: OK
@@ -871,7 +871,7 @@
     tags:
       - Вебхуки-уведомления
     summary: 'Создан магазин'
-    description: >-
+    description: |
       Создать / отредактировать один или несколько магазинов в стороннем сервисе. Облако эвотор передаёт в сторонний сервис все изменения, сделанные в Личном кабинете. Эвотор является мастер-системой по данной сущности.
 
       Ожидает от стороннего сервиса ответа `200 ОК`. Если ответ не приходит в течение 10 секунд, Облако отправляет уведомление повторно.
@@ -885,7 +885,7 @@
         schema:
           type: array
           items:
-            $ref: ./definitions.yaml#/storeWithoutCode
+            $ref: ./definitions.yaml#/store
     responses:
       '200':
         description: OK
@@ -1162,35 +1162,35 @@
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/schemes/delete:
- x-summary: Удаление схем
- post:
-   tags:
-     - Схемы и дополнительные поля товаров
-   summary: 'Удалить схемы товаров'
-   description: |
-     Удаляет указанные схемы.
+  x-summary: Удаление схем
+  post:
+    tags:
+      - Схемы и дополнительные поля товаров
+    summary: 'Удалить схемы товаров'
+    description: |
+      Удаляет указанные схемы.
 
-     В теле запроса укажите один или несколько идентификаторов схем, которые требуется удалить.
+      В теле запроса укажите один или несколько идентификаторов схем, которые требуется удалить.
 
-   parameters:
-     - $ref: ./parameters.yaml#/contentType
-     - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/storeUuid
-     - name: schemas
-       in: body
-       description: Массив идентификаторов схем.
-       schema:
-         type: array
-         items:
-           type: string
-           description: |
-             Идентификатор схемы в Облаке Эвотор, уникальный в рамках приложения.
+    parameters:
+      - $ref: ./parameters.yaml#/contentType
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
+      - name: schemas
+        in: body
+        description: Массив идентификаторов схем.
+        schema:
+          type: array
+          items:
+            type: string
+            description: |
+              Идентификатор схемы в Облаке Эвотор, уникальный в рамках приложения.
 
-             Формат – `uuid4`.
-           pattern: >-
-             ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-           example: 1eaca77f-1579-5078-a726-83c892348acd
-   responses:
+              Формат – `uuid4`.
+            pattern: |
+              ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+            example: 1eaca77f-1579-5078-a726-83c892348acd
+    responses:
       '200':
         description: OK
         headers:
@@ -1309,34 +1309,34 @@
         description: Не авторизован
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/extras/delete:
- x-summary: Удаление дополнительных полей
- post:
-   tags:
-     - Схемы и дополнительные поля товаров
-   summary: 'Удалить дополнительные поля товаров'
-   description: |
-     Удаляет указанные дополнительные поля.
+  x-summary: Удаление дополнительных полей
+  post:
+    tags:
+      - Схемы и дополнительные поля товаров
+    summary: 'Удалить дополнительные поля товаров'
+    description: |
+      Удаляет указанные дополнительные поля.
 
-     В теле запроса укажите один или несколько идентификаторов дополнительных полей, которые требуется удалить.
+      В теле запроса укажите один или несколько идентификаторов дополнительных полей, которые требуется удалить.
 
-   parameters:
-     - $ref: ./parameters.yaml#/contentType
-     - $ref: ./parameters.yaml#/auth
-     - $ref: ./parameters.yaml#/storeUuid
-     - name: extras
-       in: body
-       description: Массив идентификаторов дополнительных полей.
-       required: true
-       schema:
-         type: array
-         items:
-           type: string
-           description: |
-             Идентификатор дополнительного поля в Облаке Эвотор, уникальный в рамках приложения.
+    parameters:
+      - $ref: ./parameters.yaml#/contentType
+      - $ref: ./parameters.yaml#/auth
+      - $ref: ./parameters.yaml#/storeUuid
+      - name: extras
+        in: body
+        description: Массив идентификаторов дополнительных полей.
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            description: |
+              Идентификатор дополнительного поля в Облаке Эвотор, уникальный в рамках приложения.
 
-             Формат – `uuid4`.
-           example: 2bnmv77f-1579-5078-a726-83c892348acd
-   responses:
+              Формат – `uuid4`.
+            example: 2bnmv77f-1579-5078-a726-83c892348acd
+    responses:
       '200':
         description: OK
         headers:
@@ -1367,13 +1367,13 @@
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/quantities:
- x-summary:
-# get:
+  x-summary:
+#  get:
     tags:
-     - Товары и документы
+      - Товары и документы
     summary: 'Получить остатки товаров в магазине'
     description: |
-        Возвращает информацию об остатках всех товаров в определённом магазине (`{storeUuid}`) пользователя платформы. Ответ содержит JSON-объект с набором пар {"идентификатор товара" - "остаток"} (см. пример ответа).
+      Возвращает информацию об остатках всех товаров в определённом магазине (`{storeUuid}`) пользователя платформы. Ответ содержит JSON-объект с набором пар {"идентификатор товара" - "остаток"} (см. пример ответа).
     parameters:
       - $ref: ./parameters.yaml#/auth
       - $ref: ./parameters.yaml#/storeUuid
@@ -1382,16 +1382,16 @@
       '200':
         description: OK
         examples:
-            application/json: { "35fac185-8e78-4495-b7d2-7a3aac129356": "1.23", "a0128ed3-06b6-4dd3-99f6-6eb8f5545b80": "2.0" }
+          application/json: { "35fac185-8e78-4495-b7d2-7a3aac129356": "1.23", "a0128ed3-06b6-4dd3-99f6-6eb8f5545b80": "2.0" }
       '401':
         $ref: ./responses.yaml#/40110021003
 
- post:
+  post:
     tags:
-     - Товары и документы
+      - Товары и документы
     summary: 'Передать остатки товара в магазине'
     description: |
-        Передаёт информацию об остатках определённого товара (`{productUuid}`), в определённом магазине (`{storeUuid}`) пользователя платформы.
+      Передаёт информацию об остатках определённого товара (`{productUuid}`), в определённом магазине (`{storeUuid}`) пользователя платформы.
     parameters:
       - $ref: ./parameters.yaml#/auth
       - $ref: ./parameters.yaml#/storeUuid
@@ -1415,13 +1415,13 @@
 
 
 /api.evotor.ru/api/v1/inventories/stores/{storeUuid}/products/{productUuid}/quantities:
- x-summary:
- get:
+  x-summary:
+  get:
     tags:
-     - Товары и документы
+      - Товары и документы
     summary: 'Получить остатки определённого товара в магазине'
     description: |
-        Возвращает информацию об остатках всех определённого товара (`{productUuid}`) в определённом магазине (`{storeUuid}`) пользователя платформы.
+      Возвращает информацию об остатках всех определённого товара (`{productUuid}`) в определённом магазине (`{storeUuid}`) пользователя платформы.
     parameters:
       - $ref: ./parameters.yaml#/auth
       - $ref: ./parameters.yaml#/storeUuid
@@ -1672,7 +1672,7 @@
                  type: array
                  description: Объект с данными о магазине
         x-examples:
-           application/json:
+          application/json:
               {
                   "version": 2,
                   "provider": "OFD",
