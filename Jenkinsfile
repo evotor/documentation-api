@@ -8,7 +8,9 @@ pipeline {
   }
   stages {
     stage('Build') {
-      sh "docker build -t docker-registry.market.local/documentation-api:$BUILD_TAG ."
+      steps {
+        sh "docker build -t docker-registry.market.local/documentation-api:$BUILD_TAG ."
+      }
     }
     stage('Publish') {
       steps {
