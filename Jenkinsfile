@@ -20,7 +20,11 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        helmUpgradeInstall('test-cluster', 'test', './helm/values/test.yaml', "${REVISION}", 'documentation-api', './helm/documentation-api')
+        if (env.BRANCH_NAME == 'dev') {
+          helmUpgradeInstall('test-cluster', 'test', './helm/values/test.yaml', "${REVISION}", 'documentation-api', './helm/documentation-api')
+        } else if (env.BRANCH_NAME == 'master') {
+          helmUpgradeInstall('prod-cluster', 'prod', './helm/values/prod.yaml', "${REVISION}", 'documentation-api', './helm/documentation-api')
+        }
       }
     }
   }
