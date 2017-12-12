@@ -1,0 +1,4 @@
+apiVersion: v1
+description: api.evotor.ru documentation
+name: documentation-api
+version: 0.1.0
