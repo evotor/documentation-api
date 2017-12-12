@@ -9,17 +9,18 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh "docker build -t docker-registry.market.local/documentation-api:$BUILD_TAG ."
+        populateRevision()
+        sh "docker build -t docker-registry.market.local/documentation-api:$REVISION ."
       }
     }
     stage('Publish') {
       steps {
-        sh "docker push docker-registry.market.local/documentation-api:$BUILD_TAG"
+        sh "docker push docker-registry.market.local/documentation-api:$REVISION"
       }
     }
     stage('Deploy') {
       steps {
-        helmUpgradeInstall('test-cluster', 'test', './helm/values/test.yaml', "${BUILD_TAG}", 'documentation-api', './helm/documentation-api')
+        helmUpgradeInstall('test-cluster', 'test', './helm/values/test.yaml', "${REVISION}", 'documentation-api', './helm/documentation-api')
       }
     }
   }
