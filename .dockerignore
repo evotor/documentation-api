@@ -3,3 +3,4 @@ Jenkinsfile
 .git
 .gitignore
 .dockerignore
+helm
