@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy') {
       steps {
         // kubeRolloutWithHelm('test-cluster')
-        kubeRolloutWithHelm('test-cluster', 'test', './helm/values/test.yaml', "${BUILD_TAG}", 'documentation-api', './helm/documentation-api')
+        helmUpgradeInstall('test-cluster', 'test', './helm/values/test.yaml', "${BUILD_TAG}", 'documentation-api', './helm/documentation-api')
         // kubeRollout('test', 'deployment', 'documentation-api', "docker-registry.market.local/documentation-api:$BUILD_TAG")
 
       }
