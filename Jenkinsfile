@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        kubeRolloutWithHelm('test-cluster', 'test', 'documentation-api', './helm/documentation-api', './helm/values/test.yaml', $BUILD_TAG)
+        kubeRolloutWithHelm('test-cluster', 'test', 'documentation-api', './helm/documentation-api', './helm/values/test.yaml', ${BUILD_TAG})
       }
     }
   }
